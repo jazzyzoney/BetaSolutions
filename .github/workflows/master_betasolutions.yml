@@ -31,39 +31,28 @@ jobs:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
 
-  qodana:
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      contents: write
-      pull-requests: write
-      checks: write
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
-          fetch-depth: 0  # a full history is required for pull request analysis
-      - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2024.2
-        with:
-          pr-mode: false
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1414404859 }}
-          QODANA_ENDPOINT: 'https://qodana.cloud'
-
   deploy:
     runs-on: ubuntu-latest
-    needs: qodana
+    needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
+    permissions:
+      id-token: write #This is required for requesting the JWT
+  
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
       
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_02EE231649674041B04901E6C1B85AB1 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A6E6EF6D90354C2BB56B113F32D73B35 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_791930235922473484BCD7BE15515CCF }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -71,4 +60,4 @@ jobs:
           app-name: 'BetaSolutions'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6F19339F47C5437EAB197B1AFA5F8AD5 }}
+          

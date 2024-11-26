@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class ProjectService {
     ProjectRepository projectRepository;
 
-    public LoginController(ProjectRepository projectRepository){
+    public ProjectService(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
     }
 }

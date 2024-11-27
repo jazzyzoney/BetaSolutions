@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SubProjectController {
-    SubProjectService subProjectService;
+    private SubProjectService subProjectService;
 
     public SubProjectController(SubProjectService subProjectService){
         this.subProjectService = subProjectService;

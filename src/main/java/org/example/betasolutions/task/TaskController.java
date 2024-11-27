@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TaskController {
-    TaskService taskService;
+    private TaskService taskService;
 
     public TaskController(TaskService taskService){
         this.taskService = taskService;

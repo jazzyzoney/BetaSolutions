@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ProjectController {
-    ProjectService projectService;
+    private ProjectService projectService;
 
     public ProjectController(ProjectService projectService){
         this.projectService = projectService;

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class SubTaskController {
-    SubTaskService subTaskService;
+    private SubTaskService subTaskService;
 
     public SubTaskController(SubTaskService subTaskService){
         this.subTaskService = subTaskService;

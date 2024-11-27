@@ -11,7 +11,7 @@ public class PSSTSuperclass {
     }
 
     //create method
-    public int create(ModelInterface object, String tableName,String name,int hours, int days, int totalPrice) {
+    public int create(TaskTypes object, String tableName,String name,int hours, int days, int totalPrice) {
         String sql = "insert into " + tableName + " (" + name + ") values(?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -32,22 +32,24 @@ public class PSSTSuperclass {
         return 0;
     }
     // Read Method
-    public List<ModelInterface object> readAll(String tableName, int EmployeeID,Object model) {
-        List<Object> allObjects = new ArrayList<>();
+    public List<TaskTypes> readAll(String tableName, int EmployeeID, String tablePrefix) {
+        List<TaskTypes> allObjects = new ArrayList<>();
         String sql = "select * from " + tableName + " where employee_id = ?";
+
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, EmployeeID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String name = resultSet.getString("name");
+                int id = resultSet.getInt(tablePrefix + "ID");
+                String name = resultSet.getString(tablePrefix + "Name");
                 int hours = resultSet.getInt("hours");
                 int days = resultSet.getInt("days");
-                int totalPrice = resultSet.getInt("total_price");
+                double totalPrice = resultSet.getInt("total_price");
                 Date endDate = resultSet.getDate("end_date");
                 Date startDate = resultSet.getDate("start_date");
 
-                allObjects.add(new object(name, hours, days, totalPrice, endDate, startDate));
+                allObjects.add(new TaskTypes(id,name, hours, days, totalPrice, endDate, startDate));
             }
 
         } catch (Exception e) {
@@ -56,20 +58,10 @@ public class PSSTSuperclass {
         return allObjects;
     }
 
+    /*
     public List<String> read(String tableName, String idName, int id, Object model){
         String sql = "SELECT * FROM " + tableName + " WHERE " + idName + " =?";
-        try{
-            PreparedStatement prepstatement = conn.prepareStatement(sql);
-            prepstatement.setInt(1, id);
-            ResultSet resultSet = prepstatement.executeQuery();
-
-
-
-        }catch(SQLException e){
-
-        }
-
-    }
+*/
 
     /*
     read

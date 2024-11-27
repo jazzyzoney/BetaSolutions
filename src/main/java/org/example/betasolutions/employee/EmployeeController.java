@@ -8,5 +8,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-   //@GetMapping("/project/employees") return "employeepage"
+   /*
+   @GetMapping("/project/employees") return "employeepage"
+    @PostMapping("/project/employee/new") return "redirect: /project/employee"
+    @PostMapping("/project/employee/add") return "redirect: /project/employee"
+    @PostMapping("/project/employee/update") return "redirect: /project/employee"
+    @PostMapping("/project/employee/delete") return "redirect: /project/employee"
+    */
 }

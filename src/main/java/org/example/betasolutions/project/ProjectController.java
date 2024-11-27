@@ -14,8 +14,14 @@ public class ProjectController {
 
     /*
     @GetMapping("/home") return "homepage"
+    @GetMapping("/home/new") return "homepage"
+
     @GetMapping("/project") return "projectpage"
+    @PostMapping("project/delete") return "redirect:/home"
+    @PostMapping("project/edit") return "redirect:/project"
+
     @GetMapping("/project/budget") return "budgetpage"
+
 
     */
 }

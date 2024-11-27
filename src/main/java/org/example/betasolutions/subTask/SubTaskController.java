@@ -11,5 +11,7 @@ public class SubTaskController {
         this.subTaskService = subTaskService;
     }
 
-    //@PostMapping("project/edit/subtask") return "redirect:/project"
+    //@PostMapping("project/subtask/edit") return "redirect:/project"
+    //@PostMapping("project/subtask/delete") return "redirect:/project"
+    //@PostMapping("/project/subtask/new") return "redirect:/project";
 }

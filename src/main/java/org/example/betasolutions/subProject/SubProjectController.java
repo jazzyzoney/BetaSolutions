@@ -11,6 +11,6 @@ public class SubProjectController {
         this.subProjectService = subProjectService;
     }
 
-    //PostMapping("/project/edit/subproject")
+    //PostMapping("/project/edit/subproject") return "redirect:/project";
 
 }

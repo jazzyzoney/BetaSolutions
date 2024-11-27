@@ -11,5 +11,5 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    //PostMapping("/project/edit/task")
+    //PostMapping("/project/edit/task") return "redirect:/project"
 }

@@ -11,5 +11,5 @@ public class SubTaskController {
         this.subTaskService = subTaskService;
     }
 
-    //@GetMapping("project/edit/subtask")
+    //@PostMapping("project/edit/subtask") return "redirect:/project"
 }

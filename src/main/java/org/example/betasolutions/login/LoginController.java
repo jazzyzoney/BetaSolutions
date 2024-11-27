@@ -13,10 +13,11 @@ public class LoginController {
     }
 
     /*
-    @GetMapping("/login")
-    @PostMapping("/login")
-    @GetMapping("/login/new")
-    @PostMapping("/login/new")
-    @PostMapping("/logout")*/
+    @GetMapping("/login") return "loginpage"
+    @PostMapping("/login") return "redirect: /home"
+    @GetMapping("/login/new") return "newProfile"
+    @PostMapping("/login/new") return "redirect: /login"
+    @PostMapping("/logout") return "redirect: /login"
+    */
 
 }

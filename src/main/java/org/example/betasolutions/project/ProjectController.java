@@ -13,10 +13,10 @@ public class ProjectController {
     }
 
     /*
-    @GetMapping("/home")
-    @GetMapping("/project")
-    @GetMapping("/project/budget")
-    @GetMapping("/project/employees")
+    @GetMapping("/home") return "homepage"
+    @GetMapping("/project") return "projectpage"
+    @GetMapping("/project/budget") return "budgetpage"
+    @GetMapping("/project/employees") return "employeepage"
 
     */
 }

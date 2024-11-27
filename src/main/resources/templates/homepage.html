@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h2>Logout</h2>
+        <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+            <button type="submit">loginpage</button>
+        </form>
+    </header>
+    <p> homepage. Siden viser alle brugerens oprettede projekter og giver </br>
+        mulighed for at oprette nye projekter. </br></br>
+        Siden kan også vise hvor langt i processen, et projekt er.
+
+    </p>
+
+    </br>
+    </br>
+
+    <form class="logo" method="get" th:action="@{/project}" style="display:inline;">
+        <button type="submit">project 1</button>
+    </form>
+    <p>project 2</p>
+    <p>project 3</p>
+    <p>new project</p>
+</body>
+</html>

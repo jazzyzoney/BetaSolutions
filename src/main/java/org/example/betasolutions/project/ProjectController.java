@@ -19,7 +19,7 @@ public class ProjectController {
     }
     @PostMapping("/project/new")
     public String createNewProject(){
-        return "homepage";
+        return "redirect: /home";
     }
 
     @GetMapping("/project")

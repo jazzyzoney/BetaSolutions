@@ -12,12 +12,29 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    /*
-    @GetMapping("/login") return "loginpage"
-    @PostMapping("/login") return "redirect: /home"
-    @GetMapping("/login/new") return "newProfile"
-    @PostMapping("/login/new") return "redirect: /login"
-    @PostMapping("/logout") return "redirect: /login"
-    */
+    @GetMapping("/login")
+    public String getLogin(){
+        return "loginpage";
+    }
+
+    @PostMapping("/login")
+    public String postLogin(){
+        return "redirect: /home";
+    }
+
+    @GetMapping("/login/new")
+    public String getNewProfilePage(){
+        return "newProfile";
+    }
+
+    @PostMapping("/login/new")
+    public String postNewLogin(){
+        return "redirect: /login";
+    }
+
+    @PostMapping("/logout")
+    public String logout(){
+        return "redirect: /login";
+    }
 
 }

@@ -3,6 +3,7 @@ package org.example.betasolutions.project;
 import org.example.betasolutions.login.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProjectController {
@@ -12,16 +13,35 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    /*
-    @GetMapping("/home") return "homepage"
-    @GetMapping("/home/new") return "homepage"
+    @GetMapping("/home")
+    public String getHome(){
+        return "homepage";
+    }
+    @PostMapping("/project/new")
+    public String createNewProject(){
+        return "homepage";
+    }
 
-    @GetMapping("/project") return "projectpage"
-    @PostMapping("project/delete") return "redirect:/home"
-    @PostMapping("project/edit") return "redirect:/project"
+    @GetMapping("/project")
+    public String getProject(){
+        return "projectpage";
+    }
 
-    @GetMapping("/project/budget") return "budgetpage"
+    @PostMapping("project/delete")
+    public String deleteProject(){
+        return "redirect:/home";
+    }
+
+    @PostMapping("project/edit")
+    public String editProject(){
+        return "redirect:/project";
+    }
+
+    @GetMapping("/project/budget")
+    public String getProjectBudget(){
+        return "budgetpage";
+    }
 
 
-    */
+
 }

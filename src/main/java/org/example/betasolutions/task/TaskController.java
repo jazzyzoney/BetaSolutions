@@ -11,7 +11,16 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    //@PostMapping("project/task/new") return "redirect:/project"
-    //@PostMapping("/project/task/edit") return "redirect:/project"
-    //@PostMapping("project/task/delete") return "redirect:/project"
+    @PostMapping("project/task/new")
+    public String createNewTask(){
+        return "redirect:/project";
+    }
+    @PostMapping("/project/task/edit")
+    public String editTask(){
+        return "redirect:/project";
+    }
+    @PostMapping("project/task/delete")
+    public String deleteTask(){
+        return "redirect:/project";
+    }
 }

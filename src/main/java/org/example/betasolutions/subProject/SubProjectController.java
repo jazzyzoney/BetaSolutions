@@ -11,8 +11,17 @@ public class SubProjectController {
         this.subProjectService = subProjectService;
     }
 
-    //@PostMapping("/project/subproject/edit") return "redirect:/project";
-    //@PostMapping("/project/subproject/delete") return "redirect:/project";
-    //@PostMapping("/project/subproject/new") return "redirect:/project";
+    @PostMapping("/project/subproject/edit")
+    public String editSubProject() {
+        return "redirect:/project";
+    }
+    @PostMapping("/project/subproject/delete")
+    public String deleteSubProject(){
+        return "redirect:/project";
+    }
+    @PostMapping("/project/subproject/new")
+    public String createNewSubProject(){
+        return "redirect:/project";
+    }
 
 }

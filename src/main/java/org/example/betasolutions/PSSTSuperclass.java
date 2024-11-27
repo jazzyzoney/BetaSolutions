@@ -11,7 +11,7 @@ public class PSSTSuperclass {
     }
 
     //create method
-    public int create(TaskTypes object, String tableName,String name,int hours, int days, int totalPrice) {
+    public int create(ModelInterface object, String tableName,String name,int hours, int days, int totalPrice) {
         String sql = "insert into " + tableName + " (" + name + ") values(?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -32,8 +32,8 @@ public class PSSTSuperclass {
         return 0;
     }
     // Read Method
-    public List<TaskTypes> readAll(String tableName, int EmployeeID, String tablePrefix) {
-        List<TaskTypes> allObjects = new ArrayList<>();
+    public List<ModelInterface> readAll(String tableName, int EmployeeID, String tablePrefix,FactoryInterface factory) {
+        List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "select * from " + tableName + " where employee_id = ?";
 
         try {
@@ -48,8 +48,7 @@ public class PSSTSuperclass {
                 double totalPrice = resultSet.getInt("total_price");
                 Date endDate = resultSet.getDate("end_date");
                 Date startDate = resultSet.getDate("start_date");
-
-                allObjects.add(new TaskTypes(id,name, hours, days, totalPrice, endDate, startDate));
+                allObjects.add(factory.create(id,name, hours, days, totalPrice, endDate, startDate));
             }
 
         } catch (Exception e) {

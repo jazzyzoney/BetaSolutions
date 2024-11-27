@@ -4,7 +4,13 @@ import java.sql.Date;
 
 public interface ModelInterface {
     String getName();
-    java.sql.Date getEndDate();
+    Date getEndDate();
     Date getStartDate();
+
+    void setName();
+    void setEndDate(Date endDate);
+    void setStartDate(Date startDate);
+
+
 
 }

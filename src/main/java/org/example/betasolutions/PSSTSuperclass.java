@@ -9,7 +9,6 @@ public class PSSTSuperclass {
     public PSSTSuperclass(ConnectionManager connectionManager) {
         this.conn = connectionManager.getConnection();
     }
-
     //create method
     public int create(ModelInterface object, String tableName,String name,int hours, int days, int totalPrice) {
         String sql = "insert into " + tableName + " (" + name + ") values(?,?,?,?,?,?)";

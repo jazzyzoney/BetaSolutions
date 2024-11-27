@@ -1,6 +1,5 @@
 package org.example.betasolutions;
-
-import java.util.Date;
+import java.sql.Date;
 
 @FunctionalInterface
 public interface FactoryInterface {

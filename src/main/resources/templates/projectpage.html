@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -88,7 +90,7 @@
     <aside>
     <article>
         <h2>New Project</h2>
-        <form method=post action="/projectpage.html">
+        <form method=post action="/htmlMockUp/projectpage.html">
             <label class="large-text" for="password">Name: </label>
             <input type="text" id="password" name="password"><br>
 

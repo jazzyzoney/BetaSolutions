@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SubTaskService {
-    SubTaskRepository subTaskRepository;
+    private SubTaskRepository subTaskRepository;
 
     public SubTaskService(SubTaskRepository subTaskRepository){
         this.subTaskRepository = subTaskRepository;

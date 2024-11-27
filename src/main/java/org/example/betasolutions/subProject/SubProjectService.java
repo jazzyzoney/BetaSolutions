@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SubProjectService {
-    SubProjectRepository subProjectRepository;
+    private SubProjectRepository subProjectRepository;
 
     public SubProjectService(SubProjectRepository subProjectRepository){
         this.subProjectRepository = subProjectRepository;

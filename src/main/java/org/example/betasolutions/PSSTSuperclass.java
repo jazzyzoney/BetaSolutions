@@ -31,14 +31,42 @@ public class PSSTSuperclass {
     }
         return 0;
     }
-    // Read Method
-    public List<ModelInterface> readAll(String tableName, int EmployeeID, String tablePrefix,FactoryInterface factory) {
+    //read method
+    // this one is for reading all tasks from a project with a specific projectID
+    public List<ModelInterface> readAllTasks(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "select * from " + tableName + " where employee_id = ?";
+        String sql = "select * from " + tableName + " where project_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, projectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(tablePrefix + "ID");
+                String name = resultSet.getString(tablePrefix + "Name");
+                int hours = resultSet.getInt("hours");
+                int days = resultSet.getInt("days");
+                double totalPrice = resultSet.getInt("total_price");
+                Date endDate = resultSet.getDate("end_date");
+                Date startDate = resultSet.getDate("start_date");
+                allObjects.add(factory.create(id,name, hours, days, totalPrice, endDate, startDate));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allObjects;
+    }
+
+    // Read Method
+    // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee
+    public List<ModelInterface> readAllTasksForEmployee(String tableName, int EmployeeID,int projectID, String tablePrefix,FactoryInterface factory) {
+        List<ModelInterface> allObjects = new ArrayList<>();
+        String sql = "select * from " + tableName + " where employee_id = ? and where project_id = ?";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, EmployeeID);
+            preparedStatement.setInt(2, EmployeeID);
+            preparedStatement.setInt(3, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");

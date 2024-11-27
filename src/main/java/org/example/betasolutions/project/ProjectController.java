@@ -16,7 +16,6 @@ public class ProjectController {
     @GetMapping("/home") return "homepage"
     @GetMapping("/project") return "projectpage"
     @GetMapping("/project/budget") return "budgetpage"
-    @GetMapping("/project/employees") return "employeepage"
 
     */
 }

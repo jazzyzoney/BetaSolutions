@@ -17,8 +17,15 @@
     </header>
 
     <main>
-    <a href="loginpage.html">log out</a></br>
-    <a href="homepage.html">home</a>
+        <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+            <button type="submit">log out</button>
+        </form>
+
+
+        <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
+            <button type="submit">home</button>
+        </form>
+
     <table>
         <tr>
             <th>Task level</th>
@@ -89,8 +96,8 @@
 
     <aside>
     <article>
-        <h2>New Project</h2>
-        <form method=post action="/htmlMockUp/projectpage.html">
+        <h2>New Project (submitknap virker ikke endnu)</h2>
+        <form method=post action="@{/project/new}" >
             <label class="large-text" for="password">Name: </label>
             <input type="text" id="password" name="password"><br>
 

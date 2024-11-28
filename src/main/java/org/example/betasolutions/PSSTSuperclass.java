@@ -10,7 +10,7 @@ public class PSSTSuperclass {
         this.conn = connectionManager.getConnection();
     }
     //create method
-    public int create(ModelInterface object, String tableName,String name,int hours, int days, int totalPrice) {
+    public int insertObjectIntoTable(ModelInterface object, String tableName, String name, int hours, int days, int totalPrice) {
         String sql = "insert into " + tableName + " (" + name + ") values(?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -50,7 +50,6 @@ public class PSSTSuperclass {
                 Date startDate = resultSet.getDate("start_date");
                 allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,6 +82,16 @@ public class PSSTSuperclass {
             e.printStackTrace();
         }
         return allObjects;
+    }
+    public void deleteObjectFromTable(String tableName, String name,int projectID) {
+        String sql = "DELETE FROM " + tableName + " WHERE " + name + "ID"+" = ? AND projectID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, projectID);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*

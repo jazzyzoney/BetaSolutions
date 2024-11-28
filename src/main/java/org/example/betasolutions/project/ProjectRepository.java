@@ -13,13 +13,13 @@ public class ProjectRepository extends PSSTSuperclass {
         super(connectionManager);
     }
 
-    public int createProject(Project project, String tableName, String name, int hours, int days, int totalPrice) {
-        int projectID = super.create(project,tableName,name,hours,days,totalPrice);
+    public int createProject(Project project, String tableName, String name,String projectOwner, int hours, int days, int totalPrice) {
+        int projectID = super.insertObjectIntoTable(project,tableName,name,hours,days,totalPrice);
 
         String sql = "UPDATE project set projectOwner = ? where projectID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1,project.getOwner());
+            preparedStatement.setString(1,projectOwner);
             preparedStatement.setInt(2,projectID);
             preparedStatement.executeUpdate();
         } catch (Exception e) {

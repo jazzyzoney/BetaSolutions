@@ -8,22 +8,22 @@ public class Task implements ModelInterface {
     private int hours;
     private int days;
     private double totalPrice;
-    private Date endDate;
+    private Date Deadline;
     private Date startDate;
 
-    public Task(int id, String name, int hours, int days, double totalPrice, Date endDate, Date startDate) {
+    public Task(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
         this.id = id;
         this.name = name;
         this.hours = hours;
         this.days = days;
         this.totalPrice = totalPrice;
-        this.endDate = endDate;
+        this.Deadline = Deadline;
         this.startDate = startDate;
     }
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
-    public int getId() {
+    public int getID() {
         return id;
     }
     public void setName(String name) {
@@ -50,11 +50,11 @@ public class Task implements ModelInterface {
     public double getTotalPrice() {
         return totalPrice;
     }
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setDeadline(Date endDate) {
+        this.Deadline = endDate;
     }
-    public Date getEndDate() {
-        return endDate;
+    public Date getDeadline() {
+        return Deadline;
     }
     public void setStartDate(Date startDate) {
         this.startDate = startDate;

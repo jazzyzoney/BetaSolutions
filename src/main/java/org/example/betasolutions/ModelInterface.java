@@ -2,13 +2,13 @@ package org.example.betasolutions;
 import java.sql.Date;
 
 public interface ModelInterface {
-        int getId();
+        int getID();
         String getName();
-        java.sql.Date getEndDate();
-        java.sql.Date getStartDate();
+        Date getDeadline();
+        Date getStartDate();
 
         void setName(String name);
-        void setEndDate(Date endDate);
+        void setDeadline(Date Deadline);
         void setStartDate(Date startDate);
 
     }

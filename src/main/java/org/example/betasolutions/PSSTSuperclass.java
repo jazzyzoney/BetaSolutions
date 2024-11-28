@@ -18,7 +18,7 @@ public class PSSTSuperclass {
             preparedStatement.setInt(2, hours);
             preparedStatement.setInt(3, days);
             preparedStatement.setInt(4, totalPrice);
-            preparedStatement.setDate(5, object.getEndDate());
+            preparedStatement.setDate(5, object.getDeadline());
             preparedStatement.setDate(6, object.getStartDate());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -32,6 +32,7 @@ public class PSSTSuperclass {
     }
     //read method
     // this one is for reading all tasks from a project with a specific projectID
+    // we need to make a way to make it check that the inputted table name is correct or we might have sql injection
     public List<ModelInterface> readAllTasks(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "select * from " + tableName + " where project_id = ?";
@@ -47,7 +48,7 @@ public class PSSTSuperclass {
                 double totalPrice = resultSet.getInt("total_price");
                 Date endDate = resultSet.getDate("end_date");
                 Date startDate = resultSet.getDate("start_date");
-                allObjects.add(factory.create(id,name, hours, days, totalPrice, endDate, startDate));
+                allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
 
         } catch (Exception e) {
@@ -60,12 +61,12 @@ public class PSSTSuperclass {
     // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee
     public List<ModelInterface> readAllTasksForEmployee(String tableName, int EmployeeID,int projectID, String tablePrefix,FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "select * from " + tableName + " where employee_id = ? and where project_id = ?";
+        String sql =  "SELECT * FROM " + tableName + " WHERE employee_id = ? AND project_id = ?";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(2, EmployeeID);
-            preparedStatement.setInt(3, projectID);
+            preparedStatement.setInt(1, EmployeeID);
+            preparedStatement.setInt(2, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");
@@ -75,7 +76,7 @@ public class PSSTSuperclass {
                 double totalPrice = resultSet.getInt("total_price");
                 Date endDate = resultSet.getDate("end_date");
                 Date startDate = resultSet.getDate("start_date");
-                allObjects.add(factory.create(id,name, hours, days, totalPrice, endDate, startDate));
+                allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
 
         } catch (Exception e) {

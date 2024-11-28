@@ -2,6 +2,7 @@ package org.example.betasolutions.project;
 
 import org.example.betasolutions.login.LoginService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -23,7 +24,10 @@ public class ProjectController {
     }
 
     @GetMapping("/project")
-    public String getProject(){
+    public String getProject(Model model){
+        int projectID = 1; //should be from session.
+        Project project = projectService.getProject(projectID); //find project by ID.
+        model.addAttribute(project); //add project-object to Thymeleaf.
         return "projectpage";
     }
 

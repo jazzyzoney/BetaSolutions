@@ -10,4 +10,8 @@ public class ProjectService {
     public ProjectService(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
     }
+
+    public Project getProject(int projectID){
+        return projectRepository.getProject(projectID);
+    }
 }

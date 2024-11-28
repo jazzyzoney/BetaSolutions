@@ -93,6 +93,17 @@ public class PSSTSuperclass {
             e.printStackTrace();
         }
     }
+    public void updateObjectAtrribute(String tableName, String name, int functionID, String newName) {
+        String sql = "UPDATE " + tableName + " SET " + name + " = ? WHERE " + "ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, newName);
+            preparedStatement.setInt(2, functionID);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /*
     public List<String> read(String tableName, String idName, int id, Object model){

@@ -1,6 +1,7 @@
 package org.example.betasolutions.project;
 
 import org.example.betasolutions.login.LoginService;
+import org.example.betasolutions.task.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -5,17 +5,19 @@ import org.example.betasolutions.PSSTSuperclass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 
 @Repository
 public class ProjectRepository extends PSSTSuperclass {
 
+    @Autowired
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
 
-    public int createProject(String projectName,String projectOwner, int hours, int days, double totalPrice) { //hours, days and total price come from Service layer.
+    public int createProject(String projectName, String projectOwner, int hours, int days, double totalPrice) { //hours, days and total price come from Service layer.
         Project project = new Project(new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+ 86400000));
         //86 400 000
         String tableName = "project";

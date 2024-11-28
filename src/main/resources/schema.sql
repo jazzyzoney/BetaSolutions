@@ -1,12 +1,3 @@
-DROP TABLE IF EXISTS employeeSubProject;
-DROP TABLE IF EXISTS employeeTask;
-DROP TABLE IF EXISTS employeeSubTask;
-DROP TABLE IF EXISTS profile;
-DROP TABLE IF EXISTS employee;
-DROP TABLE IF EXISTS subTask;
-DROP TABLE IF EXISTS task;
-DROP TABLE IF EXISTS subProject;
-DROP TABLE IF EXISTS project;
 
 -- -----------------------------------------------------
 -- Schema BetaSolutionsDB
@@ -15,8 +6,7 @@ DROP TABLE IF EXISTS project;
 -- -----------------------------------------------------
 -- Schema BetaSolutionsDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS BetaSolutionsDB;
-SET SCHEMA BetaSolutionsDB;
+
 
 -- -----------------------------------------------------
 -- Table `BetaSolutionsDB`.`project`

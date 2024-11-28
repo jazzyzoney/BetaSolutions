@@ -1,16 +1,18 @@
 package org.example.betasolutions;
-import org.springframework.context.annotation.Bean;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PSSTSuperclass {
-    protected final Connection conn;
+    public ConnectionManager connectionManager;
+    public Connection conn;
 
     public PSSTSuperclass(ConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
         this.conn = connectionManager.getConnection();
     }
+
     //create method
     public int insertObjectIntoTable(ModelInterface object, String tableName, String projectName,int hours, int days, double totalPrice) {
         String sql = "insert into " + tableName + " values(?,?,?,?,?,?)";

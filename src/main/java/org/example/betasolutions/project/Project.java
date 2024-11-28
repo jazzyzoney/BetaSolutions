@@ -22,6 +22,12 @@ public class Project implements ModelInterface {
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
     }
+
+    public Project(Date projectStartDate, Date projectDeadline){
+        this.projectStartDate = projectStartDate;
+        this.projectDeadline = projectDeadline;
+
+    }
     public void setID(int projectID) {
         this.projectID = projectID;
     }

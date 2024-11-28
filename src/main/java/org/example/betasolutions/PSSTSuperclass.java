@@ -10,14 +10,15 @@ public class PSSTSuperclass {
         this.conn = connectionManager.getConnection();
     }
     //create method
-    public int insertObjectIntoTable(ModelInterface object, String tableName, String name, int hours, int days, int totalPrice) {
-        String sql = "insert into " + tableName + " (" + name + ") values(?,?,?,?,?,?)";
+    public int insertObjectIntoTable(ModelInterface object, String tableName, String projectName,int hours, int days, double totalPrice) {
+        String sql = "insert into " + tableName + " values(?,?,?,?,?,?)";
+
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, object.getName());
+            preparedStatement.setString(1, projectName);
             preparedStatement.setInt(2, hours);
             preparedStatement.setInt(3, days);
-            preparedStatement.setInt(4, totalPrice);
+            preparedStatement.setDouble(4, totalPrice);
             preparedStatement.setDate(5, object.getDeadline());
             preparedStatement.setDate(6, object.getStartDate());
             preparedStatement.executeUpdate();
@@ -104,18 +105,4 @@ public class PSSTSuperclass {
             e.printStackTrace();
         }
     }
-
-    /*
-    public List<String> read(String tableName, String idName, int id, Object model){
-        String sql = "SELECT * FROM " + tableName + " WHERE " + idName + " =?";
-*/
-
-    /*
-    read
-    insert
-    delete
-    update
-     */
-
-
 }

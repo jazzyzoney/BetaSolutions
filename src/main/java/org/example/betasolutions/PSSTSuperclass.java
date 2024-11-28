@@ -1,4 +1,6 @@
 package org.example.betasolutions;
+import org.springframework.context.annotation.Bean;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

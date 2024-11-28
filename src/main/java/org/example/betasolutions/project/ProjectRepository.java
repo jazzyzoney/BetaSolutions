@@ -16,7 +16,7 @@ public class ProjectRepository extends PSSTSuperclass {
     }
 
     public int createProject(String projectName,String projectOwner, int hours, int days, double totalPrice) { //hours, days and total price come from Service layer.
-        Project project = new Project(new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
+        Project project = new Project(new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()+ 86400000));
         //86 400 000
         String tableName = "project";
         int projectID = super.insertObjectIntoTable(project,tableName,projectName,hours,days,totalPrice);

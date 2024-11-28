@@ -9,24 +9,37 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-@SpringBootTest
+@ComponentScan("org.example.betasolutions.ConnectionManager.class")
+@SpringBootTest(classes = ProjectRepository.class)
 // Uses active profile to make sure we are hooked to database
 @ActiveProfiles("test")
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
-class ProjectRepositoryTest{
+class ProjectRepositoryTest extends PSSTSuperclass{
+
+    @Autowired
+    ConnectionManager connectionManager;
 
     @Autowired
     ProjectRepository projectRepository;
 
+
+
+
     @BeforeEach
     void setUp() {
+    }
+
+    @Test
+    void contextLoads() {
     }
 
     @Test
@@ -56,7 +69,7 @@ class ProjectRepositoryTest{
         int actualID = projectRepository.createProject("det sejeste projekt i hele verden", "test PO", 80, 6, 100000.50);
         int expectedID = 2;
 
-        assertEquals(actualID, expectedID);
+        assertEquals(expectedID, actualID);
 
     }
 }

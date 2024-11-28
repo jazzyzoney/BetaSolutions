@@ -17,17 +17,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
 
 class PSSTSuperclassTest {
-/*
+
     @Autowired
     @Qualifier("projectRepository") // Specify the exact bean name
     PSSTSuperclass superRepository;
-*/
+
     @BeforeEach
     void setUp() {
     }
 
     @Test
     void create() {
+
     }
 
     @Test

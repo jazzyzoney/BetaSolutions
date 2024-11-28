@@ -1,6 +1,8 @@
 package org.example.betasolutions;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -20,6 +22,8 @@ public class ConnectionManager {
     private String password;
 
     private Connection conn;
+
+    private ConnectionManager(){}
 
     public Connection getConnection() {
         // If a connection is already established, return it

@@ -28,19 +28,20 @@ public class PSSTSuperclass {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                return resultSet.getInt(1);
+                return resultSet.getInt(1);//return objectID.
             }
         } catch (Exception e) {
             e.printStackTrace();
     }
-        return 0;
+        return 0;//if failed
     }
+
     //read method
     // this one is for reading all tasks from a project with a specific projectID
     // we need to make a way to make it check that the inputted table name is correct or we might have sql injection
     public List<ModelInterface> readAllTasks(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "select * from " + tableName + " where project_id = ?";
+        String sql = "select * from " + tableName + " where projectID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, projectID);
@@ -48,11 +49,11 @@ public class PSSTSuperclass {
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");
                 String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt("hours");
-                int days = resultSet.getInt("days");
-                double totalPrice = resultSet.getInt("total_price");
-                Date endDate = resultSet.getDate("end_date");
-                Date startDate = resultSet.getDate("start_date");
+                int hours = resultSet.getInt(tablePrefix + "TotalHours");
+                int days = resultSet.getInt(tablePrefix + "TotalDays");
+                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
+                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
+                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
                 allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
         } catch (Exception e) {

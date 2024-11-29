@@ -34,7 +34,7 @@ class ProjectRepositoryTest{
     @Test
     void testInsertObjectIntoTable() {
         Project project = new Project(1, "Project1", "Owner1", 10, 10, 100.0, Date.valueOf("2015-10-10"), Date.valueOf("2015-10-10"));
-        int actualInt = projectRepository.insertObjectIntoTable(project);
+        int actualInt = projectRepository.insertObjectIntoTable(project); //method returns 1 if successfull, 0 if failed.
         int expectedInt = 1;
         assertEquals(expectedInt, actualInt);
     }
@@ -66,4 +66,5 @@ class ProjectRepositoryTest{
     void createProject() {
 
     }
+
 }

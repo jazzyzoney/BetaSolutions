@@ -90,12 +90,12 @@ public class PSSTSuperclass {
         }
         return allObjects;
     }
-    public boolean deleteObjectFromTable(String tableName, String tablePrefix,int projectID, int objectID) {
+    public boolean deleteObjectFromTable(String tableName, String tablePrefix,int functionID, int objectID) {
         String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "ID"+" = ? AND projectID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, objectID);
-            preparedStatement.setInt(2, projectID);
+            preparedStatement.setInt(2, functionID);
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -116,33 +116,20 @@ public class PSSTSuperclass {
         }
         return false;
     }
-
-    public int getTableInt(String tableName, int assignmentInt,int intName) {
-
-        String sql = "SELECT FROM + " tableName "+ WHERE " + assignmentInt + " = ?";
+    // so for this method to work on subProject you need to input subProject
+    public int getTableInt(String tableName, String intColumnName) {
+        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + intColumnName + " = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, intColumnName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return resultSet.getInt(intName);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        return 0;
-    }
-        return 1;
-    }
-    public String getTableString(String tableName, String stringName,) {
-        String sql = "SELECT FROM + " tableName "+ WHERE " + stringName + " = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return resultSet.getString(stringName);
+            if (resultSet.next()) {
+                return resultSet.getInt(intColumnName);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return -1;
     }
+
 }

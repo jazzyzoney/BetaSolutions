@@ -1,11 +1,11 @@
 package org.example.betasolutions.employee;
 
 public class Employee {
-    int employeeID;
-    String employeeName;
-    String employeeOffice;
-    String employeeProficiency;
-    String employeeSalary;
+    private int employeeID;
+    private String employeeName;
+    private String employeeOffice;
+    private String employeeProficiency;
+    private String employeeSalary;
 
     //getters
     public int getEmployeeID() {
@@ -50,5 +50,13 @@ public class Employee {
     }
 
     //constructor when needed
+    public Employee(int employeeID, String employeeName, String employeeOffice, String employeeProficiency, String employeeSalary) {
+        this.employeeID = employeeID;
+        this.employeeName = employeeName;
+        this.employeeOffice = employeeOffice;
+        this.employeeProficiency = employeeProficiency;
+        this.employeeSalary = employeeSalary;
+    }
 
+    //empty constructor?
 }

@@ -62,6 +62,7 @@ public class PSSTSuperclass {
         return allObjects;
     }
 
+
     // Read Method
     // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee
     public List<ModelInterface> readAllTasksForEmployee(String tableName, int EmployeeID,int projectID, String tablePrefix,FactoryInterface factory) {
@@ -109,5 +110,9 @@ public class PSSTSuperclass {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public int getTableInt(String tableName, String intName){
+        return 0;
     }
 }

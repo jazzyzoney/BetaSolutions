@@ -67,13 +67,24 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void testReadAllTasksForEmployee() {
-        
+    void testReadAllTasksForEmployee() {/*
+        List<ModelInterface> actualTaskList = superRepository.readAllTasksForEmployee("task",1, 1, "task", Task::new);
+        String actualTaskName = actualTaskList.get(0).getName();
+        String expectedTaskName = "Task 1";
+
+        assertEquals(expectedTaskName, actualTaskName); //verify name is same as in database.
+
+        int taskID1 = actualTaskList.get(0).getID();
+        int taskID2 = actualTaskList.get(1).getID();
+
+        assertNotEquals(taskID1, taskID2); //verify ID's are unique.*/
 
     }
 
     @Test
     void deleteObjectFromTable() {
+        superRepository.deleteObjectFromTable("task", "Task 1", 1);
+
     }
 
     @Test

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PSSTSuperclass {
     protected ConnectionManager connectionManager;
-    protected Connection conn;
+    public Connection conn;
 
     public PSSTSuperclass(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
@@ -90,15 +90,18 @@ public class PSSTSuperclass {
         }
         return allObjects;
     }
-    public void deleteObjectFromTable(String tableName, String name,int projectID) {
-        String sql = "DELETE FROM " + tableName + " WHERE " + name + "ID"+" = ? AND projectID = ?";
+    public boolean deleteObjectFromTable(String tableName, String tablePrefix,int projectID, int objectID) {
+        String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "ID"+" = ? AND projectID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, projectID);
+            preparedStatement.setInt(1, objectID);
+            preparedStatement.setInt(2, projectID);
             preparedStatement.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
     public void updateObjectAtrribute(String tableName, String name, int functionID, String newName) {
         String sql = "UPDATE " + tableName + " SET " + name + " = ? WHERE " + "ID = ?";

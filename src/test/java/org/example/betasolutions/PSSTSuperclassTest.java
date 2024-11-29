@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ui.Model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +29,7 @@ class PSSTSuperclassTest {
     @Autowired
     @Qualifier("projectRepository") // Specify the exact bean name
     PSSTSuperclass superRepository;
+
 
     @BeforeEach
     void setUp() {
@@ -83,8 +84,19 @@ class PSSTSuperclassTest {
 
     @Test
     void deleteObjectFromTable() {
-        superRepository.deleteObjectFromTable("task", "Task 1", 1);
+        boolean objectDeleted = false;/*
+        try {
+            superRepository.conn.setAutoCommit(false);
+            objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1, 1);
+            //superRepository("sub")
+            superRepository.conn.commit();
+            superRepository.conn.setAutoCommit(true);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        */
 
+        assertTrue(objectDeleted);
     }
 
     @Test

@@ -21,6 +21,16 @@ public class Task implements ModelInterface {
         this.startDate = startDate;
     }
 
+    public Task(String taskName, Date taskStartDate){
+        this.startDate = taskStartDate;
+        this.name = taskName;
+    }
+
+    public Task(String taskName, Date taskStartDate, Date taskDeadLine){
+        this.startDate = taskStartDate;
+        this.name = taskName;
+        this.Deadline = taskDeadLine;
+    }
     public void setID(int id) {
         this.id = id;
     }

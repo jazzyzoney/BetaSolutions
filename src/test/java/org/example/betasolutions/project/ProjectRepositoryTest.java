@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.sql.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -31,7 +33,10 @@ class ProjectRepositoryTest{
 
     @Test
     void testInsertObjectIntoTable() {
-        //projectRepository.insertObjectIntoTable(ModelInterface object, String tableName, String name, int hours, int days, int totalPrice)
+        Project project = new Project(1, "Project1", "Owner1", 10, 10, 100.0, Date.valueOf("2015-10-10"), Date.valueOf("2015-10-10"));
+        int actualInt = projectRepository.insertObjectIntoTable(project);
+        int expectedInt = 1;
+        assertEquals(expectedInt, actualInt);
     }
     @Test
     void TestRepositoryNotNull() {
@@ -40,6 +45,8 @@ class ProjectRepositoryTest{
 
     @Test
     void testReadAllTasks() {
+
+
     }
 
     @Test
@@ -57,10 +64,6 @@ class ProjectRepositoryTest{
     //projectRepository
     @Test
     void createProject() {
-        int actualID = projectRepository.createProject("det sejeste projekt i hele verden", "test PO", 80, 6, 100000.50);
-        int expectedID = 2;
-
-        assertEquals(expectedID, actualID);
 
     }
 }

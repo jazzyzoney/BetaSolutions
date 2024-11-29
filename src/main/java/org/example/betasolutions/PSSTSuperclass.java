@@ -5,8 +5,8 @@ import java.util.List;
 
 
 public class PSSTSuperclass {
-    public ConnectionManager connectionManager;
-    public Connection conn;
+    protected ConnectionManager connectionManager;
+    protected Connection conn;
 
     public PSSTSuperclass(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;

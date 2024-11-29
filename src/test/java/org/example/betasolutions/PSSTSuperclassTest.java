@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ui.Model;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +30,7 @@ class PSSTSuperclassTest {
     @Qualifier("projectRepository") // Specify the exact bean name
     PSSTSuperclass superRepository;
 
+
     @BeforeEach
     void setUp() {
         //task = new Task (1, "supersej task", 43,8, 50000.0,
@@ -38,11 +39,13 @@ class PSSTSuperclassTest {
 
     @Test
     void readAllTasks() {
+        assertTrue(false);
 
     }
 
     @Test
     void readAllTasksForEmployee() {
+        assertTrue(false);
     }
 
     @Test
@@ -50,6 +53,7 @@ class PSSTSuperclassTest {
        /* int actualID = superRepository.insertObjectIntoTable(task, "task", "supersejt project", 43, 8, 50000.5);
         int expectedID = 2;
         assertEquals(actualID, expectedID);*/
+        assertTrue (false);
     }
 
     @Test
@@ -79,15 +83,29 @@ class PSSTSuperclassTest {
 
         assertNotEquals(taskID1, taskID2); //verify ID's are unique.*/
 
+        assertTrue(false);
+
     }
 
     @Test
     void deleteObjectFromTable() {
-        superRepository.deleteObjectFromTable("task", "Task 1", 1);
+        boolean objectDeleted = false;/*
+        try {
+            superRepository.conn.setAutoCommit(false);
+            objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1, 1);
+            //superRepository("sub")
+            superRepository.conn.commit();
+            superRepository.conn.setAutoCommit(true);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        */
 
+        assertTrue(objectDeleted);
     }
 
     @Test
     void updateObjectAtrribute() {
+        
     }
 }

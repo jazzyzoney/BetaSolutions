@@ -20,6 +20,7 @@ public class Task implements ModelInterface {
         this.Deadline = Deadline;
         this.startDate = startDate;
     }
+
     public void setID(int id) {
         this.id = id;
     }

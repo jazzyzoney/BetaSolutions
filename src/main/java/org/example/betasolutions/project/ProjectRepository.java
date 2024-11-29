@@ -1,13 +1,17 @@
 package org.example.betasolutions.project;
 
 import org.example.betasolutions.ConnectionManager;
+import org.example.betasolutions.FactoryInterface;
+import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 @Repository
 public class ProjectRepository extends PSSTSuperclass {
@@ -16,7 +20,7 @@ public class ProjectRepository extends PSSTSuperclass {
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
-
+    //Create method
     public int insertObjectIntoTable(Project project) {
         String Sql = "insert into project(projectName,projectOwner,projectTotalHours,projectTotalDays,projectTotalPrice,projectDeadline,projectStartDate) values(?,?,?,?,?,?,?)";
         try {
@@ -35,7 +39,11 @@ public class ProjectRepository extends PSSTSuperclass {
             return 0;
         }
     }
+    //Read method
+    public List<ModelInterface> readProfile(int projectID) {
 
+        return super.readAllTasks("project", projectID, "project",Project::new);
+    }
     public int createProject(String projectName, String projectOwner, int hours, int days, double totalPrice) { //hours, days and total price come from Service layer.
         Project project = new Project(new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 86400000));
         //86 400 000

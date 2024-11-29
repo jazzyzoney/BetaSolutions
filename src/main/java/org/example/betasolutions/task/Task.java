@@ -31,7 +31,6 @@ public class Task implements ModelInterface {
         this.name = taskName;
         this.Deadline = taskDeadLine;
     }
-
     public void setID(int id) {
         this.id = id;
     }

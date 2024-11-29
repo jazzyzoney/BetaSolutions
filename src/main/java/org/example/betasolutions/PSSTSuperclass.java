@@ -117,7 +117,32 @@ public class PSSTSuperclass {
         return false;
     }
 
-    public int getTableInt(String tableName, String intName){
+    public int getTableInt(String tableName, int assignmentInt,int intName) {
+
+        String sql = "SELECT FROM + " tableName "+ WHERE " + assignmentInt + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getInt(intName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         return 0;
+    }
+        return 1;
+    }
+    public String getTableString(String tableName, String stringName,) {
+        String sql = "SELECT FROM + " tableName "+ WHERE " + stringName + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getString(stringName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

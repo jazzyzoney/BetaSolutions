@@ -66,7 +66,7 @@ public class PSSTSuperclass {
     // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee
     public List<ModelInterface> readAllTasksForEmployee(String tableName, int EmployeeID,int projectID, String tablePrefix,FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql =  "SELECT * FROM " + tableName + " WHERE employee_id = ? AND project_id = ?";
+        String sql =  "SELECT * FROM " + tableName + " WHERE employeeID = ? AND projectID = ?";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -76,11 +76,11 @@ public class PSSTSuperclass {
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");
                 String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt("hours");
-                int days = resultSet.getInt("days");
-                double totalPrice = resultSet.getInt("total_price");
-                Date endDate = resultSet.getDate("end_date");
-                Date startDate = resultSet.getDate("start_date");
+                int hours = resultSet.getInt(tablePrefix + "TotalHours");
+                int days = resultSet.getInt(tablePrefix + "TotalDays");
+                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
+                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
+                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
                 allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
 

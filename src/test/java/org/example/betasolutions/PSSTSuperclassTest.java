@@ -32,8 +32,8 @@ class PSSTSuperclassTest {
 
     @BeforeEach
     void setUp() {
-        task = new Task (1, "supersej task", 43,8, 50000.0,
-                new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 70000000));
+        //task = new Task (1, "supersej task", 43,8, 50000.0,
+                //new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 70000000));
     }
 
     @Test
@@ -68,6 +68,8 @@ class PSSTSuperclassTest {
 
     @Test
     void testReadAllTasksForEmployee() {
+        
+
     }
 
     @Test

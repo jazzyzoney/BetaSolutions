@@ -91,7 +91,7 @@ public class PSSTSuperclass {
         return allObjects;
     }
     public boolean deleteObjectFromTable(String tableName, String tablePrefix,int functionID) {
-        String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "ID"+" = ? ";
+        String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "ID = ? ";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, functionID);
@@ -132,7 +132,17 @@ public class PSSTSuperclass {
     }
 
     public boolean deleteAllWhere(String tableName, String whereStatement){
-        return false;
+
+            String sql = "DELETE FROM " + tableName + " WHERE " + whereStatement;
+
+            try {
+                PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.executeUpdate();
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
     }
 
 }

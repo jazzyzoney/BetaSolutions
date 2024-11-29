@@ -26,31 +26,30 @@ import static org.junit.jupiter.api.Assertions.*;
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
 
 @Rollback(true)//rolls back commits to database after each test.
+@Transactional
 class PSSTSuperclassTest {
 
-    private Task task;
+    //private Task task;
 
 
     @Autowired
     @Qualifier("projectRepository") // Specify the exact bean name
-    PSSTSuperclass superRepository;
+    private PSSTSuperclass superRepository;
+
     @Autowired
     private ConnectionManager connectionManager;
-
-    Connection conn;
+    private Connection conn;
 
 
     @BeforeEach
     void setUp() {
-        conn = connectionManager.getConnection();
-        //task = new Task (1, "supersej task", 43,8, 50000.0,
-                //new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 70000000));
+        conn = connectionManager.getConnection(); //instantiate this.conn using ConnectionManager object.
     }
 
     //not done
     @Test
     void insertObjectIntoTable() {
-       /* int actualID = superRepository.insertObjectIntoTable(task, "task", "supersejt project", 43, 8, 50000.5);
+       /* int actualID = superRepository.insertObjectIntoTable(task, "task", "test task", 43, 8, 50000.5);
         int expectedID = 2;
         assertEquals(actualID, expectedID);*/
         assertTrue (false);
@@ -97,9 +96,9 @@ class PSSTSuperclassTest {
         try {
             conn.setAutoCommit(false);
 
-            objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1);
-            //superRepository.deleteObjectFromTable("subTask", "subTask", 1); //delete subtask
-            //superRepository.deleteObjectFromTable("subTask", "subTask", 2); //delete subtask
+            //objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1); //harder to delete task, since subtasks can be dependent on it.
+            //boolean deletedAllSubTasks = superRepository.deleteAllWhere("subTask", "taskID = 1");
+            objectDeleted = superRepository.deleteObjectFromTable("subTask", "subTask", 1);
 
             conn.commit();
             conn.setAutoCommit(true);
@@ -138,6 +137,13 @@ class PSSTSuperclassTest {
     void getTableString(){
         assertTrue(false);
 
+    }
+
+    @Transactional
+    @Test
+    void deleteAllWhere(){
+        boolean deletedAllSubTasks = superRepository.deleteAllWhere("subTask", "taskID = 1");
+        assertTrue(deletedAllSubTasks);
     }
 
 }

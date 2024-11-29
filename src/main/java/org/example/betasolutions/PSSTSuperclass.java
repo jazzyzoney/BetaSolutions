@@ -103,16 +103,18 @@ public class PSSTSuperclass {
         }
         return false;
     }
-    public void updateObjectAtrribute(String tableName, String name, int functionID, String newName) {
-        String sql = "UPDATE " + tableName + " SET " + name + " = ? WHERE " + "ID = ?";
+    public boolean updateObjectString(String tableName, String attributeName, int functionID, String newValue) {
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, newName);
+            preparedStatement.setString(1, newValue);
             preparedStatement.setInt(2, functionID);
             preparedStatement.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public int getTableInt(String tableName, String intName){

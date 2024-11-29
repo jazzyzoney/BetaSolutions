@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
 
+@Rollback(true)//rolls back commits to database after each test.
 class PSSTSuperclassTest {
 
     private Task task;
@@ -35,19 +37,18 @@ class PSSTSuperclassTest {
     @Autowired
     private ConnectionManager connectionManager;
 
-    Connection conn = connectionManager.getConnection();
+    Connection conn;
 
 
     @BeforeEach
     void setUp() {
-
+        conn = connectionManager.getConnection();
         //task = new Task (1, "supersej task", 43,8, 50000.0,
                 //new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 70000000));
     }
 
     //not done
     @Test
-
     void insertObjectIntoTable() {
        /* int actualID = superRepository.insertObjectIntoTable(task, "task", "supersejt project", 43, 8, 50000.5);
         int expectedID = 2;
@@ -70,6 +71,7 @@ class PSSTSuperclassTest {
     }
 
     //brug for employeeID fra andet table.
+    @Transactional
     @Test
     void testReadAllTasksForEmployee() {/*
         List<ModelInterface> actualTaskList = superRepository.readAllTasksForEmployee("task",1, 1, "task", Task::new);
@@ -88,29 +90,33 @@ class PSSTSuperclassTest {
     }
 
     //this.conn = null.
+    @Transactional
     @Test
     void deleteObjectFromTable() {
         boolean objectDeleted = false;
         try {
             conn.setAutoCommit(false);
-            objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1, 1);
+
+            objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1);
+            //superRepository.deleteObjectFromTable("subTask", "subTask", 1); //delete subtask
+            //superRepository.deleteObjectFromTable("subTask", "subTask", 2); //delete subtask
+
             conn.commit();
             conn.setAutoCommit(true);
         }catch(SQLException e){
             e.printStackTrace();
         }
 
-
         assertTrue(objectDeleted);
     }
 
-    @Transactional
     @Test
     void testUpdateObjectString(){
         boolean objectUpdate = false;
         try {
             connectionManager.getConnection().setAutoCommit(false);
             objectUpdate = superRepository.updateObjectString("task", "taskName", 1, "supersej task");
+
             connectionManager.getConnection().commit();
             connectionManager.getConnection().setAutoCommit(true);
         }catch(SQLException e){
@@ -120,5 +126,18 @@ class PSSTSuperclassTest {
         assertTrue(objectUpdate);
     }
 
+    @Transactional
+    @Test
+    void getTableInt(){
+        assertTrue(false);
+
+    }
+
+    @Transactional
+    @Test
+    void getTableString(){
+        assertTrue(false);
+
+    }
 
 }

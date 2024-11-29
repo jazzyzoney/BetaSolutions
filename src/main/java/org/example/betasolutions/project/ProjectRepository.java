@@ -42,8 +42,13 @@ public class ProjectRepository extends PSSTSuperclass {
     //Read method
     public List<ModelInterface> readProfile(int projectID) {
 
+
         return super.readAllTasks("project", projectID, "project",Project::new);
     }
+
+
+
+
     public int createProject(String projectName, String projectOwner, int hours, int days, double totalPrice) { //hours, days and total price come from Service layer.
         Project project = new Project(new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 86400000));
         //86 400 000

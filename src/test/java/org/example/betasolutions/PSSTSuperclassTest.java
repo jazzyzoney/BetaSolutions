@@ -39,11 +39,13 @@ class PSSTSuperclassTest {
 
     @Test
     void readAllTasks() {
+        assertTrue(false);
 
     }
 
     @Test
     void readAllTasksForEmployee() {
+        assertTrue(false);
     }
 
     @Test
@@ -51,6 +53,7 @@ class PSSTSuperclassTest {
        /* int actualID = superRepository.insertObjectIntoTable(task, "task", "supersejt project", 43, 8, 50000.5);
         int expectedID = 2;
         assertEquals(actualID, expectedID);*/
+        assertTrue (false);
     }
 
     @Test
@@ -80,6 +83,8 @@ class PSSTSuperclassTest {
 
         assertNotEquals(taskID1, taskID2); //verify ID's are unique.*/
 
+        assertTrue(false);
+
     }
 
     @Test
@@ -101,5 +106,6 @@ class PSSTSuperclassTest {
 
     @Test
     void updateObjectAtrribute() {
+        
     }
 }

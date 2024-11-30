@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,8 +25,8 @@ public class ProjectRepository extends PSSTSuperclass {
             PreparedStatement preparedStatement = conn.prepareStatement(Sql,PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, project.getName());
             preparedStatement.setString(2, project.getOwner());
-            preparedStatement.setInt(3, project.getTotalHours());
-            preparedStatement.setInt(4, project.getTotalDays());
+            preparedStatement.setInt(3, project.getHours());
+            preparedStatement.setInt(4, project.getDays());
             preparedStatement.setDouble(5, project.getTotalPrice());
             preparedStatement.setDate(6, project.getDeadline());
             preparedStatement.setDate(7, project.getStartDate());
@@ -37,9 +38,21 @@ public class ProjectRepository extends PSSTSuperclass {
         }
     }
     //Read method
-    public List<ModelInterface> readProfile(int projectID) {
-        return super.readAllObjects("project", projectID, "project",Project::new);
-
+    public List<ModelInterface> readProject(int projectID) {
+        List <ModelInterface> allProjects = new ArrayList<>();
+        for (ModelInterface project : super.readAllObjects("project", projectID, "project", Project::new)) {
+            int id = project.getID();
+            String name = project.getName();
+            String owner = super.getTableString("project", "projectID",name, "project_id");
+            int hours = project.getHours();
+            int days = project.getDays();
+            double totalPrice = project.getTotalPrice();
+            Date deadline = project.getDeadline();
+            Date startDate = project.getStartDate();
+            Project newProject = new Project(id, name, owner, hours, days, totalPrice, deadline, startDate);
+            allProjects.add(newProject);
+        }
+        return allProjects;
     }
 
 

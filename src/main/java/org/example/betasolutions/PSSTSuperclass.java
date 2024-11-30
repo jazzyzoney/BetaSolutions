@@ -68,7 +68,6 @@ public class PSSTSuperclass {
     public List<ModelInterface> readAllObjectsForEmployee(String tableName, int EmployeeID, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql =  "SELECT * FROM " + tableName + " WHERE employeeID = ? AND projectID = ?";
-
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, EmployeeID);
@@ -130,6 +129,8 @@ public class PSSTSuperclass {
         }
         return -1;
     }
+
+
     public String getTableString(String tableName, String columnToSelect, String searchColumn,String searchValue) {
         String sql = "SELECT " + columnToSelect  + " FROM " + tableName + " WHERE " + searchColumn  + " = ?";
         try {

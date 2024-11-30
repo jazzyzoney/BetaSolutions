@@ -39,7 +39,7 @@ public class PSSTSuperclass {
     //read method
     // this one is for reading all tasks from a project with a specific projectID
     // we need to make a way to make it check that the inputted table name is correct or we might have sql injection
-    public List<ModelInterface> readAllTasks(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
+    public List<ModelInterface> readAllObjects(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "select * from " + tableName + " where projectID = ?";
         try {
@@ -65,7 +65,7 @@ public class PSSTSuperclass {
 
     // Read Method
     // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee
-    public List<ModelInterface> readAllTasksForEmployee(String tableName, int EmployeeID,int projectID, String tablePrefix,FactoryInterface factory) {
+    public List<ModelInterface> readAllObjectsForEmployee(String tableName, int EmployeeID, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql =  "SELECT * FROM " + tableName + " WHERE employeeID = ? AND projectID = ?";
 
@@ -115,20 +115,34 @@ public class PSSTSuperclass {
         }
         return false;
     }
-    // so for this method to work on subProject you need to input subProject
-    public int getTableInt(String tableName, String intColumnName) {
-        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + intColumnName + " = ?";
+
+    public int getTableInt(String tableName, String columnToSelect, String searchColumn,String searchValue) {
+        String sql = "SELECT " + columnToSelect  + " FROM " + tableName + " WHERE " + searchColumn  + " = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, intColumnName);
+            preparedStatement.setString(1, searchValue);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getInt(intColumnName);
+                return resultSet.getInt(columnToSelect);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;
+    }
+    public String getTableString(String tableName, String columnToSelect, String searchColumn,String searchValue) {
+        String sql = "SELECT " + columnToSelect  + " FROM " + tableName + " WHERE " + searchColumn  + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, searchValue);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString(columnToSelect);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean deleteAllWhere(String tableName, String whereStatement){

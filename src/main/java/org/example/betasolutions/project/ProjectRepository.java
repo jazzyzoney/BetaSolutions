@@ -1,14 +1,11 @@
 package org.example.betasolutions.project;
 
 import org.example.betasolutions.ConnectionManager;
-import org.example.betasolutions.FactoryInterface;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
-import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -41,9 +38,8 @@ public class ProjectRepository extends PSSTSuperclass {
     }
     //Read method
     public List<ModelInterface> readProfile(int projectID) {
+        return super.readAllObjects("project", projectID, "project",Project::new);
 
-
-        return super.readAllTasks("project", projectID, "project",Project::new);
     }
 
 

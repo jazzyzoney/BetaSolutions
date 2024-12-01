@@ -162,6 +162,7 @@ public class PSSTSuperclass {
     }
 
     public boolean deleteAllWhere(String tableName, String whereStatement){
+        authenticateTable(tableName);
 
             String sql = "DELETE FROM " + tableName + " WHERE " + whereStatement;
 
@@ -173,6 +174,22 @@ public class PSSTSuperclass {
                 e.printStackTrace();
             }
             return false;
+    }
+
+    public boolean authenticateTable(String tableName) {
+
+        switch (tableName) {
+            case "project":
+                return true;
+            case "subProject":
+                return true;
+            case "task":
+                return true;
+            case "subTask":
+                return true;
+            default:
+            throw new IllegalArgumentException("Invalid table name: " + tableName);
+        }
     }
 
 }

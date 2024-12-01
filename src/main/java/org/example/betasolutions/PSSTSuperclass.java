@@ -39,21 +39,21 @@ public class PSSTSuperclass {
     //read method
     // this one is for reading all tasks from a project with a specific projectID
     // we need to make a way to make it check that the inputted table name is correct or we might have sql injection
-    public List<ModelInterface> readAllObjects(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
+    public List<ModelInterface> readAllObjects(String tableName, int projectID,int active, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "select * from " + tableName + " where projectID = ?";
+        String sql = "select * from " + tableName + " where projectID = ? and active = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt(tablePrefix + "ID");
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                int id = resultSet.getInt(tableName + "ID");
+                String name = resultSet.getString(tableName + "Name");
+                int hours = resultSet.getInt(tableName + "TotalHours");
+                int days = resultSet.getInt(tableName + "TotalDays");
+                double totalPrice = resultSet.getInt(tableName + "TotalPrice");
+                Date endDate = resultSet.getDate(tableName + "DeadLine");
+                Date startDate = resultSet.getDate(tableName + "StartDate");
                 allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
         } catch (Exception e) {
@@ -89,6 +89,7 @@ public class PSSTSuperclass {
         }
         return allObjects;
     }
+
     public boolean deleteObjectFromTable(String tableName, String tablePrefix,int functionID) {
         String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "ID = ? ";
         try {
@@ -114,6 +115,20 @@ public class PSSTSuperclass {
         }
         return false;
     }
+    public boolean updateObjectInt(String tableName, String attributeName, int functionID, int newValue) {
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, newValue);
+            preparedStatement.setInt(2, functionID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public int getTableInt(String tableName, String columnToSelect, String searchColumn,String searchValue) {
         String sql = "SELECT " + columnToSelect  + " FROM " + tableName + " WHERE " + searchColumn  + " = ?";

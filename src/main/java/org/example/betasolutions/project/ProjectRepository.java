@@ -37,26 +37,32 @@ public class ProjectRepository extends PSSTSuperclass {
             return 0;
         }
     }
-    //Read method
-    public List<ModelInterface> readProject(int projectID) {
-        List <ModelInterface> allProjects = new ArrayList<>();
-        for (ModelInterface project : super.readAllObjects("project", projectID, "project", Project::new)) {
-            int id = project.getID();
-            String name = project.getName();
-            String owner = super.getTableString("project", "projectID",name, "project_id");
-            int hours = project.getHours();
-            int days = project.getDays();
-            double totalPrice = project.getTotalPrice();
-            Date deadline = project.getDeadline();
-            Date startDate = project.getStartDate();
-            Project newProject = new Project(id, name, owner, hours, days, totalPrice, deadline, startDate);
-            allProjects.add(newProject);
+
+    //read all method for projects
+    //do we need a way to only read projects that a team leader is assinged to ?
+    public List<Project> readAllProjects() {
+        List<Project> allProjects = new ArrayList<>();
+        String sql = "select * from project";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.executeQuery();
+            while (preparedStatement.getResultSet().next()) {
+                int id = preparedStatement.getResultSet().getInt("projectID");
+                String name = preparedStatement.getResultSet().getString("projectName");
+                String owner = preparedStatement.getResultSet().getString("projectOwner");
+                int hours = preparedStatement.getResultSet().getInt("projectTotalHours");
+                int days = preparedStatement.getResultSet().getInt("projectTotalDays");
+                double totalPrice = preparedStatement.getResultSet().getDouble("projectTotalPrice");
+                Date deadline = preparedStatement.getResultSet().getDate("projectDeadline");
+                Date startDate = preparedStatement.getResultSet().getDate("projectStartDate");
+                Project project = new Project(id, name, owner, hours, days, totalPrice, deadline, startDate);
+                allProjects.add(project);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return allProjects;
     }
-
-
-
 
     public int createProject(String projectName, String projectOwner, int hours, int days, double totalPrice) { //hours, days and total price come from Service layer.
         Project project = new Project(new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 86400000));

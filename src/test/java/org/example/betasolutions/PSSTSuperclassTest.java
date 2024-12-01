@@ -55,7 +55,7 @@ class PSSTSuperclassTest {
 
     @Test
     void testReadAllObjects() {
-        List<ModelInterface> actualTaskList = superRepository.readAllObjects("task", 1, "task", Task::new);
+        List<ModelInterface> actualTaskList = superRepository.readAllObjects("task", 1, 1, Task::new);
         String actualTaskName = actualTaskList.get(0).getName();
         String expectedTaskName = "Task 1";
 

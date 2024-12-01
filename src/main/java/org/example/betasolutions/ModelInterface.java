@@ -5,7 +5,6 @@ public interface ModelInterface {
         int getID();
         String getName();
         int getHours();
-        String getOwner();
         int getDays();
         double getTotalPrice();
         Date getDeadline();

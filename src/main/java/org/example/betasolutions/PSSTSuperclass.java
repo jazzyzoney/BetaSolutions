@@ -13,30 +13,6 @@ public class PSSTSuperclass {
         this.conn = connectionManager.getConnection();
     }
 
-    /*
-    //create method
-    public int insertAssignmentIntoTable(ModelInterface object, String tableName) {
-        String sql = "insert into " + tableName + " values(?,?,?,?,?,?)";
-
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, object.getName());
-            preparedStatement.setInt(2, object.getHours());
-            preparedStatement.setInt(3, object.getDays());
-            preparedStatement.setDouble(4, object.getTotalPrice());
-            preparedStatement.setDate(5, object.getDeadline());
-            preparedStatement.setDate(6, object.getStartDate());
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                return resultSet.getInt(1);//return objectID.
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-    }
-        return 0;//if failed
-    }
-    */
     public PreparedStatement insertAssignmentIntoTable(ModelInterface assignment,String sql){
         //String sql = "INSERT INTO " + tableName + " VALUES " + sqlValues;
 
@@ -154,6 +130,21 @@ public class PSSTSuperclass {
         }
         return -1;
     }
+    public String getTableString(String tableName, String stringColumnName) {
+        String sql = "SELECT " + stringColumnName + " FROM " + tableName + " WHERE " + stringColumnName + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, stringColumnName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString(stringColumnName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 
     public boolean deleteAllWhere(String tableName, String whereStatement){
 

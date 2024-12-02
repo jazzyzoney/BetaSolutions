@@ -182,7 +182,13 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void getTableString(){
+    void getTableStringByString(){
+        assertTrue(false);
+
+    }
+
+    @Test
+    void getTableStringByInt(){
         assertTrue(false);
 
     }

@@ -115,23 +115,6 @@ public class PSSTSuperclass {
         }
         return false;
     }
-    /*
-    // so for this method to work on subProject you need to input subProject
-    public int getTableInt(String tableName, String intColumnName) {
-        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + intColumnName + " = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, intColumnName);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return resultSet.getInt(intColumnName);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-     */
 
     public String getTableStringByInt(String tableName, String selectedColumn, String whereColumn, int inputValue ) {
         String sql = "SELECT " + selectedColumn + " FROM " + tableName + " WHERE " + whereColumn + " = ?";

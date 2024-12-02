@@ -2,6 +2,8 @@ package org.example.betasolutions;
 
 import jakarta.transaction.Transactional;
 import org.example.betasolutions.task.Task;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +90,7 @@ class PSSTSuperclassTest {
 
     }
 
-    //this.conn = null.
+    //doesn't work with Task because of something with foreign keys.
     @Transactional
     @Test
     void deleteObjectFromTable() {
@@ -109,6 +111,8 @@ class PSSTSuperclassTest {
         assertTrue(objectDeleted);
     }
 
+
+    @Rollback(true)
     @Test
     void testUpdateObjectString(){
         boolean objectUpdate = false;

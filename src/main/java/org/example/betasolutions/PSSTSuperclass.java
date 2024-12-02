@@ -39,12 +39,12 @@ public class PSSTSuperclass {
     //read method
     // this one is for reading all tasks from a project with a specific projectID
     // we need to make a way to make it check that the inputted table name is correct or we might have sql injection
-    public List<ModelInterface> readAllTasks(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
+    public List<ModelInterface> readAllTasks(String tableName,  String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "select * from " + tableName + " where projectID = ?";
+        String sql = "select * from " + tableName;// + " where projectID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, projectID);
+            //preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");
@@ -115,6 +115,8 @@ public class PSSTSuperclass {
         }
         return false;
     }
+
+
     // so for this method to work on subProject you need to input subProject
     public int getTableInt(String tableName, String intColumnName) {
         String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + intColumnName + " = ?";
@@ -129,6 +131,10 @@ public class PSSTSuperclass {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public String getTableString(String tableName, String columnName){
+        return "midlertidig String";
     }
 
     public boolean deleteAllWhere(String tableName, String whereStatement){

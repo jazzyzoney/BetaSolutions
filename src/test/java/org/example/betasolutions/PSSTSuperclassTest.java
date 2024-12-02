@@ -8,11 +8,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -26,7 +31,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
 
 @Rollback(true)//rolls back commits to database after each test.
-@Transactional
 class PSSTSuperclassTest {
 
     //private Task task;
@@ -40,10 +44,48 @@ class PSSTSuperclassTest {
     private ConnectionManager connectionManager;
     private Connection conn;
 
+    @Autowired
+
+    private JdbcTemplate jdbcTemplate;
+
+
+
+    public void executeSqlScript() {
+
+        Resource resource = new ClassPathResource("schema.sql");
+
+        try {
+
+            String sql = new String(Files.readAllBytes(resource.getFile().toPath()));
+
+            jdbcTemplate.execute(sql);
+
+        } catch (IOException e) {
+
+            throw new RuntimeException("Failed to read or execute schema.sql", e);
+
+        }
+
+    }
 
     @BeforeEach
     void setUp() {
+        //executeSqlScript();
         conn = connectionManager.getConnection(); //instantiate this.conn using ConnectionManager object.
+        try {
+            conn.setAutoCommit(false);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    @AfterEach
+    void tearDown(){
+        try {
+            conn.rollback(); //rollback changes
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     //not done
@@ -56,8 +98,8 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void testReadAllObjects() {
-        List<ModelInterface> actualTaskList = superRepository.readAllObjects("task", 1, 1, Task::new);
+    void testReadAllTasks() {
+        List<ModelInterface> actualTaskList = superRepository.readAllTasks("task", 1, "task", Task::new);
         String actualTaskName = actualTaskList.get(0).getName();
         String expectedTaskName = "Task 1";
 
@@ -70,7 +112,6 @@ class PSSTSuperclassTest {
     }
 
     //brug for employeeID fra andet table.
-    @Transactional
     @Test
     void testReadAllObjectsForEmployee() {/*
         List<ModelInterface> actualTaskList = superRepository.readAllTasksForEmployee("task",1, 1, "task", Task::new);
@@ -89,59 +130,42 @@ class PSSTSuperclassTest {
     }
 
     //doesn't work with Task because of something with foreign keys.
-    @Transactional
     @Test
     void deleteObjectFromTable() {
         boolean objectDeleted = false;
-        try {
-            conn.setAutoCommit(false);
+
+            //conn.setAutoCommit(false);
 
             //objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1); //harder to delete task, since subtasks can be dependent on it.
             //boolean deletedAllSubTasks = superRepository.deleteAllWhere("subTask", "taskID = 1");
             objectDeleted = superRepository.deleteObjectFromTable("subTask", "subTask", 1);
 
-            conn.commit();
-            conn.setAutoCommit(true);
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
+
 
         assertTrue(objectDeleted);
     }
-
 
     @Rollback(true)
     @Test
     void testUpdateObjectString(){
         boolean objectUpdate = false;
-        try {
-            connectionManager.getConnection().setAutoCommit(false);
-            objectUpdate = superRepository.updateObjectString("task", "taskName", 1, "supersej task");
-
-            connectionManager.getConnection().commit();
-            connectionManager.getConnection().setAutoCommit(true);
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-
+        objectUpdate = superRepository.updateObjectString("task", "taskName", 1, "supersej task");
         assertTrue(objectUpdate);
+        //connectionManager.getConnection().commit();
     }
 
-    @Transactional
     @Test
     void getTableInt(){
         assertTrue(false);
 
     }
 
-    @Transactional
     @Test
     void getTableString(){
         assertTrue(false);
 
     }
 
-    @Transactional
     @Test
     void deleteAllWhere(){
         boolean deletedAllSubTasks = superRepository.deleteAllWhere("subTask", "taskID = 1");

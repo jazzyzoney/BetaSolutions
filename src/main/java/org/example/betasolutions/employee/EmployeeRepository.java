@@ -65,6 +65,24 @@ public class EmployeeRepository {
         return null;
     }
 
+    //add existing employee to assignment table
+    public void addExistingEmployeeToAssignment(String idName) {
+        String sql = "INSERT INTO assignment (employeeID, "+ idName +") VALUES (?,?)";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employee.getEmployeeID());
+            preparedStatement.setString(2, assignment.getIdName());
+            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 1) {
+                System.out.println("Employee added to assignment");
+            } else {
+                System.out.println("Employee not added to assignment");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //update
     public void updateEmployee(Employee employee) {
         String sql = "UPDATE employee SET employeeName = ?, employeeOffice = ?, employeeProficiency = ?, employeeSalary = ? WHERE employeeID = ?";

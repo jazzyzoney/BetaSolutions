@@ -31,9 +31,9 @@ public class EmployeeController {
         return "employeepage";
    }
 
-    //mangler at lave denne metode
-    @PostMapping("/project/employee/add") //add employee to project/subproject/task/subtask
-    public String addExistingEmployee(){
+    //in progress
+    @PostMapping("/project/employee/add") //add employee to project/subproject/task/subtask aka assignment
+    public String addExistingEmployeeToAssignment(){
         return "redirect: /project/employee";
     }
 

@@ -149,14 +149,18 @@ class PSSTSuperclassTest {
 
     @Test
     void getTableStringByString(){
-        assertTrue(false);
+        String expectedProjectOwner = "Owner 1";
+        String actualProjectOwner = superRepository.getTableStringByString("project", "projectOwner", "projectName", "Project A");
+        assertEquals(expectedProjectOwner, actualProjectOwner);
+        assertEquals("Project A", superRepository.getTableStringByString("project", "projectName", "projectOwner", "Owner 1"));
+
 
     }
 
     @Test
     void getTableStringByInt(){
-        assertTrue(false);
-
+        assertEquals("Project A", superRepository.getTableStringByInt("project", "projectName", "projectID", 1));
+        assertEquals("Owner 1", superRepository.getTableStringByInt("project", "projectOwner", "projectID", 1));
     }
 
     @Test

@@ -134,7 +134,7 @@ class PSSTSuperclassTest {
 
         assertNotEquals(taskID1, taskID2); //verify ID's are unique.*/
 
-        //assertTrue(false);
+        assertTrue(false);
 
     }
 

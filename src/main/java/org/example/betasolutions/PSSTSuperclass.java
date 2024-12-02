@@ -13,16 +13,17 @@ public class PSSTSuperclass {
         this.conn = connectionManager.getConnection();
     }
 
+    /*
     //create method
-    public int insertObjectIntoTable(ModelInterface object, String tableName, String projectName,int hours, int days, double totalPrice) {
+    public int insertAssignmentIntoTable(ModelInterface object, String tableName) {
         String sql = "insert into " + tableName + " values(?,?,?,?,?,?)";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, projectName);
-            preparedStatement.setInt(2, hours);
-            preparedStatement.setInt(3, days);
-            preparedStatement.setDouble(4, totalPrice);
+            preparedStatement.setString(1, object.getName());
+            preparedStatement.setInt(2, object.getHours());
+            preparedStatement.setInt(3, object.getDays());
+            preparedStatement.setDouble(4, object.getTotalPrice());
             preparedStatement.setDate(5, object.getDeadline());
             preparedStatement.setDate(6, object.getStartDate());
             preparedStatement.executeUpdate();
@@ -34,6 +35,26 @@ public class PSSTSuperclass {
             e.printStackTrace();
     }
         return 0;//if failed
+    }
+    */
+    public PreparedStatement insertAssignmentIntoTable(ModelInterface assignment, String tableName, String sqlValues){
+        String sql = "INSERT INTO " + tableName + " VALUES " + sqlValues;
+        PreparedStatement preparedStatement;
+        try{
+            preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, assignment.getName());
+            preparedStatement.setInt(2, assignment.getHours());
+            preparedStatement.setInt(3, assignment.getDays());
+            preparedStatement.setDouble(4, assignment.getTotalPrice());
+            preparedStatement.setDate(5, assignment.getDeadline());
+            preparedStatement.setDate(6, assignment.getStartDate());
+
+            return preparedStatement;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return preparedStatement = null;
     }
 
 

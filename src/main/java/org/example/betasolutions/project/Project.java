@@ -12,8 +12,18 @@ public class Project implements ModelInterface {
     private Date projectDeadline;
     private Date projectStartDate;
 
-    public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, Date projectStartDate) {
+    public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
         this.projectID = projectID;
+        this.projectName = projectName;
+        this.projectOwner = projectOwner;
+        this.projectTotalHours = projectTotalHours;
+        this.projectTotalDays = projectTotalDays;
+        this.projectTotalPrice = projectTotalPrice;
+        this.projectDeadline = projectDeadline;
+        this.projectStartDate = projectStartDate;
+    }
+
+    public Project(String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, Date projectStartDate) {
         this.projectName = projectName;
         this.projectOwner = projectOwner;
         this.projectTotalHours = projectTotalHours;
@@ -102,6 +112,10 @@ public class Project implements ModelInterface {
     }
     public void setProjectOwner(String projectOwner){
         this.projectOwner = projectOwner;
+    }
+
+    public String getProjectOwner(){
+        return projectOwner;
     }
 
 }

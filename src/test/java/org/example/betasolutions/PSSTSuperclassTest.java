@@ -1,6 +1,7 @@
 package org.example.betasolutions;
 
 import jakarta.transaction.Transactional;
+import org.example.betasolutions.project.Project;
 import org.example.betasolutions.task.Task;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,6 +20,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -90,11 +93,16 @@ class PSSTSuperclassTest {
 
     //not done
     @Test
-    void insertObjectIntoTable() {
+    void insertAssignmentIntoTable() {
        /* int actualID = superRepository.insertObjectIntoTable(task, "task", "test task", 43, 8, 50000.5);
         int expectedID = 2;
         assertEquals(actualID, expectedID);*/
-        assertTrue (false);
+        Project project = new Project("projectName", "projectOwner", 43, 8, 500000.5,
+                Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
+        //(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, java.sql.DateprojectStartDate) {
+        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project, "project", "(?,?,?,?,?,?)");//,?)");
+
+        assertNotNull(preparedStatement);
     }
 
     @Test

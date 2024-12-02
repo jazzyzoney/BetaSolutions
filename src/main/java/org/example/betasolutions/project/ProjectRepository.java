@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
@@ -21,8 +22,8 @@ public class ProjectRepository extends PSSTSuperclass {
         super(connectionManager);
     }
     //Create method
-    public int insertObjectIntoTable(Project project) {
-        String Sql = "insert into project(projectName,projectOwner,projectTotalHours,projectTotalDays,projectTotalPrice,projectDeadline,projectStartDate) values(?,?,?,?,?,?,?)";
+    public int insertAssignmentIntoTable(Project project) {
+       /* String Sql = "insert into project(projectName,projectOwner,projectTotalHours,projectTotalDays,projectTotalPrice,projectDeadline,projectStartDate) values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(Sql,PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, project.getName());
@@ -37,8 +38,25 @@ public class ProjectRepository extends PSSTSuperclass {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }*/
+
+
+        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, "project", "?,?,?,?,?,?");//,?");
+        try{
+            //preparedStatement.setString(7,project.getProjectOwner());//set projectowner.
+
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);//return objectID.
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return 0;//if failed
     }
+
     //Read method
     public List<ModelInterface> readProfile(int projectID) {
 
@@ -57,7 +75,7 @@ public class ProjectRepository extends PSSTSuperclass {
         try {
             conn.setAutoCommit(false);
 
-            int projectID = super.insertObjectIntoTable(project, tableName, projectName, hours, days, totalPrice);
+            int projectID = insertAssignmentIntoTable(project);
 
             String sql = "UPDATE project SET project_owner = ? WHERE project_id = ?";
             try {

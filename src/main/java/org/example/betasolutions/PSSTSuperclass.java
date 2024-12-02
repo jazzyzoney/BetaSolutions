@@ -146,35 +146,41 @@ public class PSSTSuperclass {
         return null;
     }
     
+    public int getTableIntByString(String tableName, String selectedColumn, String whereColumn, String value) {
+        String sql = "SELECT " + selectedColumn + " FROM " + tableName + " WHERE " + whereColumn + " = ?";
+        //eg. SELECT taskID FROM task WHERE taskName = "Task 1"
 
-    public int getTableIntByString(String tableName, String intColumnName, String columnName2, String value) {
-        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + columnName2 + " = ?";
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, value);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql); //instantiate preparedStatement.
+            preparedStatement.setString(1, value); //set String value. eg. taskName = "Task 1"
+            ResultSet resultSet = preparedStatement.executeQuery();//commit
             if (resultSet.next()) {
-                return resultSet.getInt(intColumnName);
+                return resultSet.getInt(selectedColumn);//get first int where where-clause passed. eg. taskName = "Task 1"
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
+        return -1; //return -1 if method failed
     }
 
-    public int getTableIntByInt(String tableName, String intColumnName, String columnName2, int value) {
-        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + columnName2 + " = ?";
+
+    public int getTableIntByInt(String tableName, String selectedColumn, String whereColumn, int value) {
+        String sql = "SELECT " + selectedColumn + " FROM " + tableName + " WHERE " + whereColumn + " = ?";
+        //eg. SELECT taskID FROM task WHERE taskTotalHours = 100
+
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, value);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, value); //set whereColumn = value. eg: taskTotalHours = 100
+            ResultSet resultSet = preparedStatement.executeQuery(); //commit
+
             if (resultSet.next()) {
-                return resultSet.getInt(intColumnName);
+                return resultSet.getInt(selectedColumn); //returns first int in resultset (eg. first id where taskTotalHours = 100)
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
+
+        return -1;//return -1 if method fails.
     }
 
     public boolean deleteAllWhere(String tableName, String whereStatement){

@@ -67,10 +67,8 @@ class ProjectRepositoryTest{
         int secondExpectedID = 6;
 
         assertEquals(expectedID, actualID);
-
-        assertNotEquals(actualID, secondActualID); //autoincrement
-
         assertEquals(secondExpectedID, secondActualID);
+        assertNotEquals(actualID, secondActualID); //autoincrement
 
     }
     @Test

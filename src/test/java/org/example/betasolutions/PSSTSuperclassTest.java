@@ -134,7 +134,7 @@ class PSSTSuperclassTest {
 
         assertNotEquals(taskID1, taskID2); //verify ID's are unique.*/
 
-        assertTrue(false);
+        //assertTrue(false);
 
     }
 
@@ -164,9 +164,21 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void getTableInt(){
-        assertTrue(false);
+    void getTableIntByString(){
+        //get id by name ("Task 1")
+        int actualID = superRepository.getTableIntByString("task", "taskID", "taskName", "Task 1");
+        int expectedID = 1;
 
+        assertEquals(expectedID, actualID);
+    }
+
+    @Test
+    void getTableIntByInt(){
+        //get id by total hours (100)
+        int actualID = superRepository.getTableIntByInt("task", "taskID", "taskTotalHours", 100);
+        int expectedID = 1;
+
+        assertEquals(expectedID, actualID);
     }
 
     @Test

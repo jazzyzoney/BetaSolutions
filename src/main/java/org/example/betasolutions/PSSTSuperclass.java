@@ -155,6 +155,36 @@ public class PSSTSuperclass {
         return -1;
     }
 
+    public int getTableIntByString(String tableName, String intColumnName, String columnName2, String value) {
+        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + columnName2 + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(intColumnName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int getTableIntByInt(String tableName, String intColumnName, String columnName2, int value) {
+        String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + columnName2 + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, value);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(intColumnName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public boolean deleteAllWhere(String tableName, String whereStatement){
 
             String sql = "DELETE FROM " + tableName + " WHERE " + whereStatement;

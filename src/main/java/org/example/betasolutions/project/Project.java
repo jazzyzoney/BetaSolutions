@@ -93,4 +93,15 @@ public class Project implements ModelInterface {
         return projectStartDate;
     }
 
+    public int getTotalHours(){
+        return projectTotalHours;
+    }
+
+    public int getTotalDays(){
+        return projectTotalDays;
+    }
+    public void setProjectOwner(String projectOwner){
+        this.projectOwner = projectOwner;
+    }
+
 }

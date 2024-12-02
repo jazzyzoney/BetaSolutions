@@ -63,11 +63,11 @@ public class EmployeeRepository {
     }
 
     //add existing employee to assignment table
-    public void addExistingEmployeeToAssignment(String idName) {
+    public void addExistingEmployeeToAssignment(Employee employee, String assignment, String idName) { //idName is the name of the column
         String sql = "INSERT INTO assignment (employeeID, "+ idName +") VALUES (?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employee.getEmployeeID());
-            preparedStatement.setString(2, assignment.getIdName());
+            preparedStatement.setString(2, idName);
             preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
@@ -81,7 +81,7 @@ public class EmployeeRepository {
     }
 
     //update
-    public void updateEmployee(Employee employee) {
+    public void editEmployee(Employee employee) {
         String sql = "UPDATE employee SET employeeName = ?, employeeOffice = ?, employeeProficiency = ?, employeeSalary = ? WHERE employeeID = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getEmployeeName());

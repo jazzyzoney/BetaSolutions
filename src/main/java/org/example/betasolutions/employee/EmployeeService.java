@@ -24,9 +24,14 @@ public class EmployeeService {
         return employeeRepository.getAllEmployees();
     }
 
+    //add employee to assignment
+    public void addExistingEmployeeToAssignment(Employee employee, String assignment, String idName){
+        employeeRepository.addExistingEmployeeToAssignment(employee, assignment, idName);
+    }
+
     //update
     public void editEmployee(Employee employee){
-        employeeRepository.updateEmployee(employee);
+        employeeRepository.editEmployee(employee);
     }
 
     //delete

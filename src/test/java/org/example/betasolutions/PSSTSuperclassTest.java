@@ -14,9 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,8 +56,8 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void testReadAllTasks() {
-        List<ModelInterface> actualTaskList = superRepository.readAllTasks("task", 1, "task", Task::new);
+    void testReadAllObjects() {
+        List<ModelInterface> actualTaskList = superRepository.readAllObjects("task", 1, 1, Task::new);
         String actualTaskName = actualTaskList.get(0).getName();
         String expectedTaskName = "Task 1";
 
@@ -74,7 +72,7 @@ class PSSTSuperclassTest {
     //brug for employeeID fra andet table.
     @Transactional
     @Test
-    void testReadAllTasksForEmployee() {/*
+    void testReadAllObjectsForEmployee() {/*
         List<ModelInterface> actualTaskList = superRepository.readAllTasksForEmployee("task",1, 1, "task", Task::new);
         String actualTaskName = actualTaskList.get(0).getName();
         String expectedTaskName = "Task 1";

@@ -14,7 +14,7 @@ public class TaskService {
     }
 
     public List<ModelInterface> getAllTasks(int projectID){
-        return taskRepository.readAllTasks("task",projectID,"task",Task::new);
+        return taskRepository.readAllObjects("task",projectID,1,Task::new);
     }
 
 }

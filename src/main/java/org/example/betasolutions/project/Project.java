@@ -65,13 +65,13 @@ public class Project implements ModelInterface {
     public void setTotalHours(int projectTotalHours) {
         this.projectTotalHours = projectTotalHours;
     }
-    public int getTotalHours() {
+    public int getHours() {
         return projectTotalHours;
     }
     public void setTotalDays(int projectTotalDays) {
         this.projectTotalDays = projectTotalDays;
     }
-    public int getTotalDays() {
+    public int getDays() {
         return projectTotalDays;
     }
     public void setTotalPrice(double projectTotalPrice) {

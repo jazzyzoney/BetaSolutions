@@ -7,12 +7,10 @@ import org.example.betasolutions.PSSTSuperclass;
 import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -46,18 +44,6 @@ public class ProjectRepository extends PSSTSuperclass {
 
 
         return super.readAllTasks("project", projectID, "project",Project::new);
-    }
-
-
-    public List <Project> readAllProjects(){
-        List <Project> projectList = new ArrayList<>();
-
-        for (ModelInterface project : super.readAllTasks("project", "project", Project::new)){ //getting project objects from database
-            project.setProductOwner(super.getTableString("project", "projectOwner"));//getting and setting project owner
-            projectList.add(project);
-        }
-
-        return projectList;
     }
 
 

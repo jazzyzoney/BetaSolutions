@@ -47,8 +47,8 @@ class PSSTSuperclassTest {
     private ConnectionManager connectionManager;
     private Connection conn;
 
+    /*
     @Autowired
-
     private JdbcTemplate jdbcTemplate;
 
 
@@ -69,7 +69,7 @@ class PSSTSuperclassTest {
 
         }
 
-    }
+    }*/
 
     @BeforeEach
     void setUp() {

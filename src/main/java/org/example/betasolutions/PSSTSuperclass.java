@@ -56,7 +56,7 @@ public class PSSTSuperclass {
             e.printStackTrace();
         }
 
-        return preparedStatement = null;
+        return null;
     }
 
 

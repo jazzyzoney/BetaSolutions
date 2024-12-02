@@ -39,9 +39,8 @@ public class ProjectRepository extends PSSTSuperclass {
             e.printStackTrace();
             return 0;
         }*/
-        String sql = "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate, projectOwner) VALUES (?,?,?,?,?,?,?)";
 
-                //"project", "?,?,?,?,?,?,?"
 
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, sql);
         try{
@@ -50,7 +49,7 @@ public class ProjectRepository extends PSSTSuperclass {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                return resultSet.getInt(1);//return objectID.
+                return resultSet.getInt("projectID");//return objectID.
             }
         } catch (Exception e) {
             e.printStackTrace();

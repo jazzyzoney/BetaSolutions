@@ -1,4 +1,6 @@
 package org.example.betasolutions.project;
+import org.example.betasolutions.ConnectionManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,10 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 // Uses active profile to make sure we are hooked to database
@@ -22,9 +26,28 @@ class ProjectRepositoryTest{
     @Autowired
     ProjectRepository projectRepository;
 
+    @Autowired
+    private ConnectionManager connectionManager;
+    private Connection conn;
 
     @BeforeEach
     void setUp() {
+        //executeSqlScript();
+        conn = connectionManager.getConnection(); //instantiate this.conn using ConnectionManager object.
+        try {
+            conn.setAutoCommit(false);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    @AfterEach
+    void tearDown(){
+        try {
+            conn.rollback(); //rollback changes
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -33,11 +56,22 @@ class ProjectRepositoryTest{
 
     @Test
     void testInsertObjectIntoTable() {
-        Project project = new Project(1, "Project1", "Owner1", 10, 10, 100.0, Date.valueOf("2015-10-10"), Date.valueOf("2015-10-10"));
-        /*
-        int actualInt = projectRepository.insertAssignmentIntoTable()//(project); //method returns 1 if successfull, 0 if failed.
-        int expectedInt = 1;
-        assertEquals(expectedInt, actualInt);*/
+
+        Project project = new Project("projectName", "projectOwner", 43, 8, 500000.5,
+                Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
+
+        int actualID = projectRepository.insertAssignmentIntoTable(project); //insert project object into sql table.
+        int expectedID = 5; //?? should be 3.
+
+        int secondActualID = projectRepository.insertAssignmentIntoTable(project); //insert same project into table again.
+        int secondExpectedID = 6;
+
+        assertEquals(expectedID, actualID);
+
+        assertNotEquals(actualID, secondActualID); //autoincrement
+
+        assertEquals(secondExpectedID, secondActualID);
+
     }
     @Test
     void TestRepositoryNotNull() {

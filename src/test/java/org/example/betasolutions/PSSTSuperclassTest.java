@@ -46,30 +46,7 @@ class PSSTSuperclassTest {
     @Autowired
     private ConnectionManager connectionManager;
     private Connection conn;
-
-    /*
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-
-
-    public void executeSqlScript() {
-
-        Resource resource = new ClassPathResource("schema.sql");
-
-        try {
-
-            String sql = new String(Files.readAllBytes(resource.getFile().toPath()));
-
-            jdbcTemplate.execute(sql);
-
-        } catch (IOException e) {
-
-            throw new RuntimeException("Failed to read or execute schema.sql", e);
-
-        }
-
-    }*/
+    
 
     @BeforeEach
     void setUp() {
@@ -94,12 +71,11 @@ class PSSTSuperclassTest {
     //not done
     @Test
     void insertAssignmentIntoTable() {
-       /* int actualID = superRepository.insertObjectIntoTable(task, "task", "test task", 43, 8, 50000.5);
-        int expectedID = 2;
-        assertEquals(actualID, expectedID);*/
+        //instantiate new project.
         Project project = new Project("projectName", "projectOwner", 43, 8, 500000.5,
                 Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
-        //(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, java.sql.DateprojectStartDate) {
+
+        //testing method using project object and new project sql statement
         PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project,
                 "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate, projectOwner) VALUES (?,?,?,?,?,?,?)");
 
@@ -109,11 +85,14 @@ class PSSTSuperclassTest {
     @Test
     void testReadAllTasks() {
         List<ModelInterface> actualTaskList = superRepository.readAllTasks("task", 1, "task", Task::new);
+
+        //retrieving name for first element in task list.
         String actualTaskName = actualTaskList.get(0).getName();
         String expectedTaskName = "Task 1";
 
         assertEquals(expectedTaskName, actualTaskName); //verify name is same as in database.
 
+        //retrieving task ID's for 1st and 2nd task object in tasklist..
         int taskID1 = actualTaskList.get(0).getID();
         int taskID2 = actualTaskList.get(1).getID();
 
@@ -138,29 +117,16 @@ class PSSTSuperclassTest {
 
     }
 
-    //doesn't work with Task because of something with foreign keys.
     @Test
     void deleteObjectFromTable() {
-        boolean objectDeleted = false;
-
-            //conn.setAutoCommit(false);
-
-            //objectDeleted = superRepository.deleteObjectFromTable("task", "task", 1); //harder to delete task, since subtasks can be dependent on it.
-            //boolean deletedAllSubTasks = superRepository.deleteAllWhere("subTask", "taskID = 1");
-            objectDeleted = superRepository.deleteObjectFromTable("subTask", "subTask", 1);
-
-
-
+        boolean objectDeleted = superRepository.deleteObjectFromTable("subTask", "subTask", 1);
         assertTrue(objectDeleted);
     }
 
-    @Rollback(true)
     @Test
     void testUpdateObjectString(){
-        boolean objectUpdate = false;
-        objectUpdate = superRepository.updateObjectString("task", "taskName", 1, "supersej task");
+        boolean objectUpdate = superRepository.updateObjectString("task", "taskName", 1, "supersej task");
         assertTrue(objectUpdate);
-        //connectionManager.getConnection().commit();
     }
 
     @Test
@@ -195,6 +161,7 @@ class PSSTSuperclassTest {
 
     @Test
     void deleteAllWhere(){
+        //delete all subtasks.
         boolean deletedAllSubTasks = superRepository.deleteAllWhere("subTask", "taskID = 1");
         assertTrue(deletedAllSubTasks);
     }

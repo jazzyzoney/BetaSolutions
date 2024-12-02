@@ -1,5 +1,7 @@
 package org.example.betasolutions.employee;
 
+import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class EmployeeRepository {
 
     private final Connection conn;
@@ -40,11 +43,13 @@ public class EmployeeRepository {
 
     //read
     public List<Employee> getAllEmployees() {
-        List<Employee> emloyees = new ArrayList<>();
         String sql = "SELECT * FROM employee";
+
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
+            List<Employee> employees = new ArrayList<>();
+
             while (resultSet.next()) {
                 int employeeID = resultSet.getInt("employeeID");
                 String employeeName = resultSet.getString("employeeName");
@@ -53,10 +58,11 @@ public class EmployeeRepository {
                 String employeeSalary = resultSet.getString("employeeSalary");
                 employees.add(new Employee(employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary));
             }
+            return employees;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employees;
+        return null;
     }
 
     //update

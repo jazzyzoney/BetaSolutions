@@ -1,9 +1,8 @@
-package org.example.betasolutions.employee;
+package org.example.betasolutions.employee; //henter hele employee package
 
+import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import com.example.BetaSolutions.employee.EmployeeService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,34 +11,43 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
+    //constructor
     public EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
     }
 
-   @GetMapping("/project/employees")
-    public String getAllEmployees(){
-        List<Employee> employees = employeeService.getAllEmployees();
-
-        return "employeepage";
-   }
-
+    //create
     @PostMapping("/project/employee/new")
-    public String createNewEmployee(){
+    public String createNewEmployee(Employee employee){
+        employeeService.createNewEmployee(employee);
         return "redirect: /project/employee";
     }
 
+    //read
+    @GetMapping("/project/employees")
+    public String getAllEmployees(Model model){
+        List<Employee> employees = employeeService.getAllEmployees();
+        model.addAttribute("allEmployees", employees);
+        return "employeepage";
+   }
+
+    //mangler at lave denne metode
     @PostMapping("/project/employee/add") //add employee to project/subproject/task/subtask
     public String addExistingEmployee(){
         return "redirect: /project/employee";
     }
 
+    //update
     @PostMapping("/project/employee/edit")
-    public String editEmployee(){
+    public String editEmployee(Employee employee){ //@RequestParam int employeeID ??
+        employeeService.editEmployee(employee);
         return "redirect: /project/employee";
     }
 
+    //delete
     @PostMapping("/project/employee/delete")
-    public String deleteEmployee(){
+    public String deleteEmployee(int employeeID){
+        employeeService.deleteEmployee(employeeID);
         return "redirect: /project/employee";
     }
 }

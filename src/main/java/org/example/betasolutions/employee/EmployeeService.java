@@ -1,17 +1,21 @@
 package org.example.betasolutions.employee;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class EmployeeService {
 
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
+    //constructor
     public EmployeeService(EmployeeRepository employeeRepository){
         this.employeeRepository = employeeRepository;
     }
 
     //create
-    public int createEmployee(Employee employee){
+    public int createNewEmployee(Employee employee){
         return employeeRepository.createNewEmployee(employee);
     }
 
@@ -21,7 +25,7 @@ public class EmployeeService {
     }
 
     //update
-    public void updateEmployee(Employee employee){
+    public void editEmployee(Employee employee){
         employeeRepository.updateEmployee(employee);
     }
 

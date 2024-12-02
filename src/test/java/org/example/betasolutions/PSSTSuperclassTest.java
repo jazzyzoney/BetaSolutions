@@ -1,24 +1,17 @@
 package org.example.betasolutions;
 
-import jakarta.transaction.Transactional;
 import org.example.betasolutions.project.Project;
 import org.example.betasolutions.task.Task;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -83,8 +76,8 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void testReadAllTasks() {
-        List<ModelInterface> actualTaskList = superRepository.readAllTasks("task", 1, "task", Task::new);
+    void testReadAllAssignments() {
+        List<ModelInterface> actualTaskList = superRepository.readAllAssignments("task", 1, "task", Task::new);
 
         //retrieving name for first element in task list.
         String actualTaskName = actualTaskList.get(0).getName();

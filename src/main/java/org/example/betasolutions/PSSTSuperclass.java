@@ -15,8 +15,6 @@ public class PSSTSuperclass {
 
     public PreparedStatement insertAssignmentIntoTable(ModelInterface assignment,String sql){
         //String sql = "INSERT INTO " + tableName + " VALUES " + sqlValues;
-
-
         PreparedStatement preparedStatement;
         try{
             preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -39,7 +37,7 @@ public class PSSTSuperclass {
     //read method
     // this one is for reading all tasks from a project with a specific projectID
     // we need to make a way to make it check that the inputted table name is correct or we might have sql injection
-    public List<ModelInterface> readAllTasks(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
+    public List<ModelInterface> readAllAssignments(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "select * from " + tableName + " where projectID = ?";
         try {

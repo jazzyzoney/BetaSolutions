@@ -39,11 +39,13 @@ public class ProjectRepository extends PSSTSuperclass {
             e.printStackTrace();
             return 0;
         }*/
+        String sql = "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate) VALUES (?,?,?,?,?,?,?)";
 
+                //"project", "?,?,?,?,?,?,?"
 
-        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, "project", "?,?,?,?,?,?");//,?");
+        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, sql);
         try{
-            //preparedStatement.setString(7,project.getProjectOwner());//set projectowner.
+            preparedStatement.setString(7,project.getProjectOwner());//set projectowner.
 
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();

@@ -14,12 +14,12 @@
 CREATE TABLE IF NOT EXISTS project (
                                        projectID INT AUTO_INCREMENT PRIMARY KEY,
                                        projectName VARCHAR(100) NOT NULL,
-                                       projectOwner VARCHAR(100) NOT NULL,
                                        projectTotalHours INT NOT NULL,
                                        projectTotalDays INT NOT NULL,
                                        projectTotalPrice DOUBLE NOT NULL,
                                        projectDeadline DATE NOT NULL,
-                                       projectStartDate DATE NOT NULL
+                                       projectStartDate DATE NOT NULL,
+                                       projectOwner VARCHAR(100) NOT NULL
 );
 
 -- -----------------------------------------------------

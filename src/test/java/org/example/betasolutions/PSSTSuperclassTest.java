@@ -100,7 +100,8 @@ class PSSTSuperclassTest {
         Project project = new Project("projectName", "projectOwner", 43, 8, 500000.5,
                 Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
         //(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, java.sql.DateprojectStartDate) {
-        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project, "project", "(?,?,?,?,?,?)");//,?)");
+        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project,
+                "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate, projectOwner) VALUES (?,?,?,?,?,?,?)");
 
         assertNotNull(preparedStatement);
     }

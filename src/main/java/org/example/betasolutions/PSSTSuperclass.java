@@ -37,8 +37,10 @@ public class PSSTSuperclass {
         return 0;//if failed
     }
     */
-    public PreparedStatement insertAssignmentIntoTable(ModelInterface assignment, String tableName, String sqlValues){
-        String sql = "INSERT INTO " + tableName + " VALUES " + sqlValues;
+    public PreparedStatement insertAssignmentIntoTable(ModelInterface assignment,String sql){
+        //String sql = "INSERT INTO " + tableName + " VALUES " + sqlValues;
+
+
         PreparedStatement preparedStatement;
         try{
             preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

@@ -115,6 +115,7 @@ public class PSSTSuperclass {
         }
         return false;
     }
+    /*
     // so for this method to work on subProject you need to input subProject
     public int getTableInt(String tableName, String intColumnName) {
         String sql = "SELECT " + intColumnName + " FROM " + tableName + " WHERE " + intColumnName + " = ?";
@@ -130,14 +131,31 @@ public class PSSTSuperclass {
         }
         return -1;
     }
-    public String getTableString(String tableName, String stringColumnName) {
-        String sql = "SELECT " + stringColumnName + " FROM " + tableName + " WHERE " + stringColumnName + " = ?";
+     */
+
+    public String getTableStringByInt(String tableName, String selectedColumn, String whereColumn, int inputValue ) {
+        String sql = "SELECT " + selectedColumn + " FROM " + tableName + " WHERE " + whereColumn + " = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, stringColumnName);
+            preparedStatement.setInt(1, inputValue);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString(stringColumnName);
+                return resultSet.getString(selectedColumn);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getTableStringByString(String tableName, String selectedColumn, String whereColumn, String inputValue ) {
+        String sql = "SELECT " + selectedColumn + " FROM " + tableName + " WHERE " + whereColumn + " = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, inputValue);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString(selectedColumn);
             }
         } catch (Exception e) {
             e.printStackTrace();

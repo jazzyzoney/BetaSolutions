@@ -41,6 +41,7 @@ public class ProjectRepository extends PSSTSuperclass {
     }
 
     //Read method
+    //this is just a basic read method for all projects in the project table.i have a idea on how to make it work with superclass read method instead but i need to test it first so this is a placeholder for now.
     public List<Project> ReadAllProjects(int active) {
         ArrayList<Project> allProjects = new ArrayList<>();
         String sql = "select * from project where active = ?";

@@ -47,12 +47,13 @@ public class PSSTSuperclass {
     // factory is a lambda function that takes in the parameters for the model you are reading from the table.
     //lambda is a function that takes in parameters and returns a new object of the type you are reading from the table.
     //we need to use this because we are reading from a table and we need to create new objects of the type we are reading from the table.
-    public List<ModelInterface> readAllAssignments(String tableName, int projectID, String tablePrefix, FactoryInterface factory) {
+    public List<ModelInterface> readAllAssignments(String tableName, String tablePrefix, FactoryInterface factory){//}, String sqlWhereClause){//}, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "select * from " + tableName + " where projectID = ?";
+        String sql = "SELECT FROM " + tableName ;//+ " WHERE " + sqlWhereClause;
+
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, projectID);
+            //preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");
@@ -70,6 +71,30 @@ public class PSSTSuperclass {
         return allObjects;
     }
 
+    
+    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix, FactoryInterface factory, int projectID) {
+        List<ModelInterface> allObjects = new ArrayList<>();
+        String sql = "SELECT FROM " + tableName + " WHERE  projectID = ?" ;
+
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, projectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(tablePrefix + "ID");
+                String name = resultSet.getString(tablePrefix + "Name");
+                int hours = resultSet.getInt(tablePrefix + "TotalHours");
+                int days = resultSet.getInt(tablePrefix + "TotalDays");
+                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
+                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
+                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                allObjects.add(factory.build(id, name, hours, days, totalPrice, endDate, startDate));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allObjects;
+    }
 
     // Read Method
     // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee

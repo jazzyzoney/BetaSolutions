@@ -103,21 +103,7 @@ public class PSSTSuperclass {
 
         List<ModelInterface> allObjects = new ArrayList<>(); //returned at end of method.
 
-        /*
-        String sql = "SELECT employee.employeeID, employee.employeeName, employee.employeeOffice, " +
-                "employee.employeeProficiency, employee.employeeSalary, " +
-                joinTableName + "." + tableName + "ID, " + //eg. task.taskID,
-                joinTableName + "." + tableName + "Name, " +//task.taskName.
-                joinTableName + "." + tableName + "TotalHours, " + //etc.
-                joinTableName + "." + tableName + "TotalDays, " +
-                joinTableName + "." + tableName + "TotalPrice, " +
-                joinTableName + "." + tableName + "Deadline, " +
-                joinTableName + "." + tableName + "StartDate " +
-                "FROM employee " +
-                "JOIN " + joinTableName + " ON employee.employeeID = " + joinTableName + ".employeeID " +
-                "WHERE " + joinTableName + ".projectID = ? AND " + joinTableName + ".employeeID = ?";
-
-         */
+        
         String sql =   "SELECT " +
                 tableName + "." + tableName + "ID, " + //eg. task.taskID,
                 tableName + "." + tableName + "Name, " +//task.taskName.
@@ -130,31 +116,8 @@ public class PSSTSuperclass {
                 joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
                 " JOIN " + tableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID" +
                 "WHERE " + joinTableName + ".employeeID = ?";
-                //JOIN joinTable ON task.taskID, joinTable.taskID
+                //JOIN joinTable ON assignment.assignementID, joinTable.assignmentID
 
-         //String sql = "SELECT * FROM " + tableName + " WHERE " + tableName + ".employeeID = ? ";
-         //eg. SELECT * FROM task WHERE joinTable.employeeID = ?
-
-        /*
-        SELECT task.taskID, task.taskName, task.taskTotalHours, task.taskTotalDays, task.taskStartDate, task.taskDeadline,
-            joinTable.employeeID, joinTable.taskID
-        JOIN joinTable ON task.taskID, joinTable.taskID;
-
-
-
-        SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-FROM Orders
-INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
-         */
-
-                //eg.
-                        //(columnNames:)
-                //SELECT employee.employeeID, employe[.....] employe.employeeSalary, assignment.assignmentID,
-                    //assignment.assignmentNa[.....] assignment.assignmentStartDate
-
-                //FROM employee
-                //JOIN assignment ON employee.employeeID = assignment.employeeID
-                //WHERE assignment.projectID = 1 AND assignment.employeeID = 1 ;
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);

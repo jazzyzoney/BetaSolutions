@@ -13,12 +13,12 @@ public class SubTaskController {
     }
 
     @PostMapping("project/subtask/edit")
-    public String editSubtask(){
+    public String editSubTask(){
         return "redirect:/project";
     }
 
     @PostMapping("project/subtask/delete")
-    public String deleteSubtask(){
+    public String deleteSubTask(){
         return "redirect:/project";
     }
     @PostMapping("/project/subtask/new")

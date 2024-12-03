@@ -11,6 +11,9 @@
 -- -----------------------------------------------------
 -- Table `BetaSolutionsDB`.`project`
 -- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS BetaSolutionsDB;
+DROP TABLE IF EXISTS PROJECT CASCADE;
+
 CREATE TABLE IF NOT EXISTS project (
                                        projectID INT AUTO_INCREMENT PRIMARY KEY,
                                        projectName VARCHAR(100) NOT NULL,

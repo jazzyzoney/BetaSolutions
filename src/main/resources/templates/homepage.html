@@ -28,5 +28,16 @@
     <p>project 2</p>
     <p>project 3</p>
     <p>new project</p>
+    <br><table>
+        <tr>
+            <th>Our Projects Comrade:</th>
+        <tr th:each="project : ${project_overview}">
+            <td th:text="${project.getName()}"></td>
+            <td>
+
+            </td>
+        </tr>
+
+    </table>
 </body>
 </html>

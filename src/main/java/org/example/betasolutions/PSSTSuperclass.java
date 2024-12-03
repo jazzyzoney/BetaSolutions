@@ -74,7 +74,7 @@ public class PSSTSuperclass {
     
     public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix, FactoryInterface factory, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "SELECT FROM " + tableName + " WHERE  projectID = ?" ;
+        String sql = "SELECT * FROM " + tableName + " WHERE  projectID = ?" ;
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -99,38 +99,82 @@ public class PSSTSuperclass {
     // Read Method
     
     public List<ModelInterface> readAllAssignmentsForEmployee(String joinTableName, int employeeID, int projectID,
-            String tablePrefix, FactoryInterface factory) {
+            String tableName, FactoryInterface factory) {
 
-        List<ModelInterface> allObjects = new ArrayList<>();
+        List<ModelInterface> allObjects = new ArrayList<>(); //returned at end of method.
 
+        /*
         String sql = "SELECT employee.employeeID, employee.employeeName, employee.employeeOffice, " +
                 "employee.employeeProficiency, employee.employeeSalary, " +
-                joinTableName + "." + tablePrefix + "ID, " +
-                joinTableName + "." + tablePrefix + "Name, " +
-                joinTableName + "." + tablePrefix + "TotalHours, " +
-                joinTableName + "." + tablePrefix + "TotalDays, " +
-                joinTableName + "." + tablePrefix + "TotalPrice, " +
-                joinTableName + "." + tablePrefix + "Deadline, " +
-                joinTableName + "." + tablePrefix + "StartDate " +
+                joinTableName + "." + tableName + "ID, " + //eg. task.taskID,
+                joinTableName + "." + tableName + "Name, " +//task.taskName.
+                joinTableName + "." + tableName + "TotalHours, " + //etc.
+                joinTableName + "." + tableName + "TotalDays, " +
+                joinTableName + "." + tableName + "TotalPrice, " +
+                joinTableName + "." + tableName + "Deadline, " +
+                joinTableName + "." + tableName + "StartDate " +
                 "FROM employee " +
                 "JOIN " + joinTableName + " ON employee.employeeID = " + joinTableName + ".employeeID " +
                 "WHERE " + joinTableName + ".projectID = ? AND " + joinTableName + ".employeeID = ?";
 
-        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, projectID);
-            preparedStatement.setInt(2, employeeID);
+         */
+        String sqlJoin =   "SELECT " +
+                tableName + "." + tableName + "ID, " + //eg. task.taskID,
+                tableName + "." + tableName + "Name, " +//task.taskName.
+                tableName + "." + tableName + "TotalHours, " + //etc.
+                tableName + "." + tableName + "TotalDays, " +
+                tableName + "." + tableName + "TotalPrice, " +
+                tableName + "." + tableName + "Deadline, " +
+                tableName + "." + tableName + "StartDate " +
+               // joinTableName + ".employeeID" +  //select employeeID from joinTable
+                joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
+                " JOIN " + joinTableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID";
+                //JOIN joinTable ON task.taskID, joinTable.taskID
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+         String sql = "SELECT * FROM " + tableName + " WHERE " + tableName + ".employeeID = ? ";
+         //eg. SELECT * FROM task WHERE joinTable.employeeID = ?
 
+        /*
+        SELECT task.taskID, task.taskName, task.taskTotalHours, task.taskTotalDays, task.taskStartDate, task.taskDeadline,
+            joinTable.employeeID, joinTable.taskID
+        JOIN joinTable ON task.taskID, joinTable.taskID;
+
+
+
+        SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+         */
+
+                //eg.
+                        //(columnNames:)
+                //SELECT employee.employeeID, employe[.....] employe.employeeSalary, assignment.assignmentID,
+                    //assignment.assignmentNa[.....] assignment.assignmentStartDate
+
+                //FROM employee
+                //JOIN assignment ON employee.employeeID = assignment.employeeID
+                //WHERE assignment.projectID = 1 AND assignment.employeeID = 1 ;
+
+        try {
+            PreparedStatement joinPreparedStatement = conn.prepareStatement(sqlJoin);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, projectID); //WHERE assignment.projectID = 1 ....
+            preparedStatement.setInt(2, employeeID); //WHERE .... assignment.employeeID = 1;
+
+            ResultSet resultSet = preparedStatement.executeQuery(); //connect.
+
+            //for each assignmentObject, get variables.
             while (resultSet.next()) {
-                int id = resultSet.getInt(tablePrefix + "ID");
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getDouble(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "Deadline");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                int id = resultSet.getInt(tableName + "ID");
+                String name = resultSet.getString(tableName + "Name");
+                int hours = resultSet.getInt(tableName + "TotalHours");
+                int days = resultSet.getInt(tableName + "TotalDays");
+                double totalPrice = resultSet.getDouble(tableName + "TotalPrice");
+                Date endDate = resultSet.getDate(tableName + "Deadline");
+                Date startDate = resultSet.getDate(tableName + "StartDate");
 
+                //add new assignmentobject to allObjects list.
                 allObjects.add(factory.build(id, name, hours, days, totalPrice, endDate, startDate));
             }
 
@@ -138,7 +182,7 @@ public class PSSTSuperclass {
             e.printStackTrace();
         }
 
-        return allObjects;
+        return allObjects; //return list containing assignementObjects belonging to employee.
     }
 
     //delete method

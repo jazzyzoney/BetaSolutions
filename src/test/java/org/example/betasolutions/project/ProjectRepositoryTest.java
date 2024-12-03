@@ -1,5 +1,6 @@
 package org.example.betasolutions.project;
 import org.example.betasolutions.ConnectionManager;
+import org.example.betasolutions.ModelInterface;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +11,8 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,10 +62,10 @@ class ProjectRepositoryTest{
                 Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
 
         int actualID = projectRepository.insertAssignmentIntoTable(project); //insert project object into sql table.
-        int expectedID = 5; //?? should be 3.
+        int expectedID = 3; //?? should be 3.
 
         int secondActualID = projectRepository.insertAssignmentIntoTable(project); //insert same project into table again.
-        int secondExpectedID = 6;
+        int secondExpectedID = 4;
 
         assertEquals(expectedID, actualID);
         assertEquals(secondExpectedID, secondActualID);
@@ -78,6 +79,12 @@ class ProjectRepositoryTest{
 
     @Test
     void testReadAllTasks() {
+        List<Project> projectList = projectRepository.readAllProjects();
+        assertNotNull(projectList);
+        assertEquals(2, projectList.size());
+        assertNotNull(projectList.get(0).getProjectOwner());
+        assertNotNull(projectList.get(1).getProjectOwner());
+
 
 
     }

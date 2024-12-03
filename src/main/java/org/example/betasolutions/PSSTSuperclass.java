@@ -112,7 +112,7 @@ public class PSSTSuperclass {
                 tableName + "." + tableName + "TotalPrice, " +
                 tableName + "." + tableName + "Deadline, " +
                 tableName + "." + tableName + "StartDate " +
-               // joinTableName + ".employeeID" +  //select employeeID from joinTable
+               joinTableName + ".employeeID" +  //select employeeID from joinTable
                 joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
                 " JOIN " + tableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID" +
                 "WHERE " + joinTableName + ".employeeID = ?";

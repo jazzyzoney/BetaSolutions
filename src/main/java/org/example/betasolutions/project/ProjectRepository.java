@@ -5,7 +5,7 @@ import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -39,29 +39,8 @@ public class ProjectRepository extends PSSTSuperclass {
 
     //Read method
     //this is just a basic read method for all projects in the project table.i have a idea on how to make it work with superclass read method instead but i need to test it first so this is a placeholder for now.
-    public List<Project> ReadAllProjects() {
+    public List<Project> readAllProjects() {
         ArrayList<Project> projectList = new ArrayList<>();
-        /*
-        String sql = "select * from project";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("projectID");
-                String name = resultSet.getString("projectName");
-                int hours = resultSet.getInt("projectTotalHours");
-                int days = resultSet.getInt("projectTotalDays");
-                double totalPrice = resultSet.getInt("projectTotalPrice");
-                String projectOwner = resultSet.getString("projectOwner");
-                Date endDate = resultSet.getDate("projectDeadline");
-                Date startDate = resultSet.getDate("projectStartDate");
-                allProjects.add(new Project(id, name, projectOwner, hours, days, totalPrice, startDate, endDate));
-            }
-            return allProjects;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;*/
 
         for (ModelInterface assignmentObject : super.readAllAssignments("project", "project", Project::new)){
             //typecasting assignmentObject as Project:

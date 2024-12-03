@@ -1,6 +1,5 @@
 package org.example.betasolutions.project;
 
-import org.example.betasolutions.login.LoginService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public class ProjectService {
         projectRepository.insertAssignmentIntoTable(project);
     }
     public List<Project> readAllProjects(){
-       return projectRepository.ReadAllProjects();
+       return projectRepository.readAllProjects();
     }
 
 }

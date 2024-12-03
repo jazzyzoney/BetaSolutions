@@ -97,13 +97,11 @@ public class PSSTSuperclass {
     }
 
     // Read Method
-    
     public List<ModelInterface> readAllAssignmentsForEmployee(String joinTableName, int employeeID, int projectID,
             String tableName, FactoryInterface factory) {
 
         List<ModelInterface> allObjects = new ArrayList<>(); //returned at end of method.
 
-        
         String sql =   "SELECT " +
                 tableName + "." + tableName + "ID, " + //eg. task.taskID,
                 tableName + "." + tableName + "Name, " +//task.taskName.
@@ -111,21 +109,21 @@ public class PSSTSuperclass {
                 tableName + "." + tableName + "TotalDays, " +
                 tableName + "." + tableName + "TotalPrice, " +
                 tableName + "." + tableName + "Deadline, " +
-                tableName + "." + tableName + "StartDate " +
-               joinTableName + ".employeeID" +  //select employeeID from joinTable
-                joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
-                " JOIN " + tableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID" +
-                "WHERE " + joinTableName + ".employeeID = ?";
-                //JOIN joinTable ON assignment.assignementID, joinTable.assignmentID
+                tableName + "." + tableName + "StartDate, " +
 
+                joinTableName + ".employeeID," +  //select employeeID from joinTable
+                joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
+                " FROM " + tableName +
+                " JOIN " + tableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID" +
+                " WHERE " + joinTableName + ".employeeID = ? AND " + tableName + ".projectID = ?";
+                //JOIN joinTable ON assignment.assignementID, joinTable.assignmentID
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-
-            preparedStatement.setInt(1, employeeID); //WHERE assignment.projectID = 1 ....
+            preparedStatement.setInt(1, employeeID);
+            preparedStatement.setInt(2, projectID);
 
             ResultSet resultSet = preparedStatement.executeQuery(); //connect.
-
             //for each assignmentObject, get variables.
             while (resultSet.next()) {
                 int id = resultSet.getInt(tableName + "ID");
@@ -139,7 +137,6 @@ public class PSSTSuperclass {
                 //add new assignmentobject to allObjects list.
                 allObjects.add(factory.build(id, name, hours, days, totalPrice, endDate, startDate));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

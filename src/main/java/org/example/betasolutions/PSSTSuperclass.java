@@ -118,7 +118,7 @@ public class PSSTSuperclass {
                 "WHERE " + joinTableName + ".projectID = ? AND " + joinTableName + ".employeeID = ?";
 
          */
-        String sqlJoin =   "SELECT " +
+        String sql =   "SELECT " +
                 tableName + "." + tableName + "ID, " + //eg. task.taskID,
                 tableName + "." + tableName + "Name, " +//task.taskName.
                 tableName + "." + tableName + "TotalHours, " + //etc.
@@ -128,10 +128,11 @@ public class PSSTSuperclass {
                 tableName + "." + tableName + "StartDate " +
                // joinTableName + ".employeeID" +  //select employeeID from joinTable
                 joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
-                " JOIN " + joinTableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID";
+                " JOIN " + tableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID" +
+                "WHERE " + joinTableName + ".employeeID = ?";
                 //JOIN joinTable ON task.taskID, joinTable.taskID
 
-         String sql = "SELECT * FROM " + tableName + " WHERE " + tableName + ".employeeID = ? ";
+         //String sql = "SELECT * FROM " + tableName + " WHERE " + tableName + ".employeeID = ? ";
          //eg. SELECT * FROM task WHERE joinTable.employeeID = ?
 
         /*
@@ -156,11 +157,9 @@ INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
                 //WHERE assignment.projectID = 1 AND assignment.employeeID = 1 ;
 
         try {
-            PreparedStatement joinPreparedStatement = conn.prepareStatement(sqlJoin);
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
-            preparedStatement.setInt(1, projectID); //WHERE assignment.projectID = 1 ....
-            preparedStatement.setInt(2, employeeID); //WHERE .... assignment.employeeID = 1;
+            preparedStatement.setInt(1, employeeID); //WHERE assignment.projectID = 1 ....
 
             ResultSet resultSet = preparedStatement.executeQuery(); //connect.
 

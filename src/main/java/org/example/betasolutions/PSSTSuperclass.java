@@ -72,35 +72,50 @@ public class PSSTSuperclass {
 
 
     // Read Method
-    // this one is for reading all tasks from a project with a specific projectID and employeeID so see all tasks for a specific employee
-    //pretty much the same as the one above but with an extra where clause for employeeID.
-    // so it would look like this: readAllTasksForEmployee("task", 1, 1, "task", Task::new); for example.
-    // it will return a list of all tasks in the task table with the projectID 1 and employeeID 1.
-    public List<ModelInterface> readAllTasksForEmployee(String tableName, int EmployeeID,int projectID, String tablePrefix,FactoryInterface factory) {
-        List<ModelInterface> allObjects = new ArrayList<>();
-        String sql =  "SELECT * FROM " + tableName + " WHERE employeeID = ? AND projectID = ?";
+    
+    public List<ModelInterface> readAllAssignmentsForEmployee(String joinTableName, int employeeID, int projectID,
+            String tablePrefix, FactoryInterface factory) {
 
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, EmployeeID);
-            preparedStatement.setInt(2, projectID);
+        List<ModelInterface> allObjects = new ArrayList<>();
+
+        String sql = "SELECT employee.employeeID, employee.employeeName, employee.employeeOffice, " +
+                "employee.employeeProficiency, employee.employeeSalary, " +
+                joinTableName + "." + tablePrefix + "ID, " +
+                joinTableName + "." + tablePrefix + "Name, " +
+                joinTableName + "." + tablePrefix + "TotalHours, " +
+                joinTableName + "." + tablePrefix + "TotalDays, " +
+                joinTableName + "." + tablePrefix + "TotalPrice, " +
+                joinTableName + "." + tablePrefix + "Deadline, " +
+                joinTableName + "." + tablePrefix + "StartDate " +
+                "FROM employee " +
+                "JOIN " + joinTableName + " ON employee.employeeID = " + joinTableName + ".employeeID " +
+                "WHERE " + joinTableName + ".projectID = ? AND " + joinTableName + ".employeeID = ?";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, projectID);
+            preparedStatement.setInt(2, employeeID);
+
             ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "ID");
                 String name = resultSet.getString(tablePrefix + "Name");
                 int hours = resultSet.getInt(tablePrefix + "TotalHours");
                 int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
+                double totalPrice = resultSet.getDouble(tablePrefix + "TotalPrice");
+                Date endDate = resultSet.getDate(tablePrefix + "Deadline");
                 Date startDate = resultSet.getDate(tablePrefix + "StartDate");
-                allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
+
+                allObjects.add(factory.build(id, name, hours, days, totalPrice, endDate, startDate));
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return allObjects;
     }
+
     //delete method
     //this one is for deleting an object from a table with a specific ID.
     //so it would look like this: deleteObjectFromTable("task", "task", 1); for example.
@@ -117,8 +132,6 @@ public class PSSTSuperclass {
         }
         return false;
     }
-
-
     //update method
     //this one is for updating a string value in a table with a specific ID.
     //so it would look like this: updateObjectString("task", "taskName", 1, "Task 2"); for example.

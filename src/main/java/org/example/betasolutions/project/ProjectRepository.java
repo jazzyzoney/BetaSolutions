@@ -40,7 +40,8 @@ public class ProjectRepository extends PSSTSuperclass {
     //Read method
     //this is just a basic read method for all projects in the project table.i have a idea on how to make it work with superclass read method instead but i need to test it first so this is a placeholder for now.
     public List<Project> ReadAllProjects() {
-        ArrayList<Project> allProjects = new ArrayList<>();
+        ArrayList<Project> projectList = new ArrayList<>();
+        /*
         String sql = "select * from project";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -60,6 +61,23 @@ public class ProjectRepository extends PSSTSuperclass {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return null;*/
+
+        for (ModelInterface assignmentObject : super.readAllAssignments("project", "project", Project::new)){
+            //typecasting assignmentObject as Project:
+            if (assignmentObject instanceof Project){
+                Project project = (Project) assignmentObject;
+
+                //Getting projectowner from projectTAble using projectID.
+                String projectOwner = super.getTableStringByInt("project", "projectOwner",
+                        "projectID", project.getID());
+
+                //adding projectowner to projectObject.
+                project.setProjectOwner(projectOwner);
+                //adding projectObject to projectList.
+                projectList.add(project);
+            }
+        }//end of for loop.
+        return projectList;
     }
 }

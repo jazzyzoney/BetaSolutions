@@ -76,8 +76,13 @@ class PSSTSuperclassTest {
     }
 
     @Test
-    void testReadAllAssignments() {
-        List<ModelInterface> actualTaskList = superRepository.readAllAssignments("task", 1, "task", Task::new);
+    void testRealAllAssignments(){
+        assertTrue(false);
+    }
+
+    @Test
+    void testReadAllAssignmentsBelongingToProject() {
+        List<ModelInterface> actualTaskList = superRepository.readAllAssignmentsBelongingToProject("task",  "task", Task::new, 1);
 
         //retrieving name for first element in task list.
         String actualTaskName = actualTaskList.get(0).getName();
@@ -106,7 +111,7 @@ class PSSTSuperclassTest {
 
         assertNotEquals(taskID1, taskID2); //verify ID's are unique.*/
 
-        assertTrue(true);
+        assertTrue(false);
 
     }
 
@@ -146,8 +151,6 @@ class PSSTSuperclassTest {
         String actualProjectOwner = superRepository.getTableStringByString("project", "projectOwner", "projectName", "Project A");
         assertEquals(expectedProjectOwner, actualProjectOwner);
         assertEquals("Project A", superRepository.getTableStringByString("project", "projectName", "projectOwner", "Owner 1"));
-
-
     }
 
     @Test

@@ -53,6 +53,8 @@ public class Project implements ModelInterface {
         this.projectDeadline = projectDeadline;
         this.projectName = projectName;
     }
+    public Project(){
+    }
 
     public void setID(int projectID) {
         this.projectID = projectID;

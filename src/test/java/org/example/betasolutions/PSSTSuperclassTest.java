@@ -2,9 +2,7 @@ package org.example.betasolutions;
 
 import org.example.betasolutions.project.Project;
 import org.example.betasolutions.task.Task;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -25,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
-
-@Rollback(true)//rolls back commits to database after each test.
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@Rollback(true)//rolls back commits to database after each test.
 class PSSTSuperclassTest {
 
     //private Task task;
@@ -39,17 +37,17 @@ class PSSTSuperclassTest {
     @Autowired
     private ConnectionManager connectionManager;
     private Connection conn;
-    
+
 
     @BeforeEach
     void setUp() {
-        //executeSqlScript();
         conn = connectionManager.getConnection(); //instantiate this.conn using ConnectionManager object.
         try {
             conn.setAutoCommit(false);
         }catch (SQLException e){
             e.printStackTrace();
         }
+
     }
 
     @AfterEach
@@ -77,7 +75,17 @@ class PSSTSuperclassTest {
 
     @Test
     void testRealAllAssignments(){
-        assertTrue(false);
+        List<ModelInterface> actualProjectList = superRepository.readAllAssignments("project", "project", Project::new);
+        assertNotNull(actualProjectList);
+        String actualProjectName = actualProjectList.get(0).getName();
+        String expectedProjectName = "Project A";
+        assertEquals(expectedProjectName, actualProjectName);
+        assertEquals(1, actualProjectList.get(0).getID());
+        for (ModelInterface project : actualProjectList) {
+            System.out.println(project.getName());
+
+        }
+        assertEquals(2, actualProjectList.size());
     }
 
     @Test

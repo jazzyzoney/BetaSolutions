@@ -1,5 +1,6 @@
 package org.example.betasolutions.employee;
 
+import org.example.betasolutions.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;

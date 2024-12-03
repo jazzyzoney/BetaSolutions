@@ -5,7 +5,7 @@ it shows a list of all employees and also gives the user the option to create ne
       xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>List of all employees</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 
@@ -14,5 +14,31 @@ it shows a list of all employees and also gives the user the option to create ne
 <form class="logo" method="get" th:action="@{/project}" style="display:inline;">
     <button type="submit">projectpage</button>
 </form>
+
+<form th:action="@{/project/employee/add}" th:object="${employee}" method="post">
+        <input type="hidden" th:name="employeeID" />
+        <button type="submit">Add new employee</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Employee ID</th>
+        <th>Name</th>
+        <th>Proficiency</th>
+        <th>Office</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${allEmployees}">
+        <!--  -->
+        <td th:text="${employee.getEmployeeID()}"></td>
+        <td th:text="${employee.getEmployeeName()}"></td>
+        <td th:text="${employee.getEmployeeProficiency()}"></td>
+        <td th:text="${employee.getEmployeeOffice()}"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

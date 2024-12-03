@@ -13,7 +13,7 @@ public class SubProjectController {
 
     @PostMapping("/project/subproject/edit")
     public String editSubProject() {
-        return "redirect:/project";
+        return "subprojectpage";
     }
     @PostMapping("/project/subproject/delete")
     public String deleteSubProject(){

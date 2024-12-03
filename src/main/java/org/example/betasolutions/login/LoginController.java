@@ -19,7 +19,7 @@ public class LoginController {
     @GetMapping("/login")
     public String getLogin(Model model){
         model.addText("login", new Login());
-        return "loginpage";
+        return "loginPage";
     }
 
     @PostMapping("/login")

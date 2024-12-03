@@ -22,12 +22,9 @@ public class ProjectRepository extends PSSTSuperclass {
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {
         String sql = "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate, projectOwner) VALUES (?,?,?,?,?,?,?)";
-
-
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, sql);
         try{
             preparedStatement.setString(7,project.getProjectOwner());//set projectowner.
-
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {

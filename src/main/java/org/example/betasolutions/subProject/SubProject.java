@@ -9,7 +9,6 @@ import java.sql.Date;
 public class SubProject implements ModelInterface {
     private int subProjectID;
     private String projectName;
-    private String projectOwner;
     private int projectTotalHours;
     private int projectTotalDays;
     private double projectTotalPrice;
@@ -20,17 +19,15 @@ public class SubProject implements ModelInterface {
     public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
         this.subProjectID = subProjectID;
         this.projectName = projectName;
-        this.projectOwner = projectOwner;
         this.projectTotalHours = projectTotalHours;
         this.projectTotalDays = projectTotalDays;
         this.projectTotalPrice = projectTotalPrice;
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
     }
-    public SubProject(int subProjectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
+    public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
         this.subProjectID = subProjectID;
         this.projectName = projectName;
-        this.projectOwner = projectOwner;
         this.projectTotalHours = projectTotalHours;
         this.projectTotalDays = projectTotalDays;
         this.projectTotalPrice = projectTotalPrice;
@@ -58,12 +55,6 @@ public class SubProject implements ModelInterface {
     }
     public String getName() {
         return projectName;
-    }
-    public void setOwner(String projectOwner) {
-        this.projectOwner = projectOwner;
-    }
-    public String getOwner() {
-        return projectOwner;
     }
     public void setHours(int projectTotalHours) {
         this.projectTotalHours = projectTotalHours;

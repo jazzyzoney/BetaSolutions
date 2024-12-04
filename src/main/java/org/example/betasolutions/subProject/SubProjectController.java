@@ -15,6 +15,7 @@ public class SubProjectController {
     public String editSubProject() {
         return "subprojectpage";
     }
+
     @PostMapping("/project/subproject/delete")
     public String deleteSubProject(){
         return "redirect:/project";

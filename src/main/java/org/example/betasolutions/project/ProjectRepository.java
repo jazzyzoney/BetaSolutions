@@ -36,6 +36,8 @@ public class ProjectRepository extends PSSTSuperclass {
 
         return 0;//if failed
     }
+    //update
+
 
     //Read method
     //this is just a basic read method for all projects in the project table.i have a idea on how to make it work with superclass read method instead but i need to test it first so this is a placeholder for now.
@@ -58,5 +60,14 @@ public class ProjectRepository extends PSSTSuperclass {
             }
         }//end of for loop.
         return projectList;
+    }
+    //Read method by ID for project. not sure if this actually works but i will test it later.
+    public Project readProjectByID(int projectID){
+        Project Project = (Project) super.readAssingmentByID("project", "project",Project::new, projectID);
+        if (Project != null){
+            String projectOwner = super.getTableStringByInt("project", "projectOwner", "projectID", Project.getID());
+            Project.setProjectOwner(projectOwner);
+        }
+        return Project;
     }
 }

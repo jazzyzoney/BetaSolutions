@@ -2,9 +2,7 @@ package org.example.betasolutions.project;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProjectController {
@@ -20,18 +18,21 @@ public class ProjectController {
     public String getHome(Model model){
         //i have an idea with requestparam for active projects and inactive projects to show on the homepage but i am not sure how it work with the html stuff
         model.addAttribute("project", new Project());
-        int active =1; //just for now to see if it works
         model.addAttribute("ProfileID", session.getAttribute("ProfileID"));
         model.addAttribute("project_overview", projectService.readAllProjects());
         return "homepage";
     }
     @PostMapping("/project/new")
-    public String createNewProject(){
+    public String createNewProject(@ModelAttribute Project project){
+        int ProfileID = (int) session.getAttribute("ProfileID");
+        projectService.insertAssignmentIntoTable(project);
         return "redirect: /home";
     }
 
+    //does this need pathvariable?
     @GetMapping("/project")
-    public String getProject(){
+    public String getProject(Model model, @RequestParam int ID){
+        model.addAttribute("project", projectService.readProjectByID(ID));
         return "projectpage";
     }
 

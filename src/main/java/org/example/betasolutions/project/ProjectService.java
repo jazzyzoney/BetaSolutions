@@ -17,5 +17,8 @@ public class ProjectService {
     public List<Project> readAllProjects(){
        return projectRepository.readAllProjects();
     }
+    public Project readProjectByID(int project_id){
+        return projectRepository.readProjectByID(project_id);
+    }
 
 }

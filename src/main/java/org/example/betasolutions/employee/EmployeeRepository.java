@@ -18,7 +18,7 @@ public class EmployeeRepository {
 
     //create
     public int createNewEmployee(Employee employee) {
-        String sql = "INSERT INTO employee (employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO employee (employee_id, employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, employee.getEmployeeID());
             preparedStatement.setString(2, employee.getEmployeeName());
@@ -49,11 +49,11 @@ public class EmployeeRepository {
             List<Employee> employees = new ArrayList<>();
 
             while (resultSet.next()) {
-                int employeeID = resultSet.getInt("employeeID");
-                String employeeName = resultSet.getString("employeeName");
-                String employeeOffice = resultSet.getString("employeeOffice");
-                String employeeProficiency = resultSet.getString("employeeProficiency");
-                String employeeSalary = resultSet.getString("employeeSalary");
+                int employeeID = resultSet.getInt("employee_id");
+                String employeeName = resultSet.getString("employee_name");
+                String employeeOffice = resultSet.getString("employee_office");
+                String employeeProficiency = resultSet.getString("employee_proficiency");
+                String employeeSalary = resultSet.getString("employee_salary");
                 employees.add(new Employee(employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary));
             }
             return employees;
@@ -65,7 +65,7 @@ public class EmployeeRepository {
 
     //add existing employee to assignment table
     public void addExistingEmployeeToAssignment(Employee employee, String assignment, String idName) { //idName is the name of the column
-        String sql = "INSERT INTO assignment (employeeID, "+ idName +") VALUES (?,?)";
+        String sql = "INSERT INTO assignment (employee_id, "+ idName +") VALUES (?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employee.getEmployeeID());
             preparedStatement.setString(2, idName);
@@ -83,7 +83,7 @@ public class EmployeeRepository {
 
     //update
     public void editEmployee(Employee employee) {
-        String sql = "UPDATE employee SET employeeName = ?, employeeOffice = ?, employeeProficiency = ?, employeeSalary = ? WHERE employeeID = ?";
+        String sql = "UPDATE employee SET employee_name = ?, employee_office = ?, employee_proficiency = ?, employee_salary = ? WHERE employee_id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getEmployeeName());
             preparedStatement.setString(2, employee.getEmployeeOffice());
@@ -104,7 +104,7 @@ public class EmployeeRepository {
 
     //delete
     public void deleteEmployee(int employeeID) {
-        String sql = "DELETE FROM employee WHERE employeeID = ?";
+        String sql = "DELETE FROM employee WHERE employee_id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
             int rowsAffected = preparedStatement.executeUpdate();

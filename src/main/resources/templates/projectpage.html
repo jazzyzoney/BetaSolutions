@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<div class="left-side">
     <header>
         <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
         <p> <em>Employee1, Employee2, Employee3</em></p>
@@ -38,7 +37,7 @@
         </tr>
         <tr>
             <td>
-                <form class="logo" method="post" th:action="@{/project/subproject/edit}" target="subprojectFrame" style="display:inline;">
+                <form class="logo" method="post" th:action="@{/project/subproject/edit}" style="display:inline;">
                     <button type="submit">Subproject</button>
                 </form>
             </td>
@@ -50,7 +49,7 @@
         </tr>
         <tr>
             <td>
-                <form class="logo" method="post" th:action="@{/project/task/edit}" target="taskFrame" style="display:inline;">
+                <form class="logo" method="post" th:action="@{/project/task/edit}" style="display:inline;">
                     <button type="submit">Task</button>
                 </form>
             </td>
@@ -62,7 +61,7 @@
         </tr>
         <tr>
             <td>
-                <form class="logo" method="post" th:action="@{/project/subtask/edit}" target="subtaskFrame" style="display:inline;">
+                <form class="logo" method="post" th:action="@{/project/subtask/edit}" style="display:inline;">
                     <button type="submit">Subtask</button>
                 </form>
             </td>
@@ -73,11 +72,7 @@
             <td>25/12/2024</td>
         </tr>
         <tr>
-            <td>
-                <form class="logo" method="post" th:action="@{/project/subtask/edit}" target="subtaskFrame" style="display:inline;">
-                    <button type="submit">Subtask</button>
-                </form>
-            </td>
+            <td>subtask</td>
             <td>10</td>
             <td>-</td>
             <td>2 days</td>
@@ -137,11 +132,6 @@
         <h2>Total: (timer) </h2>
         <h2>Total: (penge) </h2>
     </footer>
-</div>
-
-<div class="right-side">
-    <iframe name="subprojectFrame"></iframe>
-</div>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package org.example.betasolutions.project;
 import jakarta.servlet.http.HttpSession;
+import org.example.betasolutions.subProject.SubProject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +35,9 @@ public class ProjectController {
     @GetMapping("/project")
     public String getProject(Model model){
         int projectID = (int)session.getAttribute("projectID");
-        model.addAttribute("project", projectService.readProjectByID(projectID));
+        model.addAttribute("project", projectService.readProjectByID(projectID))
 
+        //subproject, task, subtask;
         return "projectpage";
     }
 

@@ -301,12 +301,12 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getDouble(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                String name = resultSet.getString(tablePrefix + "_Name");
+                int hours = resultSet.getInt(tablePrefix + "_TotalHours");
+                int days = resultSet.getInt(tablePrefix + "_TotalDays");
+                double totalPrice = resultSet.getDouble(tablePrefix + "_TotalPrice");
+                Date endDate = resultSet.getDate(tablePrefix + "_DeadLine");
+                Date startDate = resultSet.getDate(tablePrefix + "_StartDate");
                 return factory.build(id, name, hours, days, totalPrice, endDate, startDate);
             }
         } catch (Exception e) {

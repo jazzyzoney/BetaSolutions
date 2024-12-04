@@ -68,14 +68,14 @@ public class ProjectRepository extends PSSTSuperclass {
     public Project readProjectByID(int projectID) {
         Project Project = (Project) super.readAssingmentByID("project", "project", Project::new, projectID);
         if (Project != null) {
-            String projectOwner = super.getTableStringByInt("project", "projectOwner", "projectID", Project.getID());
+            String projectOwner = super.getTableStringByInt("project", "project_Owner", "project_ID", Project.getID());
             Project.setProjectOwner(projectOwner);
         }
         return Project;
     }
 
     public boolean updateProject(Project project, int projectID) {
-        String sql = "UPDATE project SET projectName = ?, projectOwner = ?, projectTotalHours = ?, projectTotalDays = ?, projectTotalPrice = ?, projectDeadline = ?,projectStartDate =? WHERE projectID = ?";
+        String sql = "UPDATE project SET project_Name = ?, project_Owner = ?, project_Total_Hours = ?, project_Total_Days = ?, project_Total_Price = ?, project_Deadline = ?,project_Start_Date =? WHERE project_ID = ?";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);

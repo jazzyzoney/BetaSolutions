@@ -18,9 +18,8 @@ public class PSSTSuperclass {
     // see projectRepository for example.
     // VERY IMPORTANT! you need to call preparedStatement.executeUpdate(); in the child in order for it to work.
     public PreparedStatement insertAssignmentIntoTable(ModelInterface assignment,String sql){
-        PreparedStatement preparedStatement;
         try{
-            preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, assignment.getName());
             preparedStatement.setInt(2, assignment.getHours());
             preparedStatement.setInt(3, assignment.getDays());

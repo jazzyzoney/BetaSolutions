@@ -36,6 +36,14 @@
             <th>Our Projects Comrade:</th>
         <tr th:each="project : ${project_overview}">
             <td th:text="${project.getName()}"></td>
+            <td th:text="${project.getID()}"></td>
+            <td th:text="${project.getDays()}"></td>
+            <td th:text="${project.getOwner()}"></td>
+            <td th:text="${project.getDeadline()}"></td>
+            <td th:text="${project.getStartDate()}"></td>
+
+
+
             <td>
 
             </td>

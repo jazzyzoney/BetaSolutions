@@ -24,7 +24,6 @@ public class ProjectController {
     }
     @PostMapping("/project/new")
     public String createNewProject(@ModelAttribute Project project){
-        int ProfileID = (int) session.getAttribute("ProfileID");
         projectService.insertAssignmentIntoTable(project);
         return "redirect: /home";
     }

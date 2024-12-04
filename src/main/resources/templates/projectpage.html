@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Project page</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -22,7 +22,6 @@
         <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
             <button type="submit">log out</button>
         </form>
-
 
         <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
             <button type="submit">home</button>
@@ -50,7 +49,11 @@
             <td> 19/12/2024</td>
         </tr>
         <tr>
-            <td>task</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/task/edit}" target="taskFrame" style="display:inline;">
+                    <button type="submit">Task</button>
+                </form>
+            </td>
             <td>20 hr</td>
             <td>40 hr</td>
             <td>7 days </td>
@@ -58,7 +61,11 @@
             <td>02/12/2024</td>
         </tr>
         <tr>
-            <td>subtask</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/subtask/edit}" target="subtaskFrame" style="display:inline;">
+                    <button type="submit">Subtask</button>
+                </form>
+            </td>
             <td>10</td>
             <td>-</td>
             <td>2 days</td>
@@ -66,7 +73,11 @@
             <td>25/12/2024</td>
         </tr>
         <tr>
-            <td>subtask</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/subtask/edit}" target="subtaskFrame" style="display:inline;">
+                    <button type="submit">Subtask</button>
+                </form>
+            </td>
             <td>10</td>
             <td>-</td>
             <td>2 days</td>

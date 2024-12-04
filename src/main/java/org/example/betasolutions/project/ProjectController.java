@@ -35,7 +35,7 @@ public class ProjectController {
     @GetMapping("/project")
     public String getProject(Model model){
         int projectID = (int)session.getAttribute("projectID");
-        model.addAttribute("project", projectService.readProjectByID(projectID))
+        model.addAttribute("project", projectService.readProjectByID(projectID));
 
         //subproject, task, subtask;
         return "projectpage";

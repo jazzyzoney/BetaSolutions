@@ -11,11 +11,17 @@
 <div class="left-side">
     <header>
         <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
-        <p th:each = "employee : ${project.getEmployeeList()}"> <em th:text ="${employee.getName()}"> </em></p>
+<!--
+        <ul  th:each = "employee : ${getEmployeeList}">
+            <li th:unless="${employee == null}" th:text ="${employee.getName()}" >
+        </ul>
+-->
         <aside>
             <h2>Start date</h2>
             <h2> Deadline</h2>
         </aside>
+
+
     </header>
 
     <main>
@@ -36,7 +42,7 @@
             <th>start date</th>
             <th>end date(??)</th>
         </tr>
-        <tr th:each="subProject : ${project.getSubProjectList()}">
+        <tr > <!--th:each="subProject : ${project.getSubProjectList()}">-->
             <td> subproject.name</td>
             <td> hours </td>
             <td> toatl hours</td>
@@ -44,7 +50,7 @@
             <td> start date</td>
             <td> end date</td>
 
-            <tr th:each="task : ${subproject.getTaskList()}">
+            <tr> <!--th:each="task : ${subproject.getTaskList()}">-->
                 <td> task.name</td>
                 <td> hours </td>
                 <td> toatl hours</td>
@@ -52,7 +58,7 @@
                 <td> start date</td>
                 <td> end date</td>
 
-                <tr th:each="subtask : ${task.getSubTaskList()}">
+                <tr > <!--th:each="subtask : ${task.getSubTaskList()}">-->
                     <td> subtask.name</td>
                     <td> hours </td>
                     <td> toatl hours</td>
@@ -64,7 +70,7 @@
         </tr><!-- end of subproject -->
 
         <!-- independent task -->
-        <tr th:each="task : ${subproject.getTaskList()}">
+        <tr > <!--th:each="task : ${subproject.getTaskList()}">-->
             <td> task.name</td>
             <td> hours </td>
             <td> toatl hours</td>
@@ -72,7 +78,7 @@
             <td> start date</td>
             <td> end date</td>
 
-            <tr th:each="subtask : ${task.getSubTaskList()}">
+            <tr > <!--th:each="subtask : ${task.getSubTaskList()}">-->
                 <td> subtask.name</td>
                 <td> hours </td>
                 <td> toatl hours</td>

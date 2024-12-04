@@ -1,5 +1,7 @@
 package org.example.betasolutions.project;
 
+import org.example.betasolutions.FactoryInterface;
+import org.example.betasolutions.ModelInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

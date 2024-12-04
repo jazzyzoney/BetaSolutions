@@ -20,7 +20,7 @@ public class ProjectController {
     public String getHome(Model model){
         //i have an idea with requestparam for active projects and inactive projects to show on the homepage but i am not sure how it work with the html stuff
         model.addAttribute("project", new Project());
-        model.addAttribute("ProfileID", session.getAttribute("ProfileID"));
+        model.addAttribute("profileID", session.getAttribute("profileID"));
         model.addAttribute("project_overview", projectService.readAllProjects());
         return "homepage";
     }
@@ -32,11 +32,18 @@ public class ProjectController {
 
     //does this need pathvariable?
     @GetMapping("/project")
-    public String getProject(Model model, @ModelAttribute Project project){
-        int projectID = project.getID();
+    public String getProject(Model model){
+        int projectID = (int)session.getAttribute("projectID");
         model.addAttribute("project", projectService.readProjectByID(projectID));
-        session.setAttribute("project_id", projectID);
+
         return "projectpage";
+    }
+
+    @PostMapping("/project")
+    public String getProject(@ModelAttribute Project project){
+        int projectID = project.getID();
+        session.setAttribute("projectID", projectID);
+        return "redirect:/project";
     }
 
     @PostMapping("project/delete")

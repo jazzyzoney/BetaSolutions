@@ -12,19 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+
 public class ProjectRepository extends PSSTSuperclass {
 
     @Autowired
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
+
     //Create method
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {
         String sql = "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate, projectOwner) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, sql);
-        try{
-            preparedStatement.setString(7,project.getProjectOwner());//set projectowner.
+        try {
+            preparedStatement.setString(7, project.getProjectOwner());//set projectowner.
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -44,9 +46,9 @@ public class ProjectRepository extends PSSTSuperclass {
     public List<Project> readAllProjects() {
         ArrayList<Project> projectList = new ArrayList<>();
 
-        for (ModelInterface assignmentObject : super.readAllAssignments("project", "project", Project::new)){
+        for (ModelInterface assignmentObject : super.readAllAssignments("project", "project", Project::new)) {
             //typecasting assignmentObject as Project:
-            if (assignmentObject instanceof Project){
+            if (assignmentObject instanceof Project) {
                 Project project = (Project) assignmentObject;
 
                 //Getting projectowner from projectTAble using projectID.
@@ -63,9 +65,9 @@ public class ProjectRepository extends PSSTSuperclass {
     }
 
     //Read method by ID for project. not sure if this actually works but i will test it later.
-    public Project readProjectByID(int projectID){
-        Project Project = (Project) super.readAssingmentByID("project", "project",Project::new, projectID);
-        if (Project != null){
+    public Project readProjectByID(int projectID) {
+        Project Project = (Project) super.readAssingmentByID("project", "project", Project::new, projectID);
+        if (Project != null) {
             String projectOwner = super.getTableStringByInt("project", "projectOwner", "projectID", Project.getID());
             Project.setProjectOwner(projectOwner);
         }

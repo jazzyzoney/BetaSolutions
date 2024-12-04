@@ -11,6 +11,7 @@ public class ProjectService {
     public ProjectService(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
     }
+
     public void insertAssignmentIntoTable(Project project){
         projectRepository.insertAssignmentIntoTable(project);
     }

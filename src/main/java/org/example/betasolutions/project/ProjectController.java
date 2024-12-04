@@ -3,6 +3,8 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProjectController {
@@ -32,6 +34,7 @@ public class ProjectController {
     @GetMapping("/project")
     public String getProject(Model model, @RequestParam int Project_ID){
         model.addAttribute("project", projectService.readProjectByID(Project_ID));
+
         return "projectpage";
     }
 

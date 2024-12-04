@@ -5,7 +5,15 @@
 
 -- Create Tables
 DROP TABLE IF EXISTS project CASCADE;
-DROP TABLE IF EXISTS employee CASCADE;
+drop table if exists sub_project CASCADE;
+drop table if exists task CASCADE;
+drop table if exists sub_task CASCADE;
+drop table if exists employee CASCADE;
+drop table if exists profile CASCADE;
+drop table if exists project_employee CASCADE;
+drop table if exists project_employee_task CASCADE;
+drop table if exists project_employee_task_subTask CASCADE;
+
 
 CREATE TABLE IF NOT EXISTS project (
                                        project_id INT PRIMARY KEY AUTO_INCREMENT,

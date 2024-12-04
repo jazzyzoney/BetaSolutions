@@ -67,8 +67,7 @@ class PSSTSuperclassTest {
                 Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
 
         //testing method using project object and new project sql statement
-        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project,
-                "INSERT INTO project (project_Name, project_Total_Hours, project_Total_Days, project_Total_Price, project_Deadline, project_Start_Date, project_Owner) VALUES (?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project, "INSERT INTO project (project_Name, project_Total_Hours, project_Total_Days, project_Total_Price, project_Deadline, project_Start_Date, project_Owner) VALUES (?,?,?,?,?,?,?)");
 
         assertNotNull(preparedStatement);
     }

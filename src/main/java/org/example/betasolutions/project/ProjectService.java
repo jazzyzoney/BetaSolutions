@@ -1,7 +1,8 @@
 package org.example.betasolutions.project;
 
-import org.example.betasolutions.login.LoginService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProjectService {
@@ -10,4 +11,11 @@ public class ProjectService {
     public ProjectService(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
     }
+    public void insertAssignmentIntoTable(Project project){
+        projectRepository.insertAssignmentIntoTable(project);
+    }
+    public List<Project> readAllProjects(){
+       return projectRepository.readAllProjects();
+    }
+
 }

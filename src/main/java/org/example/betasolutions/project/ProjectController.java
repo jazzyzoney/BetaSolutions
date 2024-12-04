@@ -32,9 +32,10 @@ public class ProjectController {
 
     //does this need pathvariable?
     @GetMapping("/project")
-    public String getProject(Model model, @RequestParam int Project_ID){
-        model.addAttribute("project", projectService.readProjectByID(Project_ID));
-
+    public String getProject(Model model, @ModelAttribute Project project){
+        int projectID = project.getID();
+        model.addAttribute("project", projectService.readProjectByID(projectID));
+        session.setAttribute("project_id", projectID);
         return "projectpage";
     }
 

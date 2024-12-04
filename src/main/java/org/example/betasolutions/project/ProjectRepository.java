@@ -23,14 +23,14 @@ public class ProjectRepository extends PSSTSuperclass {
     //Create method
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {
-        String sql = "INSERT INTO project (projectName, projectTotalHours, projectTotalDays, projectTotalPrice, projectDeadline, projectStartDate, projectOwner) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO project (project_Name, project_Total_Hours, project_Total_Days, project_Total_Price, project_Deadline, project_Start_Date, project_Owner) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(project, sql);
         try {
             preparedStatement.setString(7, project.getProjectOwner());//set projectowner.
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                return resultSet.getInt("projectID");//return objectID.
+                return resultSet.getInt("project_ID");//return objectID.
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,8 +52,8 @@ public class ProjectRepository extends PSSTSuperclass {
                 Project project = (Project) assignmentObject;
 
                 //Getting projectowner from projectTAble using projectID.
-                String projectOwner = super.getTableStringByInt("project", "projectOwner",
-                        "projectID", project.getID());
+                String projectOwner = super.getTableStringByInt("project", "project_Owner",
+                        "project_ID", project.getID());
 
                 //adding projectowner to projectObject.
                 project.setProjectOwner(projectOwner);

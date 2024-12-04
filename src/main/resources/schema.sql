@@ -4,6 +4,8 @@
 -- SET SCHEMA BetaSolutionsDB;
 
 -- Create Tables
+DROP TABLE IF EXISTS project CASCADE;
+DROP TABLE IF EXISTS employee CASCADE;
 
 CREATE TABLE IF NOT EXISTS project (
                                        project_id INT PRIMARY KEY AUTO_INCREMENT,

@@ -3,10 +3,12 @@
       xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <title>Project page</title>
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
+
+<div class="left-side">
     <header>
         <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
         <p> <em>Employee1, Employee2, Employee3</em></p>
@@ -20,7 +22,6 @@
         <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
             <button type="submit">log out</button>
         </form>
-
 
         <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
             <button type="submit">home</button>
@@ -36,7 +37,11 @@
             <th>end date(??)</th>
         </tr>
         <tr>
-            <td>Subproject</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/subproject/edit}" target="subprojectFrame" style="display:inline;">
+                    <button type="submit">Subproject</button>
+                </form>
+            </td>
             <td>80 hr</td>
             <td>120 hr</td>
             <td>20 days</td>
@@ -44,7 +49,11 @@
             <td> 19/12/2024</td>
         </tr>
         <tr>
-            <td>task</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/task/edit}" target="taskFrame" style="display:inline;">
+                    <button type="submit">Task</button>
+                </form>
+            </td>
             <td>20 hr</td>
             <td>40 hr</td>
             <td>7 days </td>
@@ -52,7 +61,11 @@
             <td>02/12/2024</td>
         </tr>
         <tr>
-            <td>subtask</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/subtask/edit}" target="subtaskFrame" style="display:inline;">
+                    <button type="submit">Subtask</button>
+                </form>
+            </td>
             <td>10</td>
             <td>-</td>
             <td>2 days</td>
@@ -60,7 +73,11 @@
             <td>25/12/2024</td>
         </tr>
         <tr>
-            <td>subtask</td>
+            <td>
+                <form class="logo" method="post" th:action="@{/project/subtask/edit}" target="subtaskFrame" style="display:inline;">
+                    <button type="submit">Subtask</button>
+                </form>
+            </td>
             <td>10</td>
             <td>-</td>
             <td>2 days</td>
@@ -120,6 +137,11 @@
         <h2>Total: (timer) </h2>
         <h2>Total: (penge) </h2>
     </footer>
+</div>
+
+<div class="right-side">
+    <iframe name="subprojectFrame"></iframe>
+</div>
 
 </body>
 </html>

@@ -56,13 +56,13 @@ public class PSSTSuperclass {
             //preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt(tablePrefix + "ID");
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                int id = resultSet.getInt(tablePrefix + "_ID");
+                String name = resultSet.getString(tablePrefix + "_Name");
+                int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
+                int days = resultSet.getInt(tablePrefix + "_Total_Days");
+                double totalPrice = resultSet.getInt(tablePrefix + "_Total_Price");
+                Date endDate = resultSet.getDate(tablePrefix + "_DeadLine");
+                Date startDate = resultSet.getDate(tablePrefix + "_Start_Date");
                 allObjects.add(factory.build(id,name, hours, days, totalPrice, endDate, startDate));
             }
         } catch (Exception e) {
@@ -81,13 +81,13 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt(tablePrefix + "ID");
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getInt(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                int id = resultSet.getInt(tablePrefix + "_ID");
+                String name = resultSet.getString(tablePrefix + "_Name");
+                int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
+                int days = resultSet.getInt(tablePrefix + "_Total_Days");
+                double totalPrice = resultSet.getInt(tablePrefix + "_Total_Price");
+                Date endDate = resultSet.getDate(tablePrefix + "_DeadLine");
+                Date startDate = resultSet.getDate(tablePrefix + "_Start_Date");
                 allObjects.add(factory.build(id, name, hours, days, totalPrice, endDate, startDate));
             }
         } catch (Exception e) {
@@ -103,19 +103,19 @@ public class PSSTSuperclass {
         List<ModelInterface> allObjects = new ArrayList<>(); //returned at end of method.
 
         String sql =   "SELECT " +
-                tableName + "." + tableName + "ID, " + //eg. task.taskID,
-                tableName + "." + tableName + "Name, " +//task.taskName.
-                tableName + "." + tableName + "TotalHours, " + //etc.
-                tableName + "." + tableName + "TotalDays, " +
-                tableName + "." + tableName + "TotalPrice, " +
-                tableName + "." + tableName + "Deadline, " +
-                tableName + "." + tableName + "StartDate, " +
+                tableName + "." + tableName + "_ID, " + //eg. task.taskID,
+                tableName + "." + tableName + "_Name, " +//task.taskName.
+                tableName + "." + tableName + "_Total_Hours, " + //etc.
+                tableName + "." + tableName + "_Total_Days, " +
+                tableName + "." + tableName + "_Total_Price, " +
+                tableName + "." + tableName + "_Deadline, " +
+                tableName + "." + tableName + "_Start_Date, " +
 
-                joinTableName + ".employeeID," +  //select employeeID from joinTable
-                joinTableName + "." + tableName + "ID" + //select assignmentID from joinTable
+                joinTableName + ".employee_ID," +  //select employeeID from joinTable
+                joinTableName + "." + tableName + "_ID" + //select assignmentID from joinTable
                 " FROM " + tableName +
-                " JOIN " + tableName + " ON " + tableName + "." + tableName + "ID, " + joinTableName + "." + tableName + "ID" +
-                " WHERE " + joinTableName + ".employeeID = ? AND " + tableName + ".projectID = ?";
+                " JOIN " + tableName + " ON " + tableName + "." + tableName + "_ID, " + joinTableName + "." + tableName + "_ID" +
+                " WHERE " + joinTableName + ".employee_ID = ? AND " + tableName + ".project_ID = ?";
                 //JOIN joinTable ON assignment.assignementID, joinTable.assignmentID
 
         try {
@@ -126,13 +126,13 @@ public class PSSTSuperclass {
             ResultSet resultSet = preparedStatement.executeQuery(); //connect.
             //for each assignmentObject, get variables.
             while (resultSet.next()) {
-                int id = resultSet.getInt(tableName + "ID");
-                String name = resultSet.getString(tableName + "Name");
-                int hours = resultSet.getInt(tableName + "TotalHours");
-                int days = resultSet.getInt(tableName + "TotalDays");
-                double totalPrice = resultSet.getDouble(tableName + "TotalPrice");
-                Date endDate = resultSet.getDate(tableName + "Deadline");
-                Date startDate = resultSet.getDate(tableName + "StartDate");
+                int id = resultSet.getInt(tableName + "_ID");
+                String name = resultSet.getString(tableName + "_Name");
+                int hours = resultSet.getInt(tableName + "_Total_Hours");
+                int days = resultSet.getInt(tableName + "_Total_Days");
+                double totalPrice = resultSet.getDouble(tableName + "_Total_Price");
+                Date endDate = resultSet.getDate(tableName + "_Deadline");
+                Date startDate = resultSet.getDate(tableName + "_Start_Date");
 
                 //add new assignmentobject to allObjects list.
                 allObjects.add(factory.build(id, name, hours, days, totalPrice, endDate, startDate));
@@ -149,7 +149,7 @@ public class PSSTSuperclass {
     //so it would look like this: deleteObjectFromTable("task", "task", 1); for example.
     //it will delete the task with the taskID 1 from the task table.
     public boolean deleteObjectFromTable(String tableName, String tablePrefix,int functionID) {
-        String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "ID = ? ";
+        String sql = "DELETE FROM " + tableName + " WHERE " + tablePrefix + "_ID = ? ";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, functionID);
@@ -165,7 +165,7 @@ public class PSSTSuperclass {
     //so it would look like this: updateObjectString("task", "taskName", 1, "Task 2"); for example.
     //it will update the taskName of the task with the taskID 1 to "Task 2".
     public boolean updateObjectString(String tableName, String attributeName, int functionID, String newValue) {
-        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, newValue);

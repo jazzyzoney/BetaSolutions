@@ -61,6 +61,7 @@ public class ProjectRepository extends PSSTSuperclass {
         }//end of for loop.
         return projectList;
     }
+
     //Read method by ID for project. not sure if this actually works but i will test it later.
     public Project readProjectByID(int projectID){
         Project Project = (Project) super.readAssingmentByID("project", "project",Project::new, projectID);
@@ -69,5 +70,25 @@ public class ProjectRepository extends PSSTSuperclass {
             Project.setProjectOwner(projectOwner);
         }
         return Project;
+    }
+
+    public boolean updateProject(Project project, int projectID) {
+        String sql = "UPDATE project SET projectName = ?, projectOwner = ?, projectTotalHours = ?, projectTotalDays = ?, projectTotalPrice = ?, projectDeadline = ?,projectStartDate =? WHERE projectID = ?";
+
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, project.getName());
+            preparedStatement.setString(2, project.getProjectOwner());
+            preparedStatement.setInt(3, project.getTotalHours());
+            preparedStatement.setInt(4, project.getTotalDays());
+            preparedStatement.setDouble(5, project.getTotalPrice());
+            preparedStatement.setDate(6, project.getDeadline());
+            preparedStatement.setDate(7, project.getStartDate());
+            preparedStatement.setInt(8, projectID);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

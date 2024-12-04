@@ -20,5 +20,8 @@ public class ProjectService {
     public Project readProjectByID(int project_id){
         return projectRepository.readProjectByID(project_id);
     }
+    public void updateProject(Project project,int project_id){
+        projectRepository.updateProject(project,project_id);
+    }
 
 }

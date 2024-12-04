@@ -31,8 +31,8 @@ public class ProjectController {
 
     //does this need pathvariable?
     @GetMapping("/project")
-    public String getProject(Model model, @RequestParam int ID){
-        model.addAttribute("project", projectService.readProjectByID(ID));
+    public String getProject(Model model, @RequestParam int Project_ID){
+        model.addAttribute("project", projectService.readProjectByID(Project_ID));
         return "projectpage";
     }
 
@@ -42,7 +42,10 @@ public class ProjectController {
     }
 
     @PostMapping("project/edit")
-    public String editProject(){
+    public String editProject(Model model,@RequestParam int project_id){
+         project_id = (int) session.getAttribute("project_id");
+         //not done yet
+
         return "redirect:/project";
     }
 

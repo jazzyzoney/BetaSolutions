@@ -275,7 +275,9 @@ public class PSSTSuperclass {
             }
             return false;
     }
+
     //update method
+    //put og patch
     //this one is for updating an int value in a table with a specific ID.
     public boolean updateObjectInt(String tableName, String attributeName, int functionID, int newValue) {
         String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";

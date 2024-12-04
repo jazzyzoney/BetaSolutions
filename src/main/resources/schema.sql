@@ -11,6 +11,7 @@
 -- -----------------------------------------------------
 -- Table `BetaSolutionsDB`.`project`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS project CASCADE;
 CREATE TABLE IF NOT EXISTS project (
                                        projectID INT AUTO_INCREMENT PRIMARY KEY,
                                        projectName VARCHAR(100) NOT NULL,

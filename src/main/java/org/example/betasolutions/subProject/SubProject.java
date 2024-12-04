@@ -2,7 +2,9 @@ package org.example.betasolutions.subProject;
 
 import org.example.betasolutions.ModelInterface;
 
+
 import java.sql.Date;
+
 
 public class SubProject implements ModelInterface {
     private int subProjectID;
@@ -93,6 +95,4 @@ public class SubProject implements ModelInterface {
     public Date getStartDate() {
         return projectStartDate;
     }
-
-
 }

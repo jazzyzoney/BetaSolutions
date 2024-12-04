@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
     <header>
         <h2>Logout</h2>
         <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
             <button type="submit">loginpage</button>
+        </form>
+        <form class="logo" method="get" th:action="@{/project/employees}" style="display:inline;">
+            <button type="submit">Employees</button>
         </form>
     </header>
     <p> homepage. Siden viser alle brugerens oprettede projekter og giver </br>
@@ -28,16 +31,24 @@
     <p>project 2</p>
     <p>project 3</p>
     <p>new project</p>
-    <br><table>
+    <table>
         <tr>
             <th>Our Projects Comrade:</th>
+            <th>Actions</th> <!-- Added a new column for buttons -->
+        </tr>
         <tr th:each="project : ${project_overview}">
             <td th:text="${project.getName()}"></td>
+            <td th:text="${project.getID()}"></td>
+            <td th:text="${project.getDays()}"></td>
+            <td th:text="${project.getOwner()}"></td>
+            <td th:text="${project.getDeadline()}"></td>
+            <td th:text="${project.getStartDate()}"></td>
             <td>
-
+                <form method="get" th:action="@{/project}" th:object="${project}" style="display:inline;">
+                    <button type="submit">View Details</button>
+                </form>
             </td>
         </tr>
-
     </table>
 </body>
 </html>

@@ -1,8 +1,18 @@
 package org.example.betasolutions.project;
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.employee.Employee;
+import org.example.betasolutions.subProject.SubProject;
+import org.example.betasolutions.task.Task;
+
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Project implements ModelInterface {
+    private List<SubProject> subProjectList = new ArrayList<>();
+    private List<Task> taskList = new ArrayList<>();
+    private List<Employee> employeeList = new ArrayList<>();
+
     private int projectID;
     private String projectName;
     private String projectOwner;
@@ -32,6 +42,7 @@ public class Project implements ModelInterface {
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
     }
+
     public Project(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
         this.projectID = id;
         this.projectName = name;
@@ -43,81 +54,115 @@ public class Project implements ModelInterface {
     }
 
 
-    public Project(Date projectStartDate, Date projectDeadline){
+    public Project(Date projectStartDate, Date projectDeadline) {
         this.projectStartDate = projectStartDate;
         this.projectDeadline = projectDeadline;
     }
 
-    public Project(String projectName, Date projectStartDate, Date projectDeadline){
+    public Project(String projectName, Date projectStartDate, Date projectDeadline) {
         this.projectStartDate = projectStartDate;
         this.projectDeadline = projectDeadline;
         this.projectName = projectName;
     }
-    public Project(){
+
+    public Project() {
     }
 
     public void setID(int projectID) {
         this.projectID = projectID;
     }
+
     public int getID() {
         return projectID;
     }
+
     public void setName(String projectName) {
         this.projectName = projectName;
     }
+
     public String getName() {
         return projectName;
     }
+
     public void setOwner(String projectOwner) {
         this.projectOwner = projectOwner;
     }
+
     public String getOwner() {
         return projectOwner;
     }
+
     public void setTotalHours(int projectTotalHours) {
         this.projectTotalHours = projectTotalHours;
     }
+
     public int getHours() {
         return projectTotalHours;
     }
+
     public void setTotalDays(int projectTotalDays) {
         this.projectTotalDays = projectTotalDays;
     }
+
     public int getDays() {
         return projectTotalDays;
     }
+
     public void setTotalPrice(double projectTotalPrice) {
         this.projectTotalPrice = projectTotalPrice;
     }
+
     public double getTotalPrice() {
         return projectTotalPrice;
     }
+
     public void setDeadline(Date projectDeadline) {
         this.projectDeadline = projectDeadline;
     }
+
     public Date getDeadline() {
         return projectDeadline;
     }
+
     public void setStartDate(Date projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
+
     public Date getStartDate() {
         return projectStartDate;
     }
 
-    public int getTotalHours(){
+    public int getTotalHours() {
         return projectTotalHours;
     }
 
-    public int getTotalDays(){
+    public int getTotalDays() {
         return projectTotalDays;
     }
-    public void setProjectOwner(String projectOwner){
+
+    public void setProjectOwner(String projectOwner) {
         this.projectOwner = projectOwner;
     }
 
-    public String getProjectOwner(){
+    public String getProjectOwner() {
         return projectOwner;
     }
 
+    public List<SubProject> getSubProjectList() {
+        return subProjectList;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
 }
+
+
+
+
+

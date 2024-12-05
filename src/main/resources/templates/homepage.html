@@ -25,12 +25,6 @@
     </br>
     </br>
 
-    <form class="logo" method="get" th:action="@{/project}" style="display:inline;">
-        <button type="submit">project 1</button>
-    </form>
-    <p>project 2</p>
-    <p>project 3</p>
-    <p>new project</p>
     <table>
         <tr>
             <th>Project Name</th>
@@ -51,12 +45,12 @@
             <td th:text="${project.getDeadline()}"></td>
             <td th:text="${project.getStartDate()}"></td>
             <td>
-                <form method="post" th:action="@{/project}" th:object="${project.getID()}" style="display:inline;">
-                    <button type="submit">View Details</button>
-                </form>
-                <!--<form th:action="@{/project/{projectID} (projectID = ${project.getID()})}" style="display:inline;">
+                <!--<form method="post" th:action="@{/project}" th:object="${project.getID()}" style="display:inline;">
                     <button type="submit">View Details</button>
                 </form>-->
+                <form th:action="@{/project/{projectID} (projectID = ${project.getID()})}" style="display:inline;">
+                    <button type="submit">View Details</button>
+                </form>
             </td>
         </tr>
     </table>

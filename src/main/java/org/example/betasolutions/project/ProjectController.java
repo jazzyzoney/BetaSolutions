@@ -35,13 +35,8 @@ public class ProjectController {
     //does this need pathvariable?
     @GetMapping("/project/{projectID}")
     public String getProject(Model model, @PathVariable int projectID){
-        //int projectID = (int)session.getAttribute("projectID");
-        System.out.println(projectID);
-
-        Project project = projectService.readAllProjects().get(projectID - 1);//readProjectByID(projectID);
-        System.out.println(project.getName());
-
-        model.addAttribute("project", project );
+        Project project = projectService.readAllProjects().get(projectID - 1); //readProjectByID(projectID);
+        model.addAttribute("project", project);
 
         //subproject, task, subtask;
         return "projectpage";

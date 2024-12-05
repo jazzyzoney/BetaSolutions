@@ -10,16 +10,21 @@
 
 <div class="left-side">
     <header>
-        <h2><span style="font-size: 2em;" th:text = "${project.getName()}">  </span> Project owner</h2>
+        <h2 ><span style="font-size: 2em;" th:text = "${project.getName()}">  </span> <span th:text = "${project.getProjectOwner()}"></span> </h2>
 <!--
         <ul  th:each = "employee : ${getEmployeeList}">
             <li th:unless="${employee == null}" th:text ="${employee.getName()}" >
         </ul>
 -->
-        <aside>
-            <h2>Start date</h2>
-            <h2> Deadline</h2>
-        </aside>
+
+            <h3 class = "right-side">
+                <span style = "font-stize : 2em;" >
+                    Start date: <span th:text="${project.getStartDate()}"> </span>
+                </span>
+
+                Deadline: <span th:text="${project.getDeadline()}"> </span>
+            </h3>
+ 
 
 
     </header>
@@ -33,6 +38,7 @@
             <button type="submit">home</button>
         </form>
 
+        <!-- tables: -->
     <table>
         <tr>
             <th>Task level</th>
@@ -190,8 +196,8 @@
     </aside>
 
     <footer>
-        <h2>Total: (timer) </h2>
-        <h2>Total: (penge) </h2>
+        <h2>Total Hours: <span th:text = "${project.getTotalHours()}"></span> </h2>
+        <h2>Total EUR/USD/DKK(??): <span th:text = "${project.getTotalPrice()}"></span> </h2>
     </footer>
 </div>
 

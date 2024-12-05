@@ -24,9 +24,19 @@ public class EmployeeService {
         return employeeRepository.getAllEmployees();
     }
 
-    //add employee to assignment
-    public void addExistingEmployeeToAssignment(Employee employee, String assignment, String idName){
-        employeeRepository.addExistingEmployeeToAssignment(employee, assignment, idName);
+    //add employee to project
+    public void addExistingEmployeeToProject(Employee employee, int projectID){
+        employeeRepository.addExistingEmployeeToProject(employee, projectID);
+    }
+
+    //add employee to task
+    public void addExistingEmployeeToTask(Employee employee, int taskID, int projectID){
+        employeeRepository.addExistingEmployeeToTask(employee, taskID, projectID);
+    }
+
+    //add employee to subtask
+    public void addExistingEmployeeToSubTask(Employee employee, int taskID, int subTaskID, int projectID){
+        employeeRepository.addExistingEmployeeToSubTask(employee, taskID, subTaskID, projectID);
     }
 
     //update

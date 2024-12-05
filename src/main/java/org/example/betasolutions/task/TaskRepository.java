@@ -29,8 +29,14 @@ public class TaskRepository extends PSSTSuperclass {
         return 0;
     }
     public List<ModelInterface> readAllTasks(int ID){
-        return super.readAllAssignmentsBelongingToProject("task","task",Task::new,ID);
+        return super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID);
     }
+    public List<ModelInterface> readAllTasksForSubProject(int ID){
+        return super.readAllAssignmentsBelongingToProject("task","task","subProject",Task::new,ID);
+    }
+
+
+
     public Task readTask(int taskID){
         return (Task) super.readAssingmentByID("task","task",Task::new,taskID);
     }

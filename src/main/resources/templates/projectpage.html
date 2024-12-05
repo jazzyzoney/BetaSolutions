@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/style/style.css}" rel="stylesheet">
+</head>
 <table>
     <tr>
         <th>Subproject Name</th>
@@ -16,3 +24,22 @@
         <td th:text="${subproject.startDate}">Start Date</td>
     </tr>
 </table>
+<table>
+    <tr>
+        <th>task Name</th>
+        <th>ID</th>
+        <th>Days</th>
+        <th>Deadline</th>
+        <th>Start Date</th>
+    </tr>
+
+    <!-- Loop through subprojects -->
+    <tr th:each="task : ${task_overview}">
+        <td th:text="${task.name}">Subproject Name</td>
+        <td th:text="${task.ID}">ID</td>
+        <td th:text="${task.days}">Days</td>
+        <td th:text="${task.deadline}">Deadline</td>
+        <td th:text="${task.startDate}">Start Date</td>
+    </tr>
+</table>
+</html>

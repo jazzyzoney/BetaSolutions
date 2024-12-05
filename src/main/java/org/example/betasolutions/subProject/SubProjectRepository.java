@@ -29,7 +29,7 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
     //read all subprojects
     public List<ModelInterface> readAllSubProjects(int projectID){
-        return super.readAllAssignmentsBelongingToProject("sub_project","sub_project",SubProject::new,projectID);
+        return super.readAllAssignmentsBelongingToProject("sub_project","sub_project","project", SubProject::new,projectID);
     }
     //read a subproject
     public SubProject readSubProject(int subProjectID){

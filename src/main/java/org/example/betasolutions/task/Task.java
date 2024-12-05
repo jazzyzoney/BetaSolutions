@@ -74,4 +74,13 @@ public class Task implements ModelInterface {
         return startDate;
     }
 
+    public void setTotalHours(int hours){
+        this.hours = hours;
+    }
+
+    public void setTotalDays(int days){
+        this.days = days;
+    }
+
+
 }

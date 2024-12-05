@@ -1,31 +1,34 @@
 package org.example.betasolutions.login;
-
+import org.example.betasolutions.login.Login;
+import org.example.betasolutions.ConnectionManager;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 
 @Repository
 public class LoginRepository {
 
     private final Connection conn;
 
-    public LoginRepository(ConnectionManager connectionManager) {
+    public LoginRepository(ConnectionManager connectionManager){
         this.conn = connectionManager.getConnection();
-
-    }
-    public int saveUser(Login login) {
-        String sql = "INSERT INTO login (password, email) VALUES (?, ?)";
-try(PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-prepraredStatement.setString(1, login.getPassword());
-preparedStatement.setString(2, login.getEmail());
-preparedStatement.executeUpdate();
-ResultSet resultSet = preparedStatement.getGeneratedKeys();
-if(resultSet.next()) {
-
-}
-
-
     }
 
+    // create login
+    public void createLogin(Login login){
+        String SQLInsertLogin = "insert into login (email, password, employee_id) values(?,?,?)";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQLInsertLogin);
+            preparedStatement.setString(1, login.getEmail());
+            preparedStatement.setString(2, login.getPassword());
+            preparedStatement.setInt(3, login.getEmployee().getEmployeeID());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

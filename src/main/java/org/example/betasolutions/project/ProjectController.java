@@ -21,7 +21,6 @@ public class ProjectController {
     public String getHome(Model model){
         //i have an idea with requestparam for active projects and inactive projects to show on the homepage but i am not sure how it work with the html stuff
         //model.addAttribute("project", new Project());
-
         model.addAttribute("profileID", session.getAttribute("profileID"));
         model.addAttribute("projectList", projectService.readAllProjects());
         return "homepage";

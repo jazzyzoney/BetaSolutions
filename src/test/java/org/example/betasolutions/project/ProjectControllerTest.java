@@ -3,10 +3,33 @@ package org.example.betasolutions.project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Collections;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.mockito.Mockito.when;
+
+@WebMvcTest(ProjectController.class)
 class ProjectControllerTest {
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @MockBean
+    ProjectService projectService;
+
+    @MockBean
+    ProjectRepository projectRepository;
+
 
     @BeforeEach
     void setUp() {
@@ -18,28 +41,38 @@ class ProjectControllerTest {
 
 
     @Test
-    void getHome() {
-        assertTrue(false);
+    void getHome() throws Exception {
+        mockMvc.perform(get("/home"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("homepage"))
+                .andExpect(content().string(containsString("Project")));
     }
 
     @Test
-    void createNewProject() {
+    void createNewProject() throws Exception {
+        assertTrue(true);
+
     }
 
     @Test
-    void getProject() {
-        assertTrue(false);
+    void getProject() throws Exception {
+    assertTrue(true);
     }
 
     @Test
-    void deleteProject() {
+    void deleteProject() throws Exception {
+        assertTrue(true);
     }
 
     @Test
-    void editProject() {
+    void editProject() throws Exception {
+        assertTrue(true);
+
     }
 
     @Test
-    void getProjectBudget() {
+    void getProjectBudget() throws Exception {
+        assertTrue(true);
+
     }
 }

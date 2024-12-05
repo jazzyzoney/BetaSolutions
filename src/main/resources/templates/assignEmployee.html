@@ -15,18 +15,15 @@ it shows a list of all employees and also gives the user the option to create ne
     <button type="submit">Home</button>
 </form>
 
-<form th:action="@{/project/employee/new}" th:object="${employee}" method="post">
-        <input type="hidden" th:name="employee_id"/>
-        <button type="submit">Create new employee</button>
-</form>
 
-<!-- table of all employees -->
+<!-- table to add employee to assignment -->
 <table>
     <thead>
     <tr>
         <th>Name</th>
         <th>Proficiency</th>
         <th>Office</th>
+        <th>Add to project</th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +32,22 @@ it shows a list of all employees and also gives the user the option to create ne
         <td th:text="${employee.getEmployeeName()}"></td>
         <td th:text="${employee.getEmployeeProficiency()}"></td>
         <td th:text="${employee.getEmployeeOffice()}"></td>
+        <td>
+            <!-- Form to add employee to project -->
+            <form method="post" th:action="@{/project/employee/add}">
+                <input type="hidden" name="projectID" th:value="${project.projectID}" />
+
+                <!-- Label and Dropdown for selecting an employee -->
+                <select name="projectID" id="projectSelect" required>
+                    <option value="" disabled selected>Select project</option>
+                    <option th:each="project : ${projects}"
+                            th:value="${project.projectID}"
+                            th:text="${project.projectName}"></option>
+                </select>
+
+                <button type="submit">Add</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

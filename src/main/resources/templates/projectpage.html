@@ -10,16 +10,16 @@
 
     <header>
         <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
-<!--
+
+        <!-- employees on this project -->
         <ul  th:each = "employee : ${getEmployeeList}">
             <li th:unless="${employee == null}" th:text ="${employee.getName()}" >
         </ul>
--->
+
         <aside>
             <h2>Start date</h2>
             <h2> Deadline</h2>
         </aside>
-
 
     </header>
 
@@ -30,6 +30,10 @@
 
         <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
             <button type="submit">home</button>
+        </form>
+
+        <form class="logo" method="post" th:action="@{/project/employee/add}" style="display:inline;">
+            <button type="submit">Add employee to project</button>
         </form>
 
     <table>

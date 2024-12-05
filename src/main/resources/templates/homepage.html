@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h2>Logout</h2>
+        <h2>Home</h2>
         <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
             <button type="submit">loginpage</button>
         </form>
@@ -19,18 +19,11 @@
     <p> homepage. Siden viser alle brugerens oprettede projekter og giver </br>
         mulighed for at oprette nye projekter. </br></br>
         Siden kan også vise hvor langt i processen, et projekt er.
-
     </p>
 
     </br>
     </br>
 
-    <form class="logo" method="get" th:action="@{/project}" style="display:inline;">
-        <button type="submit">project 1</button>
-    </form>
-    <p>project 2</p>
-    <p>project 3</p>
-    <p>new project</p>
     <table>
         <tr>
             <th>Project Name</th>
@@ -51,7 +44,7 @@
             <td th:text="${project.getDeadline()}"></td>
             <td th:text="${project.getStartDate()}"></td>
             <td>
-                <form method="post" th:action="@{/project}" th:object="${project}" style="display:inline;">
+                <form method="get" th:action="@{/project}" th:object="${project}" style="display:inline;">
                     <button type="submit">View Details</button>
                 </form>
             </td>

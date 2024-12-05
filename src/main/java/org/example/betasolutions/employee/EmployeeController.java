@@ -21,7 +21,7 @@ public class EmployeeController {
     @PostMapping("/project/employee/new")
     public String createNewEmployee(Employee employee){
         employeeService.createNewEmployee(employee);
-        return "redirect: /project/employee";
+        return "newEmployee";
     }
 
     //read
@@ -35,7 +35,7 @@ public class EmployeeController {
     @PostMapping("/project/employee/add") //add employee to project/subproject/task/subtask aka assignment
     public String addExistingEmployeeToAssignment(Employee employee, String assignment, String idName){
         employeeService.addExistingEmployeeToAssignment(employee, assignment, idName);
-        return "redirect: /project/employee";
+        return "assignEmployee";
     }
 
     //update

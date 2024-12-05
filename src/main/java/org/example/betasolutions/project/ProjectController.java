@@ -33,19 +33,11 @@ public class ProjectController {
 
     //does this need pathvariable?
     @GetMapping("/project")
-    public String getProject(Model model){
-        int projectID = (int)session.getAttribute("projectID");
-        model.addAttribute("project", projectService.readProjectByID(projectID));
-
-        //subproject, task, subtask;
-        return "projectpage";
-    }
-
-    @PostMapping("/project")
     public String getProject(@ModelAttribute Project project){
         int projectID = project.getID();
         session.setAttribute("projectID", projectID);
-        return "redirect:/project";
+        //subproject, task, subtask;
+        return "projectpage";
     }
 
     @PostMapping("project/delete")

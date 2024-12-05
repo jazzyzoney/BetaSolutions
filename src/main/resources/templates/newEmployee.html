@@ -8,7 +8,29 @@
 </head>
 <body>
 
+<h1>Create new employee</h1>
+<form th:action="@{/project/employee/new}" method="post" th:object="${newEmployee}"> <br>
 
+    <label class="large-text">Name:
+        <input type="text" name="name" th:value="${newEmployee.employeeName}" required>
+    </label>
+    <br>
+    <label class="large-text">Office:
+        <select name="employeeOffice" id="officeSelect" required>
+            <option value="" disabled selected>Select office</option>
+            <option th:each="office : ${offices}"
+                    th:value="${employee.employeeOffice}"
+                    th:text="${employee.employeeOffice}"></option>
+        </select>
+    </label>
+
+    <br>
+    <label class="large-text">Proficiency:
+        <input type="text" name="proficiency" th:value="${newEmployee.employeeProficiency}" required>
+    </label>
+    <br>
+    <button type="submit">Submit</button>
+</form>
 
 </body>
 </html>

@@ -12,12 +12,18 @@
     <h2 th:text="${task.getName()}"></h2>
 
     <form
-        method="post" th:action = "@{/project/task/edit}"  th:object="${task}"  style="display:inline;">
+        th:method="post" th:action = "@{/project/task/edit}"  th:object="${task}"  style="display:inline;">
         <label for="hours"> Hours: </label>
-        <input type="number" id="hours" name="password" th:value = "${task.getHours()}"/>
-        </br>
+        <input type="hidden" id="hours" name="hours" th:value = "${task.hours}"/>
+        <br>
         <button type="submit">Submit</button>
     </form>
+
+    <!--
+    <form th:action="@{/attractions/save}" th:method="post" th:object="${touristAttraction}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${touristAttraction.name}"> <br>
+-->
 
 </body>
 </html>

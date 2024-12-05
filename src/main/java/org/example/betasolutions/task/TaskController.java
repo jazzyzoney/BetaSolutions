@@ -15,6 +15,7 @@ public class TaskController {
     @GetMapping("project/{projectID}/task/{taskID}")
     public String getTask(Model model, @PathVariable int projectID, @PathVariable int taskID){
         Task task = taskService.getTask(projectID, taskID);
+        System.out.println("task contr. start date: " + task.getStartDate());
         model.addAttribute("task", task);
         model.addAttribute("hours", task.getHours());
         return "taskPage";
@@ -26,6 +27,9 @@ public class TaskController {
     }
     @PostMapping("/project/task/edit")
     public String editTask(@ModelAttribute Task task){
+        System.out.println("task contr. start date: " + task.getStartDate());
+        System.out.println("task contr. id: " + task.getID());
+        System.out.println("task contr. hours: " + task.getHours());
 
         taskService.editTime(task, 2);
 

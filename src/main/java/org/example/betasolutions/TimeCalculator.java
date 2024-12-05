@@ -21,6 +21,7 @@ public class TimeCalculator {
 
     public Date calculateEndDate(Date startDate, int days){
 
+        //System.out.println("timecalc. start date: " + startDate);
         LocalDate localDate = startDate.toLocalDate(); //create localDate object, from startDate.
 
         //adding days to deadline.

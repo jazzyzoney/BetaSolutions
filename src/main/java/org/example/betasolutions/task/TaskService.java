@@ -13,23 +13,13 @@ public class TaskService {
     private TaskRepository taskRepository;
     private TimeCalculator timeCalculator;
 
-    public TaskService(TaskRepository taskRepository, TimeCalculator timeCalculator){
+    public TaskService(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
-        this.timeCalculator = timeCalculator;
+        timeCalculator = new TimeCalculator();
     }
 
     public List<ModelInterface> getAllTasks(int projectID){
         return taskRepository.readAllAssignmentsBelongingToProject("task","task",Task::new, projectID);
-    }
-
-    public void editTime(Task task, int hours){
-        task.setTotalHours(hours); //set task hours = new hours;
-
-        int days = timeCalculator.calculateDays(hours); //calculate days;
-        task.setTotalDays(days);  //set task days.
-
-        task.setDeadline(timeCalculator.calculateEndDate(task.getStartDate(), days)); //calculate new expected end date for task, using startdate and days.
-
     }
 
     public Task getTask(int projectID, int taskID){
@@ -37,7 +27,16 @@ public class TaskService {
         return task;
     }
 
+    public void editTime(Task task, int hours) {
+        task.setTotalHours(hours); //set task hours = new hours;
 
+        int days = timeCalculator.calculateDays(hours); //calculate days;
+        task.setTotalDays(days);  //set task days.
 
+        //System.out.println("taskservice. start date: " + task.getStartDate());
+
+        task.setDeadline(timeCalculator.calculateEndDate(task.getStartDate(), days)); //calculate new expected end date for task, using startdate and days.
+
+    }
 
 }

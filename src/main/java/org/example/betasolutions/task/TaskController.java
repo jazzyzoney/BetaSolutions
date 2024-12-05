@@ -17,7 +17,7 @@ public class TaskController {
     }
     @PostMapping("/project/task/edit")
     public String editTask(){
-        return "redirect:/project";
+        return "taskpage";
     }
     @PostMapping("project/task/delete")
     public String deleteTask(){

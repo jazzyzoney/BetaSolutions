@@ -1,45 +1,38 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{/style/style.css}" rel="stylesheet">
+    <title>Project Page</title>
 </head>
-<table>
-    <tr>
-        <th>Subproject Name</th>
-        <th>ID</th>
-        <th>Days</th>
-        <th>Deadline</th>
-        <th>Start Date</th>
-    </tr>
+<body>
 
-    <!-- Loop through subprojects -->
-    <tr th:each="subproject : ${subproject_overview}">
-        <td th:text="${subproject.name}">Subproject Name</td>
-        <td th:text="${subproject.subProjectID}">ID</td>
-        <td th:text="${subproject.days}">Days</td>
-        <td th:text="${subproject.deadline}">Deadline</td>
-        <td th:text="${subproject.startDate}">Start Date</td>
-    </tr>
-</table>
-<table>
-    <tr>
-        <th>task Name</th>
-        <th>ID</th>
-        <th>Days</th>
-        <th>Deadline</th>
-        <th>Start Date</th>
-    </tr>
+<h1>Project: <span th:text="${project.name}"></span> - Hours: <span th:text="${project.getHours()}"
+></span>- deadline: <span th:text="${project.getDeadline()}"></span>- StartDate: <span th:text="${project.getStartDate()}"></span>
+    - TotalPrice: <span th:text="${project.getTotalPrice()}"></span> - days: <span th:text="${project.getDays()}"></span></h1>
 
-    <!-- Loop through subprojects -->
-    <tr th:each="task : ${task_overview}">
-        <td th:text="${task.name}">Subproject Name</td>
-        <td th:text="${task.ID}">ID</td>
-        <td th:text="${task.days}">Days</td>
-        <td th:text="${task.deadline}">Deadline</td>
-        <td th:text="${task.startDate}">Start Date</td>
-    </tr>
-</table>
+
+<h2>Tasks for just the project:</h2>
+<ul>
+    <li th:each="task : ${tasksWithoutSubProject}">
+        Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span>
+    </li>
+</ul>
+
+<h2>Subprojects with tasks:</h2>
+<ul>
+    <li th:each="entry : ${subProjects}">
+        <h3>SubProject: <span th:text="${entry.key.name}"></span> - Hours: <span th:text="${entry.key.getHours()}"
+        ></span>- deadline: <span th:text="${entry.key.getDeadline()}"></span>- StartDate: <span th:text="${entry.key.getStartDate()}"></span>
+            - TotalPrice: <span th:text="${entry.key.getTotalPrice()}"></span> - days: <span th:text="${entry.key.getDays()}"></span>
+        </h3>
+
+        <ul>
+            <li th:if="${#lists.isEmpty(entry.value)}">No tasks for this subproject</li>
+            <li th:each="task : ${entry.value}">
+                Task: <span th:text="${task.getName()}"></span> - Hours: <span th:text="${task.getHours()}"></span>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+</body>
 </html>

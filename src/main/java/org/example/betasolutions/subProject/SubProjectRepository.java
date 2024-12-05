@@ -28,8 +28,19 @@ public class SubProjectRepository extends PSSTSuperclass {
         return 0;
     }
     //read all subprojects
-    public List<ModelInterface> readAllSubProjects(int projectID){
-        return super.readAllAssignmentsBelongingToProject("sub_project","sub_project","project", SubProject::new,projectID);
+    public List<SubProject> readAllSubProjects(int projectID){
+        List<SubProject> subProjects = new ArrayList<>();
+        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("sub_project","sub_project","sub_project",SubProject::new,projectID)){
+            if(assignmentObject instanceof SubProject){
+                SubProject subProject = (SubProject) assignmentObject;
+                subProjects.add(subProject);
+
+                int projectIDfromTable = super.getTableIntByInt("sub_project","project_id","sub_project_id",subProject.getID());
+                subProject.setProjectID(projectIDfromTable);
+                subProjects.add(subProject);
+            }
+        }
+        return subProjects;
     }
     //read a subproject
     public SubProject readSubProject(int subProjectID){

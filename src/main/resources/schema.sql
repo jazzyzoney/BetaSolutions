@@ -171,4 +171,22 @@ INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub
 VALUES
     (1, 1, 1, 1),
     (2, 2, 2, 2);
+-- Tasks connected to SubProject 1 (Project 1)
+INSERT INTO task (task_name, task_total_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
+VALUES
+    ('Task 3', 80, 6, 2000.0, '2024-12-10', '2024-11-20', 1, 1, 1),
+    ('Task 4', 60, 4, 1500.0, '2024-12-12', '2024-11-22', 1, 1, 1);
+
+-- Tasks connected to SubProject 2 (Project 1)
+INSERT INTO task (task_name, task_total_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
+VALUES
+    ('Task 5', 40, 3, 1000.0, '2024-12-14', '2024-11-25', 1, 2, 1);
+
+-- Tasks directly under Project 1 (no sub_project_id)
+INSERT INTO task (task_name, task_total_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
+VALUES
+    ('Task 6', 120, 8, 2500.0, '2024-12-20', '2024-11-30', 1, NULL, 1),
+    ('Task 7', 90, 7, 1800.0, '2024-12-22', '2024-12-01', 1, NULL, 1),
+    ('Task 8', 70, 5, 1600.0, '2024-12-25', '2024-12-03', 1, NULL, 1);
+
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -28,14 +29,24 @@ public class TaskRepository extends PSSTSuperclass {
         }
         return 0;
     }
-    public List<ModelInterface> readAllTasks(int ID){
-        return super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID);
+    public List<Task> readAllTasks(int ID){
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID)) {
+            if (assignmentObject instanceof Task) {
+                Task task = (Task) assignmentObject;
+                taskList.add(task);
+
+                int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID());
+                task.setSubProjectID(subProjectID);
+                taskList.add(task);
+            }
+        }
+        return taskList;
     }
     public List<ModelInterface> readAllTasksForSubProject(int ID){
-        return super.readAllAssignmentsBelongingToProject("task","task","subProject",Task::new,ID);
+        return super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID);
     }
-
-
 
     public Task readTask(int taskID){
         return (Task) super.readAssingmentByID("task","task",Task::new,taskID);

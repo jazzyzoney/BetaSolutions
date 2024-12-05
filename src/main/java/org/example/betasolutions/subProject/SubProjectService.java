@@ -16,7 +16,7 @@ public class SubProjectService {
     public void insertIntoSubProject(SubProject subProject){
         subProjectRepository.insertIntoSubProject(subProject);
     }
-    public List<ModelInterface> readAllSubProjects(int projectID){
+    public List<SubProject> readAllSubProjects(int projectID){
        return subProjectRepository.readAllSubProjects(projectID);
     }
     public void readSubProjectByID(int subProjectID){

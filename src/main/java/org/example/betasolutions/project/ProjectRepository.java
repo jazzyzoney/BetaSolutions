@@ -52,8 +52,7 @@ public class ProjectRepository extends PSSTSuperclass {
                 Project project = (Project) assignmentObject;
 
                 //Getting projectowner from projectTAble using projectID.
-                String projectOwner = super.getTableStringByInt("project", "project_Owner",
-                        "project_ID", project.getID());
+                String projectOwner = super.getTableStringByInt("project", "project_Owner", "project_ID", project.getID());
 
                 //adding projectowner to projectObject.
                 project.setProjectOwner(projectOwner);

@@ -38,17 +38,17 @@ public class SubProject implements ModelInterface {
     public SubProject() {
     }
 
-    public void setID(int projectID) {
-        this.projectID = projectID;
-    }
-    public int getID() {
-        return projectID;
-    }
-    public void setSubProjectID(int subProjectID) {
+    public void setID(int subProjectID) {
         this.subProjectID = subProjectID;
     }
-    public int getSubProjectID() {
+    public int getID() {
         return subProjectID;
+    }
+    public void setProjectID(int projectID) {
+        this.subProjectID = projectID;
+    }
+    public int getProjectID() {
+        return projectID;
     }
     public void setName(String projectName) {
         this.projectName = projectName;

@@ -13,7 +13,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<ModelInterface> getAllTasks(int projectID){
+    public List<Task> getAllTasks(int projectID){
         return taskRepository.readAllTasks(projectID);
     }
 

@@ -31,10 +31,16 @@
         <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
             <button type="submit">home</button>
         </form>
-
+projectID
         <form class="logo" method="post" th:action="@{/project/employee/add/project}" style="display:inline;">
+            <input type="hidden" th:name="projectID"  th:value="${project.getID}" />
             <button type="submit">Add employee to project</button>
+            <!--<hidden name="project_id" value="project_id"> </hidden> -->
         </form>
+
+        <a th:href="@{'/' +${project.getID} +'/employee/add/project'}">
+            <input type="button" value="Employee">
+        </a>
 
     <table>
         <tr>

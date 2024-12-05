@@ -1,6 +1,6 @@
 package org.example.betasolutions.employee; //henter hele employee package
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,12 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final HttpSession session;
 
     //constructor
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, HttpSession session) {
         this.employeeService = employeeService;
+        this.session = session;
     }
 
     //create
@@ -34,24 +36,30 @@ public class EmployeeController {
 
     //add employee to project
     @PostMapping("/project/employee/add/project") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToAssignment(Employee employee, int projectID) {
-            employeeService.addExistingEmployeeToProject(employee, projectID);
+    public String addExistingEmployeeToProject(@RequestParam("employeeID") int employeeID, @RequestParam int projectID) {
+            employeeService.addExistingEmployeeToProject(employeeID, projectID);
+            session.getAttribute("projectID");
             return "redirect: /project/employees";
-        }
+    }
 
     //add employee to task
-    @PostMapping("/project/employee/add/task") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToAssignment(Employee employee, int projectID, int taskID) {
+   /* @PostMapping("/project/employee/add/task") //add employee to project/subproject/task/subtask aka assignment
+    public String addExistingEmployeeToTask(@ModelAttribute Employee employee, @RequestParam int projectID, @RequestParam int taskID) {
         employeeService.addExistingEmployeeToTask(employee, taskID, projectID);
+        session.getAttribute("taskID");
+        session.getAttribute("projectID");
         return "redirect: /project/employees";
     }
 
     //add employee to subtask
     @PostMapping("/project/employee/add/subtask") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToAssignment(Employee employee, int projectID, int taskID, int subTaskID) {
+    public String addExistingEmployeeToSubTask(@ModelAttribute Employee employee, @RequestParam int projectID, @RequestParam int taskID, @RequestParam int subTaskID) {
         employeeService.addExistingEmployeeToSubTask(employee, taskID, subTaskID, projectID);
+        session.getAttribute("taskID");
+        session.getAttribute("projectID");
+        session.getAttribute("subTaskID");
         return "redirect: /project/employees";
-    }
+    }*/
 
         //update
         @PostMapping("/project/employee/edit")
@@ -62,7 +70,7 @@ public class EmployeeController {
 
         //delete
         @PostMapping("/project/employee/delete")
-        public String deleteEmployee (int employeeID){
+        public String deleteEmployee (@RequestParam int employeeID){
             employeeService.deleteEmployee(employeeID);
             return "redirect: /project/employees";
         }

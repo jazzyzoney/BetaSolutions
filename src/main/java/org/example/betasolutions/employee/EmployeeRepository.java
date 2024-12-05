@@ -63,10 +63,10 @@ public class EmployeeRepository {
     }
 
     //add existing employee to project_employee table
-    public void addExistingEmployeeToProject(Employee employee, int projectID) { //idName is the name of the column
+    public void addExistingEmployeeToProject(int employeeID, int projectID) { //idName is the name of the column
         String sql = "INSERT INTO project_employee_task (employee_id, project_id) VALUES (?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, employee.getEmployeeID());
+            preparedStatement.setInt(1, employeeID);
             preparedStatement.setInt(2, projectID);
             preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();

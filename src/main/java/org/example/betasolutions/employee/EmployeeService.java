@@ -25,19 +25,19 @@ public class EmployeeService {
     }
 
     //add employee to project
-    public void addExistingEmployeeToProject(Employee employee, int projectID){
-        employeeRepository.addExistingEmployeeToProject(employee, projectID);
+    public void addExistingEmployeeToProject(int employeeID, int projectID){
+        employeeRepository.addExistingEmployeeToProject(employeeID, projectID);
     }
 
     //add employee to task
-    public void addExistingEmployeeToTask(Employee employee, int taskID, int projectID){
-        employeeRepository.addExistingEmployeeToTask(employee, taskID, projectID);
-    }
+    //public void addExistingEmployeeToTask(int employeeID, int taskID, int projectID){
+      //  employeeRepository.addExistingEmployeeToTask(employeeID, taskID, projectID);
+    //}
 
     //add employee to subtask
-    public void addExistingEmployeeToSubTask(Employee employee, int taskID, int subTaskID, int projectID){
-        employeeRepository.addExistingEmployeeToSubTask(employee, taskID, subTaskID, projectID);
-    }
+   // public void addExistingEmployeeToSubTask(int employeeID, int taskID, int subTaskID, int projectID){
+     //   employeeRepository.addExistingEmployeeToSubTask(employeeID, taskID, subTaskID, projectID);
+    //}
 
     //update
     public void editEmployee(Employee employee){

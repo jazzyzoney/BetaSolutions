@@ -23,7 +23,7 @@ public class EmployeeController {
     @PostMapping("/project/employee/new")
     public String createNewEmployee(Employee employee) {
         employeeService.createNewEmployee(employee);
-        return "redirect: /project/employees";
+        return "redirect:/project/employees";
     }
 
     //read
@@ -36,10 +36,10 @@ public class EmployeeController {
 
     //add employee to project
     @PostMapping("/project/{id}/employee/add/project") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToProject(@PathVariable("id") @RequestParam("employeeID") int employeeID, @RequestParam int projectID) {
+    public String addExistingEmployeeToProject(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID) {
             employeeService.addExistingEmployeeToProject(employeeID, projectID);
             session.getAttribute("projectID");
-            return "redirect: /project/employees";
+            return "redirect:/project/employees";
     }
 
     //add employee to task
@@ -65,13 +65,13 @@ public class EmployeeController {
         @PostMapping("/project/employee/edit")
         public String editEmployee (Employee employee){ //@RequestParam int employeeID ??
             employeeService.editEmployee(employee);
-            return "redirect: /project/employees";
+            return "redirect:/project/employees";
         }
 
         //delete
         @PostMapping("/project/employee/delete")
         public String deleteEmployee (@RequestParam int employeeID){
             employeeService.deleteEmployee(employeeID);
-            return "redirect: /project/employees";
+            return "redirect:/project/employees";
         }
 }

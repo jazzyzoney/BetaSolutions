@@ -10,7 +10,7 @@
 
 <div class="left-side">
     <header>
-        <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
+        <h2><span style="font-size: 2em;" th:text = "${project.getName()}">  </span> Project owner</h2>
 <!--
         <ul  th:each = "employee : ${getEmployeeList}">
             <li th:unless="${employee == null}" th:text ="${employee.getName()}" >

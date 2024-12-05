@@ -20,9 +20,10 @@ public class ProjectController {
     @GetMapping("/home")
     public String getHome(Model model){
         //i have an idea with requestparam for active projects and inactive projects to show on the homepage but i am not sure how it work with the html stuff
-        model.addAttribute("project", new Project());
+        //model.addAttribute("project", new Project());
+
         model.addAttribute("profileID", session.getAttribute("profileID"));
-        model.addAttribute("project_overview", projectService.readAllProjects());
+        model.addAttribute("projectList", projectService.readAllProjects());
         return "homepage";
     }
     @PostMapping("/project/new")
@@ -32,21 +33,29 @@ public class ProjectController {
     }
 
     //does this need pathvariable?
-    @GetMapping("/project")
-    public String getProject(Model model){
-        int projectID = (int)session.getAttribute("projectID");
-        model.addAttribute("project", projectService.readProjectByID(projectID));
+    @GetMapping("/project/{projectID}")
+    public String getProject(Model model, @PathVariable int projectID){
+        //int projectID = (int)session.getAttribute("projectID");
+        System.out.println(projectID);
+
+        Project project = projectService.readAllProjects().get(projectID - 1);//readProjectByID(projectID);
+        System.out.println(project.getName());
+
+        model.addAttribute("project", project );
 
         //subproject, task, subtask;
         return "projectpage";
     }
 
+/*
     @PostMapping("/project")
-    public String getProject(@ModelAttribute Project project){
-        int projectID = project.getID();
+    public String getProject(@ModelAttribute int projectID){//Project project){
+        //int projectID = project.getID();
         session.setAttribute("projectID", projectID);
+        //System.out.println(project.getName());
+        System.out.println(session.getAttribute("projectID"));
         return "redirect:/project";
-    }
+    }*/
 
     @PostMapping("project/delete")
     public String deleteProject(){

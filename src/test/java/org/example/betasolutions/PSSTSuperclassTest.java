@@ -183,4 +183,14 @@ class PSSTSuperclassTest {
         assertTrue(deletedAllSubTasks);
     }
 
+    @Test
+    void readAssignmentByID(){
+        int expectedID = 1;
+        ModelInterface project =superRepository.readAssignmentByID("project", "project", Project::new, expectedID);
+        assertTrue(project instanceof Project);
+        int actualID = project.getID();
+
+        assertEquals (expectedID, actualID);
+
+    }
 }

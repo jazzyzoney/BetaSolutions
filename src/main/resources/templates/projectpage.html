@@ -6,6 +6,43 @@
     <title>Title</title>
     <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
+<body>
+
+<header>
+    <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
+
+    <!-- employees on this project -->
+    <!--<ul  th:each = "employee : ${getEmployeeList}">
+        <li th:unless="${employee == null}" th:text ="${employee.getName()}" >
+    </ul>-->
+
+    <!--"/project/{id}/employees"-->
+
+    <aside>
+        <h2>Start date</h2>
+        <h2> Deadline</h2>
+    </aside>
+
+</header>
+
+<main>
+    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+        <button type="submit">log out</button>
+    </form>
+
+    <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
+        <button type="submit">home</button>
+    </form>
+
+    <form class="logo" method="post" th:action="@{/project/{id}/employee/add/project}" style="display:inline;">
+        <button type="submit">Add employee to project</button>
+        <hidden name="project_id" value="project_id"> </hidden>
+    </form>
+
+   <!-- <a th:href="@{'/project' +${project.getID} +'/employee/add/project'}">
+        <input type="button" value="Employee">
+    </a>-->
+
 <table>
     <tr>
         <th>Subproject Name</th>
@@ -42,4 +79,6 @@
         <td th:text="${task.startDate}">Start Date</td>
     </tr>
 </table>
+</main>
+</body>
 </html>

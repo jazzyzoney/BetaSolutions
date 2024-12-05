@@ -35,8 +35,8 @@ public class EmployeeController {
     }
 
     //add employee to project
-    @PostMapping("/project/employee/add/project") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToProject(@RequestParam("employeeID") int employeeID, @RequestParam int projectID) {
+    @PostMapping("/project/{id}/employee/add/project") //add employee to project/subproject/task/subtask aka assignment
+    public String addExistingEmployeeToProject(@PathVariable("id") @RequestParam("employeeID") int employeeID, @RequestParam int projectID) {
             employeeService.addExistingEmployeeToProject(employeeID, projectID);
             session.getAttribute("projectID");
             return "redirect: /project/employees";

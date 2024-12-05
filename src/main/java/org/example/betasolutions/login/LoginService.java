@@ -9,5 +9,12 @@ public class LoginService {
     public LoginService(LoginRepository loginRepository){
         this.loginRepository = loginRepository;
     }
+    public boolean validateLogin(Login login) {
+        Login storedLogin = loginRepository.findByEmail(login.getEmail());
+        return storedLogin != null && storedLogin.getPassword().equals(login.getPassword());
+    }
 
+    public void createLogin(Login login) {
+        loginRepository.createLogin(login);
+    }
 }

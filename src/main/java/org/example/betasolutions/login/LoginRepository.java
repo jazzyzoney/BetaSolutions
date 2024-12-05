@@ -1,9 +1,9 @@
 package org.example.betasolutions.login;
-import org.example.betasolutions.login.Login;
 import org.example.betasolutions.ConnectionManager;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 @Repository
@@ -17,7 +17,7 @@ public class LoginRepository {
 
     // create login
     public void createLogin(Login login){
-        String SQLInsertLogin = "insert into login (email, password, employee_id) values(?,?,?)";
+        String SQLInsertLogin = "insert into login (email, password, employeeID) values(?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLInsertLogin);
             preparedStatement.setString(1, login.getEmail());
@@ -30,5 +30,22 @@ public class LoginRepository {
         }
 
     }
-
+    public Login findByEmail(String email) {
+        String SQLFindByEmail = "SELECT * FROM login WHERE email = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQLFindByEmail);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                Login login = new Login();
+                login.setEmail(resultSet.getString("email"));
+                login.setPassword(resultSet.getString("password"));
+                // Set other fields as needed
+                return login;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

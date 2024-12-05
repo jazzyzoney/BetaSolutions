@@ -3,200 +3,43 @@
       xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Project page</title>
+    <title>Title</title>
     <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
-<body>
+<table>
+    <tr>
+        <th>Subproject Name</th>
+        <th>ID</th>
+        <th>Days</th>
+        <th>Deadline</th>
+        <th>Start Date</th>
+    </tr>
 
-    <header>
-        <h2><span style="font-size: 2em;"> Project name </span> Project owner</h2>
+    <!-- Loop through subprojects -->
+    <tr th:each="subproject : ${subproject_overview}">
+        <td th:text="${subproject.name}">Subproject Name</td>
+        <td th:text="${subproject.subProjectID}">ID</td>
+        <td th:text="${subproject.days}">Days</td>
+        <td th:text="${subproject.deadline}">Deadline</td>
+        <td th:text="${subproject.startDate}">Start Date</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>task Name</th>
+        <th>ID</th>
+        <th>Days</th>
+        <th>Deadline</th>
+        <th>Start Date</th>
+    </tr>
 
-        <!-- employees on this project -->
-        <ul  th:each = "employee : ${getEmployeeList}">
-            <li th:unless="${employee == null}" th:text ="${employee.getName()}" >
-        </ul>
-
-        <aside>
-            <h2>Start date</h2>
-            <h2> Deadline</h2>
-        </aside>
-
-    </header>
-
-    <main>
-        <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
-            <button type="submit">log out</button>
-        </form>
-
-        <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
-            <button type="submit">home</button>
-        </form>
-projectID
-        <form class="logo" method="post" th:action="@{/project/employee/add/project}" style="display:inline;">
-            <input type="hidden" th:name="projectID"  th:value="${project.getID}" />
-            <button type="submit">Add employee to project</button>
-            <!--<hidden name="project_id" value="project_id"> </hidden> -->
-        </form>
-
-        <a th:href="@{'/' +${project.getID} +'/employee/add/project'}">
-            <input type="button" value="Employee">
-        </a>
-
-    <table>
-        <tr>
-            <th>Task level</th>
-            <th>estimated time in hours</th>
-            <th>total estimated time</th>
-            <th>days</th>
-            <th>start date</th>
-            <th>end date(??)</th>
-        </tr>
-        <tr > <!--th:each="subProject : ${project.getSubProjectList()}">-->
-            <td> subproject.name</td>
-            <td> hours </td>
-            <td> toatl hours</td>
-            <td> total days</td>
-            <td> start date</td>
-            <td> end date</td>
-
-            <tr> <!--th:each="task : ${subproject.getTaskList()}">-->
-                <td> task.name</td>
-                <td> hours </td>
-                <td> toatl hours</td>
-                <td> total days</td>
-                <td> start date</td>
-                <td> end date</td>
-
-                <tr > <!--th:each="subtask : ${task.getSubTaskList()}">-->
-                    <td> subtask.name</td>
-                    <td> hours </td>
-                    <td> toatl hours</td>
-                    <td> total days</td>
-                    <td> start date</td>
-                    <td> end date</td>
-                </tr> <!-- end of subtask -->
-            </tr><!-- end of task -->
-        </tr><!-- end of subproject -->
-
-        <!-- independent task -->
-        <tr > <!--th:each="task : ${subproject.getTaskList()}">-->
-            <td> task.name</td>
-            <td> hours </td>
-            <td> toatl hours</td>
-            <td> total days</td>
-            <td> start date</td>
-            <td> end date</td>
-
-            <tr > <!--th:each="subtask : ${task.getSubTaskList()}">-->
-                <td> subtask.name</td>
-                <td> hours </td>
-                <td> toatl hours</td>
-                <td> total days</td>
-                <td> start date</td>
-                <td> end date</td>
-            </tr> <!-- end of subtask -->
-        </tr><!-- end of independent task -->
-
-        <tr>
-
-            <td>
-                <form class="logo" method="post" th:action="@{/project/subproject/edit}" style="display:inline;">
-                    <button type="submit">Subproject</button>
-                </form>
-            </td>
-
-            <td></br></br>Subproject</td>
-            <td>80 hr</td>
-            <td>120 hr</td>
-            <td>20 days</td>
-            <td> 21/11/2024</td>
-            <td> 19/12/2024</td>
-        </tr>
-        <tr>
-            <td>
-                <form class="logo" method="post" th:action="@{/project/task/edit}" style="display:inline;">
-                    <button type="submit">Task</button>
-                </form>
-            </td>
-            <td>20 hr</td>
-            <td>40 hr</td>
-            <td>7 days </td>
-            <td>21/11/2024</td>
-            <td>02/12/2024</td>
-        </tr>
-        <tr>
-            <td>
-                <form class="logo" method="post" th:action="@{/project/subtask/edit}" style="display:inline;">
-                    <button type="submit">Subtask</button>
-                </form>
-            </td>
-            <td>10</td>
-            <td>-</td>
-            <td>2 days</td>
-            <td>21/11/2024</td>
-            <td>25/12/2024</td>
-        </tr>
-        <tr>
-            <td>subtask</td>
-            <td>10</td>
-            <td>-</td>
-            <td>2 days</td>
-            <td>25/11/2024</td>
-            <td>27/12/2024</td>
-        </tr>
-        <tr>
-            <td>.</td>
-        </tr>
-        <tr>
-            <td>task</td>
-            <td>30 hr</td>
-            <td>40 hr</td>
-            <td>7 days </td>
-            <td>21/11/2024</td>
-            <td>02/12/2024</td>
-        </tr>
-        <tr>
-            <td>subtask</td>
-            <td>10</td>
-            <td>-</td>
-            <td>2 days</td>
-            <td>21/11/2024</td>
-            <td>25/12/2024</td>
-        </tr>
-
-        <p>"løsgængere". altså, tasks som ikke er tilknyttet nogen subproject.
-            </br> subtasks kan kun eksistere, hvis der er tasks.
-            </br>
-        </p>
-    </table>
-    </main>
-
-    <aside>
-    <article>
-        <h2>New task/subtask/subproject (submitknap virker ikke endnu)</h2>
-        <form method=post action="@{/project/new}" >
-            <label class="large-text" for="password">Name: </label>
-            <input type="text" id="password" name="password"><br>
-
-            <label>opgave type</label>
-            <select name="project_id" id="wishlistSelect" required>
-                <option>subproject</option>
-                <option>task</option>
-                <option>subtask</option>
-            </select>
-
-            <p>indtast medarbejder</p>
-
-            </br>
-            <button type="submit">submit</button>
-        </form>
-    </article>
-    </aside>
-
-    <footer>
-        <h2>Total: (timer) </h2>
-        <h2>Total: (penge) </h2>
-    </footer>
-
-</body>
+    <!-- Loop through subprojects -->
+    <tr th:each="task : ${task_overview}">
+        <td th:text="${task.name}">Subproject Name</td>
+        <td th:text="${task.ID}">ID</td>
+        <td th:text="${task.days}">Days</td>
+        <td th:text="${task.deadline}">Deadline</td>
+        <td th:text="${task.startDate}">Start Date</td>
+    </tr>
+</table>
 </html>

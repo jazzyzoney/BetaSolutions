@@ -18,7 +18,7 @@ public class LoginController {
 
 @GetMapping("/login")
 public String getLogin(Model model) {
-    model.addAttribute("login", new Login());
+    model.addAttribute("profile", new Login());
     return "loginpage";
 }
 

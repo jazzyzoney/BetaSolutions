@@ -1,5 +1,7 @@
 package org.example.betasolutions.project;
 import jakarta.servlet.http.HttpSession;
+import org.example.betasolutions.subProject.SubProjectRepository;
+import org.example.betasolutions.task.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,12 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProjectController {
+    private final SubProjectRepository subProjectRepository;
     private ProjectService projectService;
     private final HttpSession session;
+    private TaskService taskService;
 
-    public ProjectController(ProjectService projectService, HttpSession session) {
+    public ProjectController(ProjectService projectService, HttpSession session, SubProjectRepository subProjectRepository,TaskService taskService) {
         this.projectService = projectService;
         this.session = session;
+        this.subProjectRepository = subProjectRepository;
+        this.taskService = taskService;
     }
 
     @GetMapping("/home")
@@ -31,11 +37,12 @@ public class ProjectController {
     }
 
     //does this need pathvariable?
-    @GetMapping("/project")
-    public String getProject(Model model, @ModelAttribute Project project){
-        int projectID = project.getID();
+    @GetMapping("/project/{id}")
+    public String getProject(@PathVariable("id") int projectID,Model model, @ModelAttribute Project project,int subProjectID){
         model.addAttribute("project", projectService.readProjectByID(projectID));
-        session.setAttribute("project_id", projectID);
+        model.addAttribute("subproject_overview", subProjectRepository.readAllSubProjects(projectID));
+        model.addAttribute("task", taskService.getAllTasks(projectID));
+        session.setAttribute("project_id", subProjectID);
         return "projectpage";
     }
 

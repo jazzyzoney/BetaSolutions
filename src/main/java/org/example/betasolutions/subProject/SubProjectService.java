@@ -1,6 +1,10 @@
 package org.example.betasolutions.subProject;
 
+import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.project.Project;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SubProjectService {
@@ -12,10 +16,10 @@ public class SubProjectService {
     public void insertIntoSubProject(SubProject subProject){
         subProjectRepository.insertIntoSubProject(subProject);
     }
-    public void readAllSubProjects(int projectID){
-        subProjectRepository.readAllSubProjects(projectID);
+    public List<ModelInterface> readAllSubProjects(int projectID){
+       return subProjectRepository.readAllSubProjects(projectID);
     }
     public void readSubProjectByID(int subProjectID){
-        subProjectRepository.readSubProjectByID(subProjectID);
+        subProjectRepository.readSubProject(subProjectID);
     }
 }

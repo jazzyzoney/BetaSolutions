@@ -13,11 +13,10 @@ public class SubProjectController {
         this.subProjectService = subProjectService;
     }
 
-    @GetMapping("/project/subproject")
-    public String getSubProjects(Model model){
+    @GetMapping("/project/{id}/subproject")
+    public String getSubProjects(Model model,int projectID){
         model.addAttribute("subproject", new SubProject());
-        model.addAttribute("subproject_overview", subProjectService.
-
+        model.addAttribute("subproject_overview",subProjectService.readAllSubProjects(projectID));
         return "projectpage";
     }
 

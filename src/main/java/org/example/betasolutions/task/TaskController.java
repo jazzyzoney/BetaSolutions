@@ -17,8 +17,9 @@ public class TaskController {
 
     @GetMapping("project/{projectID}/task/{taskID}")
     public String getTask(Model model, @PathVariable int projectID, @PathVariable int taskID){
-        Task task = taskService.getAllTasks()
-        model.addAttribute("task", task)
+        Task task = taskService.getTask(projectID, taskID);
+        model.addAttribute("task", task);
+        model.addAttribute("hours", task.getHours());
         return "taskPage";
     }
 

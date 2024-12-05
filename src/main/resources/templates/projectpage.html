@@ -26,6 +26,14 @@
             <button type="submit">home</button>
         </form>
 
+        <!-- move button + change taskID with thymeleaf. -->
+        <form method="get"
+              th:action="@{/project/{projectID}/task/{taskID} (projectID = ${project.getID()}, taskID = 1)}"
+              style="display:inline;">
+
+            <button type="submit">Task 1</button>
+        </form>
+
     <table>
         <tr>
             <th>Task level</th>

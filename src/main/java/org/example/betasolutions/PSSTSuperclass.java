@@ -73,7 +73,7 @@ public class PSSTSuperclass {
     
     public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix, FactoryInterface factory, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "SELECT * FROM " + tableName + " WHERE  projectID = ?" ;
+        String sql = "SELECT * FROM " + tableName + " WHERE  project_ID = ?" ;
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);

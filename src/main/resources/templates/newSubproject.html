@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New SubProject</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1 class="logo"><span class="local">Local</span><span class="wish">Wish</span><span class="local">.</span></h1>
+</header>
+<h1>Create New SubProject</h1>
+<form th:action="@{'/project/' + ${projectID} + '/subproject/newSubProject'}" method="post" th:object="${subproject}">
+
+    <label class="large-text">SubProject Name:
+        <input type="text" name="projectName" th:value="${subproject.name}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Hours:
+        <input type="number" name="projectTotalHours" th:value="${subproject.getHours()}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Days:
+        <input type="number" name="projectTotalDays" th:value="${subproject.getDays()}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Price:
+        <input type="number" step="0.01" name="projectTotalPrice" th:value="${subproject.getTotalPrice()}" required>
+    </label>
+    <br>
+    <label class="large-text">Deadline:
+        <input type="date" name="projectDeadline" th:value="${subproject.getDeadline()}" required>
+    </label>
+    <br>
+    <label class="large-text">Start Date:
+        <input type="date" name="projectStartDate" th:value="${subproject.getStartDate()}" required>
+    </label>
+    <br>
+    <button type="submit">Create SubProject</button>
+</form>
+
+</body>
+</html>

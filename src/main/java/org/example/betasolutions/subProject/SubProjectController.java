@@ -2,8 +2,10 @@ package org.example.betasolutions.subProject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Controller
 public class SubProjectController {
@@ -19,6 +21,21 @@ public class SubProjectController {
         model.addAttribute("subproject_overview",subProjectService.readAllSubProjects(projectID));
         return "projectpage";
     }
+    @GetMapping("/project/{id}/subproject/newSubProject")
+    public String createNewSubProject(@PathVariable int id,Model model){
+        model.addAttribute("projectID", id);
+        model.addAttribute("subproject",new SubProject());
+        return "newSubproject";
+    }
+    @PostMapping("/project/{id}/subproject/newSubProject")
+    public String postNewSubProject(@PathVariable int id, @ModelAttribute SubProject subProject){
+        subProject.setProjectID(id);
+        subProjectService.insertIntoSubProject(subProject);
+        //Date Deadline = Date.valueOf(LocalDate);
+       // Date startDate = Date.valueOf(LocalDate);
+
+        return "redirect:/project/" + id;
+    }
 
     @PostMapping("/project/subproject/edit")
     public String editSubProject() {
@@ -26,9 +43,11 @@ public class SubProjectController {
     }
 
     @PostMapping("/project/subproject/delete")
-    public String deleteSubProject(){
-        return "redirect:/project";
+    public String deleteSubProject(@RequestParam int subprojectID,  @RequestParam int id){
+        subProjectService.deleteSubProject(subprojectID);
+        return "redirect:/project/" + id;
     }
+
     @PostMapping("/project/subproject/new")
     public String createNewSubProject(){
         return "redirect:/project";

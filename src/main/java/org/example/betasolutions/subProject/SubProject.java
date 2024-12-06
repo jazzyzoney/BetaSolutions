@@ -86,4 +86,5 @@ public class SubProject implements ModelInterface {
     public Date getStartDate() {
         return projectStartDate;
     }
+
 }

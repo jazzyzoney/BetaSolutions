@@ -159,6 +159,7 @@ public class PSSTSuperclass {
         }
         return false;
     }
+
     //update method
     //this one is for updating a string value in a table with a specific ID.
     //so it would look like this: updateObjectString("task", "taskName", 1, "Task 2"); for example.

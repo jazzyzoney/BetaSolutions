@@ -16,31 +16,31 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-@GetMapping("/login")
-public String getLogin(Model model) {
-    model.addAttribute("profile", new Login());
-    return "loginpage";
-}
+    @GetMapping("/login")
+    public String getLogin(Model model) {
+        model.addAttribute("profile", new Login());
+        return "loginpage";
+    }
 
-@PostMapping("/login")
-public String postLogin(@ModelAttribute Login login) {
-    return "redirect:/home";
-}
+    @PostMapping("/login")
+    public String postLogin(@ModelAttribute Login login) {
+        return "redirect:/home";
+    }
 
-@GetMapping("/login/new")
-public String getNewProfilePage() {
-    return "newProfile";
-}
+    @GetMapping("/login/new")
+    public String getNewProfilePage() {
+        return "newProfile";
+    }
 
-@PostMapping("/login/new")
-public String postNewLogin() {
-    return "redirect:/login";
-}
+    @PostMapping("/login/new")
+    public String postNewLogin() {
+        return "redirect:/login";
+    }
 
-@PostMapping("/logout")
-public String logout() {
-    return "redirect:/login";
-}
+    @PostMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
 
 
 

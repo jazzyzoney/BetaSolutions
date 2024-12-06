@@ -1,5 +1,6 @@
 package org.example.betasolutions.subProject;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,11 @@ import java.time.LocalDate;
 @Controller
 public class SubProjectController {
     private SubProjectService subProjectService;
+    private final HttpSession session;
 
-    public SubProjectController(SubProjectService subProjectService){
+    public SubProjectController(SubProjectService subProjectService, HttpSession session) {
         this.subProjectService = subProjectService;
+        this.session = session;
     }
 
     @GetMapping("/project/{id}/subproject")
@@ -23,19 +26,19 @@ public class SubProjectController {
         return "projectpage";
     }
     @GetMapping("/project/{id}/subproject/newSubProject")
-    public String createNewSubProject(@PathVariable int id,Model model){
-        model.addAttribute("projectID", id);
-        model.addAttribute("subproject",new SubProject());
+    public String createNewSubProject(@PathVariable ("id") int projectID,Model model){
+        System.out.print(projectID);
+        model.addAttribute("projectID", projectID);
+        System.out .println("id: " + projectID);
+        SubProject subProject = new SubProject();
+        model.addAttribute("subproject",subProject);
         return "newSubproject";
     }
-    @PostMapping("/project/{id}/subproject/newSubProject")
-    public String postNewSubProject(@PathVariable int id, @ModelAttribute SubProject subProject){
-        System.out.println("id: " + subProject.getID() + "\nname: " + subProject.getID() + "\ndeadline: " + subProject.getDeadline());
-        subProject.setProjectID(id);
+    @PostMapping("/project/{id}/subproject/newSubProject/post")
+    public String postNewSubProject(@PathVariable("id") int projectID, @ModelAttribute SubProject subProject) {
+        subProject.setProjectID(projectID);
         subProjectService.insertIntoSubProject(subProject);
-
-
-        return "redirect:/project/" + id;
+        return "redirect:/project/" + projectID;
     }
 
     @PostMapping("/project/subproject/edit")

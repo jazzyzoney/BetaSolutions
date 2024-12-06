@@ -47,7 +47,8 @@ public class ProjectController {
     //does this need pathvariable?
     @GetMapping("/project/{id}")
     public String getProject(@PathVariable("id") int projectID,Model model) {
-        Project project = projectService.readAllProjects().get(projectID - 1); //readProjectByID(projectID);
+        Project project = projectService.readAllProjects().get(projectID - 1);
+        session.setAttribute("project_id", projectID);//readProjectByID(projectID);
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
         List<Task> tasks = taskService.getAllTasks(projectID);
 
@@ -76,7 +77,6 @@ public class ProjectController {
         model.addAttribute("project", project);
         model.addAttribute("subProjects", subProjectsAndTasks);
         model.addAttribute("tasksWithoutSubProject", tasksWithoutSubProject);
-        session.setAttribute("project_id", projectID);
         return "projectpage";
     }
 

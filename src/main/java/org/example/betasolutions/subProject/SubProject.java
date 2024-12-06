@@ -49,7 +49,7 @@ public class SubProject implements ModelInterface {
         return subProjectID;
     }
     public void setProjectID(int projectID) {
-        this.subProjectID = projectID;
+        this.projectID = projectID;
     }
     public int getProjectID() {
         return projectID;

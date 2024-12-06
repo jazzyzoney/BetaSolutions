@@ -6,6 +6,7 @@
 <body>
 
 <h1>Project: <span th:text="${project.name}"></span> - Hours: <span th:text="${project.getHours()}"
+
 ></span>- deadline: <span th:text="${project.getDeadline()}"></span>- StartDate: <span th:text="${project.getStartDate()}"></span>
     - TotalPrice: <span th:text="${project.getTotalPrice()}"></span> - days: <span th:text="${project.getDays()}"></span></h1>
 
@@ -19,10 +20,9 @@
 
 <h2>Subprojects with tasks:</h2>
 <!-- Button to create a new subproject -->
-<a th:href="@{'/project/' + ${project.getID()} + '/subproject/newSubProject'}"
-   style="margin-left: 10px; padding: 5px 10px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 3px;">
-    New Subproject
-</a>
+<form th:action="@{/project/{id}/subproject/newSubProject(id=${project.getID()})}" method="get">
+    <button type="submit">Create New SubProject</button>
+</form>
 
 <ul>
     <li th:each="entry : ${subProjects}">
@@ -30,7 +30,7 @@
             <button type="submit" class="delete-button">Delete SubProject</button>
         </form>
         <h3>SubProject: <span th:text="${entry.key.name}"></span> - Hours: <span th:text="${entry.key.getHours()}"
-        ></span>- deadline: <span th:text="${entry.key.getprojectDeadLineAsLocalDate()}"></span>- StartDate: <span th:text="${entry.key.getProjectStartDateAsLocalDate()}"></span>
+        ></span>- deadline: <span th:text="${entry.key.getDeadline()}"></span>- StartDate: <span th:text="${entry.key.getStartDate()}"></span>
             - TotalPrice: <span th:text="${entry.key.getTotalPrice()}"></span> - days: <span th:text="${entry.key.getDays()}"></span>
         </h3>
 

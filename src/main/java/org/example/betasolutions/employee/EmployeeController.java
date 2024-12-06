@@ -52,23 +52,23 @@ public class EmployeeController {
     }
 
     //add employee to task
-   /* @PostMapping("/project/employee/add/task") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToTask(@ModelAttribute Employee employee, @RequestParam int projectID, @RequestParam int taskID) {
-        employeeService.addExistingEmployeeToTask(employee, taskID, projectID);
+    @PostMapping("/project/{id}/employee/add/task") //add employee to project/subproject/task/subtask aka assignment
+    public String addExistingEmployeeToTask(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID, @RequestParam("taskID") int taskID) {
+        employeeService.addExistingEmployeeToTask(employeeID, taskID, projectID);
         session.getAttribute("taskID");
         session.getAttribute("projectID");
         return "redirect: /project/employees";
     }
 
     //add employee to subtask
-    @PostMapping("/project/employee/add/subtask") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToSubTask(@ModelAttribute Employee employee, @RequestParam int projectID, @RequestParam int taskID, @RequestParam int subTaskID) {
-        employeeService.addExistingEmployeeToSubTask(employee, taskID, subTaskID, projectID);
+    @PostMapping("/project/{id}/employee/add/subtask") //add employee to project/subproject/task/subtask aka assignment
+    public String addExistingEmployeeToSubTask(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID, @RequestParam("taskID") int taskID, @RequestParam("subTaskID") int subTaskID) {
+        employeeService.addExistingEmployeeToSubTask(employeeID, taskID, subTaskID, projectID);
         session.getAttribute("taskID");
         session.getAttribute("projectID");
         session.getAttribute("subTaskID");
         return "redirect: /project/employees";
-    }*/
+    }
 
         //update
         @PostMapping("/project/employee/edit")

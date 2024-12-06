@@ -63,7 +63,7 @@ public class EmployeeRepository {
     }
 
     //add existing employee to project_employee table
-    public void addExistingEmployeeToProject(int employeeID, int projectID) { //idName is the name of the column
+    public void addExistingEmployeeToProject(int employeeID, int projectID) {
         String sql = "INSERT INTO project_employee_task (employee_id, project_id) VALUES (?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
@@ -81,10 +81,10 @@ public class EmployeeRepository {
     }
 
     //add existing employee to project_employee_task table
-    public void addExistingEmployeeToTask(Employee employee, int taskID, int projectID) { //idName is the name of the column
+    public void addExistingEmployeeToTask(int employeeID, int taskID, int projectID) { //idName is the name of the column
         String sql = "INSERT INTO project_employee_task (employee_id, project_id, task_id) VALUES (?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, employee.getEmployeeID());
+            preparedStatement.setInt(1, employeeID);
             preparedStatement.setInt(2, projectID);
             preparedStatement.setInt(3, taskID);
             preparedStatement.executeUpdate();
@@ -100,10 +100,10 @@ public class EmployeeRepository {
     }
 
     //add existing employee to project_employee_task_subTask table
-    public void addExistingEmployeeToSubTask(Employee employee, int projectID, int taskID, int subTaskID) { //idName is the name of the column
+    public void addExistingEmployeeToSubTask(int employeeID, int projectID, int taskID, int subTaskID) { //idName is the name of the column
         String sql = "INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub_task_id) VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, employee.getEmployeeID());
+            preparedStatement.setInt(1, employeeID);
             preparedStatement.setInt(2, projectID);
             preparedStatement.setInt(3, taskID);
             preparedStatement.setInt(4, subTaskID);

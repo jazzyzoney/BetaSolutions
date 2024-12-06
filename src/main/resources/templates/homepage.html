@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
     <header>
         <h2>Logout</h2>
         <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
             <button type="submit">loginpage</button>
+        </form>
+        <form class="logo" method="get" th:action="@{/project/employees}" style="display:inline;">
+            <button type="submit">Employees</button>
         </form>
     </header>
     <p> homepage. Siden viser alle brugerens oprettede projekter og giver </br>
@@ -22,22 +25,34 @@
     </br>
     </br>
 
-    <form class="logo" method="get" th:action="@{/project}" style="display:inline;">
-        <button type="submit">project 1</button>
-    </form>
-    <p>project 2</p>
-    <p>project 3</p>
-    <p>new project</p>
-    <br><table>
+    <table>
         <tr>
-            <th>Our Projects Comrade:</th>
-        <tr th:each="project : ${project_overview}">
-            <td th:text="${project.getName()}"></td>
-            <td>
+            <th>Project Name</th>
+            <th> PO</th>
+            <th>Total Days</th>
+            <th>Total Hours </th>
+            <th> Deadline</th>
+            <th> Start date</th>
+            <th></th>
 
+                <!-- Added a new column for buttons -->
+        </tr>
+        <tr th:each="project : ${projectList}">
+            <td th:text="${project.getName()}"></td>
+            <td th:text="${project.getProjectOwner()}"></td>
+            <td th:text="${project.getDays()}"></td>
+            <td th:text="${project.getHours()}"></td>
+            <td th:text="${project.getDeadline()}"></td>
+            <td th:text="${project.getStartDate()}"></td>
+            <td>
+                <!--<form method="post" th:action="@{/project}" th:object="${project.getID()}" style="display:inline;">
+                    <button type="submit">View Details</button>
+                </form>-->
+                <form th:action="@{/project/{projectID} (projectID = ${project.getID()})}" style="display:inline;">
+                    <button type="submit">View Details</button>
+                </form>
             </td>
         </tr>
-
     </table>
 </body>
 </html>

@@ -20,6 +20,7 @@ public class TaskController {
 
         model.addAttribute("task", task);
         model.addAttribute("hours", task.getHours());
+        model.addAttribute("projectID", projectID);
         return "taskpage";
     }
 
@@ -27,15 +28,17 @@ public class TaskController {
     public String createNewTask(){
         return "redirect:/project";
     }
-    @PostMapping("/project/task/edit")
-    public String editTask(@ModelAttribute Task task){
+    @PostMapping("/project/{projectID}/task/{taskID}/edit")
+    public String editTask(@PathVariable int projectID, @PathVariable int taskID, @ModelAttribute int hours){
+
+        Task task =  taskService.getTask(projectID, taskID);
         //Task task = new Task()
         //Task newTask = task;
         System.out.println("task contr. start date: " + task.getStartDate());
         System.out.println("task contr. id: " + task.getID());
         System.out.println("task contr. hours: " + task.getHours());
 
-        taskService.editTime(task, task.getHours());
+        taskService.editTime(task, hours);
 
         return "redirect:/project";
     }

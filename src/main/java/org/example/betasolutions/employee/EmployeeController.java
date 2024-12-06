@@ -30,8 +30,17 @@ public class EmployeeController {
     @GetMapping("/project/employees")
     public String getAllEmployees(Model model) {
         List<Employee> employees = employeeService.getAllEmployees();
+        System.out.println(employees.size());
         model.addAttribute("allEmployees", employees);
         return "employeepage";
+    }
+
+    @GetMapping("/project/{id}/employees")
+    public String getAllEmployeesToAssign(@PathVariable int id, Model model) {
+        List<Employee> employees = employeeService.getAllEmployees();
+        System.out.println(employees.size());
+        model.addAttribute("allEmployees", employees);
+        return "assignEmployee";
     }
 
     //add employee to project

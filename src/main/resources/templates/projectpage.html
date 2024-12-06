@@ -34,8 +34,7 @@
         <button type="submit">home</button>
     </form>
 
-    <form class="logo" method="post" th:action="@{/project/{id}/employee/add/project (id=${projectID})}" style="display:inline;">
-        <input type="hidden" name="employeeID" th:value="${employeeID}" />
+    <form class="logo" method="get" th:action="@{/project/{id}/employees (id=${id})}" style="display:inline;">
         <button type="submit">Add employee to project</button>
         <hidden name="project_id" value="project_id"> </hidden>
     </form>

@@ -40,6 +40,7 @@ public class ProjectController {
     @GetMapping("/project/{id}")
     public String getProject(@PathVariable("id") int projectID,Model model){
         Project project = projectService.readAllProjects().get(projectID - 1); //readProjectByID(projectID);
+        session.setAttribute("project_id", projectID);
         model.addAttribute("subproject_overview", subProjectRepository.readAllSubProjects(projectID));
         model.addAttribute("task_overview", taskService.getAllTasks(projectID));
         //session.setAttribute("project_id", subProjectID);

@@ -28,16 +28,15 @@ it shows a list of all employees and also gives the user the option to create ne
     </thead>
     <tbody>
     <tr th:each="employee : ${allEmployees}">
-        <td th:text="${employee.employeeID}"></td>
-        <td th:text="${employee.name}"></td>
-        <td th:text="${employee.proficiency}"></td>
-        <td th:text="${employee.office}"></td>
+        <td th:text="${employee.getEmployeeID()}"></td>
+        <td th:text="${employee.getEmployeeName()}"></td>
+        <td th:text="${employee.getEmployeeProficiency()}"></td>
+        <td th:text="${employee.getEmployeeOffice()}"></td>
         <td>
-            <form method="post" th:action="@{/project/employee/add/project}">
+            <form method="post" th:action="@{/project/employee/add/project}" th:object="${employee}">
                 <!-- Include employeeID as a hidden field -->
-                <input type="hidden" name="employeeID" id="employeeID" th:value="${employee.employeeID}" />
+                <input type="hidden" name="employeeID" id="employeeID" th:value="${id}" />
                 <!-- Include projectID (replace with dynamic projectID if applicable) -->
-                <input type="hidden" name="projectID" id="projectID" value="1" />
                 <button type="submit">Add to Project</button>
             </form>
         </td>

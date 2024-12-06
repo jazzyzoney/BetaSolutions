@@ -29,11 +29,11 @@
     </label>
     <br>
     <label class="large-text">Deadline:
-        <input type="date" name="projectDeadline" th:value="${subproject.getDeadline()}" required>
+        <input type="date" name="projectDeadline" th:value="${subproject.getprojectDeadLineAsLocalDate()}" required>
     </label>
     <br>
     <label class="large-text">Start Date:
-        <input type="date" name="projectStartDate" th:value="${subproject.getStartDate()}" required>
+        <input type="date" name="projectStartDate" th:value="${subproject.getProjectStartDateAsLocalDate()}" required>
     </label>
     <br>
     <button type="submit">Create SubProject</button>

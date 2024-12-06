@@ -4,6 +4,7 @@ import org.example.betasolutions.ModelInterface;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 public class SubProject implements ModelInterface {
@@ -15,6 +16,8 @@ public class SubProject implements ModelInterface {
     private Date projectDeadline;
     private Date projectStartDate;
     private int projectID;
+    private LocalDate projectStartDateAsLocalDate;
+    private LocalDate projectDeadLineAsLocalDate;
 
     public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
         this.subProjectID = subProjectID;
@@ -24,6 +27,8 @@ public class SubProject implements ModelInterface {
         this.projectTotalPrice = projectTotalPrice;
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
+        projectStartDateAsLocalDate = projectStartDate.toLocalDate();
+        projectDeadLineAsLocalDate = projectDeadline.toLocalDate();
     }
     public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
         this.subProjectID = subProjectID;
@@ -34,6 +39,7 @@ public class SubProject implements ModelInterface {
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
         this.projectID = projectID;
+        projectStartDateAsLocalDate = projectStartDate.toLocalDate();
     }
     public SubProject() {
     }
@@ -80,11 +86,26 @@ public class SubProject implements ModelInterface {
     public Date getDeadline() {
         return projectDeadline;
     }
+
+    /*
+    public LocalDate getDeadlineAsLocalDate(){
+        return projectDeadline.toLocalDate();
+    }*/
     public void setStartDate(Date projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
     public Date getStartDate() {
         return projectStartDate;
+    }
+    /*
+    public LocalDate getStartDateAsLocalDate() {
+        return projectStartDate.toLocalDate();
+    }*/
+    public LocalDate getProjectStartDateAsLocalDate() {
+        return projectStartDateAsLocalDate;
+    }
+    public LocalDate getprojectDeadLineAsLocalDate() {
+        return projectDeadLineAsLocalDate;
     }
 
 }

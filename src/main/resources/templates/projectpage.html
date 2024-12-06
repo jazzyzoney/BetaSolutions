@@ -30,7 +30,7 @@
             <button type="submit" class="delete-button">Delete SubProject</button>
         </form>
         <h3>SubProject: <span th:text="${entry.key.name}"></span> - Hours: <span th:text="${entry.key.getHours()}"
-        ></span>- deadline: <span th:text="${entry.key.getDeadline()}"></span>- StartDate: <span th:text="${entry.key.getStartDate()}"></span>
+        ></span>- deadline: <span th:text="${entry.key.getprojectDeadLineAsLocalDate()}"></span>- StartDate: <span th:text="${entry.key.getProjectStartDateAsLocalDate()}"></span>
             - TotalPrice: <span th:text="${entry.key.getTotalPrice()}"></span> - days: <span th:text="${entry.key.getDays()}"></span>
         </h3>
 

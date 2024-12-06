@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Controller
@@ -29,10 +30,10 @@ public class SubProjectController {
     }
     @PostMapping("/project/{id}/subproject/newSubProject")
     public String postNewSubProject(@PathVariable int id, @ModelAttribute SubProject subProject){
+        System.out.println("id: " + subProject.getID() + "\nname: " + subProject.getID() + "\ndeadline: " + subProject.getDeadline());
         subProject.setProjectID(id);
         subProjectService.insertIntoSubProject(subProject);
-        //Date Deadline = Date.valueOf(LocalDate);
-       // Date startDate = Date.valueOf(LocalDate);
+
 
         return "redirect:/project/" + id;
     }
@@ -52,5 +53,6 @@ public class SubProjectController {
     public String createNewSubProject(){
         return "redirect:/project";
     }
+
 
 }

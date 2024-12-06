@@ -14,10 +14,11 @@
     <form
         th:method="post" th:action = "@{/project/task/edit}"  th:object="${task}"  style="display:inline;">
         <label for="hours"> Hours: </label>
-        <input type="hidden" id="hours" name="hours" th:value = "${task.hours}"/>
+        <input type="number" id="hours" name="hours" th:value = "${task.getHours()}"/>
         <br>
         <button type="submit">Submit</button>
     </form>
+
 
     <!--
     <form th:action="@{/attractions/save}" th:method="post" th:object="${touristAttraction}">

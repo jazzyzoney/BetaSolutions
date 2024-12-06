@@ -27,15 +27,21 @@ public class TaskService {
         return task;
     }
 
-    public void editTime(Task task, int hours) {
-        task.setTotalHours(hours); //set task hours = new hours;
+    public void updateHours(Task task, int hours) {
+        //task.setTotalHours(hours); //set task hours = new hours;
 
+        int taskID = task.getID();
         int days = timeCalculator.calculateDays(hours); //calculate days;
-        task.setTotalDays(days);  //set task days.
+        //task.setTotalDays(days);  //set task days.
 
         //System.out.println("taskservice. start date: " + task.getStartDate());
 
-        task.setDeadline(timeCalculator.calculateEndDate(task.getStartDate(), days)); //calculate new expected end date for task, using startdate and days.
+        Date deadline = timeCalculator.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
+
+
+        taskRepository.updateTaskHours(taskID, hours);
+        taskRepository.updateTaskDays(taskID, days);
+        taskRepository.updateTaskDeadline(taskID, deadline);
 
     }
 

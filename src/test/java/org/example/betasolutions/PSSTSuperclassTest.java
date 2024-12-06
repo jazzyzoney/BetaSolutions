@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-//@Rollback(true)//rolls back commits to database after each test.
 class PSSTSuperclassTest {
 
     //private Task task;
@@ -181,6 +180,19 @@ class PSSTSuperclassTest {
         //delete all subtasks.
         boolean deletedAllSubTasks = superRepository.deleteAllWhere("sub_Task", "task_ID = 1");
         assertTrue(deletedAllSubTasks);
+    }
+
+    @Test
+    void updateInt(){
+        boolean updatedHours = superRepository.updateInt("task", "task_Total_hours", 1, 4);
+        assertTrue(updatedHours);
+
+    }
+
+    @Test
+    void updateDate(){
+        boolean updateDeadline = superRepository.updateDate("task", "task_deadline", 1, Date.valueOf(LocalDate.now()));
+        assertTrue(updateDeadline);
     }
 
 }

@@ -33,10 +33,13 @@ public class SubProjectRepository extends PSSTSuperclass {
         for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("sub_project","sub_project","sub_project",SubProject::new,projectID)){
             if(assignmentObject instanceof SubProject){
                 SubProject subProject = (SubProject) assignmentObject;
+                super.toLocalDate(subProject.getDeadline());
+                super.toLocalDate(subProject.getStartDate());
                 subProjects.add(subProject);
 
                 int projectIDfromTable = super.getTableIntByInt("sub_project","project_id","sub_project_id",subProject.getID());
                 subProject.setProjectID(projectIDfromTable);
+
                 subProjects.add(subProject);
             }
         }
@@ -59,4 +62,5 @@ public class SubProjectRepository extends PSSTSuperclass {
         }
         return 0;
     }
+
 }

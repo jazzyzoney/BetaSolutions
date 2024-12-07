@@ -12,6 +12,11 @@ public class SubTaskController {
         this.subTaskService = subTaskService;
     }
 
+    @GetMapping("/project/{projectID}/task/{taskID}/subtasks")
+    public String SubTasksforTask(){
+        return "subtaskpage";
+    }
+
     @PostMapping("project/subtask/edit")
     public String editSubTask(){
         return "redirect:/project";

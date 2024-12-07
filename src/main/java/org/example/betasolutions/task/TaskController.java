@@ -48,7 +48,8 @@ public class TaskController {
         return "redirect:/project";
     }
     @PostMapping("project/task/delete")
-    public String deleteTask(){
-        return "redirect:/project";
+    public String deleteTask(@RequestParam int taskID, @RequestParam int projectID){
+        taskService.deleteTask(taskID);
+        return "redirect:/project/"+ projectID ;
     }
 }

@@ -66,6 +66,13 @@ public class TaskRepository extends PSSTSuperclass {
     public Task readTask(int taskID){
         return (Task) super.readAssingmentByID("task","task",Task::new,taskID);
     }
+    public int deleteTask(int taskID){
+        if (super.deleteObjectFromTable("task", "task", taskID)){
+            return 1;
+        }
+        return 0;
+
+    }
 
 
 }

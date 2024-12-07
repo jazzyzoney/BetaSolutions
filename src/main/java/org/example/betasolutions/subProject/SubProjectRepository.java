@@ -54,6 +54,7 @@ public class SubProjectRepository extends PSSTSuperclass {
          super.deleteObjectFromTable("sub_project","sub_project",subProjectID);
          super.deleteAllWhere("task","sub_project_id =" + subProjectID);
             conn.commit();
+            conn.setAutoCommit(true);
             return 1;
         }catch (Exception e){
             e.printStackTrace();

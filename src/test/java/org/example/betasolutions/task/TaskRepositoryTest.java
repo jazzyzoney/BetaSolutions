@@ -25,4 +25,7 @@ class TaskRepositoryTest {
     @Test
     void readTask() {
     }
+    @Test
+    void deleteTask() {
+    }
 }

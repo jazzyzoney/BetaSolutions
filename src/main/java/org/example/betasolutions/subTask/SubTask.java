@@ -27,6 +27,15 @@ public class SubTask implements ModelInterface {
         this.subTaskStartDate = subTaskStartDate;
         this.taskID = taskID;
     }
+    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate) {
+        this.subTaskID = subTaskID;
+        this.subTaskName = subTaskName;
+        this.subTaskTotalHours = subTaskTotalHours;
+        this.subTaskTotalDays = subTaskTotalDays;
+        this.subTaskTotalPrice = subTaskTotalPrice;
+        this.subTaskDeadline = subTaskDeadline;
+        this.subTaskStartDate = subTaskStartDate;
+    }
 
     public int getID() {
         return subTaskID;

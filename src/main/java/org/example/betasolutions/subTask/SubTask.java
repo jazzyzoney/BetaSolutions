@@ -88,8 +88,8 @@ public class SubTask implements ModelInterface {
     public Date getStartDate() {
         return subTaskStartDate;
     }
-
     public void setSubTaskStartDate(Date subTaskStartDate) {
+        this.subTaskStartDate = subTaskStartDate;
     }
     public int getTaskID() {
         return taskID;

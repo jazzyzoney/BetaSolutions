@@ -28,7 +28,7 @@ public class SubTaskRepository extends PSSTSuperclass {
     }
     public List<SubTask> readAllSubTasks(int ProjectID){
         ArrayList<SubTask> subTaskList = new ArrayList<>();
-        String SQL ="SELECT * FROM sub_task JOIN task ON sub_task.task_id where task.project_id = ?";
+        String SQL ="SELECT *  FROM sub_task JOIN task ON sub_task.task_id = task.task_id WHERE task.project_id = ?";
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
@@ -36,6 +36,7 @@ public class SubTaskRepository extends PSSTSuperclass {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 SubTask subTask = new SubTask();
+                subTask.setSubTaskID(resultSet.getInt("sub_task_id"));
                 subTask.setSubTaskName(resultSet.getString("sub_task_name"));
                 subTask.setSubTaskTotalHours(resultSet.getInt("sub_task_total_hours"));
                 subTask.setSubTaskTotalDays(resultSet.getInt("sub_task_total_days"));
@@ -49,7 +50,5 @@ public class SubTaskRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
         return subTaskList;
-        }
-
-
+    }
 }

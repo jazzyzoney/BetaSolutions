@@ -67,7 +67,6 @@ public class ProjectController {
 
         for (Task task : tasks) {
             if (task.getSubProjectID() != 0) {
-                System.out.println("Task ID: " + task.getName() + " SubProject ID: " + task.getSubProjectID());
                 for (SubProject subProject : subProjects) {
                     if (task.getSubProjectID() == subProject.getID()) {
                         subProjectsAndTasks.get(subProject).add(task);

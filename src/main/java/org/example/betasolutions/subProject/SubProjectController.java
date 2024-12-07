@@ -25,8 +25,8 @@ public class SubProjectController {
         model.addAttribute("subproject_overview",subProjectService.readAllSubProjects(projectID));
         return "projectpage";
     }
-    @GetMapping("/project/{id}/subproject/newSubProject")
-    public String createNewSubProject(@PathVariable ("id") int projectID,Model model){
+    @GetMapping("/project/{projectID}/subproject/newSubProject")
+    public String createNewSubProject(@PathVariable ("projectID") int projectID,Model model){
         System.out.print(projectID);
         model.addAttribute("projectID", projectID);
         System.out .println("id: " + projectID);
@@ -34,8 +34,8 @@ public class SubProjectController {
         model.addAttribute("subproject",subProject);
         return "newSubproject";
     }
-    @PostMapping("/project/{id}/subproject/newSubProject/post")
-    public String postNewSubProject(@PathVariable("id") int projectID, @ModelAttribute SubProject subProject) {
+    @PostMapping("/project/{projectID}/subproject/newSubProject/post")
+    public String postNewSubProject(@PathVariable("projectID") int projectID, @ModelAttribute SubProject subProject) {
         subProject.setProjectID(projectID);
         subProjectService.insertIntoSubProject(subProject);
         return "redirect:/project/" + projectID;
@@ -47,9 +47,9 @@ public class SubProjectController {
     }
 
     @PostMapping("/project/subproject/delete")
-    public String deleteSubProject(@RequestParam int subprojectID,  @RequestParam int id){
+    public String deleteSubProject(@RequestParam int subprojectID,  @RequestParam int projectID){
         subProjectService.deleteSubProject(subprojectID);
-        return "redirect:/project/" + id;
+        return "redirect:/project/" + projectID;
     }
 
     @PostMapping("/project/subproject/new")

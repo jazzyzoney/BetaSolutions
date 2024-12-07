@@ -180,7 +180,7 @@ VALUES
 -- Tasks connected to SubProject 2 (Project 1)
 INSERT INTO task (task_name, task_total_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
 VALUES
-    ('Task 5', 40, 3, 1000.0, '2024-12-14', '2024-11-25', 1, 2, 1);
+    ('Task 5', 40, 3, 1000.0, '2024-12-14', '2024-11-25', 2, 2, 1);
 
 -- Tasks directly under Project 1 (no sub_project_id)
 INSERT INTO task (task_name, task_total_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)

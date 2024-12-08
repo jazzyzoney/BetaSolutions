@@ -11,7 +11,8 @@ public class SubTaskService {
     public SubTaskService(SubTaskRepository subTaskRepository){
         this.subTaskRepository = subTaskRepository;
     }
-    public List<SubTask> readAllSubTasks(int ProjectID){
-       return subTaskRepository.readAllSubTasks(ProjectID);
+    public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
+        return subTaskRepository.readAllSubTasks(ProjectID, TaskID);
+
     }
 }

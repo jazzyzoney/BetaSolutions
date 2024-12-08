@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Subtask</title>
+    <title>Project Page</title>
 </head>
 <body>
 
+<table>
+    <thead>
+    <tr>
+        <th>Subtask</th>
+        <th>Hours</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subtask : ${subtasks}">
+        <td>subtask: <span th:text="${subtask.name}"></span></td>
+        <td>Hours: <span th:text="${subtask.hours}"></span></td>
+        <!-- Delete button for each task -->
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

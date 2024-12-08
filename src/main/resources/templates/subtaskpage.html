@@ -5,6 +5,8 @@
 </head>
 <body>
 
+<h2>Subtasks:</h2>
+<!-- Display the list of subtasks -->
 <table>
     <thead>
     <tr>
@@ -14,11 +16,16 @@
     </thead>
     <tbody>
     <tr th:each="subtask : ${subtasks}">
-        <td>subtask: <span th:text="${subtask.name}"></span></td>
-        <td>Hours: <span th:text="${subtask.hours}"></span></td>
-        <!-- Delete button for each task -->
+        <td><span th:text="${subtask.name}"></span></td>
+        <td><span th:text="${subtask.hours}"></span></td>
     </tr>
     </tbody>
 </table>
+
+<!-- Button to create a new subtask -->
+<form th:action="@{/project/{projectID}/task/{taskID}/subtasks/new(projectID=${projectID}, taskID=${taskID})}" method="get">
+    <button type="submit">Create New Subtask</button>
+</form>
+
 </body>
 </html>

@@ -55,15 +55,24 @@ public class ProjectController {
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
         List<Task> tasks = taskService.getAllTasks(projectID);
 
+
+        Map<Task,Integer> subTaskCount = new HashMap<>();
         Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
         List<Task> tasksWithoutSubProject = new ArrayList<>();
 
-
+        //for each subproject we are adding a list of tasks to the map subProjectsAndTasks with the subproject as key and the list of tasks as value
         for (SubProject subProject : subProjects) {
             subProjectsAndTasks.put(subProject, new ArrayList<>());
         }
-
+        //here we are counting the amount of subtasks for each task and adding it to the map SubTaskCount with the task as key and the amount of subtasks as value
         for (Task task : tasks) {
+
+            //count them subtasks
+            int subTaskCounter = subTaskService.readAllSubTasks(projectID, task.getID()).size();
+
+            subTaskCount.put(task, subTaskCounter);
+
+
             if (task.getSubProjectID() != 0) {
                 for (SubProject subProject : subProjects) {
                     if (task.getSubProjectID() == subProject.getID()) {
@@ -76,10 +85,10 @@ public class ProjectController {
             }
         }
 
-
         model.addAttribute("project", project);
         model.addAttribute("subProjects", subProjectsAndTasks);
         model.addAttribute("tasksWithoutSubProject", tasksWithoutSubProject);
+        model.addAttribute("subTaskCount", subTaskCount);
         return "projectpage";
     }
 

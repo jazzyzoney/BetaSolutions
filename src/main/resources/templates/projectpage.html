@@ -19,6 +19,14 @@
     <li th:each="task : ${tasksWithoutSubProject}">
         Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span>
 
+        <!-- Display subtask count -->
+        <span th:if="${subTaskCount[task] > 0}">
+            - Subtasks: <span th:text="${subTaskCount[task]}"></span>
+        </span>
+        <span th:if="${subTaskCount[task] == 0}">
+            - No subtasks
+        </span>
+
         <!-- Button to navigate to subtasks page -->
         <form th:action="@{/project/{projectID}/task/{taskID}/subtasks(projectID=${project.getID()}, taskID=${task.getID()})}" method="get">
             <button type="submit">View Subtasks</button>
@@ -57,7 +65,15 @@
         <ul>
             <li th:if="${#lists.isEmpty(entry.value)}">No tasks for this subproject</li>
             <li th:each="task : ${entry.value}">
-                Task: <span th:text="${task.getName()}"></span> - Hours: <span th:text="${task.getHours()}"></span>
+                Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span>
+
+                <!-- Display subtask count for tasks within subprojects -->
+                <span th:if="${subTaskCount[task] > 0}">
+                    - Subtasks: <span th:text="${subTaskCount[task]}"></span>
+                </span>
+                <span th:if="${subTaskCount[task] == 0}">
+                    - No subtasks
+                </span>
 
                 <!-- Button to navigate to subtasks page -->
                 <form th:action="@{/project/{projectID}/task/{taskID}/subtasks(projectID=${project.getID()}, taskID=${task.getID()})}" method="get">

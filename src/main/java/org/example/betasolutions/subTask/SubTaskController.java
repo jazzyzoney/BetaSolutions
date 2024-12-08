@@ -34,8 +34,7 @@ public class SubTaskController {
     public String createNewSubTask(Model model, @PathVariable ("projectID") int projectID, @PathVariable ("taskID") int taskID){
         model.addAttribute("projectID", projectID);
         model.addAttribute("taskID", taskID);
-        SubTask subTask = new SubTask();
-        model.addAttribute("subtask", subTask);
+        model.addAttribute("subtask", new SubTask());
         return "newSubtaskPage";
     }
 

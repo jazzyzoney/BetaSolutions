@@ -1,7 +1,6 @@
 package org.example.betasolutions.subTask;
 
 import org.example.betasolutions.ConnectionManager;
-import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
 import org.springframework.stereotype.Repository;
 
@@ -37,13 +36,13 @@ public class SubTaskRepository extends PSSTSuperclass {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 SubTask subTask = new SubTask();
-                subTask.setSubTaskID(resultSet.getInt("sub_task_id"));
-                subTask.setSubTaskName(resultSet.getString("sub_task_name"));
-                subTask.setSubTaskTotalHours(resultSet.getInt("sub_task_total_hours"));
-                subTask.setSubTaskTotalDays(resultSet.getInt("sub_task_total_days"));
-                subTask.setSubTaskTotalPrice(resultSet.getDouble("sub_task_total_price"));
-                subTask.setSubTaskDeadline(resultSet.getDate("sub_task_deadline"));
-                subTask.setSubTaskStartDate(resultSet.getDate("sub_task_start_date"));
+                subTask.setId(resultSet.getInt("sub_task_id"));
+                subTask.setName(resultSet.getString("sub_task_name"));
+                subTask.setHours(resultSet.getInt("sub_task_total_hours"));
+                subTask.setDays(resultSet.getInt("sub_task_total_days"));
+                subTask.setTotalPrice(resultSet.getDouble("sub_task_total_price"));
+                subTask.setDeadline(resultSet.getDate("sub_task_deadline"));
+                subTask.setStartDate(resultSet.getDate("sub_task_start_date"));
                 subTask.setTaskID(resultSet.getInt("task_id"));
                 subTaskList.add(subTask);
             }
@@ -51,5 +50,16 @@ public class SubTaskRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
         return subTaskList;
+    }
+    public void deleteSubTask(int subTaskID) {
+        try {
+        conn.setAutoCommit(false);
+        super.deleteAllWhere("sub_task", "sub_task_id = " + subTaskID);
+        super.deleteAllWhere("project_employee_task_subTask", "sub_task_id = " + subTaskID);
+        conn.commit();
+        conn.setAutoCommit(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

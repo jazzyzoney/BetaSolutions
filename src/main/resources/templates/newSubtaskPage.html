@@ -16,27 +16,27 @@
     </label>
     <br>
     <label class="large-text">Total Hours:
-        <input type="number" id="subTaskTotalHours" name="hours" th:field="${subtask.hours}" required>
+        <input type="number" id="subTaskTotalHours" name="subTaskTotalHours" th:field="${subtask.hours}" required>
     </label>
     <br>
     <label class="large-text">Total Days:
-        <input type="number" id="subTaskTotalDays" name="days" th:field="${subtask.days}" required>
+        <input type="number" id="subTaskTotalDays" name="subTaskTotalDays" th:field="${subtask.days}" required>
     </label>
     <br>
     <label class="large-text">Total Price:
-        <input type="number" step="0.01" id="subTaskTotalPrice" name="totalPrice" th:field="${subtask.totalPrice}" required>
+        <input type="number" step="0.01" id="subTaskTotalPrice" name="subTaskTotalPrice" th:field="${subtask.totalPrice}" required>
     </label>
     <br>
     <label class="large-text">Deadline:
-        <input type="date" id="subTaskDeadline" name="deadline" th:field="${subtask.deadline}" required>
+        <input type="date" id="subTaskDeadline" name="subTaskDeadline" th:value="${subtask.deadline}" required>
     </label>
     <br>
     <label class="large-text">Start Date:
-        <input type="date" id="subTaskStartDate" name="startDate" th:field="${subtask.startDate}" required>
+        <input type="date" id="subTaskStartDate" name="subTaskStartDate" th:value="${subtask.startDate}" required>
     </label>
     <br>
     <button type="submit">Create SubTask</button>
 </form>
-
+<input type="hidden" name="taskId" th:value="${subtask.taskID}">
 </body>
 </html>

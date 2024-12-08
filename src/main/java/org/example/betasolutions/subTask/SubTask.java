@@ -5,91 +5,91 @@ import org.example.betasolutions.ModelInterface;
 import java.sql.Date;
 
 public class SubTask implements ModelInterface {
-    private int subTaskID;
-    private String subTaskName;
-    private int subTaskTotalHours;
-    private int subTaskTotalDays;
-    private double subTaskTotalPrice;
-    private Date subTaskDeadline;
-    private Date subTaskStartDate;
+    private int id;
+    private String name;
+    private int hours;
+    private int days;
+    private double totalPrice;
+    private Date Deadline;
+    private Date startDate;
     private int taskID;
 
     public SubTask() {
     }
 
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate, int taskID) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
+    public SubTask(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate, int taskID) {
+        this.id = id;
+        this.name = name;
+        this.hours = hours;
+        this.days = days;
+        this.totalPrice = totalPrice;
+        this.Deadline = Deadline;
+        this.startDate = startDate;
         this.taskID = taskID;
     }
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
+    public SubTask(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
+        this.id = id;
+        this.name = name;
+        this.hours = hours;
+        this.days = days;
+        this.totalPrice = totalPrice;
+        this.Deadline = Deadline;
+        this.startDate = startDate;
     }
 
     public int getID() {
-        return subTaskID;
+        return id;
     }
 
-    public void setSubTaskID(int subTaskID) {
-        this.subTaskID = subTaskID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
-        return subTaskName;
+        return name;
     }
 
-    public void setSubTaskName(String subTaskName) {
-        this.subTaskName = subTaskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHours() {
-        return subTaskTotalHours;
+        return hours;
     }
 
-    public void setSubTaskTotalHours(int subTaskTotalHours) {
-        this.subTaskTotalHours = subTaskTotalHours;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
     public int getDays() {
-        return subTaskTotalDays;
+        return days;
     }
 
-    public void setSubTaskTotalDays(int subTaskTotalDays) {
-        this.subTaskTotalDays = subTaskTotalDays;
+    public void setDays(int days) {
+        this.days = days;
     }
 
     public double getTotalPrice() {
-        return subTaskTotalPrice;
+        return totalPrice;
     }
 
-    public void setSubTaskTotalPrice(double subTaskTotalPrice) {
-        this.subTaskTotalPrice = subTaskTotalPrice;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Date getDeadline() {
-        return subTaskDeadline;
+        return Deadline;
     }
 
-    public void setSubTaskDeadline(Date subTaskDeadline) {
-        this.subTaskDeadline = subTaskDeadline;
+    public void setDeadline(Date deadline) {
+        this.Deadline = deadline;
     }
 
     public Date getStartDate() {
-        return subTaskStartDate;
+        return startDate;
     }
-    public void setSubTaskStartDate(Date subTaskStartDate) {
-        this.subTaskStartDate = subTaskStartDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
     public int getTaskID() {
         return taskID;

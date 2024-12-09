@@ -1,7 +1,5 @@
 package org.example.betasolutions.subProject;
 
-import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.project.Project;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +12,7 @@ public class SubProjectService {
         this.subProjectRepository = subProjectRepository;
     }
     public void insertIntoSubProject(SubProject subProject){
-        subProjectRepository.insertIntoSubProject(subProject);
+        subProjectRepository.insertSubProject(subProject);
     }
     public List<SubProject> readAllSubProjects(int projectID){
        return subProjectRepository.readAllSubProjects(projectID);

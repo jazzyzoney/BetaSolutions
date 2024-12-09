@@ -281,7 +281,7 @@ public class PSSTSuperclass {
     //put og patch
     //this one is for updating an int value in a table with a specific ID.
     public boolean updateObjectInt(String tableName, String attributeName, int functionID, int newValue) {
-        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, newValue);
@@ -297,18 +297,18 @@ public class PSSTSuperclass {
 
     //read for a specific object with a specific ID.
     public ModelInterface readAssingmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
-        String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "ID = ?";
+        String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getDouble(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
+                String name = resultSet.getString(tablePrefix + "_name");
+                int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
+                int days = resultSet.getInt(tablePrefix + "_Total_Days");
+                double totalPrice = resultSet.getDouble(tablePrefix + "_Total_Price");
+                Date endDate = resultSet.getDate(tablePrefix + "_Dead_Line");
+                Date startDate = resultSet.getDate(tablePrefix + "_Start_Date");
                 return factory.build(id, name, hours, days, totalPrice, endDate, startDate);
             }
         } catch (Exception e) {

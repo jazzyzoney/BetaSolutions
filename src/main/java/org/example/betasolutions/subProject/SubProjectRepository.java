@@ -15,17 +15,17 @@ public class SubProjectRepository extends PSSTSuperclass {
         super(connectionManager);
     }
     //create a subproject
-    public int insertIntoSubProject(SubProject subProject){
+    public boolean insertSubProject(SubProject subProject){
         String sql =( "insert into sub_project (sub_project_name,sub_project_total_hours,sub_project_total_days,sub_project_total_price,sub_project_start_date,sub_project_deadline,project_id) values(?,?,?,?,?,?,?)");
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(subProject,sql);
         try{
-            preparedStatement.setInt(7,subProject.getProjectID());
+            preparedStatement.setInt(7,subProject.getProjectID()); //set foreign key 'project_ID' for subproject.
             preparedStatement.executeUpdate();
-            return 1;
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
     //read all subprojects
     public List<SubProject> readAllSubProjects(int projectID){

@@ -4,6 +4,7 @@ import org.example.betasolutions.ModelInterface;
 
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 public class SubProject implements ModelInterface {
@@ -16,6 +17,7 @@ public class SubProject implements ModelInterface {
     private Date projectStartDate;
     private int projectID;
 
+
     public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
         this.subProjectID = subProjectID;
         this.projectName = projectName;
@@ -24,6 +26,7 @@ public class SubProject implements ModelInterface {
         this.projectTotalPrice = projectTotalPrice;
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
+
     }
     public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
         this.subProjectID = subProjectID;
@@ -35,20 +38,32 @@ public class SubProject implements ModelInterface {
         this.projectStartDate = projectStartDate;
         this.projectID = projectID;
     }
+
+    //constructor with no subprojectID.
+    public SubProject(String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
+        this.projectName = projectName;
+        this.projectTotalHours = projectTotalHours;
+        this.projectTotalDays = projectTotalDays;
+        this.projectTotalPrice = projectTotalPrice;
+        this.projectDeadline = projectDeadline;
+        this.projectStartDate = projectStartDate;
+        this.projectID = projectID;
+    }
+
     public SubProject() {
     }
 
-    public void setID(int projectID) {
-        this.projectID = projectID;
-    }
-    public int getID() {
-        return projectID;
-    }
-    public void setSubProjectID(int subProjectID) {
+    public void setID(int subProjectID) {
         this.subProjectID = subProjectID;
     }
-    public int getSubProjectID() {
+    public int getID() {
         return subProjectID;
+    }
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
+    }
+    public int getProjectID() {
+        return projectID;
     }
     public void setName(String projectName) {
         this.projectName = projectName;
@@ -80,10 +95,18 @@ public class SubProject implements ModelInterface {
     public Date getDeadline() {
         return projectDeadline;
     }
+
+    /*
+    public LocalDate getDeadlineAsLocalDate(){
+        return projectDeadline.toLocalDate();
+    }*/
     public void setStartDate(Date projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
     public Date getStartDate() {
         return projectStartDate;
     }
+
+
+
 }

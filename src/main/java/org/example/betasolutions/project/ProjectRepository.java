@@ -19,7 +19,6 @@ public class ProjectRepository extends PSSTSuperclass {
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
-
     //Create method
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {
@@ -52,8 +51,7 @@ public class ProjectRepository extends PSSTSuperclass {
                 Project project = (Project) assignmentObject;
 
                 //Getting projectowner from projectTAble using projectID.
-                String projectOwner = super.getTableStringByInt("project", "project_Owner",
-                        "project_ID", project.getID());
+                String projectOwner = super.getTableStringByInt("project", "project_Owner", "project_ID", project.getID());
 
                 //adding projectowner to projectObject.
                 project.setProjectOwner(projectOwner);
@@ -66,7 +64,7 @@ public class ProjectRepository extends PSSTSuperclass {
 
     //Read method by ID for project. not sure if this actually works but i will test it later.
     public Project readProjectByID(int projectID) {
-        Project Project = (Project) super.readAssingmentByID("project", "project", Project::new, projectID);
+        Project Project = (Project) super.readAssignmentByID("project", "project", Project::new, projectID);
         if (Project != null) {
             String projectOwner = super.getTableStringByInt("project", "project_Owner", "project_ID", Project.getID());
             Project.setProjectOwner(projectOwner);

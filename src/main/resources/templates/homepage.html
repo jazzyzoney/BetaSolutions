@@ -36,7 +36,7 @@
 
                 <!-- Added a new column for buttons -->
         </tr>
-        <tr th:each="project : ${project_overview}">
+        <tr th:each="project : ${projectList}">
             <td th:text="${project.getName()}"></td>
             <td th:text="${project.getProjectOwner()}"></td>
             <td th:text="${project.getDays()}"></td>
@@ -45,6 +45,7 @@
             <td th:text="${project.getStartDate()}"></td>
             <td>
                 <form method="get" th:action="@{/project/{id}(id=${project.getID})}" style="display:inline;">
+                    
                     <button type="submit">View Details</button>
                 </form>
             </td>

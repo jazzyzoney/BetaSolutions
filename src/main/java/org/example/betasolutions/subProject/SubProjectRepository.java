@@ -48,17 +48,17 @@ public class SubProjectRepository extends PSSTSuperclass {
         return (SubProject) super.readAssingmentByID("sub_project","sub_project",SubProject::new,subProjectID);
     }
     //delete a subproject
-    public int deleteSubProject(int subProjectID){
+    public boolean deleteSubProject(int subProjectID){
         try {
         conn.setAutoCommit(false);
          super.deleteObjectFromTable("sub_project","sub_project",subProjectID);
          super.deleteAllWhere("task","sub_project_id =" + subProjectID);
             conn.commit();
-            return 1;
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
 
 }

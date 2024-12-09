@@ -20,7 +20,7 @@ public class SubProjectService {
     public void readSubProjectByID(int subProjectID){
         subProjectRepository.readSubProject(subProjectID);
     }
-    public int deleteSubProject(int subProjectID){
+    public boolean deleteSubProject(int subProjectID){
         return subProjectRepository.deleteSubProject(subProjectID);
     }
 }

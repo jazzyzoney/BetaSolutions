@@ -77,5 +77,6 @@ class SubProjectRepositoryTest {
 
     @Test
     void deleteSubProject() {
+        assertTrue (subProjectRepository.deleteSubProject(1));
     }
 }

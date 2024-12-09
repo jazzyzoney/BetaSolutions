@@ -183,6 +183,7 @@ class PSSTSuperclassTest {
     }
 
     @Test
+
     void updateInt(){
         boolean updatedHours = superRepository.updateInt("task", "task_Total_hours", 1, 4);
         assertTrue(updatedHours);
@@ -193,6 +194,17 @@ class PSSTSuperclassTest {
     void updateDate(){
         boolean updateDeadline = superRepository.updateDate("task", "task_deadline", 1, Date.valueOf(LocalDate.now()));
         assertTrue(updateDeadline);
+    }
+
+    @Test
+    void readAssignmentByID(){
+        int expectedID = 1;
+        ModelInterface project =superRepository.readAssignmentByID("project", "project", Project::new, expectedID);
+        assertTrue(project instanceof Project);
+        int actualID = project.getID();
+
+        assertEquals (expectedID, actualID);
+
     }
 
 }

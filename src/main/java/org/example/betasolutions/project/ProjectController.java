@@ -1,9 +1,10 @@
 package org.example.betasolutions.project;
 import jakarta.servlet.http.HttpSession;
+import org.example.betasolutions.subProject.SubProject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -19,21 +20,36 @@ public class ProjectController {
     @GetMapping("/home")
     public String getHome(Model model){
         //i have an idea with requestparam for active projects and inactive projects to show on the homepage but i am not sure how it work with the html stuff
-        model.addAttribute("project", new Project());
-        int active =1; //just for now to see if it works
-        model.addAttribute("ProfileID", session.getAttribute("ProfileID"));
-        model.addAttribute("project_overview", projectService.readAllProjects());
+        //model.addAttribute("project", new Project());
+        model.addAttribute("profileID", session.getAttribute("profileID"));
+        model.addAttribute("projectList", projectService.readAllProjects());
         return "homepage";
     }
     @PostMapping("/project/new")
-    public String createNewProject(){
+    public String createNewProject(@ModelAttribute Project project){
+        projectService.insertAssignmentIntoTable(project);
         return "redirect: /home";
     }
 
-    @GetMapping("/project")
-    public String getProject(){
+    //does this need pathvariable?
+    @GetMapping("/project/{projectID}")
+    public String getProject(Model model, @PathVariable int projectID){
+        Project project = projectService.readAllProjects().get(projectID - 1); //readProjectByID(projectID);
+        model.addAttribute("project", project);
+
+        //subproject, task, subtask;
         return "projectpage";
     }
+
+/*
+    @PostMapping("/project")
+    public String getProject(@ModelAttribute int projectID){//Project project){
+        //int projectID = project.getID();
+        session.setAttribute("projectID", projectID);
+        //System.out.println(project.getName());
+        System.out.println(session.getAttribute("projectID"));
+        return "redirect:/project";
+    }*/
 
     @PostMapping("project/delete")
     public String deleteProject(){
@@ -41,7 +57,10 @@ public class ProjectController {
     }
 
     @PostMapping("project/edit")
-    public String editProject(){
+    public String editProject(Model model,@RequestParam int project_id){
+         project_id = (int) session.getAttribute("project_id");
+         //not done yet
+
         return "redirect:/project";
     }
 

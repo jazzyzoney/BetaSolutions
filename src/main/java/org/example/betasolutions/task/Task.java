@@ -1,9 +1,8 @@
 package org.example.betasolutions.task;
 import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.TimeCalculator;
+import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
-import java.sql.Time;
 
 public class Task implements ModelInterface {
     private int taskID;
@@ -39,7 +38,7 @@ public class Task implements ModelInterface {
         this.taskTotalPrice = taskTotalPrice;
         this.taskStartDate = taskStartDate;
 
-        TimeCalculator timeManager = new TimeCalculator();
+        TimeManager timeManager = new TimeManager();
         taskTotalDays = timeManager.calculateDays(taskTotalHours);
         taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
     }
@@ -73,10 +72,10 @@ public class Task implements ModelInterface {
     public void setHours(int hours) {
         this.taskTotalHours = hours;
 
-        TimeCalculator timeCalculator = new TimeCalculator();
+        TimeManager timeManager = new TimeManager();
 
-        taskTotalDays = timeCalculator.calculateDays(hours);
-        taskDeadLine = timeCalculator.calculateEndDate(taskStartDate, taskTotalDays);
+        taskTotalDays = timeManager.calculateDays(hours);
+        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
 
 
     }

@@ -7,7 +7,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Component
-public class TimeCalculator {
+public class TimeManager {
 
     public int calculateDays(int hours){
         int days = hours / 6; //calculate how many days of 6 work hours.

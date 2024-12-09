@@ -1,21 +1,20 @@
 package org.example.betasolutions.task;
 
 import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.TimeCalculator;
+import org.example.betasolutions.TimeManager;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class TaskService {
     private TaskRepository taskRepository;
-    private TimeCalculator timeCalculator;
+    private TimeManager timeManager;
 
     public TaskService(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
-        timeCalculator = new TimeCalculator();
+        timeManager = new TimeManager();
     }
 
     public List<ModelInterface> getAllTasks(int projectID){
@@ -31,12 +30,12 @@ public class TaskService {
         //task.setTotalHours(hours); //set task hours = new hours;
 
         int taskID = task.getID();
-        int days = timeCalculator.calculateDays(hours); //calculate days;
+        int days = timeManager.calculateDays(hours); //calculate days;
         //task.setTotalDays(days);  //set task days.
 
         //System.out.println("taskservice. start date: " + task.getStartDate());
 
-        Date deadline = timeCalculator.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
+        Date deadline = timeManager.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
 
 
         taskRepository.updateTaskHours(taskID, hours);

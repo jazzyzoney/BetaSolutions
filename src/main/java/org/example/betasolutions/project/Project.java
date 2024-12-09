@@ -1,6 +1,6 @@
 package org.example.betasolutions.project;
 import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.TimeCalculator;
+import org.example.betasolutions.TimeManager;
 import org.example.betasolutions.employee.Employee;
 import org.example.betasolutions.subProject.SubProject;
 import org.example.betasolutions.task.Task;
@@ -46,9 +46,9 @@ public class Project implements ModelInterface {
         this.projectTotalPrice = projectTotalPrice;
         this.projectStartDate = projectStartDate;
 
-        TimeCalculator timeCalculator = new TimeCalculator();
-        projectTotalDays = timeCalculator.calculateDays(projectTotalHours);
-        projectDeadline = timeCalculator.calculateEndDate(projectStartDate, projectTotalDays);
+        TimeManager timeManager = new TimeManager();
+        projectTotalDays = timeManager.calculateDays(projectTotalHours);
+        projectDeadline = timeManager.calculateEndDate(projectStartDate, projectTotalDays);
     }
 
     /*

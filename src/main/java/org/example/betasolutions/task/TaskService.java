@@ -30,8 +30,8 @@ public class TaskService {
         return taskRepository.readAllTasks(projectID);
     }
 
-    public Task getTask(int projectID, int taskID){
-        Task task = (Task) taskRepository.readTask();//readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID).get(taskID - 1);
+    public Task getTask(int taskID){
+        Task task = (Task) taskRepository.readTaskByID(taskID);//readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID).get(taskID - 1);
         return task;
     }
 

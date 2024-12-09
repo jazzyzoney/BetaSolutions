@@ -17,12 +17,12 @@ public class TaskRepository extends PSSTSuperclass {
     public TaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
-    public boolean addTaskForProject(Task task){
+    public boolean addTaskToProject(Task task){
         String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?)";
-        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql);
+        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
-            preparedStatement.setInt(7,task.getProjectID());
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
+            preparedStatement.executeUpdate(); //add task to database.
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -31,11 +31,11 @@ public class TaskRepository extends PSSTSuperclass {
     }
     public boolean addTaskToSubProject(Task task){
         String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id) values(?,?,?,?,?,?,?,?)";
-        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql);
+        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
-            preparedStatement.setInt(7,task.getProjectID());
-            preparedStatement.setInt(8,task.getSubProjectID());
-            preparedStatement.executeUpdate();
+            preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
+            preparedStatement.setInt(8,task.getSubProjectID()); //set subproject id for task.
+            preparedStatement.executeUpdate(); //add task to database.
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -44,23 +44,42 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
 
-    public List<Task> readAllTasks(int ID){
+    public List<Task> readAllTasksBelongingToProject(int projectID){
         ArrayList<Task> taskList = new ArrayList<>();
 
-        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID)) {
+        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("task","task",Task::new,projectID)) {
             if (assignmentObject instanceof Task) {
-                Task task = (Task) assignmentObject;
+                Task task = (Task) assignmentObject; //typecasting.
 
-                int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID());
-                task.setSubProjectID(subProjectID);
-                taskList.add(task);
+                int subProjectID = super.getTableIntByInt("task", "sub_project_id", //get subprojectID
+                        "task_id", task.getID());
+
+                task.setSubProjectID(subProjectID); //set subprojectID
+                taskList.add(task); //add task to tasklist.
             }
         }
         return taskList;
     }
+/*
+    public List<ModelInterface> readAllTasksBelongingToProject(int projectID){
+        return super.readAllAssignmentsBelongingToProject("task","task",Task::new,projectID);
+    }
+*/
 
-    public List<ModelInterface> readAllTasksForSubProject(int ID){
-        return super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID);
+
+    public List<Task> readAllTasksForSubProject(int subProjectID){
+
+        List <ModelInterface> allTasksOnProject = readAllAssignmentsBelongingToProject("task","task",Task::new,subProjectID);
+        List <Task> allTasksForSubProject = new ArrayList<>();
+
+        for (ModelInterface projectTask : allTasksOnProject){
+            if (projectTask instanceof Task &&
+                    ((Task) projectTask).getSubProjectID() == subProjectID){ //if task belongs to 
+
+            }
+        }
+
+        return
     }
 
     public Task readTask(int taskID){

@@ -37,8 +37,8 @@ public class TaskController {
 
     @PostMapping("/project/{projectID}/subproject/{subProjectID}/New/task/post")
     public String createNewTaskForSubProjectPost(@PathVariable("projectID") int projectID, @PathVariable("subProjectID") int subProjectID,@ModelAttribute Task task){
-        task.setProjectID(projectID);
-        task.setSubProjectID(subProjectID);
+        task.setProjectID(projectID); //set project id.
+        task.setSubProjectID(subProjectID); //set subproject id.
         taskService.createTaskForSubProject(task);
         return "redirect:/project/" + projectID;
     }

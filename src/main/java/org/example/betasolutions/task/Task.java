@@ -10,6 +10,7 @@ public class Task implements ModelInterface {
     private double totalPrice;
     private Date Deadline;
     private Date startDate;
+
     private int subProjectID;
     private int projectID;
 

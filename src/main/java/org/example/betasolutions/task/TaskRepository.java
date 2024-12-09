@@ -67,21 +67,25 @@ public class TaskRepository extends PSSTSuperclass {
 */
 
 
-    public List<Task> readAllTasksForSubProject(int subProjectID){
+    public List<Task> readAllTasksForSubProject(int projectID, int subProjectID){
 
         List <ModelInterface> allTasksOnProject = readAllAssignmentsBelongingToProject("task", //holds tasks temporarily.
-                "task",Task::new,subProjectID);
-
+                "task",Task::new,projectID);
         List <Task> allTasksForSubProject = new ArrayList<>(); // will be returned.
 
         for (ModelInterface projectTask : allTasksOnProject){
-            if (projectTask instanceof Task &&
-                    ((Task) projectTask).getSubProjectID() == subProjectID){ //if task belongs to subproject.
-
+            if (projectTask instanceof Task){
                 Task task = (Task) projectTask; //typecast projecttask as task.
-                allTasksForSubProject.add(task);//add task to return list.
-            }
-        }
+
+                //set subprojectID and projectID
+                task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
+                task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
+
+                if (task.getSubProjectID() == subProjectID) {
+                    allTasksForSubProject.add(task);//add task to return list.
+                }
+            }// end of "if (projectTask instanceof Task)"
+        }//end of for loop.
 
         return allTasksForSubProject;
     }

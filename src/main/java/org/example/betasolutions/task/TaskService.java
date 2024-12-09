@@ -22,8 +22,8 @@ public class TaskService {
         return taskRepository.readAllTasksBelongingToProject(projectID);
     }
 
-    public List <Task> getAllTasksForToSubProject(int subProjectID){
-        return taskRepository.readAllTasksForSubProject(subProjectID);
+    public List <Task> getAllTasksForSubProject(int projectID, int subProjectID){
+        return taskRepository.readAllTasksForSubProject(projectID, subProjectID);
     }
     public boolean deleteTask(int taskID){
         return taskRepository.deleteTask(taskID);

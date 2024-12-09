@@ -17,6 +17,8 @@ public class SubTaskService {
 
     public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
         return subTaskRepository.readAllSubTasks(ProjectID, TaskID);
-
+    }
+    public void deleteSubTask(int subTaskID){
+        subTaskRepository.deleteSubTask(subTaskID);
     }
 }

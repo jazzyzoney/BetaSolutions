@@ -26,10 +26,12 @@ public class SubTaskController {
         return "redirect:/project";
     }
 
-    @PostMapping("project/subtask/delete")
-    public String deleteSubTask(){
-        return "redirect:/project";
+    @PostMapping("/project/subtask/delete")
+    public String deleteSubTask(@RequestParam int subTaskID, @RequestParam int projectID, @RequestParam int taskID){
+        subTaskService.deleteSubTask(subTaskID);
+        return "redirect:/project/" + projectID + "/task/" + taskID + "/subtasks";
     }
+
     @GetMapping("/project/{projectID}/task/{taskID}/subtasks/new")
     public String createNewSubTask(Model model, @PathVariable ("projectID") int projectID, @PathVariable ("taskID") int taskID){
         model.addAttribute("projectID", projectID);

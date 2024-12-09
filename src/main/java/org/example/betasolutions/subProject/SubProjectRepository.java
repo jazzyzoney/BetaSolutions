@@ -45,7 +45,7 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
     //read a subproject
     public SubProject readSubProject(int subProjectID){
-        return (SubProject) super.readAssingmentByID("sub_project","sub_project",SubProject::new,subProjectID);
+        return (SubProject) super.readAssignmentByID("sub_project","sub_project",SubProject::new,subProjectID);
     }
     //delete a subproject
     public boolean deleteSubProject(int subProjectID){

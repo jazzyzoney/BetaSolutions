@@ -64,7 +64,7 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public Task readTask(int taskID){
-        return (Task) super.readAssingmentByID("task","task",Task::new,taskID);
+        return (Task) super.readAssignmentByID("task","task",Task::new,taskID);
     }
 
 

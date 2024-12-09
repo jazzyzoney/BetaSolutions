@@ -11,6 +11,9 @@ public class Task implements ModelInterface {
     private Date Deadline;
     private Date startDate;
 
+    private int subProjectID;
+    private int projectID;
+
     public Task(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
         this.id = id;
         this.name = name;
@@ -85,5 +88,11 @@ public class Task implements ModelInterface {
         this.days = days;
     }
 
+    public void setSubProjectID(int subProjectID){
+        this.subProjectID = subProjectID;
+    }
 
+    public void setProjectID(int projectID){
+        this.projectID = projectID;
+    }
 }

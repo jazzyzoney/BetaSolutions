@@ -1,6 +1,7 @@
 package org.example.betasolutions.task;
 import org.example.betasolutions.ConnectionManager;
 
+import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,9 +18,9 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public List<Task> getAllTasksBelongingToProject(int projectID){
-        List <Task> allTasks = super.readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID);
+        List <ModelInterface> allTasks = super.readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID);
         for (Task task : allTasks){
-            task.setSubprojectID(getTableIntByInt("task", "subproject_id", "project_id", projectID));
+            task.setSubProjectID(getTableIntByInt("task", "subproject_id", "project_id", projectID));
             task.setProjectID(projectID);
         }
         return allTasks;

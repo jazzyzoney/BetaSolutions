@@ -43,10 +43,7 @@ public class Project implements ModelInterface {
         this.projectName = projectName;
         this.projectOwner = projectOwner;
         this.projectTotalHours = projectTotalHours;
-
-        //this.projectTotalDays = projectTotalDays;
         this.projectTotalPrice = projectTotalPrice;
-        //this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
 
         TimeCalculator timeCalculator = new TimeCalculator();

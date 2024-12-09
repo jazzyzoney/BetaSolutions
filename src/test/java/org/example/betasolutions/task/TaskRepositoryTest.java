@@ -75,5 +75,5 @@ class TaskRepositoryTest {
     void readTask() {
 
     }
-        
+
 }

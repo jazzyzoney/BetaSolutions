@@ -17,30 +17,30 @@ public class TaskRepository extends PSSTSuperclass {
     public TaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
-    public int addTaskForProject(Task task){
+    public boolean addTaskForProject(Task task){
         String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql);
         try{
             preparedStatement.setInt(7,task.getProjectID());
             preparedStatement.executeUpdate();
-            return 1;
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
-    public int addTaskToSubProject(Task task){
+    public boolean addTaskToSubProject(Task task){
         String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id) values(?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql);
         try{
             preparedStatement.setInt(7,task.getProjectID());
             preparedStatement.setInt(8,task.getSubProjectID());
             preparedStatement.executeUpdate();
-            return 1;
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
 
 
@@ -66,11 +66,11 @@ public class TaskRepository extends PSSTSuperclass {
     public Task readTask(int taskID){
         return (Task) super.readAssingmentByID("task","task",Task::new,taskID);
     }
-    public int deleteTask(int taskID){
+    public boolean deleteTask(int taskID){
         if (super.deleteObjectFromTable("task", "task", taskID)){
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
 
     }
 

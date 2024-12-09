@@ -21,7 +21,7 @@ public class TaskService {
     public List<Task> getAllTasks(int projectID){
         return taskRepository.readAllTasks(projectID);
     }
-    public int deleteTask(int taskID){
+    public boolean deleteTask(int taskID){
         return taskRepository.deleteTask(taskID);
     }
 

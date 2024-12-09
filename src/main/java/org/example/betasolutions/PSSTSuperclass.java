@@ -71,7 +71,7 @@ public class PSSTSuperclass {
     }
 
     
-    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix,String assingmentID, FactoryInterface factory, int projectID) {
+    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix, FactoryInterface factory, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "SELECT * FROM " + tableName + " WHERE  project_ID = ?" ;
 
@@ -80,7 +80,7 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt(assingmentID + "_ID");
+                int id = resultSet.getInt( tablePrefix+ "_ID");
                 String name = resultSet.getString(tablePrefix + "_Name");
                 int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
                 int days = resultSet.getInt(tablePrefix + "_Total_Days");

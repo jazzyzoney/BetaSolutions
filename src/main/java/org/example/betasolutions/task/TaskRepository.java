@@ -83,7 +83,7 @@ public class TaskRepository extends PSSTSuperclass {
     public List<Task> readAllTasks(int ID){
         ArrayList<Task> taskList = new ArrayList<>();
 
-        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID)) {
+        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("task","task",Task::new,ID)) {
             if (assignmentObject instanceof Task) {
                 Task task = (Task) assignmentObject;
 
@@ -96,11 +96,11 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public List<ModelInterface> readAllTasksForSubProject(int ID){
-        return super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID);
+        return super.readAllAssignmentsBelongingToProject("task","task",Task::new,ID);
     }
 
     public Task readTaskByID(int taskID){
-        return super.readAssignmentByID("task", "task", Task::new, taskID);
+        return (Task) super.readAssignmentByID("task", "task", Task::new, taskID);
     }
 
 //>>>>>>> master

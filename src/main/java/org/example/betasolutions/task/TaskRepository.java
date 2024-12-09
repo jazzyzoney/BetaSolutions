@@ -67,11 +67,20 @@ public class TaskRepository extends PSSTSuperclass {
         return (Task) super.readAssingmentByID("task","task",Task::new,taskID);
     }
     public int deleteTask(int taskID){
-        if (super.deleteObjectFromTable("task", "task", taskID)){
+        try {
+        conn.setAutoCommit(false);
+            super.deleteObjectFromTable("task", "task", taskID);
+            super.deleteAllWhere("sub_task", "task_id = " + taskID);
+            super.deleteAllWhere("project_employee_task_subTask", "task_id = " + taskID);
+            super.deleteAllWhere("project_employee_task", "task_id = " + taskID);
+            conn.commit();
+            conn.setAutoCommit(true);
             return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return 0;
 
+        return 0;
     }
 
 

@@ -38,8 +38,8 @@ public class Project implements ModelInterface {
     }
 
     //set all variables.
-    public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, double projectTotalPrice, Date projectStartDate) {
-        this.projectID = projectID;
+    public Project( String projectName, String projectOwner, int projectTotalHours, double projectTotalPrice, Date projectStartDate) {
+        //this.projectID = projectID;
         this.projectName = projectName;
         this.projectOwner = projectOwner;
         this.projectTotalHours = projectTotalHours;

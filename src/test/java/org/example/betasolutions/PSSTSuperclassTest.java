@@ -181,5 +181,13 @@ class PSSTSuperclassTest {
     }
 
 
+    @Test
+    void readAssignmentByID(){
+        int expectedID = 1;
+        Project project = (Project) superRepository.readAssingmentByID("project", "project", Project::new, expectedID);
+        int actualID = project.getID();
+
+        assertEquals(expectedID, actualID);
+    }
 
 }

@@ -297,25 +297,29 @@ public class PSSTSuperclass {
 
     //read for a specific object with a specific ID.
     public ModelInterface readAssingmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
-        String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "_ID = ?";
+        /* String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                //set variables
                 String name = resultSet.getString(tablePrefix + "_name");
                 int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
                 int days = resultSet.getInt(tablePrefix + "_Total_Days");
                 double totalPrice = resultSet.getDouble(tablePrefix + "_Total_Price");
                 Date endDate = resultSet.getDate(tablePrefix + "_Dead_Line");
                 Date startDate = resultSet.getDate(tablePrefix + "_Start_Date");
-                return factory.build(id, name, hours, days, totalPrice, endDate, startDate);
+                return factory.build(id, name, hours, days, totalPrice, endDate, startDate); //construct object:
             }
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-        return null;
+        return null;*/
+
+        List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
+         return assignmentList.get(id- 1);
     }
     
 

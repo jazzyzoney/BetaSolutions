@@ -38,6 +38,8 @@ public class TaskRepository extends PSSTSuperclass {
         return allTasks; //return all tasks.
     }*/
 
+
+
     public void updateTaskHours(int taskID, int taskHours){
         super.updateInt("task", "task_Total_Hours", taskID, taskHours);
     }
@@ -97,10 +99,7 @@ public class TaskRepository extends PSSTSuperclass {
         return super.readAllAssignmentsBelongingToProject("task","task","task",Task::new,ID);
     }
 
-    public Task readTask(int taskID){
-        return (Task) super.readAssignmentByID("task","task",Task::new,taskID);
-    }
-
+    
 
 //>>>>>>> master
 }

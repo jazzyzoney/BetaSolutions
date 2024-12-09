@@ -85,7 +85,15 @@ class TaskRepositoryTest {
 
     @Test
     void readTask() {
-        assertTrue (false);
+        int expectedID = 1;
+        Task task1 = taskRepository.readTask(expectedID);
+        int actualID = task1.getID();
+
+        assertEquals(expectedID, actualID);
+
+        Task task2 = taskRepository.readTask(2);
+
+        assertNotEquals(task1, task2);
 
     }
     @Test

@@ -17,12 +17,12 @@ public class LoginRepository {
 
     // create login
     public void createLogin(Login login){
-        String SQLInsertLogin = "insert into login (email, password, employeeID) values(?,?,?)";
+        String SQLInsertLogin = "insert into profile (email, password, employee_id) values(?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLInsertLogin);
             preparedStatement.setString(1, login.getEmail());
             preparedStatement.setString(2, login.getPassword());
-            preparedStatement.setInt(3, login.getEmployee().getEmployeeID());
+            preparedStatement.setInt(3, login.getEmployeeId());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -31,7 +31,7 @@ public class LoginRepository {
 
     }
     public Login findByEmail(String email) {
-        String SQLFindByEmail = "SELECT * FROM login WHERE email = ?";
+        String SQLFindByEmail = "SELECT * FROM profile WHERE email = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLFindByEmail);
             preparedStatement.setString(1, email);

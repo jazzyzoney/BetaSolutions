@@ -9,21 +9,27 @@
 <header>
 
 </header>
-<h1>Velkommen</h1>
-<form th:action="@{/login} "method="post" th:object="${profile}">
+<h1>Welcome</h1>
+<form th:action="@{/login/new} "method="post" th:object="${login}">
+    <div>
+        <label for="employeeid">EmployeeId</label>
+        <input type="text" id="employeeid" name="employeeid" th:value="${login.employeeId}" />
+    </div>
     <div>
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" th:value="${profile.getEmail()}" />
+        <input type="text" id="email" name="email" th:value="${login.email}" />
     </div>
     <div>
         <label class="large-text">Password:
-            <input type="password" name="password" th:value="${profile.getPassword()}" required>
+            <input type="password" name="password" th:value="${login.password}" required>
         </label>
+
         <br>
+
         </label>
         <br>
 
-        <button type="submit">Login</button>
+        <button type="submit">Save</button>
     </div>
 </form>
 </body>

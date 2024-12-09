@@ -7,12 +7,12 @@ public class Login {
     private int loginID;
     private String password;
     private String email;
-    private Employee employee;
+    private int employeeId;
 
-    public Login(String password, String email, Employee employee) {
+    public Login(String password, String email, int employeeId) {
         this.password = password;
         this.email = email;
-        this.employee = employee;
+        this.employeeId = employeeId;
     }
 
     public Login(){
@@ -42,12 +42,12 @@ public class Login {
         this.email = email;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
 }

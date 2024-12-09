@@ -18,7 +18,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String getLogin(Model model) {
-        model.addAttribute("profile", new Login());
+        model.addAttribute("login", new Login());
         return "loginpage";
     }
 
@@ -28,12 +28,14 @@ public class LoginController {
     }
 
     @GetMapping("/login/new")
-    public String getNewProfilePage() {
-        return "newProfile";
+    public String getNewLoginPage(Model model) {
+        model.addAttribute("login", new Login());
+        return "loginpage";
     }
 
     @PostMapping("/login/new")
-    public String postNewLogin() {
+    public String postNewLogin(@ModelAttribute Login login) {
+        loginService.createLogin(login);
         return "redirect:/login";
     }
 

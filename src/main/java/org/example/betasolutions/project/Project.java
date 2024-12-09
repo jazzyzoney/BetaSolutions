@@ -1,5 +1,6 @@
 package org.example.betasolutions.project;
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.TimeCalculator;
 import org.example.betasolutions.employee.Employee;
 import org.example.betasolutions.subProject.SubProject;
 import org.example.betasolutions.task.Task;
@@ -22,6 +23,40 @@ public class Project implements ModelInterface {
     private Date projectDeadline;
     private Date projectStartDate;
 
+    //empty
+    public Project(){}
+
+    //factory interface
+    public Project(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
+        this.projectID = id;
+        this.projectName = name;
+        this.projectTotalHours = hours;
+        this.projectTotalDays = days;
+        this.projectTotalPrice = totalPrice;
+        this.projectDeadline = Deadline;
+        this.projectStartDate = startDate;
+    }
+
+    //set all variables.
+    public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, double projectTotalPrice, Date projectStartDate) {
+        this.projectID = projectID;
+        this.projectName = projectName;
+        this.projectOwner = projectOwner;
+        this.projectTotalHours = projectTotalHours;
+
+        //this.projectTotalDays = projectTotalDays;
+        this.projectTotalPrice = projectTotalPrice;
+        //this.projectDeadline = projectDeadline;
+        this.projectStartDate = projectStartDate;
+
+        TimeCalculator timeCalculator = new TimeCalculator();
+        projectTotalDays = timeCalculator.calculateDays(projectTotalHours);
+        projectDeadline = timeCalculator.calculateEndDate(projectStartDate, projectTotalDays);
+    }
+
+    /*
+
+    //id, name, po, hours, days, price, startdate, deadline
     public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
         this.projectID = projectID;
         this.projectName = projectName;
@@ -33,6 +68,7 @@ public class Project implements ModelInterface {
         this.projectStartDate = projectStartDate;
     }
 
+    //name, po, hours, days, price, startdate, deadline.
     public Project(String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, Date projectStartDate) {
         this.projectName = projectName;
         this.projectOwner = projectOwner;
@@ -41,16 +77,6 @@ public class Project implements ModelInterface {
         this.projectTotalPrice = projectTotalPrice;
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
-    }
-
-    public Project(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
-        this.projectID = id;
-        this.projectName = name;
-        this.projectTotalHours = hours;
-        this.projectTotalDays = days;
-        this.projectTotalPrice = totalPrice;
-        this.projectDeadline = Deadline;
-        this.projectStartDate = startDate;
     }
 
 
@@ -65,9 +91,7 @@ public class Project implements ModelInterface {
         this.projectName = projectName;
     }
 
-    public Project() {
-    }
-
+*/
     public void setID(int projectID) {
         this.projectID = projectID;
     }

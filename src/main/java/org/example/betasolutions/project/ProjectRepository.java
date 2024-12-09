@@ -64,7 +64,7 @@ public class ProjectRepository extends PSSTSuperclass {
 
     //Read method by ID for project. not sure if this actually works but i will test it later.
     public Project readProjectByID(int projectID) {
-        Project Project = (Project) super.readAssingmentByID("project", "project", Project::new, projectID);
+        Project Project = (Project) super.readAssignmentByID("project", "project", Project::new, projectID);
         if (Project != null) {
             String projectOwner = super.getTableStringByInt("project", "projectOwner", "projectID", Project.getID());
             Project.setProjectOwner(projectOwner);

@@ -296,7 +296,9 @@ public class PSSTSuperclass {
 
 
     //read for a specific object with a specific ID.
+    /*
     public ModelInterface readAssingmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
+       /*
         String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -316,6 +318,14 @@ public class PSSTSuperclass {
 
         }
         return null;
+
+    }*/
+
+    //read for a specific object with a specific ID.
+    public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
+       List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
+       return assignmentList.get(id- 1);
+
     }
     
 

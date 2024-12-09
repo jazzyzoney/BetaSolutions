@@ -24,6 +24,14 @@ public class EmployeeService {
         return employeeRepository.getAllEmployees();
     }
 
+    public List<Employee> getAllEmployeesForProject(int projectID){
+        return employeeRepository.getAllEmployeesForProject(projectID);
+    }
+
+    public List<Employee> getAllEmployeesNotOnProject(int projectID){
+        return employeeRepository.getAllEmployeesNotOnProject(projectID);
+    }
+
     //add employee to project
     public void addExistingEmployeeToProject(int employeeID, int projectID){
         employeeRepository.addExistingEmployeeToProject(employeeID, projectID);

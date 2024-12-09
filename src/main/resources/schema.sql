@@ -171,4 +171,3 @@ INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub
 VALUES
     (1, 1, 1, 1),
     (2, 2, 2, 2);
-

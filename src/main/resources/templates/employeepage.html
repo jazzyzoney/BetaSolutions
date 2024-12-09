@@ -15,8 +15,7 @@ it shows a list of all employees and also gives the user the option to create ne
     <button type="submit">Home</button>
 </form>
 
-<form th:action="@{/project/employee/new}" th:object="${employee}" method="post">
-        <input type="hidden" th:name="employeeID"/>
+<form th:action="@{/employee/new}" th:object="${allEmployees}" method="get">
         <button type="submit">Create new employee</button>
 </form>
 

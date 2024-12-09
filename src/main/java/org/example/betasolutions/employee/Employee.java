@@ -58,5 +58,7 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
-    //empty constructor?
+    //empty constructor
+    public Employee() {
+    }
 }

@@ -35,8 +35,8 @@
     </form>
 
     <form class="logo" method="get" th:action="@{/project/{id}/employees (id=${id})}" style="display:inline;">
-        <button type="submit">Add employee to project</button>
-        <hidden name="project_id" value="project_id"> </hidden>
+        <button type="submit">All employees for project</button>
+        <hidden name="projectID" value="projectID"> </hidden>
     </form>
 
    <!-- <a th:href="@{'/project' +${project.getID} +'/employee/add/project'}">

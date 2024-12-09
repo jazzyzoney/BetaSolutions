@@ -9,16 +9,17 @@
 <body>
 
 <h1>Create new employee</h1>
-<form th:action="@{/project/employee/new}" method="post" th:object="${newEmployee}"> <br>
+<form th:action="@{/employee/new/post}" method="post" th:object="${employee}"> <br>
 
     <label class="large-text">Name:
-        <input type="text" name="name" th:value="${newEmployee.employeeName}" required>
+        <input type="text" name="employeeName" th:value="${employee.employeeName}" required>
     </label>
+
     <br>
     <label class="large-text">Office:
         <select name="employeeOffice" id="officeSelect" required>
             <option value="" disabled selected>Select office</option>
-            <option th:each="office : ${offices}"
+            <option th:each="employeeOffice : ${employee}"
                     th:value="${employee.employeeOffice}"
                     th:text="${employee.employeeOffice}"></option>
         </select>
@@ -26,10 +27,13 @@
 
     <br>
     <label class="large-text">Proficiency:
-        <input type="text" name="proficiency" th:value="${newEmployee.employeeProficiency}" required>
+        <input type="text" name="employeeProficiency" th:value="${employee.employeeProficiency}" required>
     </label>
     <br>
-    <button type="submit">Submit</button>
+
+    <input type="hidden" name="employeeSalary"  th:value="${2500}"/>
+
+    <button type="submit">Add</button>
 </form>
 
 </body>

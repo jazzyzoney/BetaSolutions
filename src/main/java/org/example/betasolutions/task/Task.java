@@ -1,29 +1,50 @@
 package org.example.betasolutions.task;
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.TimeCalculator;
+
 import java.sql.Date;
+import java.sql.Time;
 
 public class Task implements ModelInterface {
-    private int id;
-    private String name;
-    private int hours;
-    private int days;
-    private double totalPrice;
-    private Date Deadline;
-    private Date startDate;
+    private int taskID;
+    private String taskName;
+    private int taskTotalHours;
+    private int taskTotalDays;
+    private double taskTotalPrice;
+    private Date taskDeadLine;
+    private Date taskStartDate;
 
     private int subProjectID;
     private int projectID;
 
+    //empty
+    public Task(){}
+
+    //factory constructor.
     public Task(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
-        this.id = id;
-        this.name = name;
-        this.hours = hours;
-        this.days = days;
-        this.totalPrice = totalPrice;
-        this.Deadline = Deadline;
-        this.startDate = startDate;
+        this.taskID = id;
+        this.taskName = name;
+        this.taskTotalHours = hours;
+        this.taskTotalDays = days;
+        this.taskTotalPrice = totalPrice;
+        this.taskDeadLine = Deadline;
+        this.taskStartDate = startDate;
     }
 
+    //set all values
+    public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate){
+        //this.id = id;
+        this.taskName = taskName;
+        this.taskTotalHours = taskTotalHours;
+        this.taskTotalPrice = taskTotalPrice;
+        this.taskStartDate = taskStartDate;
+
+        TimeCalculator timeManager = new TimeCalculator();
+        taskTotalDays = timeManager.calculateDays(taskTotalHours);
+        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
+    }
+
+    /*
     public Task(String taskName, Date taskStartDate){
         this.startDate = taskStartDate;
         this.name = taskName;
@@ -36,57 +57,68 @@ public class Task implements ModelInterface {
     }
 
     public Task (){}
-
+    */
     public void setID(int id) {
-        this.id = id;
+        this.taskID = id;
     }
     public int getID() {
-        return id;
+        return taskID;
     }
     public void setName(String name) {
-        this.name = name;
+        this.taskName = name;
     }
     public String getName() {
-        return name;
+        return taskName;
     }
     public void setHours(int hours) {
-        this.hours = hours;
+        this.taskTotalHours = hours;
+
+        TimeCalculator timeCalculator = new TimeCalculator();
+
+        taskTotalDays = timeCalculator.calculateDays(hours);
+        taskDeadLine = timeCalculator.calculateEndDate(taskStartDate, taskTotalDays);
+
+
     }
     public int getHours() {
-        return hours;
+        return taskTotalHours;
     }
+
+    /*
     public void setDays(int days) {
-        this.days = days;
-    }
+        this.taskTotalDays = taskTotalDays;
+    }*/
+
     public int getDays() {
-        return days;
+        return taskTotalDays;
     }
     public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+        this.taskTotalPrice = totalPrice;
     }
     public double getTotalPrice() {
-        return totalPrice;
+        return taskTotalPrice;
     }
     public void setDeadline(Date endDate) {
-        this.Deadline = endDate;
+        this.taskDeadLine = endDate;
     }
     public Date getDeadline() {
-        return Deadline;
+        return taskDeadLine;
     }
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.taskStartDate = startDate;
     }
     public Date getStartDate() {
-        return startDate;
+        return taskStartDate;
     }
 
     public void setTotalHours(int hours){
-        this.hours = hours;
+        this.taskTotalHours = hours;
     }
 
+    /*
     public void setTotalDays(int days){
-        this.days = days;
-    }
+        this.taskTotalDays = days;
+    }*/
 
     public void setSubProjectID(int subProjectID){
         this.subProjectID = subProjectID;

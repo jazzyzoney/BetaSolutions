@@ -45,10 +45,8 @@
             <td th:text="${project.getDeadline()}"></td>
             <td th:text="${project.getStartDate()}"></td>
             <td>
-                <!--<form method="post" th:action="@{/project}" th:object="${project.getID()}" style="display:inline;">
-                    <button type="submit">View Details</button>
-                </form>-->
-                <form th:action="@{/project/{projectID} (projectID = ${project.getID()})}" style="display:inline;">
+                <form method="get" th:action="@{/project/{id}(id=${project.getID()})}" style="display:inline;">
+
                     <button type="submit">View Details</button>
                 </form>
             </td>

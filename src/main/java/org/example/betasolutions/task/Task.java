@@ -5,6 +5,7 @@ import org.example.betasolutions.TimeManager;
 import java.sql.Date;
 
 public class Task implements ModelInterface {
+
     private int taskID;
     private String taskName;
     private int taskTotalHours;
@@ -57,6 +58,7 @@ public class Task implements ModelInterface {
 
     public Task (){}
     */
+
     public void setID(int id) {
         this.taskID = id;
     }
@@ -77,10 +79,20 @@ public class Task implements ModelInterface {
         taskTotalDays = timeManager.calculateDays(hours);
         taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
 
-
     }
+
     public int getHours() {
         return taskTotalHours;
+    }
+
+
+
+    public int getSubProjectID() {
+        return subProjectID;
+    }
+
+    public int getProjectID() {
+        return projectID;
     }
 
     /*

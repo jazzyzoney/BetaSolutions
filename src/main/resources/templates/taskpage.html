@@ -1,12 +1,42 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit task</title>
+    <title>Create New Task</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
+<h1>Create New  TASK FOR Project</h1>
+
+<form th:action="@{/project/{projectID}/task/new/post(projectID=${projectID})}" method="post" th:object="${task}">
+
+    <label class="large-text">SubProject Name:
+        <input type="text" id="projectName" name="projectName" th:field="${task.name}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Hours:
+        <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${task.hours}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Days:
+        <input type="number" id="projectTotalDays" name="projectTotalDays" th:field="${task.days}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Price:
+        <input type="number" step="0.01" id="projectTotalPrice" name="projectTotalPrice" th:field="${task.totalPrice}" required>
+    </label>
+    <br>
+    <label class="large-text">Deadline:
+        <input type="date" id="projectDeadline" name="projectDeadline" th:field="${task.deadline}" required>
+    </label>
+    <br>
+    <label class="large-text">Start Date:
+        <input type="date" id="projectStartDate" name="projectStartDate" th:field="${task.startDate}" required>
+    </label>
+    <br>
+    <button type="submit">Create SubProject</button>
+</form>
 
     <p> task page</p>
     <h2 th:text="${task.getName()}"></h2>

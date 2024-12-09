@@ -1,5 +1,6 @@
 package org.example.betasolutions.task;
 
+
 import org.example.betasolutions.ConnectionManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -55,6 +56,24 @@ class TaskRepositoryTest {
     }
 
     @Test
-    void updateTaskDeadline() {
+    void addTaskForProject() {
     }
+
+    @Test
+    void addTaskToSubProject() {
+    }
+
+    @Test
+    void readAllTasks() {
+    }
+
+    @Test
+    void readAllTasksForSubProject() {
+    }
+
+    @Test
+    void readTask() {
+
+    }
+        
 }

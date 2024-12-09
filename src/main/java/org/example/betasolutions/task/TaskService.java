@@ -1,7 +1,7 @@
 package org.example.betasolutions.task;
 
-import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.TimeManager;
+
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -17,8 +17,17 @@ public class TaskService {
         timeManager = new TimeManager();
     }
 
-    public List<ModelInterface> getAllTasks(int projectID){
-        return taskRepository.readAllAssignmentsBelongingToProject("task","task",Task::new, projectID);
+    public void createTaskForProject(Task task){
+        taskRepository.addTaskForProject(task);
+    }
+
+    public void createTaskForSubProject(Task task){
+        taskRepository.addTaskToSubProject(task);
+    }
+
+
+    public List<Task> getAllTasks(int projectID){
+        return taskRepository.readAllTasks(projectID);
     }
 
     public Task getTask(int projectID, int taskID){

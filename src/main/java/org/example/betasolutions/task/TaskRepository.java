@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.Date;
+import java.util.List;
 
 @Repository
 public class TaskRepository extends PSSTSuperclass {
@@ -13,6 +14,15 @@ public class TaskRepository extends PSSTSuperclass {
     @Autowired
     public TaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);
+    }
+
+    public List<Task> getAllTasksBelongingToProject(int projectID){
+        List <Task> allTasks = super.readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID);
+        for (Task task : allTasks){
+            task.setSubprojectID(getTableIntByInt("task", "subproject_id", "project_id", projectID));
+            task.setProjectID(projectID);
+        }
+        return allTasks;
     }
 
     public void updateTaskHours(int taskID, int taskHours){

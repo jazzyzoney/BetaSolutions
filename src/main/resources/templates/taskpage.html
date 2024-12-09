@@ -13,9 +13,9 @@
 
     <!--@{/project/{projectID}/task/{taskID}/edit (projectID = ${projectID}, taskID = ${task.getID()})}"  th:object="${task}"-->
     <form
-        th:method="post" th:action = "@{/project/task/edit}"  style="display:inline;">
+        th:method="post" th:action = "@{/project/task/edit}" th:object="${task}" style="display:inline;">
         <label for="hours"> Hours: </label>
-        <input type="number" id="hours" name="hours" th:value = "${task.hours}"/>
+        <input type="number" id="hours" name="hours" th:value = "${task.getHours()}"/>
         <br>
         <button type="submit">Submit</button>
     </form>

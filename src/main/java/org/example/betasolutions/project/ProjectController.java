@@ -1,6 +1,5 @@
 package org.example.betasolutions.project;
 import jakarta.servlet.http.HttpSession;
-import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.subProject.SubProject;
 import org.example.betasolutions.subProject.SubProjectRepository;
 import org.example.betasolutions.task.Task;
@@ -33,9 +32,9 @@ public class ProjectController {
     @GetMapping("/home")
     public String getHome(Model model){
         //i have an idea with requestparam for active projects and inactive projects to show on the homepage but i am not sure how it work with the html stuff
-        model.addAttribute("project", new Project());
-        model.addAttribute("ProfileID", session.getAttribute("ProfileID"));
-        model.addAttribute("project_overview", projectService.readAllProjects());
+        //model.addAttribute("project", new Project());
+        model.addAttribute("profileID", session.getAttribute("profileID"));
+        model.addAttribute("projectList", projectService.readAllProjects());
         return "homepage";
     }
     @PostMapping("/project/new")
@@ -77,6 +76,16 @@ public class ProjectController {
         model.addAttribute("tasksWithoutSubProject", tasksWithoutSubProject);
         return "projectpage";
     }
+
+/*
+    @PostMapping("/project")
+    public String getProject(@ModelAttribute int projectID){//Project project){
+        //int projectID = project.getID();
+        session.setAttribute("projectID", projectID);
+        //System.out.println(project.getName());
+        System.out.println(session.getAttribute("projectID"));
+        return "redirect:/project";
+    }*/
 
     @PostMapping("project/delete")
     public String deleteProject(){

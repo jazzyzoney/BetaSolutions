@@ -10,6 +10,8 @@ public class Task implements ModelInterface {
     private double totalPrice;
     private Date Deadline;
     private Date startDate;
+    private int subProjectID;
+    private int projectID;
 
     public Task(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
         this.id = id;
@@ -19,6 +21,17 @@ public class Task implements ModelInterface {
         this.totalPrice = totalPrice;
         this.Deadline = Deadline;
         this.startDate = startDate;
+    }
+    public Task(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate, int subProjectID, int projectID) {
+        this.id = id;
+        this.name = name;
+        this.hours = hours;
+        this.days = days;
+        this.totalPrice = totalPrice;
+        this.Deadline = Deadline;
+        this.startDate = startDate;
+        this.subProjectID = subProjectID;
+        this.projectID = projectID;
     }
 
     public Task(String taskName, Date taskStartDate){
@@ -31,6 +44,9 @@ public class Task implements ModelInterface {
         this.name = taskName;
         this.Deadline = taskDeadLine;
     }
+    public Task() {
+    }
+
     public void setID(int id) {
         this.id = id;
     }
@@ -72,6 +88,18 @@ public class Task implements ModelInterface {
     }
     public Date getStartDate() {
         return startDate;
+    }
+    public void setSubProjectID(int subProjectID) {
+        this.subProjectID = subProjectID;
+    }
+    public int getSubProjectID() {
+        return subProjectID;
+    }
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
+    }
+    public int getProjectID() {
+        return projectID;
     }
 
 }

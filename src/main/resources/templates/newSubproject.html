@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New SubProject</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h1>Create New SubProject</h1>
+
+<form th:action="@{/project/{id}/subproject/newSubProject/post(id=${projectID})}" method="post" th:object="${subproject}">
+
+    <label class="large-text">SubProject Name:
+        <input type="text" id="projectName" name="projectName" th:field="${subproject.name}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Hours:
+        <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${subproject.hours}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Days:
+        <input type="number" id="projectTotalDays" name="projectTotalDays" th:field="${subproject.days}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Price:
+        <input type="number" step="0.01" id="projectTotalPrice" name="projectTotalPrice" th:field="${subproject.totalPrice}" required>
+    </label>
+    <br>
+    <label class="large-text">Deadline:
+        <input type="date" id="projectDeadline" name="projectDeadline" th:field="${subproject.deadline}" required>
+    </label>
+    <br>
+    <label class="large-text">Start Date:
+        <input type="date" id="projectStartDate" name="projectStartDate" th:field="${subproject.startDate}" required>
+    </label>
+    <br>
+    <button type="submit">Create SubProject</button>
+</form>
+
+</body>
+</html>

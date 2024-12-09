@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New SubProject</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h1>Create New  TASK FOR SubProject</h1>
+
+<form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">
+    <label class="large-text">Task Name:
+        <input type="text" id="taskName" name="name" th:field="${task.name}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Hours:
+        <input type="number" id="taskTotalHours" name="hours" th:field="${task.hours}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Days:
+        <input type="number" id="taskTotalDays" name="days" th:field="${task.days}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Price:
+        <input type="number" step="0.01" id="taskTotalPrice" name="totalPrice" th:field="${task.totalPrice}" required>
+    </label>
+    <br>
+    <label class="large-text">Deadline:
+        <input type="date" id="taskDeadline" name="deadline" th:field="${task.deadline}" required>
+    </label>
+    <br>
+    <label class="large-text">Start Date:
+        <input type="date" id="taskStartDate" name="startDate" th:field="${task.startDate}" required>
+    </label>
+    <br>
+
+    <!-- SubProject ID as hidden field -->
+    <input type="hidden" th:field="${task.subProjectID}" th:value="${subProjectID}">
+
+    <button type="submit">Create Task</button>
+</form>

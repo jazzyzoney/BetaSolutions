@@ -1,6 +1,5 @@
 package org.example.betasolutions.task;
 
-import org.example.betasolutions.ModelInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +11,15 @@ public class TaskService {
     public TaskService(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
     }
+    public void createTaskForProejct(Task task){
+        taskRepository.addTaskForProject(task);
+    }
+    public void createTaskForSubProject(Task task){
+        taskRepository.addTaskToSubProject(task);
+    }
 
-    public List<ModelInterface> getAllTasks(int projectID){
-        return taskRepository.readAllAssignmentsBelongingToProject("task","task",Task::new, projectID);
+    public List<Task> getAllTasks(int projectID){
+        return taskRepository.readAllTasks(projectID);
     }
 
 }

@@ -52,7 +52,7 @@ public class PSSTSuperclass {
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            //preparedStatement.setInt(1, projectID);
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(tablePrefix + "_ID");
@@ -71,7 +71,7 @@ public class PSSTSuperclass {
     }
 
     
-    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix, FactoryInterface factory, int projectID) {
+    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix,String assingmentID, FactoryInterface factory, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "SELECT * FROM " + tableName + " WHERE  project_ID = ?" ;
 
@@ -80,7 +80,7 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt(tablePrefix + "_ID");
+                int id = resultSet.getInt(assingmentID + "_ID");
                 String name = resultSet.getString(tablePrefix + "_Name");
                 int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
                 int days = resultSet.getInt(tablePrefix + "_Total_Days");
@@ -159,6 +159,7 @@ public class PSSTSuperclass {
         }
         return false;
     }
+
     //update method
     //this one is for updating a string value in a table with a specific ID.
     //so it would look like this: updateObjectString("task", "taskName", 1, "Task 2"); for example.
@@ -279,7 +280,7 @@ public class PSSTSuperclass {
     //put og patch
     //this one is for updating an int value in a table with a specific ID.
     public boolean updateObjectInt(String tableName, String attributeName, int functionID, int newValue) {
-        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, newValue);
@@ -294,25 +295,12 @@ public class PSSTSuperclass {
 
 
     //read for a specific object with a specific ID.
-    public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
-        String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "_ID = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                String name = resultSet.getString(tablePrefix + "_name");
-                int hours = resultSet.getInt(tablePrefix + "_TotalHours");
-                int days = resultSet.getInt(tablePrefix + "_TotalDays");
-                double totalPrice = resultSet.getDouble(tablePrefix + "_TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "_DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "_StartDate");
-                return factory.build(id, name, hours, days, totalPrice, endDate, startDate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return null;
+    public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
+        List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
+         return assignmentList.get(id- 1);
+
     }
+    
+
 }

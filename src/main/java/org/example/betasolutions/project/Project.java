@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Project implements ModelInterface {
-    private List<SubProject> subProjectList = new ArrayList<>();
-    private List<Task> taskList = new ArrayList<>();
-    private List<Employee> employeeList = new ArrayList<>();
 
     private int projectID;
     private String projectName;
@@ -39,56 +36,16 @@ public class Project implements ModelInterface {
 
     //set all variables.
     public Project( String projectName, String projectOwner, int projectTotalHours, double projectTotalPrice, Date projectStartDate) {
-        //this.projectID = projectID;
         this.projectName = projectName;
         this.projectOwner = projectOwner;
-        this.projectTotalHours = projectTotalHours;
         this.projectTotalPrice = projectTotalPrice;
         this.projectStartDate = projectStartDate;
 
-        TimeManager timeManager = new TimeManager();
-        projectTotalDays = timeManager.calculateDays(projectTotalHours);
-        projectDeadline = timeManager.calculateEndDate(projectStartDate, projectTotalDays);
-    }
+        setTotalHours(projectTotalHours);
 
-    /*
-
-    //id, name, po, hours, days, price, startdate, deadline
-    public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
-        this.projectID = projectID;
-        this.projectName = projectName;
-        this.projectOwner = projectOwner;
-        this.projectTotalHours = projectTotalHours;
-        this.projectTotalDays = projectTotalDays;
-        this.projectTotalPrice = projectTotalPrice;
-        this.projectDeadline = projectDeadline;
-        this.projectStartDate = projectStartDate;
-    }
-
-    //name, po, hours, days, price, startdate, deadline.
-    public Project(String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, Date projectStartDate) {
-        this.projectName = projectName;
-        this.projectOwner = projectOwner;
-        this.projectTotalHours = projectTotalHours;
-        this.projectTotalDays = projectTotalDays;
-        this.projectTotalPrice = projectTotalPrice;
-        this.projectDeadline = projectDeadline;
-        this.projectStartDate = projectStartDate;
     }
 
 
-    public Project(Date projectStartDate, Date projectDeadline) {
-        this.projectStartDate = projectStartDate;
-        this.projectDeadline = projectDeadline;
-    }
-
-    public Project(String projectName, Date projectStartDate, Date projectDeadline) {
-        this.projectStartDate = projectStartDate;
-        this.projectDeadline = projectDeadline;
-        this.projectName = projectName;
-    }
-
-*/
     public void setID(int projectID) {
         this.projectID = projectID;
     }
@@ -115,14 +72,14 @@ public class Project implements ModelInterface {
 
     public void setTotalHours(int projectTotalHours) {
         this.projectTotalHours = projectTotalHours;
+
+        TimeManager timeManager = new TimeManager();
+        projectStartDate = timeManager.calculateDays(this.projectTotalHours);
+        projectDeadline = timeManager.calculateEndDate(projectStartDate, this.projectTotalHours);
     }
 
     public int getHours() {
         return projectTotalHours;
-    }
-
-    public void setTotalDays(int projectTotalDays) {
-        this.projectTotalDays = projectTotalDays;
     }
 
     public int getDays() {
@@ -135,10 +92,6 @@ public class Project implements ModelInterface {
 
     public double getTotalPrice() {
         return projectTotalPrice;
-    }
-
-    public void setDeadline(Date projectDeadline) {
-        this.projectDeadline = projectDeadline;
     }
 
     public Date getDeadline() {
@@ -167,18 +120,6 @@ public class Project implements ModelInterface {
 
     public String getProjectOwner() {
         return projectOwner;
-    }
-
-    public List<SubProject> getSubProjectList() {
-        return subProjectList;
-    }
-
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    public List<Employee> getEmployeeList() {
-        return employeeList;
     }
 
 }

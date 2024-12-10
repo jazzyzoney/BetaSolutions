@@ -35,29 +35,11 @@ public class Task implements ModelInterface {
     public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate){
         //this.id = id;
         this.taskName = taskName;
-        this.taskTotalHours = taskTotalHours;
         this.taskTotalPrice = taskTotalPrice;
         this.taskStartDate = taskStartDate;
 
-        TimeManager timeManager = new TimeManager();
-        taskTotalDays = timeManager.calculateDays(taskTotalHours);
-        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
+        setHours(taskTotalHours);
     }
-
-    /*
-    public Task(String taskName, Date taskStartDate){
-        this.startDate = taskStartDate;
-        this.name = taskName;
-    }
-
-    public Task(String taskName, Date taskStartDate, Date taskDeadLine){
-        this.startDate = taskStartDate;
-        this.name = taskName;
-        this.Deadline = taskDeadLine;
-    }
-
-    public Task (){}
-    */
 
     public void setID(int id) {
         this.taskID = id;
@@ -78,15 +60,12 @@ public class Task implements ModelInterface {
 
         taskTotalDays = timeManager.calculateDays(hours);
         taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
-
     }
 
     public int getHours() {
         return taskTotalHours;
     }
-
-
-
+    
     public int getSubProjectID() {
         return subProjectID;
     }
@@ -94,11 +73,6 @@ public class Task implements ModelInterface {
     public int getProjectID() {
         return projectID;
     }
-
-    /*
-    public void setDays(int days) {
-        this.taskTotalDays = taskTotalDays;
-    }*/
 
     public int getDays() {
         return taskTotalDays;
@@ -123,13 +97,13 @@ public class Task implements ModelInterface {
     }
 
     public void setTotalHours(int hours){
+        TimeManager timeManager = new TimeManager();
         this.taskTotalHours = hours;
+
+        taskTotalDays = timeManager.calculateDays(taskTotalHours);
+        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
     }
 
-    /*
-    public void setTotalDays(int days){
-        this.taskTotalDays = days;
-    }*/
 
     public void setSubProjectID(int subProjectID){
         this.subProjectID = subProjectID;

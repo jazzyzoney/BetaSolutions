@@ -28,18 +28,11 @@ public class SubTask {
     }
 
     public SubTask(String name, int hours, int days, Date startDate, Date deadline, int taskID){
-        //subTaskID = id;
         subTaskName = name;
-        subTaskTotalHours = hours;
         subTaskStartDate = startDate;
         this.taskID = taskID;
 
-        TimeManager timeManager = new TimeManager();
-
-        subTaskTotalDays = timeManager.calculateDays(subTaskTotalHours);
-        subTaskDeadline = timeManager.calculateEndDate(subTaskStartDate, subTaskTotalDays);
-
-
+        setHours(hours);
 
     }
 

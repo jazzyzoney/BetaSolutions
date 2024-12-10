@@ -2,6 +2,7 @@ package org.example.betasolutions.subProject;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.task.Task;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -61,5 +62,7 @@ public class SubProjectRepository extends PSSTSuperclass {
         }
         return false;
     }
+
+
 
 }

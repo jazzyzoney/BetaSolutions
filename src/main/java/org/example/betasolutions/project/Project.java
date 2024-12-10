@@ -74,7 +74,7 @@ public class Project implements ModelInterface {
         this.projectTotalHours = projectTotalHours;
 
         TimeManager timeManager = new TimeManager();
-        projectStartDate = timeManager.calculateDays(this.projectTotalHours);
+        projectTotalDays = timeManager.calculateDays(this.projectTotalHours);
         projectDeadline = timeManager.calculateEndDate(projectStartDate, this.projectTotalHours);
     }
 

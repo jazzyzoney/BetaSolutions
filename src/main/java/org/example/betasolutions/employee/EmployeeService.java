@@ -15,7 +15,7 @@ public class EmployeeService {
     }
 
     //create
-    public int createNewEmployee(Employee employee){
+    public boolean createNewEmployee(Employee employee){
         return employeeRepository.createNewEmployee(employee);
     }
 

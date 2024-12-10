@@ -17,7 +17,7 @@ public class EmployeeRepository {
     }
 
     //create
-    public int createNewEmployee(Employee employee) {
+    public boolean createNewEmployee(Employee employee) {
         String sql = "INSERT INTO employee (employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, employee.getEmployeeName());
@@ -27,7 +27,7 @@ public class EmployeeRepository {
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                return resultSet.getInt(1);
+                return true;
             }
             System.out.println("New employee created");
 
@@ -35,13 +35,12 @@ public class EmployeeRepository {
             e.printStackTrace();
         }
         System.out.println("New employee not created");
-        return 1;
+        return false;
     }
 
     //read
     public List<Employee> getAllEmployees() {
         String sql = "SELECT * FROM employee";
-
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

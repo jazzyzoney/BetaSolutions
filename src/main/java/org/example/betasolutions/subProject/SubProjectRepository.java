@@ -30,7 +30,7 @@ public class SubProjectRepository extends PSSTSuperclass {
     //read all subprojects
     public List<SubProject> readAllSubProjects(int projectID){
         List<SubProject> subProjects = new ArrayList<>();
-        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("sub_project","sub_project","sub_project",SubProject::new,projectID)){
+        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("sub_project","sub_project",SubProject::new,projectID)){
             if(assignmentObject instanceof SubProject){
                 SubProject subProject = (SubProject) assignmentObject;
                 subProjects.add(subProject);
@@ -54,6 +54,7 @@ public class SubProjectRepository extends PSSTSuperclass {
          super.deleteObjectFromTable("sub_project","sub_project",subProjectID);
          super.deleteAllWhere("task","sub_project_id =" + subProjectID);
             conn.commit();
+
             return true;
         }catch (Exception e){
             e.printStackTrace();

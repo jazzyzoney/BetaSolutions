@@ -2,6 +2,8 @@ package org.example.betasolutions.project;
 import jakarta.servlet.http.HttpSession;
 import org.example.betasolutions.subProject.SubProject;
 import org.example.betasolutions.subProject.SubProjectRepository;
+import org.example.betasolutions.subTask.SubTask;
+import org.example.betasolutions.subTask.SubTaskService;
 import org.example.betasolutions.task.Task;
 import org.example.betasolutions.task.TaskService;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,14 @@ public class ProjectController {
     private ProjectService projectService;
     private final HttpSession session;
     private TaskService taskService;
+    private SubTaskService subTaskService;
 
-    public ProjectController(ProjectService projectService, HttpSession session, SubProjectRepository subProjectRepository,TaskService taskService) {
+    public ProjectController(ProjectService projectService, HttpSession session, SubProjectRepository subProjectRepository, TaskService taskService, SubTaskService subTaskService) {
         this.projectService = projectService;
         this.session = session;
         this.subProjectRepository = subProjectRepository;
         this.taskService = taskService;
+        this.subTaskService = subTaskService;
     }
 
     @GetMapping("/home")
@@ -48,9 +52,11 @@ public class ProjectController {
     public String getProject(@PathVariable("projectID") int projectID,Model model) {
         Project project = projectService.readAllProjects().get(projectID - 1);
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
-        List<Task> tasks = taskService.getAllTasks(projectID);
+        List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
+        List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID);
 
         Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
+        Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>();
         List<Task> tasksWithoutSubProject = new ArrayList<>();
 
 
@@ -60,7 +66,6 @@ public class ProjectController {
 
         for (Task task : tasks) {
             if (task.getSubProjectID() != 0) {
-                System.out.println("Task ID: " + task.getName() + " SubProject ID: " + task.getSubProjectID());
                 for (SubProject subProject : subProjects) {
                     if (task.getSubProjectID() == subProject.getID()) {
                         subProjectsAndTasks.get(subProject).add(task);
@@ -71,9 +76,22 @@ public class ProjectController {
                 tasksWithoutSubProject.add(task);
             }
         }
+
+        for (Task task : tasks) {
+            tasksAndSubTasks.put(task, new ArrayList<>());
+        }
+        for (Task task : tasks) {
+            for (SubTask subTask : subTasks) {
+                if (subTask.getTaskID() == task.getID()) {
+                    tasksAndSubTasks.get(task).add(subTask);
+                }
+            }
+        }
+
         model.addAttribute("project", project);
         model.addAttribute("subProjects", subProjectsAndTasks);
         model.addAttribute("tasksWithoutSubProject", tasksWithoutSubProject);
+        model.addAttribute("tasksAndSubTasks", tasksAndSubTasks);
         return "projectpage";
     }
 

@@ -80,7 +80,9 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt( tablePrefix+ "_ID");
+
+                int id = resultSet.getInt(tablePrefix + "_ID");
+
                 String name = resultSet.getString(tablePrefix + "_Name");
                 int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
                 int days = resultSet.getInt(tablePrefix + "_Total_Days");
@@ -323,7 +325,6 @@ public class PSSTSuperclass {
 
 
     //read for a specific object with a specific ID.
-
     public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
         List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
          return assignmentList.get(id- 1);

@@ -47,6 +47,7 @@ public class Task implements ModelInterface {
     public int getID() {
         return taskID;
     }
+
     public void setName(String name) {
         this.taskName = name;
     }

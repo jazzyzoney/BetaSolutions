@@ -18,7 +18,8 @@ public class TaskService {
     }
 
     public void createTaskForProject(Task task){
-        taskRepository.addTaskForProject(task);
+        taskRepository.addTaskToProject(task);
+
     }
 
     public void createTaskForSubProject(Task task){
@@ -26,12 +27,20 @@ public class TaskService {
     }
 
 
-    public List<Task> getAllTasks(int projectID){
-        return taskRepository.readAllTasks(projectID);
+    public List<Task> getAllTasksBelongingToProject(int projectID){
+        return taskRepository.readAllTasksBelongingToProject(projectID);
+    }
+
+    public List <Task> getAllTasksForSubProject(int projectID, int subProjectID){
+        return taskRepository.readAllTasksForSubProject(projectID, subProjectID);
+    }
+    public boolean deleteTask(int taskID){
+        return taskRepository.deleteTask(taskID);
+
     }
 
     public Task getTask(int taskID){
-        Task task = (Task) taskRepository.readTaskByID(taskID);//readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID).get(taskID - 1);
+        Task task = (Task) taskRepository.readTask(taskID);//readAllAssignmentsBelongingToProject("task", "task", Task::new, projectID).get(taskID - 1);
         return task;
     }
 

@@ -44,5 +44,4 @@ public class SubTask {
         subTaskTotalDays = timeManager.calculateDays(subTaskTotalHours);
         subTaskDeadline = timeManager.calculateEndDate(subTaskStartDate, subTaskTotalDays);
     }
-
 }

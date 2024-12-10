@@ -19,7 +19,7 @@ public class EmployeeController {
         this.session = session;
     }
 
-    //create
+    //create new employee - get the form to create a new employee
     @GetMapping("/employee/new")
     public String createNewEmployee(Model model) {
         Employee employee = new Employee();
@@ -28,6 +28,7 @@ public class EmployeeController {
         return "newEmployee";
     }
 
+    //post the new employee and go back to the employee page
     @PostMapping("/employee/new/post")
     public String createNewEmployeePost(Model model, @ModelAttribute Employee employee) { //henter model fra getmapping overfor
         employeeService.createNewEmployee(employee);
@@ -35,7 +36,7 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    //read
+    //read all employees in the business and show them on the employee page in a list
     @GetMapping("/employees")
     public String getAllEmployees(Model model) {
         List<Employee> employees = employeeService.getAllEmployees();
@@ -44,7 +45,7 @@ public class EmployeeController {
         return "employeepage";
     }
 
-    //read
+    //read employees that are assigned to a specific project
     @GetMapping("/project/{id}/employees") //get employees for specific project
     public String getAllEmployeesForProject(@PathVariable int id, Model model) {
         List<Employee> employees = employeeService.getAllEmployeesForProject(id);
@@ -53,7 +54,7 @@ public class EmployeeController {
         return "allEmployeesOnProject";
     }
 
-    //read
+    //read all the employees that are NOT assigned to the specific project
     @GetMapping("/project/{id}/employeesNotAssigned") //get employees NOT on the specific project
     public String getAllEmployeesNotOnProject(@PathVariable int id, Model model) {
         List<Employee> employees = employeeService.getAllEmployeesNotOnProject(id);
@@ -89,14 +90,14 @@ public class EmployeeController {
         return "redirect:/project/employees";
     }
 
-        //update
+    //update - not in use yet, so no test for this method
     @PostMapping("/project/employee/edit")
     public String editEmployee (Employee employee){ //@RequestParam int employeeID ??
          employeeService.editEmployee(employee);
          return "redirect:/project/employees";
     }
 
-        //delete
+    //delete - not in use yet, so no test for this method
     @PostMapping("/project/employee/delete")
     public String deleteEmployee (@RequestParam int employeeID){
          employeeService.deleteEmployee(employeeID);

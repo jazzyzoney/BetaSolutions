@@ -24,10 +24,12 @@ public class EmployeeService {
         return employeeRepository.getAllEmployees();
     }
 
+    //read
     public List<Employee> getAllEmployeesForProject(int projectID){
         return employeeRepository.getAllEmployeesForProject(projectID);
     }
 
+    //read
     public List<Employee> getAllEmployeesNotOnProject(int projectID){
         return employeeRepository.getAllEmployeesNotOnProject(projectID);
     }
@@ -47,12 +49,12 @@ public class EmployeeService {
         employeeRepository.addExistingEmployeeToSubTask(employeeID, taskID, subTaskID, projectID);
     }
 
-    //update
+    //update - not in use yet, so no test for this method
     public void editEmployee(Employee employee){
         employeeRepository.editEmployee(employee);
     }
 
-    //delete
+    //delete - not in use yet, so no test for this method
     public void deleteEmployee(int employeeID){
         employeeRepository.deleteEmployee(employeeID);
     }

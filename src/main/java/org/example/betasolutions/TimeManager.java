@@ -24,14 +24,16 @@ public class TimeManager {
         LocalDate localDate = startDate.toLocalDate(); //create localDate object, from startDate.
 
         //adding days to deadline.
-        for (int i = 0; i <= days; i++){
+        for (int i = 0; i < days; i++){
+            localDate = localDate.plusDays(1); //add one day at a time.
             //if the day is a Sunday or Saturday, it is skipped, since it's the weekend.
             if (localDate.getDayOfWeek() == DayOfWeek.SATURDAY ||
             localDate.getDayOfWeek() == DayOfWeek.SUNDAY){
-                continue;
+                days++;
+               continue;
             }
 
-            localDate.plusDays(1); //add one day at a time.
+
         } //end of loop.
 
         Date deadline = Date.valueOf(localDate);//convert localdate object back into sql.Date object.

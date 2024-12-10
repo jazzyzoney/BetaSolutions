@@ -52,9 +52,12 @@ public class ProjectController {
     public String getProject(@PathVariable("projectID") int projectID,Model model) {
         Project project = projectService.readAllProjects().get(projectID - 1);//get project by id.
 
+        /*
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID); //read all subprojects
         List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID); //readall tasks
         List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID); //read all subtasks.
+*/
+
 
         //the maps contain a type of assignment and the assignments below.
         //eg. Subproject and lists of tasks.
@@ -62,7 +65,8 @@ public class ProjectController {
         Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>(); //all subtasks in tasks
         List<Task> tasksWithoutSubProject = new ArrayList<>(); //all tasks, indpendent of subprojects.
 
-
+        
+/*
         //for each subproject in project, add to Map, and create empty arraylist.
         for (SubProject subProject : subProjects) {
             subProjectsAndTasks.put(subProject, new ArrayList<>());
@@ -94,7 +98,8 @@ public class ProjectController {
                     break; //no need to look at rest of subtasks.
                 }//end of 'if (subTask.getTaskID() == task.getID())'
             }//end of inner for loop (subtask)
-        }//end of outer for loop (task)
+        }//end of outer for loop (task)*/
+
 
         model.addAttribute("project", project);
         model.addAttribute("subProjects", subProjectsAndTasks);

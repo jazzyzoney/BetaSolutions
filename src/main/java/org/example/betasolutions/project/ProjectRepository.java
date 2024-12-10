@@ -23,10 +23,6 @@ import java.util.Map;
 
 public class ProjectRepository extends PSSTSuperclass {
 
-    private List<SubProject> subProjects; //read all subprojects
-    private List<Task> tasks ; //readall tasks
-    private List<SubTask> subTasks ; //read all subtasks.
-
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
@@ -112,27 +108,25 @@ public class ProjectRepository extends PSSTSuperclass {
     }
 
     public List<SubProject> getAllSubProjects(int projectID){
-        //SubProjectRepository subProjectRepository = new SubProjectRepository();
-        subProjects = subProjectRepository.readAllSubProjects(projectID);
+        List <SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID); //get all subprojects using subprojectRepository.
         return subProjects;
     }
 
-    public List<Task> getAllTasksForSubProject (int subProjectID){
-        //TaskRepository taskRepository = new TaskRepository();
-        tasks = taskRepository.readAllTasksForSubProject(subProjectID);
+    public List<Task> getAllTasksForSubProject (int projectID, int subProjectID){
+        List <Task> tasks = taskRepository.readAllTasksForSubProject(projectID, subProjectID); //get all tasks for subproject, using taskRepository.
         return tasks;
     }
 
     public List <Task> getAllTasksBelongingToProject(int projectID){
-        //TaskRepository taskRepository = new TaskRepository();
-        tasks = taskRepository.readAllTasksBelongingToProject(projectID);
+        List <Task> tasks = taskRepository.readAllTasksBelongingToProject(projectID);
         return tasks;
     }
 
     public List <SubTask> getAllSubTasks (int taskID, int projectID){
-        //SubTaskRepository subTaskRepository = new SubTaskRepository();
-        subTasks = subTaskRepository.readSubTaskBelongingToTask(taskID, projectID);
+        List <SubTask> subTasks = subTaskRepository.readSubTaskBelongingToTask(taskID, projectID);
+        return subTasks;
     }
+    /*
     
     public void blalbla() {
         //the maps contain a type of assignment and the assignments below.
@@ -174,6 +168,6 @@ public class ProjectRepository extends PSSTSuperclass {
                 }//end of 'if (subTask.getTaskID() == task.getID())'
             }//end of inner for loop (subtask)
         }//end of outer for loop (task)
-    }
+    }*/
 
 }

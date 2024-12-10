@@ -91,7 +91,7 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public Task readTask(int taskID){
-        return (Task) super.readAssignmentByID("task","task",Task::new,taskID);
+        return (Task) super.readAssignmentByID("task","task",Task::new,taskID); //read task using super class.
     }
 
     public boolean deleteTask(int taskID){
@@ -99,7 +99,6 @@ public class TaskRepository extends PSSTSuperclass {
             return true;
         }
         return false;
-
     }
 
 

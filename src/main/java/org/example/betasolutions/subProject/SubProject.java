@@ -37,8 +37,19 @@ public class SubProject implements ModelInterface {
         this.projectDeadline = projectDeadline;
         this.projectStartDate = projectStartDate;
         this.projectID = projectID;
-
     }
+
+    //constructor with no subprojectID.
+    public SubProject(String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
+        this.projectName = projectName;
+        this.projectTotalHours = projectTotalHours;
+        this.projectTotalDays = projectTotalDays;
+        this.projectTotalPrice = projectTotalPrice;
+        this.projectDeadline = projectDeadline;
+        this.projectStartDate = projectStartDate;
+        this.projectID = projectID;
+    }
+
     public SubProject() {
     }
 

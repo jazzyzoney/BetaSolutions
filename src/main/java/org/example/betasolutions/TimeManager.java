@@ -21,12 +21,11 @@ public class TimeManager {
 
     public Date calculateEndDate(Date startDate, int days){
 
-        //System.out.println("timecalc. start date: " + startDate);
         LocalDate localDate = startDate.toLocalDate(); //create localDate object, from startDate.
 
         //adding days to deadline.
         for (int i = 0; i <= days; i++){
-            //if the day is a Sunday or Saturday, it is skipped, since no one is working those days.
+            //if the day is a Sunday or Saturday, it is skipped, since it's the weekend.
             if (localDate.getDayOfWeek() == DayOfWeek.SATURDAY ||
             localDate.getDayOfWeek() == DayOfWeek.SUNDAY){
                 continue;
@@ -35,7 +34,7 @@ public class TimeManager {
             localDate.plusDays(1); //add one day at a time.
         } //end of loop.
 
-        Date deadline = Date.valueOf(localDate);
+        Date deadline = Date.valueOf(localDate);//convert localdate object back into sql.Date object.
 
         return deadline;
     }

@@ -42,6 +42,7 @@ class TaskRepositoryTest {
     @Test
     void addTaskToProject() {
         Task task = new Task (3, "new task", 4, 1, 5000.2, Date.valueOf("2024-12-09"), Date.valueOf("2024-12-10"));
+        task.setProjectID(1);
         boolean taskAddedToProject = taskRepository.addTaskToProject(task);
 
         assertTrue(taskAddedToProject);
@@ -51,6 +52,8 @@ class TaskRepositoryTest {
     @Test
     void addTaskToSubProject() {
         Task task = new Task (3, "new task", 4, 1, 5000.2, Date.valueOf("2024-12-09"), Date.valueOf("2024-12-10"));
+        task.setProjectID(1);
+
         boolean taskAddedToSubProject = taskRepository.addTaskToProject(task);
 
         assertTrue(taskAddedToSubProject);

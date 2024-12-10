@@ -51,4 +51,16 @@ public class SubTaskRepository extends PSSTSuperclass {
         }
         return subTaskList;
     }
+
+    public List<SubTask> readSubTaskBelongingToTask(int taskID, int projectID){
+        List <SubTask> subTaskList = new ArrayList<>();
+
+        //if subtask has same taskid as taskID, add to subTaskList.
+        for (SubTask subtask : readAllSubTasks(projectID)){
+            if (subtask.getTaskID() == taskID){
+                subTaskList.add(subtask);
+            }
+        }
+        return subTaskList;
+    }
 }

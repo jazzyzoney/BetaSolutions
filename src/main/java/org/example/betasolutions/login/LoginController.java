@@ -1,5 +1,4 @@
 package org.example.betasolutions.login;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,17 +23,24 @@ public class LoginController {
 
     @PostMapping("/login")
     public String postLogin(@ModelAttribute Login login) {
-        return "redirect:/home";
+        loginService.validateLogin(login);
+        if (loginService.validateLogin(login)){
+            return "redirect:/home";
+            } else {
+            return "redirect:/login";
+        }
     }
 
     @GetMapping("/login/new")
     public String getNewLoginPage(Model model) {
         model.addAttribute("login", new Login());
-        return "loginpage";
+        return "newProfile";
     }
 
     @PostMapping("/login/new")
     public String postNewLogin(@ModelAttribute Login login) {
+        int employeeID = loginService.findEmployeeByEmail(login.getEmail());
+        login.setEmployeeID(employeeID);
         loginService.createLogin(login);
         return "redirect:/login";
     }

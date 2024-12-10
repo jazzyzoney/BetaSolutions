@@ -16,4 +16,8 @@ public class LoginService {
     public void createLogin(Login login) {
         loginRepository.createLogin(login);
     }
+
+    public int findEmployeeByEmail(String email) {
+        return loginRepository.findEmployeeByEmail(email);
+    }
 }

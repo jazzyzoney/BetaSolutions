@@ -46,7 +46,7 @@ public class Login {
         return employeeID;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeID(int employeeId) {
         this.employeeID = employeeId;
     }
 

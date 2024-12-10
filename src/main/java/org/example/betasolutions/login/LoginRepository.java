@@ -17,7 +17,7 @@ public class LoginRepository {
     }
 
     // create login
-    public void createLogin(Login login){
+    public void createLogin(Login login) {
         String SQLInsertEmployee = "INSERT INTO employee (employee_id, employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?,?)";
         String SQLInsertLogin = "INSERT INTO profile (email, password, employee_id) VALUES(?,?,?)";
 
@@ -33,6 +33,7 @@ public class LoginRepository {
         }
 
     }
+
     public Login findByEmail(String email) {
         String SQLFindByEmail = "SELECT * FROM profile WHERE email = ?";
         try {
@@ -51,7 +52,23 @@ public class LoginRepository {
         }
         return null;
     }
+
+
+    public int findEmployeeByEmail(String email) {
+        String SQLFindEmployeeByEmail = "SELECT * FROM employee WHERE email = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQLFindEmployeeByEmail);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int employeeID= resultSet.getInt("employee_id");
+
+                // Set other fields as needed
+                return employeeID;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
-
-
-

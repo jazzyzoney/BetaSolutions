@@ -16,10 +16,19 @@
 </p>
 
 <p>(homepage)</p>
-<form class="logo" method="get" th:action="@{/home}" style="display:inline;">
+<h1>Create new profile</h1>
+<form th:action="@{/login/new}" method="post" th:object="${login}"> <br>
+    <br>
+    <label class="large-text">Email:
+        <input type="email" name="email" th:value="${login.email}" required>
+    </label>
+    <br>
+    <label class="large-text">Password:
+        <input type="password" name="password" th:value="${login.password}" required>
+    </label>
+
+    <br>
     <button type="submit">login</button>
-</form>
-
-
+    </form>
 </body>
 </html>

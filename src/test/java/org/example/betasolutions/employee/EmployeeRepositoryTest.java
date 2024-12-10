@@ -27,19 +27,36 @@ class EmployeeRepositoryTest {
 
     @Test
     void getAllEmployees() {
-
+        int actual = employeeRepository.getAllEmployees().size();
+        int expected = 2;
+        assertEquals(expected, actual);
+        String actualName = employeeRepository.getAllEmployees().get(0).getEmployeeName();
+        String expectedName = "Employee 1";
+        assertEquals(expectedName, actualName);
     }
 
     @Test
     void getAllEmployeesForProject() {
+        int actual = employeeRepository.getAllEmployeesForProject(1).size();
+        int expected = 1;
+        assertEquals(expected, actual);
+        String actualName = employeeRepository.getAllEmployeesForProject(1).get(0).getEmployeeName();
+        String expectedName = "Employee 1";
     }
 
     @Test
     void getAllEmployeesNotOnProject() {
+        int actual = employeeRepository.getAllEmployeesNotOnProject(1).size();
+        int expected = 1;
+        assertEquals(expected, actual);
+        String actualName = employeeRepository.getAllEmployeesNotOnProject(1).get(0).getEmployeeName();
+        String expectedName = "Employee 2";
     }
 
     @Test
     void addExistingEmployeeToProject() {
+
+
     }
 
     @Test

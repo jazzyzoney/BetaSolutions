@@ -51,6 +51,8 @@
         <td th:text="${task.days}"></td>
         <td th:text="${task.deadline}"></td>
         <td th:text="${task.startDate}"></td>
+        <td th:action="@{/project/task/delete(taskID=${task.getID()}, projectID=${project.getID()})}" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
+            <button type="submit" class="delete-button">Delete task</button>
     </tr>
 </table>
 
@@ -96,6 +98,12 @@
             <li th:if="${#lists.isEmpty(entry.value)}">No tasks for this subproject</li>
             <li th:each="task : ${entry.value}">
                 Task: <span th:text="${task.getName()}"></span> - Hours: <span th:text="${task.getHours()}"></span>
+                <!-- Delete button for each task in the subproject -->
+                <form th:action="@{/project/task/delete(taskID=${task.getID()}, projectID=${project.getID()})}" method="post"
+                      onsubmit="return confirm('Are you sure you want to delete this task?');">
+                    <button type="submit" class="delete-button">Delete Task</button>
+                </form>
+
             </li>
         </ul>
     </li>

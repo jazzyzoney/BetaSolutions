@@ -37,8 +37,8 @@ public class TaskController {
 
     @PostMapping("/project/{projectID}/subproject/{subProjectID}/New/task/post")
     public String createNewTaskForSubProjectPost(@PathVariable("projectID") int projectID, @PathVariable("subProjectID") int subProjectID,@ModelAttribute Task task){
-        task.setProjectID(projectID);
-        task.setSubProjectID(subProjectID);
+        task.setProjectID(projectID); //set project id.
+        task.setSubProjectID(subProjectID); //set subproject id.
         taskService.createTaskForSubProject(task);
         return "redirect:/project/" + projectID;
     }
@@ -48,7 +48,8 @@ public class TaskController {
         return "taskpage";
     }
     @PostMapping("project/task/delete")
-    public String deleteTask(){
-        return "redirect:/project";
+    public String deleteTask(@RequestParam int taskID, @RequestParam int projectID){
+        taskService.deleteTask(taskID);
+        return "redirect:/project/"+ projectID ;
     }
 }

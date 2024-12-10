@@ -42,8 +42,7 @@ class SubProjectRepositoryTest {
 
     @Test
     void insertSubProject() {
-        SubProject subproject = new SubProject("test subproject", 5, 1,
-                1000.5, Date.valueOf("2024-12-09"), Date.valueOf("2024-12-10"), 1);
+        SubProject subproject = new SubProject("sub 1",200,500,Date.valueOf("1996-06-06"),1);
 
         boolean subprojectInserted = subProjectRepository.insertSubProject(subproject);
 

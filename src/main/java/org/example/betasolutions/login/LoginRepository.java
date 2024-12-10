@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 
 @Repository
@@ -55,13 +55,13 @@ public class LoginRepository {
 
 
     public int findEmployeeByEmail(String email) {
-        String SQLFindEmployeeByEmail = "SELECT * FROM employee WHERE email = ?";
+        String SQLFindEmployeeByEmail= "SELECT employee_id FROM employee WHERE email = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLFindEmployeeByEmail);
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                int employeeID= resultSet.getInt("employee_id");
+                int employeeID = resultSet.getInt("employee_id");
 
                 // Set other fields as needed
                 return employeeID;

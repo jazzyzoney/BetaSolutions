@@ -54,14 +54,13 @@ public class TaskController {
     public String createNewTaskForSubProjectPost(@PathVariable("projectID") int projectID, @PathVariable("subProjectID") int subProjectID,@ModelAttribute Task task){
         task.setProjectID(projectID); //set project id.
         task.setSubProjectID(subProjectID); //set subproject id.
-        task.setTotalHours(taskService.getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
         taskService.createTaskForSubProject(task);
         return "redirect:/project/" + projectID;
     }
 
+    /*
     @PostMapping("/project/task/edit")
     public String editTask(@ModelAttribute int hours){
-
         Task task = (Task) session.getAttribute("task");// taskService.getTask(projectID, taskID);
 
         System.out.println("task contr. start date: " + task.getStartDate());
@@ -71,7 +70,7 @@ public class TaskController {
         taskService.updateHours(task, hours);
 
         return "redirect:/project";
-    }
+    }*/
 
     @PostMapping("project/task/delete")
     public String deleteTask(@RequestParam int taskID, @RequestParam int projectID){

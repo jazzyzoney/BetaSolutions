@@ -1,16 +1,29 @@
-html, body {
-    display: flex;
-    flex-direction: row;
+:root {
+    --dark-purple: #4B0082; /* Darker shade of purple */
+    --medium-purple: #9370DB; /* Lighter shade of purple */
+    --light-purple: #D8BFD8; /* Much lighter shade of purple */
 }
-.left-side{
-    width: 50%;
-    border-right: 1px solid transparent;
+
+.subproject {
+    background-color: var(--dark-purple);
+    color: white; /* Adjust text color for better readability */
 }
-.right-side {
-    width: 50%;
+
+.task {
+    background-color: var(--medium-purple);
+    color: white; /* Adjust text color for better readability */
 }
-iframe{
-    width: 100%;
-    height: 100%;
-    border: none;
+
+.subtask {
+    background-color: var(--light-purple);
+    color: black; /* Adjust text color for better readability */
+}
+
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
 }

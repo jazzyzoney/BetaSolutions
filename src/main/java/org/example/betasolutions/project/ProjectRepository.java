@@ -3,32 +3,17 @@ package org.example.betasolutions.project;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
-import org.example.betasolutions.subProject.SubProject;
-import org.example.betasolutions.subProject.SubProjectRepository;
-import org.example.betasolutions.subTask.SubTask;
-import org.example.betasolutions.subTask.SubTaskRepository;
-import org.example.betasolutions.task.Task;
-import org.example.betasolutions.task.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 
 public class ProjectRepository extends PSSTSuperclass {
-
-    @Autowired
-    private TaskRepository taskRepository;
-    @Autowired
-    private SubTaskRepository subTaskRepository;
-    @Autowired
-    private SubProjectRepository subProjectRepository;
 
     @Autowired
     public ProjectRepository(ConnectionManager connectionManager) {
@@ -106,68 +91,4 @@ public class ProjectRepository extends PSSTSuperclass {
         }
         return false;
     }
-
-    public List<SubProject> getAllSubProjects(int projectID){
-        List <SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID); //get all subprojects using subprojectRepository.
-        return subProjects;
-    }
-
-    public List<Task> getAllTasksForSubProject (int projectID, int subProjectID){
-        List <Task> tasks = taskRepository.readAllTasksForSubProject(projectID, subProjectID); //get all tasks for subproject, using taskRepository.
-        return tasks;
-    }
-
-    public List <Task> getAllTasksBelongingToProject(int projectID){
-        List <Task> tasks = taskRepository.readAllTasksBelongingToProject(projectID);
-        return tasks;
-    }
-
-    public List <SubTask> getAllSubTasks (int taskID, int projectID){
-        List <SubTask> subTasks = subTaskRepository.readSubTaskBelongingToTask(taskID, projectID);
-        return subTasks;
-    }
-    /*
-    
-    public void blalbla() {
-        //the maps contain a type of assignment and the assignments below.
-        //eg. Subproject and lists of tasks.
-        Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>(); //all tasks belonging to subprojects.
-        Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>(); //all subtasks in tasks
-        List<Task> tasksWithoutSubProject = new ArrayList<>(); //all tasks, indpendent of subprojects.
-
-
-        //for each subproject in project, add to Map, and create empty arraylist.
-        for (SubProject subProject : subProjects) {
-            subProjectsAndTasks.put(subProject, new ArrayList<>());
-        }
-
-        //For each task in project :
-        for (Task task : tasks) {
-            if (task.getSubProjectID() != 0) { //if task has subproject:
-
-                for (SubProject subProject : subProjects) { //for each subproject.
-                    if (task.getSubProjectID() == subProject.getID()) { //if task.subprojectID and subproject.subprojectID are equal:
-                        subProjectsAndTasks.get(subProject).add(task); //add task to subproject.
-                        break; // no need to look at rest of subprojects.
-                    }
-                }
-            } else { //if task doesn't have a subproject
-                tasksWithoutSubProject.add(task); //add subproject
-            } //end of 'if task.getSubProjectID() != 0)'
-        }//end of outer loop.
-
-        for (Task task : tasks) {// for each task in project
-            tasksAndSubTasks.put(task, new ArrayList<>()); //add task and new arraylist to hashmap.
-        }
-
-        for (Task task : tasks) { //for each task in project
-            for (SubTask subTask : subTasks) { //for each subtask in project.
-                if (subTask.getTaskID() == task.getID()) { //if subtask.taskID and task.taskID are equal
-                    tasksAndSubTasks.get(task).add(subTask); //add subtask to subtasklist in task.
-                    break; //no need to look at rest of subtasks.
-                }//end of 'if (subTask.getTaskID() == task.getID())'
-            }//end of inner for loop (subtask)
-        }//end of outer for loop (task)
-    }*/
-
 }

@@ -34,7 +34,7 @@ class TaskTest {
         actualDays = task.getDays();
         assertEquals(expectedDays, actualDays);
 
-        expectedDeadLine = Date.valueOf("2024-12-16");
+        expectedDeadLine = Date.valueOf("2024-12-13"); // + 2 days.
         actualDeadLine = task.getDeadline();
         assertEquals(expectedDeadLine, actualDeadLine);
 

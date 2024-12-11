@@ -6,7 +6,9 @@ import org.example.betasolutions.PSSTSuperclass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,20 @@ public class TaskRepository extends PSSTSuperclass {
     public TaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
+
+    public void updateTaskHours(int taskID, int taskHours){
+        super.updateInt("task", "task_Total_Hours", taskID, taskHours);
+    }
+
+    public void updateTaskDays(int taskID, int taskDays){
+        super.updateInt("task", "task_total_days", taskID, taskDays);
+
+    }
+
+    public void updateTaskDeadline(int taskID, Date taskDate){
+        super.updateDate("task", "task_deadline", taskID, taskDate);
+    }
+
     public boolean addTaskToProject(Task task){
         String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
@@ -60,12 +76,6 @@ public class TaskRepository extends PSSTSuperclass {
         }
         return taskList;
     }
-/*
-    public List<ModelInterface> readAllTasksBelongingToProject(int projectID){
-        return super.readAllAssignmentsBelongingToProject("task","task",Task::new,projectID);
-    }
-*/
-
 
     public List<Task> readAllTasksForSubProject(int projectID, int subProjectID){
 

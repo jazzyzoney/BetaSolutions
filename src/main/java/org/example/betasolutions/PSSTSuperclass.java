@@ -80,7 +80,9 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+
                 int id = resultSet.getInt(tablePrefix + "_ID");
+
                 String name = resultSet.getString(tablePrefix + "_Name");
                 int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
                 int days = resultSet.getInt(tablePrefix + "_Total_Days");
@@ -170,6 +172,34 @@ public class PSSTSuperclass {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, newValue);
             preparedStatement.setInt(2, functionID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateDate(String tableName, String attributeName, int assignmentID, Date newValue){
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setDate(1, newValue);
+            preparedStatement.setInt(2, assignmentID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateInt(String tableName, String attributeName, int assignmentID, int newValue){
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, newValue);
+            preparedStatement.setInt(2, assignmentID);
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {

@@ -1,17 +1,19 @@
 package org.example.betasolutions.task;
 
 import org.example.betasolutions.ConnectionManager;
-import org.example.betasolutions.project.ProjectRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,15 +29,38 @@ class TaskRepositoryTest {
     TaskRepository taskRepository;
 
     @Autowired
+
     private ConnectionManager connectionManager;
+
+    Connection conn;
+
+    @BeforeEach
+    void setup(){
+        conn = connectionManager.getConnection();
+    }
+
 
     @AfterEach
     void tearDown(){
         try {
-            connectionManager.getConnection().rollback(); //rollback changes
+            conn.rollback();
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void updateTaskHours() {
+        //taskRepository.updateTaskHours(1, 4);
+
+    }
+
+    @Test
+    void updateTaskDays() {
+    }
+
+    @Test
+    void addTaskForProject() {
     }
 
     //foreing key error. 'project.project_id'
@@ -88,6 +113,7 @@ class TaskRepositoryTest {
 
     @Test
     void readTask() {
+
         int expectedID = 1;
         Task task1 = taskRepository.readTask(expectedID);
         int actualID = task1.getID();
@@ -104,4 +130,5 @@ class TaskRepositoryTest {
         boolean taskDeleted = taskRepository.deleteTask(1);
         assertTrue(taskDeleted);
     }
+
 }

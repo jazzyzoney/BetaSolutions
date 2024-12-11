@@ -8,7 +8,13 @@
 </head>
 <body>
     <header>
+        <a th:href="@{/home}" class="logo">
+            <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+        </a>
 
+        <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+            <button type="submit">Log out</button>
+        </form>
     </header>
 
     <h2>Home</h2>

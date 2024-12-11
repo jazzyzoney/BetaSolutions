@@ -1,6 +1,6 @@
 :root {
-    --dark-purple: #6a2c96; /* Darker shade of purple */
-    --medium-purple: #9370DB; /* Lighter shade of purple */
+    --dark-purple: #7851A9; /* Darker shade of purple */
+    --medium-purple: #9e7fca; /* Lighter shade of purple */
     --light-purple: #D8BFD8; /* Much lighter shade of purple */
 }
 
@@ -68,7 +68,7 @@ header{
 
 /* color of the logo */
 header .logo .beta{
-    color:var(--medium-purple);
+    color:var(--dark-purple);
 }
 
 header .logo .solutions{

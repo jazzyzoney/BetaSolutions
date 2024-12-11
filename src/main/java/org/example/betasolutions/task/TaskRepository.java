@@ -132,11 +132,11 @@ public class TaskRepository extends PSSTSuperclass {
     public boolean updateTotalHoursForTask(int taskID, int newTotalHoursForTask){
         return super.updateInt("task", "task_total_hours", taskID, newTotalHoursForTask);
     }
-    
+
     public boolean updateHoursForTask(Task task, int newHoursForTask){
         task.setHours(newHoursForTask); //set Task hours.
-        int totalHours = getTotalHoursForTask(Task); //get new total hours.
-        //task.setTotalHours(newHoursForTask);
+        int totalHours = getTotalHoursForTask(task); //get new total hours.
+        
         return updateTotalHoursForTask(task.getID(), totalHours); //update total hours for task.
     }
 

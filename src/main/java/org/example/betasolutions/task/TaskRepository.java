@@ -101,22 +101,6 @@ public class TaskRepository extends PSSTSuperclass {
         return false;
     }
 
-    /*
-    public List <Task> getAllTasksBelongingToSubProject( int subProjectID){
-        List <Task> allTasksForSubProject = new ArrayList<>();
-
-        List <Task> taskList = r
-        //for each task in tasklist:
-        for (Task task : taskList){
-            if ( task.getSubProjectID() == subProjectID){ //if task.subprojectID and subprojectID
-                allTasksForSubProject.add(task);//add task to tasklist.
-            }
-        }
-        return allTasksForSubProject;
-    }*/
-
-
-
 
 }
 

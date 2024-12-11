@@ -50,53 +50,43 @@ public class ProjectController {
     //does this need pathvariable?
     @GetMapping("/project/{projectID}")
     public String getProject(@PathVariable("projectID") int projectID,Model model) {
-        Project project = projectService.readAllProjects().get(projectID - 1);//get project by id.
+        Project project = projectService.readAllProjects().get(projectID - 1);
+        List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
+        List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
+        List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID);
 
-        List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID); //read all subprojects
-        List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID); //readall tasks
-        List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID); //read all subtasks.
-
-        //the maps contain a type of assignment and the assignments below.
-        //eg. Subproject and lists of tasks.
-        Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>(); //all tasks belonging to subprojects.
-        Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>(); //all subtasks in tasks
-        List<Task> tasksWithoutSubProject = new ArrayList<>(); //all tasks, indpendent of subprojects.
+        Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
+        Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>();
+        List<Task> tasksWithoutSubProject = new ArrayList<>();
 
 
-
-        //for each subproject in project, add to Map, and create empty arraylist.
         for (SubProject subProject : subProjects) {
             subProjectsAndTasks.put(subProject, new ArrayList<>());
         }
 
-        //For each task in project :
         for (Task task : tasks) {
-            if (task.getSubProjectID() != 0) { //if task has subproject:
-
-                for (SubProject subProject : subProjects) { //for each subproject.
-                    if (task.getSubProjectID() == subProject.getID()) { //if task.subprojectID and subproject.subprojectID are equal:
-                        subProjectsAndTasks.get(subProject).add(task); //add task to subproject.
-                        break; // no need to look at rest of subprojects.
+            if (task.getSubProjectID() != 0) {
+                for (SubProject subProject : subProjects) {
+                    if (task.getSubProjectID() == subProject.getID()) {
+                        subProjectsAndTasks.get(subProject).add(task);
+                        break;
                     }
                 }
-            } else { //if task doesn't have a subproject
-                tasksWithoutSubProject.add(task); //add subproject
-            } //end of 'if task.getSubProjectID() != 0)'
-        }//end of outer loop.
-
-        for (Task task : tasks) {// for each task in project
-            tasksAndSubTasks.put(task, new ArrayList<>()); //add task and new arraylist to hashmap.
+            } else {
+                tasksWithoutSubProject.add(task);
+            }
         }
 
-        for (Task task : tasks) { //for each task in project
-            for (SubTask subTask : subTasks) { //for each subtask in project.
-                if (subTask.getTaskID() == task.getID()) { //if subtask.taskID and task.taskID are equal
-                    tasksAndSubTasks.get(task).add(subTask); //add subtask to subtasklist in task.
-                    break; //no need to look at rest of subtasks.
-                }//end of 'if (subTask.getTaskID() == task.getID())'
-            }//end of inner for loop (subtask)
-        }//end of outer for loop (task)*/
-
+        for (Task task : tasks) {
+            tasksAndSubTasks.put(task, new ArrayList<>());
+        }
+        for (Task task : tasks) {
+            for (SubTask subTask : subTasks) {
+                if (subTask.getTaskID() == task.getID()) {
+                    tasksAndSubTasks.get(task).add(subTask);
+                }
+            }
+        }
 
         model.addAttribute("project", project);
         model.addAttribute("subProjects", subProjectsAndTasks);

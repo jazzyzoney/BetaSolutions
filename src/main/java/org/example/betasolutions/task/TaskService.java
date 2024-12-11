@@ -19,13 +19,16 @@ public class TaskService {
 
     public void createTaskForProject(Task task){
         taskRepository.addTaskToProject(task);
-
     }
+
 
     public void createTaskForSubProject(Task task){
         taskRepository.addTaskToSubProject(task);
     }
 
+    public int getTotalHoursForTask(Task task){
+        return taskRepository.getTotalHoursForTask(task);
+    }
 
     public List<Task> getAllTasksBelongingToProject(int projectID){
         return taskRepository.readAllTasksBelongingToProject(projectID);

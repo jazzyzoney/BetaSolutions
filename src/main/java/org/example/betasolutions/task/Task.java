@@ -11,6 +11,7 @@ public class Task implements ModelInterface {
     private int taskTotalHours;
     private int taskHours;
     private int taskTotalDays;
+    private int taskDays;
     private double taskTotalPrice;
     private Date taskDeadLine;
     private Date taskStartDate;
@@ -34,12 +35,12 @@ public class Task implements ModelInterface {
 
     //set all values
     public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate){
-        //this.id = id;
         this.taskName = taskName;
         this.taskTotalPrice = taskTotalPrice;
         this.taskStartDate = taskStartDate;
 
-        setHours(taskTotalHours);
+        setHours(taskHours); //set task hours and days.
+        setTotalHours(taskTotalHours); //set total hours, total days, and deadline.
     }
 
     public void setID(int id) {
@@ -59,8 +60,15 @@ public class Task implements ModelInterface {
         this.taskHours = hours;
         TimeManager timeManager = new TimeManager();
 
-        taskTotalDays = timeManager.calculateDays(hours);
-        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
+        taskDays = timeManager.calculateDays(hours); //set days.
+    }
+
+    public void setTotalHours(int totalHours){
+        this.taskTotalHours = totalHours;
+        TimeManager timeManager = new TimeManager();
+
+        taskTotalDays = timeManager.calculateDays(totalHours); //set total days.
+        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays); //set new deadline
     }
 
     public int getHours() {
@@ -69,14 +77,14 @@ public class Task implements ModelInterface {
     public int getTotalHours() {
         return taskTotalHours;
     }
-
+/*
     public void setTotalHours(int hours){
         TimeManager timeManager = new TimeManager();
         this.taskTotalHours = hours;
 
         taskTotalDays = timeManager.calculateDays(taskTotalHours);
         taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
-    }
+    }*/
     
     public int getSubProjectID() {
         return subProjectID;

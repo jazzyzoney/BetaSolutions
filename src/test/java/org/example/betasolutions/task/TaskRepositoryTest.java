@@ -48,7 +48,7 @@ class TaskRepositoryTest {
             e.printStackTrace();
         }
     }
-
+/*
     @Test
     void updateTaskTotalHours() {
         //taskRepository.updateTaskHours(1, 4);
@@ -58,7 +58,7 @@ class TaskRepositoryTest {
     @Test
     void updateTaskTotalDays() {
     }
-
+*/
     @Test
     void addTaskForProject() {
     }
@@ -129,6 +129,21 @@ class TaskRepositoryTest {
     void deleteTask() {
         boolean taskDeleted = taskRepository.deleteTask(1);
         assertTrue(taskDeleted);
+    }
+
+    @Test
+    void getTotalHoursForTask(){
+        assertTrue(false);
+    }
+
+    @Test
+    void updateTotalHoursForTask(){
+        assertTrue (false);
+    }
+
+    @Test
+    void updateHoursForTask(){
+        assertTrue (false);
     }
 
 }

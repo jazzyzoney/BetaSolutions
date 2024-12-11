@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS task (
                                     task_total_hours INT NOT NULL,
                                     task_hours INT NOT NULL,
                                     task_total_days INT NOT NULL,
+                                    task_days INT NOT NULL,
                                     task_total_price DOUBLE NOT NULL,
                                     task_deadline DATE NOT NULL,
                                     task_start_date DATE NOT NULL,
@@ -121,10 +122,10 @@ VALUES
     ('SubProject 2', 100, 10, 3000.0, '2025-01-05', '2024-12-10', 2, TRUE);
 
 -- Insert sample data into task table
-INSERT INTO task (task_name, task_total_hours, task_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
+INSERT INTO task (task_name, task_total_hours, task_hours, task_total_days, task_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
 VALUES
-    ('Task 1', 100, 50, 5, 1500.0, '2024-12-05', '2024-11-10', 1, 1, TRUE),
-    ('Task 2', 50, 25, 4, 1200.0, '2024-12-20', '2024-11-15', 2, 2, TRUE);
+    ('Task 1', 100, 50, 5, 3, 1500.0, '2024-12-05', '2024-11-10', 1, 1, TRUE),
+    ('Task 2', 50, 25, 4, 2, 1200.0, '2024-12-20', '2024-11-15', 2, 2, TRUE);
 
 -- Insert sample data into sub_task table
 INSERT INTO sub_task (sub_task_name, sub_task_total_hours, sub_task_total_days, sub_task_total_price, sub_task_deadline, sub_task_start_date, task_id, sub_task_active)

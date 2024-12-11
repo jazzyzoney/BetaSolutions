@@ -8,6 +8,11 @@ class TaskTest {
 
     @Test
     void setHours() {
-        assertTrue(false);
+        assertTrue(false); //hours, days
+    }
+
+    @Test
+    void setTotalHours(){
+        assertTrue(false); //total hours, total days, deadline
     }
 }

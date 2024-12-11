@@ -35,12 +35,17 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public boolean addTaskToProject(Task task){
-        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?)";
+        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, task_hours, task_days) values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
             preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
 
-            preparedStatement.setInt(2, getTotalHoursForTask(task));//set total hours for task.
+            /*preparedStatement.setInt(2, getTotalHoursForTask(task));//set total hours for task.
+            preparedStatement.setInt(3, task.getTotalDays()); //update total days.
+            preparedStatement.setInt(5, task.getDeadline());//update*/
+            preparedStatement.setInt(8, task.getHours());//set task specific hours
+            preparedStatement.setInt(9, task.getDays());//set task specific days.
+
             preparedStatement.executeUpdate(); //add task to database.
             return true;
         }catch (Exception e){
@@ -49,11 +54,15 @@ public class TaskRepository extends PSSTSuperclass {
         return false;
     }
     public boolean addTaskToSubProject(Task task){
-        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id) values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id, task_hours, task_days) values(?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
             preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
             preparedStatement.setInt(8,task.getSubProjectID()); //set subproject id for task.
+
+            preparedStatement.setInt(2, task.getTotalHours());//update task Total hours.
+            preparedStatement.setInt(9, task.getHours()); //set task specific hours.
+            preparedStatement.setInt(10, task.getDays());//set task specific days
             preparedStatement.executeUpdate(); //add task to database.
             return true;
         }catch (Exception e){

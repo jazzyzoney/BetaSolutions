@@ -15,7 +15,7 @@ public class SubTaskRepository extends PSSTSuperclass {
     public SubTaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
-    public void addSubTaskToTask(SubTask subTask){
+    public boolean addSubTaskToTask(SubTask subTask){
         String sql = "insert into sub_task (sub_task_name, sub_task_total_hours,sub_task_total_days,sub_task_total_price,sub_task_deadline,sub_task_start_date,task_id) values(?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(subTask,sql);
         try{
@@ -51,7 +51,7 @@ public class SubTaskRepository extends PSSTSuperclass {
         }
         return subTaskList;
     }
-    public void deleteSubTask(int subTaskID) {
+    public boolean deleteSubTask(int subTaskID) {
         try {
         conn.setAutoCommit(false);
         super.deleteAllWhere("sub_task", "sub_task_id = " + subTaskID);

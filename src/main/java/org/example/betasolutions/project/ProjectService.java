@@ -27,7 +27,8 @@ public class ProjectService {
         projectRepository.updateProject(project,project_id);
     }
 
-    public boolean updateTotalHoursForProject(int projectID){
+    public boolean updateProjectTotalHours(int projectID){
+        
         return true;
     }
 

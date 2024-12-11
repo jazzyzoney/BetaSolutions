@@ -23,7 +23,7 @@ public class SubTaskService {
         subTask.setSubTaskTotalHours(totalHours); //update on object.
         subTaskRepository.updateSubTaskTotalHours(subTask); //update on database
 
-        taskService.updateTaskTotalHours(subTask.getTaskID(), totalHours); //update on task.
+        taskService.updateTaskTotalHours(subTask.getTaskID()); //update on task.
 
     }
 }

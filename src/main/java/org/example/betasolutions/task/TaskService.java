@@ -78,11 +78,12 @@ public class TaskService {
     }
 */
 
-    public boolean updateTaskTotalHours(int taskID){
+    public void updateTaskTotalHours(int taskID){
         Task task = taskRepository.readTask(taskID); //read task.
         int totalHours = taskRepository.getTotalHoursForTask(task); //getTotalHours for task.
+
         task.setTotalHours(totalHours);//set hours on task.
-        taskRepository.updateTaskTotalHours (task, totalHours); //update task total hours on database.
+        taskRepository.updateTaskTotalHours (taskID, totalHours); //update task total hours on database.
 
         if (task.getSubProjectID() > 0) {
             subProjectService.updateSubProjectTotalHours(task.getSubProjectID());

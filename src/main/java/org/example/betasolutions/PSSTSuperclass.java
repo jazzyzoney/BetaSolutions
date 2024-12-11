@@ -1,6 +1,5 @@
 package org.example.betasolutions;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +71,7 @@ public class PSSTSuperclass {
     }
 
     
-    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix,String assingmentID, FactoryInterface factory, int projectID) {
+    public List<ModelInterface> readAllAssignmentsBelongingToProject(String tableName, String tablePrefix, FactoryInterface factory, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
         String sql = "SELECT * FROM " + tableName + " WHERE  project_ID = ?" ;
 
@@ -81,7 +80,9 @@ public class PSSTSuperclass {
             preparedStatement.setInt(1, projectID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt(assingmentID + "_ID");
+
+                int id = resultSet.getInt(tablePrefix + "_ID");
+
                 String name = resultSet.getString(tablePrefix + "_Name");
                 int hours = resultSet.getInt(tablePrefix + "_Total_Hours");
                 int days = resultSet.getInt(tablePrefix + "_Total_Days");
@@ -171,6 +172,34 @@ public class PSSTSuperclass {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, newValue);
             preparedStatement.setInt(2, functionID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateDate(String tableName, String attributeName, int assignmentID, Date newValue){
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setDate(1, newValue);
+            preparedStatement.setInt(2, assignmentID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateInt(String tableName, String attributeName, int assignmentID, int newValue){
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, newValue);
+            preparedStatement.setInt(2, assignmentID);
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -281,7 +310,7 @@ public class PSSTSuperclass {
     //put og patch
     //this one is for updating an int value in a table with a specific ID.
     public boolean updateObjectInt(String tableName, String attributeName, int functionID, int newValue) {
-        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "ID = ?";
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, newValue);
@@ -296,26 +325,10 @@ public class PSSTSuperclass {
 
 
     //read for a specific object with a specific ID.
-    public ModelInterface readAssingmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
-        String sql = "SELECT FROM " + tableName + " WHERE " + tablePrefix + "ID = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                String name = resultSet.getString(tablePrefix + "Name");
-                int hours = resultSet.getInt(tablePrefix + "TotalHours");
-                int days = resultSet.getInt(tablePrefix + "TotalDays");
-                double totalPrice = resultSet.getDouble(tablePrefix + "TotalPrice");
-                Date endDate = resultSet.getDate(tablePrefix + "DeadLine");
-                Date startDate = resultSet.getDate(tablePrefix + "StartDate");
-                return factory.build(id, name, hours, days, totalPrice, endDate, startDate);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
+        List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
+         return assignmentList.get(id- 1);
 
-        }
-        return null;
     }
     
 

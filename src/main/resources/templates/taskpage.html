@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New SubProject</title>
+    <title>Create New Task</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
@@ -36,6 +37,26 @@
     <br>
     <button type="submit">Create SubProject</button>
 </form>
+
+    <p> task page</p>
+    <h2 th:text="${task.getName()}"></h2>
+
+    <!--@{/project/{projectID}/task/{taskID}/edit (projectID = ${projectID}, taskID = ${task.getID()})}"  th:object="${task}"-->
+    <form
+        th:method="post" th:action = "@{/project/task/edit}" th:object="${task}" style="display:inline;">
+        <label for="hours"> Hours: </label>
+        <input type="number" id="hours" name="hours" th:value = "${task.getHours()}"/>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <!--
+    <form th:action="@{/attractions/save}" th:method="post" th:object="${touristAttraction}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${touristAttraction.name}"> <br>
+-->
+
 
 </body>
 </html>

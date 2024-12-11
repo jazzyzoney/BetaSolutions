@@ -1,46 +1,48 @@
 package org.example.betasolutions.subProject;
 
-import org.example.betasolutions.ModelInterface;
-
+import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
+import org.example.betasolutions.ModelInterface;
 
 public class SubProject implements ModelInterface {
-    private int subProjectID;
-    private String projectName;
-    private int projectTotalHours;
-    private int projectTotalDays;
-    private double projectTotalPrice;
-    private Date projectDeadline;
-    private Date projectStartDate;
-    private int projectID;
 
+    int subProjectID;
+    String subProjectName;
 
-    public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
-        this.subProjectID = subProjectID;
-        this.projectName = projectName;
-        this.projectTotalHours = projectTotalHours;
-        this.projectTotalDays = projectTotalDays;
-        this.projectTotalPrice = projectTotalPrice;
-        this.projectDeadline = projectDeadline;
-        this.projectStartDate = projectStartDate;
+    int subProjectTotalHours;
+    int subProjectTotalDays;
+    double subProjectTotalPrice;
+    Date subProjectStartDate;
+    Date subProjectDeadline;
 
+    int projectID;
+
+    public SubProject(){}
+
+    //factory construcor
+    public SubProject(int id, String name, int hours, int days, double price, Date startDate, Date deadLine){
+        subProjectID = id;
+        subProjectName = name;
+        subProjectTotalHours = hours;
+        subProjectTotalDays = days;
+        subProjectTotalPrice = price;
+        subProjectStartDate = startDate;
+        subProjectDeadline = deadLine;
     }
-    public SubProject(int subProjectID, String projectName, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline, int projectID) {
-        this.subProjectID = subProjectID;
-        this.projectName = projectName;
-        this.projectTotalHours = projectTotalHours;
-        this.projectTotalDays = projectTotalDays;
-        this.projectTotalPrice = projectTotalPrice;
-        this.projectDeadline = projectDeadline;
-        this.projectStartDate = projectStartDate;
+
+    //set all variables:
+    public SubProject(String name, int hours, double price, Date startDate, int projectID){
+        subProjectName = name;
+        subProjectTotalPrice = price;
+        subProjectStartDate = startDate;
+
         this.projectID = projectID;
 
+        setHours(hours);
     }
-    public SubProject() {
-    }
+
 
     public void setID(int subProjectID) {
         this.subProjectID = subProjectID;
@@ -54,46 +56,43 @@ public class SubProject implements ModelInterface {
     public int getProjectID() {
         return projectID;
     }
-    public void setName(String projectName) {
-        this.projectName = projectName;
+    public void setName(String subProjectName) {
+        this.subProjectName = subProjectName;
     }
     public String getName() {
-        return projectName;
+        return subProjectName;
     }
-    public void setHours(int projectTotalHours) {
-        this.projectTotalHours = projectTotalHours;
+    public void setHours(int subProjectTotalHours) {
+        this.subProjectTotalHours = subProjectTotalHours;
+
     }
     public int getHours() {
-        return projectTotalHours;
+        return subProjectTotalHours;
     }
-    public void setDays(int projectTotalDays) {
-        this.projectTotalDays = projectTotalDays;
+    public void setDays(int subProjectTotalDays) {
+        this.subProjectTotalDays = subProjectTotalDays;
     }
     public int getDays() {
-        return projectTotalDays;
+        return subProjectTotalDays;
     }
-    public void setTotalPrice(double projectTotalPrice) {
-        this.projectTotalPrice = projectTotalPrice;
+    public void setTotalPrice(double subProjectTotalPrice) {
+        this.subProjectTotalPrice = subProjectTotalPrice;
     }
     public double getTotalPrice() {
-        return projectTotalPrice;
+        return subProjectTotalPrice;
     }
-    public void setDeadline(Date projectDeadline) {
-        this.projectDeadline = projectDeadline;
+    public void setDeadline(Date subProjectDeadline) {
+        this.subProjectDeadline = subProjectDeadline;
     }
     public Date getDeadline() {
-        return projectDeadline;
+        return subProjectDeadline;
     }
 
-    /*
-    public LocalDate getDeadlineAsLocalDate(){
-        return projectDeadline.toLocalDate();
-    }*/
-    public void setStartDate(Date projectStartDate) {
-        this.projectStartDate = projectStartDate;
+    public void setStartDate(Date subProjectStartDate) {
+        this.subProjectStartDate = subProjectStartDate;
     }
     public Date getStartDate() {
-        return projectStartDate;
+        return subProjectStartDate;
     }
 
 

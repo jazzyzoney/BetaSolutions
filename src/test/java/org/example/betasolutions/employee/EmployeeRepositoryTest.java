@@ -59,7 +59,6 @@ class EmployeeRepositoryTest {
         int  actual = employeeRepository.getAllEmployeesForProject(2).size();
         int expected = 2;
         assertEquals(expected, actual);
-
     }
 
     @Test
@@ -72,9 +71,9 @@ class EmployeeRepositoryTest {
 
     @Test
     void addExistingEmployeeToSubTask() {
-        boolean actual = employeeRepository.addExistingEmployeeToSubTask(2, 2, 2, 2);
-        boolean expected = true;
+        employeeRepository.addExistingEmployeeToSubTask(2, 2, 2, 2);
+        int actual = employeeRepository.getAllEmployees().size();
+        int expected = 2;
         assertEquals(expected, actual);
-
     }
 }

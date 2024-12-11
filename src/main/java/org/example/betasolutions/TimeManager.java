@@ -40,4 +40,5 @@ public class TimeManager {
 
         return deadline;
     }
+
 }

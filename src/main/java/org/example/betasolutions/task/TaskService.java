@@ -56,8 +56,8 @@ public class TaskService {
         Date deadline = timeManager.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
 
 
-        taskRepository.updateTaskHours(taskID, hours);
-        taskRepository.updateTaskDays(taskID, days);
+        taskRepository.updateTaskTotalHours(taskID, hours);
+        taskRepository.updateTaskTotalDays(taskID, days);
         taskRepository.updateTaskDeadline(taskID, deadline);
 
     }

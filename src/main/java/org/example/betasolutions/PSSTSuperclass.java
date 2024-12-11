@@ -48,7 +48,7 @@ public class PSSTSuperclass {
     //we need to use this because we are reading from a table and we need to create new objects of the type we are reading from the table.
     public List<ModelInterface> readAllAssignments(String tableName, String tablePrefix, FactoryInterface factory){//}, String sqlWhereClause){//}, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "SELECT * FROM " + tableName ;//+ " WHERE " + sqlWhereClause;
+        String sql = "SELECT * FROM " + tableName ;
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);

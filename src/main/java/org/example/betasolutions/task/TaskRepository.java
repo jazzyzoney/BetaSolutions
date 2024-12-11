@@ -3,6 +3,7 @@ import org.example.betasolutions.ConnectionManager;
 
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.subTask.SubTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +21,11 @@ public class TaskRepository extends PSSTSuperclass {
         super(connectionManager);
     }
 
-    public void updateTaskHours(int taskID, int taskHours){
+    public void updateTaskTotalHours(int taskID, int taskHours){
         super.updateInt("task", "task_Total_Hours", taskID, taskHours);
     }
 
-    public void updateTaskDays(int taskID, int taskDays){
+    public void updateTaskTotalDays(int taskID, int taskDays){
         super.updateInt("task", "task_total_days", taskID, taskDays);
 
     }
@@ -38,6 +39,8 @@ public class TaskRepository extends PSSTSuperclass {
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
             preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
+
+            preparedStatement.setInt(2, getTotalHoursForTask(task));//set total hours for task.
             preparedStatement.executeUpdate(); //add task to database.
             return true;
         }catch (Exception e){
@@ -67,8 +70,8 @@ public class TaskRepository extends PSSTSuperclass {
             if (assignmentObject instanceof Task) {
                 Task task = (Task) assignmentObject; //typecasting.
 
-                int subProjectID = super.getTableIntByInt("task", "sub_project_id", //get subprojectID
-                        "task_id", task.getID());
+                int subProjectID = super.getTableIntByInt("task", //get subprojectID.
+                        "sub_project_id","task_id", task.getID());
 
                 task.setSubProjectID(subProjectID); //set subprojectID
                 taskList.add(task); //add task to tasklist.
@@ -111,6 +114,31 @@ public class TaskRepository extends PSSTSuperclass {
         return false;
     }
 
+    public int getTotalHoursForTask(Task task){
+        int totalHoursForTask = task.getHours(); //get task-specific hours.
+
+        List<ModelInterface> allSubTasks = super.readAllAssignments("sub_task", "sub_task", SubTask::new);//get All subtasks.
+
+        for (ModelInterface modelInterface : allSubTasks){
+            SubTask subTask = (SubTask) modelInterface; //typecasting.
+            if (subTask.getTaskID() == task.getID()){
+                totalHoursForTask += subTask.getHours(); //add subtask-specific hours to total.
+            }
+        }//end of all subtasks.
+
+        return totalHoursForTask;
+    }
+
+    public boolean updateTotalHoursForTask(int taskID, int newTotalHoursForTask){
+        return super.updateInt("task", "task_total_hours", taskID, newTotalHoursForTask);
+    }
+    
+    public boolean updateHoursForTask(Task task, int newHoursForTask){
+        task.setHours(newHoursForTask); //set Task hours.
+        int totalHours = getTotalHoursForTask(Task); //get new total hours.
+        //task.setTotalHours(newHoursForTask);
+        return updateTotalHoursForTask(task.getID(), totalHours); //update total hours for task.
+    }
 
 }
 

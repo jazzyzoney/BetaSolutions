@@ -50,13 +50,13 @@ class TaskRepositoryTest {
     }
 
     @Test
-    void updateTaskHours() {
+    void updateTaskTotalHours() {
         //taskRepository.updateTaskHours(1, 4);
 
     }
 
     @Test
-    void updateTaskDays() {
+    void updateTaskTotalDays() {
     }
 
     @Test

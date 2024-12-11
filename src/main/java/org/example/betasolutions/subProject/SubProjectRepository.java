@@ -16,7 +16,7 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
     //create a subproject
     public boolean insertSubProject(SubProject subProject){
-        String sql =( "insert into sub_project (sub_project_name,sub_project_total_hours,sub_project_total_days,sub_project_total_price,sub_project_deadline,sub_project_start_date,project_id) values(?,?,?,?,?,?,?)");
+        String sql =( "insert into sub_project (sub_project_name,sub_project_total_hours,sub_project_total_days,sub_project_total_price,sub_project_start_date,sub_project_deadline,project_id) values(?,?,?,?,?,?,?)");
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(subProject,sql);
         try{
             preparedStatement.setInt(7,subProject.getProjectID()); //set foreign key 'project_ID' for subproject.

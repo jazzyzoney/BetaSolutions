@@ -3,7 +3,6 @@ package org.example.betasolutions.subProject;
 import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
-import java.sql.Time;
 
 import org.example.betasolutions.ModelInterface;
 
@@ -65,10 +64,6 @@ public class SubProject implements ModelInterface {
     }
     public void setHours(int subProjectTotalHours) {
         this.subProjectTotalHours = subProjectTotalHours;
-
-        TimeManager timeManager = new TimeManager();
-        subProjectTotalDays = timeManager.calculateDays(subProjectTotalHours); //set days
-        subProjectDeadline = timeManager.calculateEndDate(subProjectStartDate, subProjectTotalDays); //set deadline
 
     }
     public int getHours() {

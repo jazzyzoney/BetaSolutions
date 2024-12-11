@@ -62,4 +62,12 @@ public class SubProjectRepository extends PSSTSuperclass {
         return false;
     }
 
+    public boolean updateSubProjectTotalHours(SubProject subProject, int newTotalHours){
+        return true;
+    }
+
+    public int getTotalHoursForSubProject(SubProject subProject){
+        return - 1;
+    }
+
 }

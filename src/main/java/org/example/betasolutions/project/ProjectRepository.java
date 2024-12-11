@@ -91,4 +91,12 @@ public class ProjectRepository extends PSSTSuperclass {
         }
         return false;
     }
+
+    public int getTotalHoursForProject(Project project){
+        return -1;
+    }
+
+    public boolean updateTotalHoursForProject(int projectID){
+        return true;
+    }
 }

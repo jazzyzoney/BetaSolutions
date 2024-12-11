@@ -51,4 +51,8 @@ public class SubTaskRepository extends PSSTSuperclass {
         }
         return subTaskList;
     }
+
+    public boolean updateSubTaskTotalHours(SubTask subTask){
+        return true;
+    }
 }

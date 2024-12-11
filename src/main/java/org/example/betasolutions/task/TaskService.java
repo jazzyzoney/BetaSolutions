@@ -2,6 +2,9 @@ package org.example.betasolutions.task;
 
 import org.example.betasolutions.TimeManager;
 
+import org.example.betasolutions.project.ProjectService;
+import org.example.betasolutions.subProject.SubProjectRepository;
+import org.example.betasolutions.subProject.SubProjectService;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -10,11 +13,17 @@ import java.util.List;
 @Service
 public class TaskService {
     private TaskRepository taskRepository;
+
+    private SubProjectService subProjectService;
+    private final ProjectService projectService;
     private TimeManager timeManager;
 
-    public TaskService(TaskRepository taskRepository){
+    public TaskService(TaskRepository taskRepository, SubProjectService subProjectService, ProjectService projectService){
         this.taskRepository = taskRepository;
+        this.subProjectService = subProjectService;
+
         timeManager = new TimeManager();
+        this.projectService = projectService;
     }
 
     public void createTaskForProject(Task task){
@@ -68,4 +77,17 @@ public class TaskService {
 
     }
 */
+
+    public boolean updateTaskTotalHours(int taskID){
+        Task task = taskRepository.readTask(taskID); //read task.
+        int totalHours = taskRepository.getTotalHoursForTask(task); //getTotalHours for task.
+        task.setTotalHours(totalHours);//set hours on task.
+        taskRepository.updateTaskTotalHours (task, totalHours); //update task total hours on database.
+
+        if (task.getSubProjectID() > 0) {
+            subProjectService.updateSubProjectTotalHours(task.getSubProjectID());
+        }else{
+            projectService.updateProjectTotalHours(task.getProjectID());
+        }
+    }
 }

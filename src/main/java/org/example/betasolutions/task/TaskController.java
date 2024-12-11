@@ -27,7 +27,7 @@ public class TaskController {
         return "taskpage";
     }
     //this one is for creating a new task on a project
-    @GetMapping("/project/{projectID}/New/task")
+    @GetMapping("/project/{projectID}/new/task")
     public String createNewTaskForProject(Model model, @PathVariable("projectID") int projectID){
         model.addAttribute("projectID", projectID);
         model.addAttribute("task", new Task());

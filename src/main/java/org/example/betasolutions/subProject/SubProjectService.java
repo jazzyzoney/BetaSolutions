@@ -16,6 +16,7 @@ public class SubProjectService {
         this.projectService = projectService;
     }
     public void insertIntoSubProject(SubProject subProject){
+        updateSubProjectTotalHours(subProject.getID());
         subProjectRepository.insertSubProject(subProject);
     }
     public List<SubProject> readAllSubProjects(int projectID){

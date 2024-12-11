@@ -33,7 +33,8 @@ public class TaskService {
 
 
     public void createTaskForSubProject(Task task){
-        task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+        //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+        updateTaskTotalHours(task.getHours());
         taskRepository.addTaskToSubProject(task);
     }
 

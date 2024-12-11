@@ -8,29 +8,30 @@
 <body>
 
 <header>
-    <h2><span style="font-size: 2em;"> Project name: <span th:text="${project.name}"></span> </span> Project owner: <span th:text="${project.owner}"></span></h2>
+    <a th:href="@{/home}" class="logo">
+        <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+    </a>
 
-    <aside>
-        <h2>Start date: <span th:text="${project.getStartDate()}"></span></h2>
-        <h2> Deadline: <span th:text="${project.getDeadline()}"></span></h2>
-        <h2> Total price: <span th:text="${project.getTotalPrice()}"></span></h2>
-        <h2> Days: <span th:text="${project.getDays()}"></span></h2>
-    </aside>
+    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+        <button type="submit">Log out</button>
+    </form>
 </header>
 
+<h2><span style="font-size: 2em;"> Project name: <span th:text="${project.name}"></span> </span> Project owner: <span th:text="${project.owner}"></span></h2>
+
+<aside>
+    <h2>Start date: <span th:text="${project.getStartDate()}"></span></h2>
+    <h2> Deadline: <span th:text="${project.getDeadline()}"></span></h2>
+    <h2> Total price: <span th:text="${project.getTotalPrice()}"></span></h2>
+    <h2> Days: <span th:text="${project.getDays()}"></span></h2>
+</aside>
+
 <main>
-    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
-        <button type="submit">log out</button>
-    </form>
-
-    <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
-        <button type="submit">home</button>
-    </form>
-
     <form class="logo" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
         <button type="submit">All employees for project</button>
         <hidden name="projectID" value="projectID"> </hidden>
     </form>
+    <br>
 
     <h2>Project with tasks:</h2>
     <form th:action="@{/project/{projectID}/New/task(projectID=${project.getID()})}" method="get">
@@ -66,6 +67,7 @@
                 </form> </td>
         </tr>
     </table>
+    <br>
 
     <h2>Subprojects with tasks:</h2>
     <!-- Button to create a new subproject -->

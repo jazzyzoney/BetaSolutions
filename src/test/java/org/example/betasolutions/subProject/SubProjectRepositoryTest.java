@@ -43,7 +43,7 @@ class SubProjectRepositoryTest {
     @Test
     void insertSubProject() {
         SubProject subproject = new SubProject("sub 1",200,500,Date.valueOf("1996-06-06"),1);
-
+        System.out.println(subproject.getDeadline());
         boolean subprojectInserted = subProjectRepository.insertSubProject(subproject);
 
         assertTrue(subprojectInserted); //verify that subproject has been inserted in test database.

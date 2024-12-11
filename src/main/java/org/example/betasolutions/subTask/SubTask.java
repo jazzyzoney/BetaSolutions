@@ -1,6 +1,7 @@
 package org.example.betasolutions.subTask;
 
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
 
@@ -14,9 +15,30 @@ public class SubTask implements ModelInterface {
     private Date subTaskStartDate;
     private int taskID;
 
+    //empty
     public SubTask() {
     }
 
+    public SubTask (String name, int hours, double price, Date startDate, int taskID){
+        subTaskName = name;
+        subTaskTotalPrice = price;
+        subTaskStartDate = startDate;
+
+        setHours(hours);
+
+        this.taskID = taskID;
+    }
+
+    public SubTask (String name, int hours, int days, double price, Date startDate, Date deadLine){
+        subTaskName = name;
+        subTaskTotalHours = hours;
+        subTaskTotalDays = days;
+        subTaskTotalPrice = price;
+        subTaskStartDate = startDate;
+        subTaskStartDate = deadLine;
+
+    }
+    /*
     public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate, int taskID) {
         this.subTaskID = subTaskID;
         this.subTaskName = subTaskName;
@@ -36,7 +58,7 @@ public class SubTask implements ModelInterface {
         this.subTaskDeadline = subTaskDeadline;
         this.subTaskStartDate = subTaskStartDate;
     }
-
+*/
     public int getID() {
         return subTaskID;
     }
@@ -57,8 +79,19 @@ public class SubTask implements ModelInterface {
         return subTaskTotalHours;
     }
 
+    /*
     public void setSubTaskTotalHours(int subTaskTotalHours) {
         this.subTaskTotalHours = subTaskTotalHours;
+    }
+*/
+
+    public void setHours(int hours){
+        this.subTaskTotalHours = hours;
+
+        TimeManager timeManager = new TimeManager();
+
+        subTaskTotalDays = timeManager.calculateDays(hours);
+        subTaskDeadline = timeManager.calculateEndDate(subTaskStartDate, subTaskTotalDays);
     }
 
     public int getDays() {

@@ -21,10 +21,13 @@ public class SubTaskRepository extends PSSTSuperclass {
         try{
             preparedStatement.setInt(7,subTask.getTaskID());
             preparedStatement.executeUpdate();
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
+        return false;
     }
+
     public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
         ArrayList<SubTask> subTaskList = new ArrayList<>();
         String SQL ="SELECT *  FROM sub_task JOIN task ON sub_task.task_id = task.task_id WHERE task.project_id = ? and task.task_id = ?";
@@ -51,6 +54,7 @@ public class SubTaskRepository extends PSSTSuperclass {
         }
         return subTaskList;
     }
+
     public boolean deleteSubTask(int subTaskID) {
         try {
         conn.setAutoCommit(false);
@@ -58,8 +62,10 @@ public class SubTaskRepository extends PSSTSuperclass {
         super.deleteAllWhere("project_employee_task_subTask", "sub_task_id = " + subTaskID);
         conn.commit();
         conn.setAutoCommit(true);
+        return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

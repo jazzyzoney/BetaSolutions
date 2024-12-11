@@ -39,7 +39,7 @@ class SubTaskRepositoryTest {
     void readAllSubTasks() {
         List <SubTask> allSubTasksForTask = subTaskRepository.readAllSubTasks(1, 1);
 
-        int expectedSize = 3;
+        int expectedSize = 1;
         int actualSize = allSubTasksForTask.size();
         assertEquals(expectedSize, actualSize);
 

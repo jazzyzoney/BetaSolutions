@@ -66,7 +66,7 @@ public class TaskRepository extends PSSTSuperclass {
     public Task readTask(int taskID){
         return (Task) super.readAssingmentByID("task","task",Task::new,taskID);
     }
-    public int deleteTask(int taskID){
+    public boolean deleteTask(int taskID){
         try {
         conn.setAutoCommit(false);
             super.deleteObjectFromTable("task", "task", taskID);

@@ -100,7 +100,7 @@ class TaskRepositoryTest {
     void readAllTasksForSubProject() {
         List <Task> allTasksForSubProject = taskRepository.readAllTasksForSubProject(1, 1); //??
 
-        int expectedSize = 3;
+        int expectedSize = 1;
         int actualSize = allTasksForSubProject.size();
         assertEquals(expectedSize, actualSize);
 

@@ -27,9 +27,11 @@ public class ProjectService {
         projectRepository.updateProject(project,project_id);
     }
 
-    public boolean updateProjectTotalHours(int projectID){
-        
-        return true;
+    public void updateProjectTotalHours(int projectID){
+        Project project = projectRepository.readProjectByID(projectID); //read project.
+        int totalHours = projectRepository.getTotalHoursForProject(project);//get total hours
+        project.setTotalHours(totalHours); //update object.
+        projectRepository.updateTotalHoursForProject(projectID, totalHours); //update database.
     }
 
 

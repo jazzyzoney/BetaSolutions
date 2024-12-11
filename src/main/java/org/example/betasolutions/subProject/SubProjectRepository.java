@@ -2,6 +2,8 @@ package org.example.betasolutions.subProject;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.subTask.SubTask;
+import org.example.betasolutions.task.Task;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -63,11 +65,22 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
 
     public boolean updateSubProjectTotalHours(SubProject subProject, int newTotalHours){
-        return true;
+        return updateObjectInt("sub_project", "sub_project_total_hours", subProject.getID(), newTotalHours);
     }
 
     public int getTotalHoursForSubProject(SubProject subProject){
-        return - 1;
+        int totalHours = subProject.getHours(); //get subProject-specific hours.
+
+        List<ModelInterface> allSubTasks = super.readAllAssignments("task", "task", Task::new);//get All subtasks.
+
+        for (ModelInterface modelInterface : allSubTasks){
+            Task task = (Task) modelInterface; //typecasting.
+            if (task.getSubProjectID() == subProject.getID()){
+                totalHours += task.getHours(); //add task-specific hours to total.
+            }
+        }//end of all subtasks.
+
+        return totalHours;
     }
 
 }

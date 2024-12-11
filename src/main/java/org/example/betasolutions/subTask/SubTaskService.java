@@ -19,7 +19,7 @@ public class SubTaskService {
        return subTaskRepository.readAllSubTasks(ProjectID);
     }
 
-    public boolean updateSubTaskTotalHours(SubTask subTask, int totalHours){
+    public void updateSubTaskTotalHours(SubTask subTask, int totalHours){
         subTask.setSubTaskTotalHours(totalHours); //update on object.
         subTaskRepository.updateSubTaskTotalHours(subTask); //update on database
 

@@ -3,6 +3,8 @@ package org.example.betasolutions.project;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.subProject.SubProject;
+import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -93,10 +95,21 @@ public class ProjectRepository extends PSSTSuperclass {
     }
 
     public int getTotalHoursForProject(Project project){
-        return -1;
+        int totalHours = project.getHours(); //get project hours.
+
+        List<ModelInterface> allSubProjects = super.readAllAssignments("sub_project", "sub_project", SubProject::new);//get All subtasks.
+
+        for (ModelInterface modelInterface : allSubProjects){
+            SubProject subProject = (SubProject) modelInterface; //typecasting.
+            if (subProject.getProjectID() == subProject.getID()){
+                totalHours += subProject.getHours(); //add subProject hours to total.
+            }
+        }//end of all subprojects.
+
+        return totalHours;
     }
 
-    public boolean updateTotalHoursForProject(int projectID){
-        return true;
+    public boolean updateTotalHoursForProject(int projectID, int newTotalHours){
+        return super.updateObjectInt("project", "project_total_hours", projectID, newTotalHours);
     }
 }

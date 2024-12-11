@@ -9,6 +9,7 @@ public class Task implements ModelInterface {
     private int taskID;
     private String taskName;
     private int taskTotalHours;
+    private int taskHours;
     private int taskTotalDays;
     private double taskTotalPrice;
     private Date taskDeadLine;
@@ -55,8 +56,7 @@ public class Task implements ModelInterface {
         return taskName;
     }
     public void setHours(int hours) {
-        this.taskTotalHours = hours;
-
+        this.taskHours = hours;
         TimeManager timeManager = new TimeManager();
 
         taskTotalDays = timeManager.calculateDays(hours);
@@ -64,7 +64,18 @@ public class Task implements ModelInterface {
     }
 
     public int getHours() {
+        return taskHours;
+    }
+    public int getTotalHours() {
         return taskTotalHours;
+    }
+
+    public void setTotalHours(int hours){
+        TimeManager timeManager = new TimeManager();
+        this.taskTotalHours = hours;
+
+        taskTotalDays = timeManager.calculateDays(taskTotalHours);
+        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
     }
     
     public int getSubProjectID() {
@@ -95,14 +106,6 @@ public class Task implements ModelInterface {
     }
     public Date getStartDate() {
         return taskStartDate;
-    }
-
-    public void setTotalHours(int hours){
-        TimeManager timeManager = new TimeManager();
-        this.taskTotalHours = hours;
-
-        taskTotalDays = timeManager.calculateDays(taskTotalHours);
-        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
     }
 
 

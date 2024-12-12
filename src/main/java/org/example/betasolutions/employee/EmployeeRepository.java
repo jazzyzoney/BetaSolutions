@@ -64,7 +64,6 @@ public class EmployeeRepository {
     //read employees on specific project
     public List<Employee> getAllEmployeesForProject(int projectID) {
         String sql = "SELECT * FROM employee JOIN project_employee ON employee.employee_id = project_employee.employee_id WHERE project_employee.project_id = ?";
-
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, projectID);

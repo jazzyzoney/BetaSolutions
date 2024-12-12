@@ -23,6 +23,7 @@ public class SubTaskController {
     }
     @PostMapping("/project/subtask/new")
     public String createNewSubTask(){
+        
         return "redirect:/project";
     }
 }

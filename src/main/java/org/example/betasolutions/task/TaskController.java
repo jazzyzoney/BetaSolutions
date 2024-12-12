@@ -26,6 +26,7 @@ public class TaskController {
         model.addAttribute("projectID", task.getProjectID());
         return "taskpage";
     }
+
     //this one is for creating a new task on a project
     @GetMapping("/project/{projectID}/new/task")
     public String createNewTaskForProject(Model model, @PathVariable("projectID") int projectID){
@@ -38,7 +39,7 @@ public class TaskController {
     @PostMapping("project/{projectID}/task/new/post")
     public String createNewTaskForProjectPost(@PathVariable("projectID") int projectID, @ModelAttribute Task task){
         task.setProjectID(projectID);
-        taskService.createTaskForProject(task);
+        taskService.createTaskForProject(task); //create task, update total hours for subproject and project.
         return "redirect:/project/" + projectID;
     }
 
@@ -50,27 +51,14 @@ public class TaskController {
         return "taskpageforSubProject";
     }
 
+    //create new task for subproject.
     @PostMapping("/project/{projectID}/subproject/{subProjectID}/New/task/post")
     public String createNewTaskForSubProjectPost(@PathVariable("projectID") int projectID, @PathVariable("subProjectID") int subProjectID,@ModelAttribute Task task){
         task.setProjectID(projectID); //set project id.
         task.setSubProjectID(subProjectID); //set subproject id.
-        taskService.createTaskForSubProject(task);
+        taskService.createTaskForSubProject(task); //create task for subproject, update total hours for subproject and project.
         return "redirect:/project/" + projectID;
     }
-
-    /*
-    @PostMapping("/project/task/edit")
-    public String editTask(@ModelAttribute int hours){
-        Task task = (Task) session.getAttribute("task");// taskService.getTask(projectID, taskID);
-
-        System.out.println("task contr. start date: " + task.getStartDate());
-        System.out.println("task contr. id: " + task.getID());
-        System.out.println("task contr. hours: " + task.getHours());
-
-        taskService.updateHours(task, hours);
-
-        return "redirect:/project";
-    }*/
 
     @PostMapping("project/task/delete")
     public String deleteTask(@RequestParam int taskID, @RequestParam int projectID){

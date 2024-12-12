@@ -23,7 +23,7 @@ public class SubTaskController {
 
     @PostMapping("project/subtask/edit")
     public String editSubTask(){
-        return "redirect:/project";
+        return "subtaskpage";
     }
 
     @PostMapping("/project/subtask/delete")

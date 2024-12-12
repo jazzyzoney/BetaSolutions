@@ -17,18 +17,17 @@ public class EmployeeRepository {
     }
 
     //create
-    public int createNewEmployee(Employee employee) {
-        String sql = "INSERT INTO employee (employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary) VALUES (?,?,?,?,?)";
+    public boolean createNewEmployee(Employee employee) {
+        String sql = "INSERT INTO employee (employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setInt(1, employee.getEmployeeID());
-            preparedStatement.setString(2, employee.getEmployeeName());
-            preparedStatement.setString(3, employee.getEmployeeOffice());
-            preparedStatement.setString(4, employee.getEmployeeProficiency());
-            preparedStatement.setString(5, employee.getEmployeeSalary());
+            preparedStatement.setString(1, employee.getEmployeeName());
+            preparedStatement.setString(2, employee.getEmployeeOffice());
+            preparedStatement.setString(3, employee.getEmployeeProficiency());
+            preparedStatement.setString(4, employee.getEmployeeSalary());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                return resultSet.getInt(1);
+                return true;
             }
             System.out.println("New employee created");
 
@@ -36,24 +35,23 @@ public class EmployeeRepository {
             e.printStackTrace();
         }
         System.out.println("New employee not created");
-        return 1;
+        return false;
     }
 
     //read
     public List<Employee> getAllEmployees() {
         String sql = "SELECT * FROM employee";
-
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Employee> employees = new ArrayList<>();
 
             while (resultSet.next()) {
-                int employeeID = resultSet.getInt("employeeID");
-                String employeeName = resultSet.getString("employeeName");
-                String employeeOffice = resultSet.getString("employeeOffice");
-                String employeeProficiency = resultSet.getString("employeeProficiency");
-                String employeeSalary = resultSet.getString("employeeSalary");
+                int employeeID = resultSet.getInt("employee_id");
+                String employeeName = resultSet.getString("employee_name");
+                String employeeOffice = resultSet.getString("employee_office");
+                String employeeProficiency = resultSet.getString("employee_proficiency");
+                String employeeSalary = resultSet.getString("employee_salary");
                 employees.add(new Employee(employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary));
             }
             return employees;
@@ -63,18 +61,106 @@ public class EmployeeRepository {
         return null;
     }
 
-    //add existing employee to assignment table
-    public void addExistingEmployeeToAssignment(Employee employee, String assignment, String idName) { //idName is the name of the column
-        String sql = "INSERT INTO assignment (employeeID, "+ idName +") VALUES (?,?)";
+    //read employees on specific project
+    public List<Employee> getAllEmployeesForProject(int projectID) {
+        String sql = "SELECT * FROM employee JOIN project_employee ON employee.employee_id = project_employee.employee_id WHERE project_employee.project_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, projectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Employee> employees = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int employeeID = resultSet.getInt("employee_id");
+                String employeeName = resultSet.getString("employee_name");
+                String employeeOffice = resultSet.getString("employee_office");
+                String employeeProficiency = resultSet.getString("employee_proficiency");
+                String employeeSalary = resultSet.getString("employee_salary");
+                employees.add(new Employee(employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary));
+            }
+            return employees;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //read employees NOT on the specific project
+    public List<Employee> getAllEmployeesNotOnProject(int projectID) {
+        String sql = "SELECT * FROM employee WHERE employee.employee_id NOT IN (SELECT employee_id FROM project_employee WHERE project_id = ?);"; //NOT IN is important here for the SQL statement
+
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, projectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Employee> employees = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int employeeID = resultSet.getInt("employee_id");
+                String employeeName = resultSet.getString("employee_name");
+                String employeeOffice = resultSet.getString("employee_office");
+                String employeeProficiency = resultSet.getString("employee_proficiency");
+                String employeeSalary = resultSet.getString("employee_salary");
+                employees.add(new Employee(employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary));
+            }
+            return employees;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //add existing employee to project_employee table
+    public void addExistingEmployeeToProject(int employeeID, int projectID) {
+        String sql = "INSERT INTO project_employee (employee_id, project_id) VALUES (?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setInt(1, employee.getEmployeeID());
-            preparedStatement.setString(2, idName);
+            preparedStatement.setInt(1, employeeID);
+            preparedStatement.setInt(2, projectID);
             preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
-                System.out.println("Employee added to assignment");
+                System.out.println("Employee added to project");
             } else {
-                System.out.println("Employee not added to assignment");
+                System.out.println("Employee not added to project");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //add existing employee to project_employee_task table
+    public void addExistingEmployeeToTask(int employeeID, int taskID, int projectID) { //idName is the name of the column
+        String sql = "INSERT INTO project_employee_task (employee_id, project_id, task_id) VALUES (?,?,?)" + "MERGE INTO project_employee (employee_id, project_id) KEY (employee_id, project_id) VALUES (?, ?)"; //because we get a "primary key violation" in the console when adding an employee to a project, we attempt to ignore it in H2
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employeeID);
+            preparedStatement.setInt(2, projectID);
+            preparedStatement.setInt(3, taskID);
+            //preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 1) {
+                System.out.println("Employee added to task");
+            } else {
+                System.out.println("Employee not added to task");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //add existing employee to project_employee_task_subTask table
+    public void addExistingEmployeeToSubTask(int employeeID, int projectID, int taskID, int subTaskID) { //idName is the name of the column
+        String sql = "INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub_task_id) VALUES (?,?,?,?)";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employeeID);
+            preparedStatement.setInt(2, projectID);
+            preparedStatement.setInt(3, taskID);
+            preparedStatement.setInt(4, subTaskID);
+            //preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected == 1) {
+                System.out.println("Employee added to subtask");
+            } else {
+                System.out.println("Employee not added to subtask");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,14 +169,14 @@ public class EmployeeRepository {
 
     //update
     public void editEmployee(Employee employee) {
-        String sql = "UPDATE employee SET employeeName = ?, employeeOffice = ?, employeeProficiency = ?, employeeSalary = ? WHERE employeeID = ?";
+        String sql = "UPDATE employee SET employee_name = ?, employee_office = ?, employee_proficiency = ?, employee_salary = ? WHERE employee_id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, employee.getEmployeeName());
             preparedStatement.setString(2, employee.getEmployeeOffice());
             preparedStatement.setString(3, employee.getEmployeeProficiency());
             preparedStatement.setString(4, employee.getEmployeeSalary());
             preparedStatement.setInt(5, employee.getEmployeeID());
-            preparedStatement.executeUpdate();
+            //preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee updated");
@@ -104,7 +190,7 @@ public class EmployeeRepository {
 
     //delete
     public void deleteEmployee(int employeeID) {
-        String sql = "DELETE FROM employee WHERE employeeID = ?";
+        String sql = "DELETE FROM employee WHERE employee_id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
             int rowsAffected = preparedStatement.executeUpdate();

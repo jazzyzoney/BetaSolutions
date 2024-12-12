@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-//@Rollback(true)//rolls back commits to database after each test.
 class PSSTSuperclassTest {
 
     //private Task task;
@@ -60,11 +59,13 @@ class PSSTSuperclassTest {
     @Test
     void insertAssignmentIntoTable() {
         //instantiate new project.
-        Project project = new Project("projectName", "projectOwner", 43, 8, 500000.5,
-                Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
+        Project project = new Project("projectName", "projectOwner", 43, 500000.5, Date.valueOf("2024-12-02"));
 
         //testing method using project object and new project sql statement
-        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project, "INSERT INTO project (project_Name, project_Total_Hours, project_Total_Days, project_Total_Price, project_Deadline, project_Start_Date, project_Owner) VALUES (?,?,?,?,?,?,?)");
+        PreparedStatement preparedStatement = superRepository.insertAssignmentIntoTable(project,
+                "INSERT INTO project (project_Name, project_Total_Hours, project_Total_Days, " +
+                        "project_Total_Price, project_Deadline, project_Start_Date, project_Owner) " +
+                        "VALUES (?,?,?,?,?,?,?)");
 
         assertNotNull(preparedStatement);
     }
@@ -178,6 +179,29 @@ class PSSTSuperclassTest {
         //delete all subtasks.
         boolean deletedAllSubTasks = superRepository.deleteAllWhere("sub_Task", "task_ID = 1");
         assertTrue(deletedAllSubTasks);
+    }
+
+    @Test
+
+    void updateInt(){
+        boolean updatedHours = superRepository.updateInt("task", "task_Total_hours", 1, 4);
+        assertTrue(updatedHours);
+
+    }
+
+    @Test
+    void updateDate(){
+        boolean updateDeadline = superRepository.updateDate("task", "task_deadline", 1, Date.valueOf(LocalDate.now()));
+        assertTrue(updateDeadline);
+    }
+
+    @Test
+    void readAssignmentByID(){
+        int expectedID = 1;
+        Project project = (Project) superRepository.readAssignmentByID("project", "project", Project::new, expectedID);
+        int actualID = project.getID();
+
+        assertEquals(expectedID, actualID);
     }
 
 }

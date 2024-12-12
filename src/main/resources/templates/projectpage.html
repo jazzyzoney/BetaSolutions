@@ -14,6 +14,13 @@
     <button type="submit">Create New Task</button>
 </form>
 
+
+<form class="logo" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
+    <button type="submit">All employees for project</button>
+</form>
+
+
+
 <h2>Tasks for just the project:</h2>
 <ul>
     <li th:each="task : ${tasksWithoutSubProject}">
@@ -87,6 +94,7 @@
                 </form>
             </li>
         </ul>
+
     </li>
 </ul>
 

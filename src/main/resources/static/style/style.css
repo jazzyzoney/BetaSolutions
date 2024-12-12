@@ -6,7 +6,7 @@
     --bownish: #A08679; /* Brun */
 }
 
-/* coloring the assignments */
+/* coloring project and the assignments */
 .project {
     color: black; /* Adjust text color for better readability */
     text-decoration: underline;
@@ -82,3 +82,4 @@ header .logo .beta{
 header .logo .solutions{
     color: black;
 }
+

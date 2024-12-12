@@ -135,7 +135,7 @@ public class EmployeeRepository {
             preparedStatement.setInt(1, employeeID);
             preparedStatement.setInt(2, projectID);
             preparedStatement.setInt(3, taskID);
-            preparedStatement.executeUpdate();
+            //preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee added to task");
@@ -176,7 +176,7 @@ public class EmployeeRepository {
             preparedStatement.setString(3, employee.getEmployeeProficiency());
             preparedStatement.setString(4, employee.getEmployeeSalary());
             preparedStatement.setInt(5, employee.getEmployeeID());
-            preparedStatement.executeUpdate();
+            //preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee updated");

@@ -17,7 +17,11 @@
     </form>
 </header>
 
-<h2><span style="font-size: 2em;"> Project name: <span th:text="${project.name}"></span> </span> Project owner: <span th:text="${project.owner}"></span></h2>
+<h2>
+    <span style="font-size: 2em;" class="project">
+        Project name: <span th:text="${project.name}"></span>
+    </span> Project owner: <span th:text="${project.owner}"></span>
+</h2>
 
 <aside>
     <h2>Start date: <span th:text="${project.getStartDate()}"></span></h2>

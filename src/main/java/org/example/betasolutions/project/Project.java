@@ -1,5 +1,6 @@
 package org.example.betasolutions.project;
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.TimeManager;
 import org.example.betasolutions.employee.Employee;
 import org.example.betasolutions.subProject.SubProject;
 import org.example.betasolutions.task.Task;
@@ -9,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Project implements ModelInterface {
-    private List<SubProject> subProjectList = new ArrayList<>();
-    private List<Task> taskList = new ArrayList<>();
-    private List<Employee> employeeList = new ArrayList<>();
 
     private int projectID;
     private String projectName;
@@ -22,27 +20,10 @@ public class Project implements ModelInterface {
     private Date projectDeadline;
     private Date projectStartDate;
 
-    public Project(int projectID, String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectStartDate, Date projectDeadline) {
-        this.projectID = projectID;
-        this.projectName = projectName;
-        this.projectOwner = projectOwner;
-        this.projectTotalHours = projectTotalHours;
-        this.projectTotalDays = projectTotalDays;
-        this.projectTotalPrice = projectTotalPrice;
-        this.projectDeadline = projectDeadline;
-        this.projectStartDate = projectStartDate;
-    }
+    //empty
+    public Project(){}
 
-    public Project(String projectName, String projectOwner, int projectTotalHours, int projectTotalDays, double projectTotalPrice, Date projectDeadline, Date projectStartDate) {
-        this.projectName = projectName;
-        this.projectOwner = projectOwner;
-        this.projectTotalHours = projectTotalHours;
-        this.projectTotalDays = projectTotalDays;
-        this.projectTotalPrice = projectTotalPrice;
-        this.projectDeadline = projectDeadline;
-        this.projectStartDate = projectStartDate;
-    }
-
+    //factory interface
     public Project(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
         this.projectID = id;
         this.projectName = name;
@@ -53,20 +34,17 @@ public class Project implements ModelInterface {
         this.projectStartDate = startDate;
     }
 
-
-    public Project(Date projectStartDate, Date projectDeadline) {
-        this.projectStartDate = projectStartDate;
-        this.projectDeadline = projectDeadline;
-    }
-
-    public Project(String projectName, Date projectStartDate, Date projectDeadline) {
-        this.projectStartDate = projectStartDate;
-        this.projectDeadline = projectDeadline;
+    //set all variables.
+    public Project( String projectName, String projectOwner, int projectTotalHours, double projectTotalPrice, Date projectStartDate) {
         this.projectName = projectName;
+        this.projectOwner = projectOwner;
+        this.projectTotalPrice = projectTotalPrice;
+        this.projectStartDate = projectStartDate;
+
+        setTotalHours(projectTotalHours);
+
     }
 
-    public Project() {
-    }
 
     public void setID(int projectID) {
         this.projectID = projectID;
@@ -94,14 +72,13 @@ public class Project implements ModelInterface {
 
     public void setTotalHours(int projectTotalHours) {
         this.projectTotalHours = projectTotalHours;
+        TimeManager timeManager = new TimeManager();
+        projectTotalDays = timeManager.calculateDays(this.projectTotalHours);
+        projectDeadline = timeManager.calculateEndDate(projectStartDate, this.projectTotalHours);
     }
 
     public int getHours() {
         return projectTotalHours;
-    }
-
-    public void setTotalDays(int projectTotalDays) {
-        this.projectTotalDays = projectTotalDays;
     }
 
     public int getDays() {
@@ -114,10 +91,6 @@ public class Project implements ModelInterface {
 
     public double getTotalPrice() {
         return projectTotalPrice;
-    }
-
-    public void setDeadline(Date projectDeadline) {
-        this.projectDeadline = projectDeadline;
     }
 
     public Date getDeadline() {
@@ -146,18 +119,6 @@ public class Project implements ModelInterface {
 
     public String getProjectOwner() {
         return projectOwner;
-    }
-
-    public List<SubProject> getSubProjectList() {
-        return subProjectList;
-    }
-
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    public List<Employee> getEmployeeList() {
-        return employeeList;
     }
 
 }

@@ -59,8 +59,8 @@ class ProjectRepositoryTest{
     void testInsertObjectIntoTable() {
 
         //new project
-        Project project = new Project("projectName", "projectOwner", 43, 8, 500000.5,
-                Date.valueOf("2024-12-02"), Date.valueOf("2025-01-01"));
+        Project project = new Project("projectName", "projectOwner", 43,
+                500000.5, Date.valueOf("2024-12-02"));
 
         int actualID = projectRepository.insertAssignmentIntoTable(project); //insert project object into sql table.
         int expectedID = 3;

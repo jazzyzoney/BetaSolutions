@@ -15,27 +15,35 @@ it shows a list of all employees and also gives the user the option to create ne
     <button type="submit">Home</button>
 </form>
 
-<form th:action="@{/employee/new}" th:object="${allEmployees}" method="get">
-        <button type="submit">Create new employee</button>
-</form>
 
-<!-- table of all employees -->
+<!-- table to add employee to assignment -->
 <table>
     <thead>
     <tr>
         <th>Name</th>
         <th>Proficiency</th>
         <th>Office</th>
+        <th>Add to project</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="employee : ${allEmployees}">
-        <!--  -->
+        <td th:text="${employee.getEmployeeID()}"></td>
         <td th:text="${employee.getEmployeeName()}"></td>
         <td th:text="${employee.getEmployeeProficiency()}"></td>
         <td th:text="${employee.getEmployeeOffice()}"></td>
+        <td>
+            <form method="post" th:action="@{/project/{id}/employee/add/project(id=${id})}" th:object="${employee}">
+                <!-- Include employeeID as a hidden field -->
+                <input type="hidden" name="employeeID" id="employeeID" th:value="${employee.employeeID}"/>
+                <!-- Include projectID (replace with dynamic projectID if applicable) -->
+
+                <button type="submit">Add to Project</button>
+            </form>
+        </td>
     </tr>
     </tbody>
+
 </table>
 
 </body>

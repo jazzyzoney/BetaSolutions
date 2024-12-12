@@ -11,14 +11,7 @@ public class SubTaskService {
     public SubTaskService(SubTaskRepository subTaskRepository){
         this.subTaskRepository = subTaskRepository;
     }
-    public void createSubTask(SubTask subTask){
-        subTaskRepository.addSubTaskToTask(subTask);
-    }
-
-    public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
-        return subTaskRepository.readAllSubTasks(ProjectID, TaskID);
-    }
-    public void deleteSubTask(int subTaskID){
-        subTaskRepository.deleteSubTask(subTaskID);
+    public List<SubTask> readAllSubTasks(int ProjectID){
+        return subTaskRepository.readAllSubTasks(ProjectID);
     }
 }

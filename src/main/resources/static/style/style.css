@@ -1,22 +1,24 @@
 :root {
-    --dark-purple: #7851A9; /* Darker shade of purple */
-    --medium-purple: #9e7fca; /* Lighter shade of purple */
-    --light-purple: #D8BFD8; /* Much lighter shade of purple */
+    --dark-green: #568; /* Darker shade */
+    --medium-green: #68BB; /* Lighter shade */
+    --light-green: #ACDF; /* Much lighter shade */
 }
+
+/* orange , brun ,  */
 
 /* coloring the assignments */
 .subproject {
-    background-color: var(--dark-purple);
+    background-color: var(--dark-green);
     color: white; /* Adjust text color for better readability */
 }
 
 .task {
-    background-color: var(--medium-purple);
+    background-color: var(--medium-green);
     color: white; /* Adjust text color for better readability */
 }
 
 .subtask {
-    background-color: var(--light-purple);
+    background-color: var(--light-green);
     color: black; /* Adjust text color for better readability */
 }
 /*  */
@@ -68,7 +70,7 @@ header{
 
 /* color of the logo */
 header .logo .beta{
-    color:var(--dark-purple);
+    color:var(--dark-green);
 }
 
 header .logo .solutions{

@@ -53,6 +53,14 @@ public class EmployeeController {
         return "allEmployeesOnProject";
     }
 
+    @GetMapping("/project/{id}/task/{taskID}/employees") //get employees for specific project
+    public String getAllEmployeesForTask(@PathVariable int id,@PathVariable int taskID , Model model) {
+        List<Employee> employees = employeeService.getAllEmployeesForTask(id, taskID);
+        model.addAttribute("allEmployees", employees);
+        model.addAttribute("taskID", taskID);
+        return "allEmployeesOnTask";
+    }
+
     //read
     @GetMapping("/project/{id}/employeesNotAssigned") //get employees NOT on the specific project
     public String getAllEmployeesNotOnProject(@PathVariable int id, Model model) {
@@ -60,6 +68,13 @@ public class EmployeeController {
         System.out.println(employees.size());
         model.addAttribute("allEmployees", employees);
         return "allEmployeesNotOnProject";
+    }
+    //read
+    @GetMapping("/project/{id}/task/{taskID}/employeesNotAssignedForTask") //get employees NOT on the specific task
+    public String getAllemployeesNotAssingedToTaskForProject(@PathVariable int id, Model model,@PathVariable int taskID) {
+        List<Employee> employees = employeeService.getAllemployeesNotAssingedToTaskForProject(id);
+        model.addAttribute("allEmployees", employees);
+        return "allEmployeesNotOnTask";
     }
 
     //add employee to project
@@ -71,12 +86,10 @@ public class EmployeeController {
     }
 
     //add employee to task
-    @PostMapping("/project/{id}/employee/add/task") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToTask(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID, @RequestParam("taskID") int taskID) {
+    @PostMapping("/project/{id}/employee/{taskID}/add/task") //add employee to project task
+    public String addExistingEmployeeToTask(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID, @PathVariable("taskID") int taskID) {
         employeeService.addExistingEmployeeToTask(employeeID, taskID, projectID);
-        session.getAttribute("taskID");
-        session.getAttribute("projectID");
-        return "redirect:/project/employees";
+        return "redirect:/project/" + projectID + "/task/" + taskID + "/employees";
     }
 
     //add employee to subtask

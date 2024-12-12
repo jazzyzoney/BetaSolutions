@@ -71,7 +71,7 @@ class EmployeeRepositoryTest {
 
     @Test
     void addExistingEmployeeToSubTask() {
-        employeeRepository.addExistingEmployeeToSubTask(2, 2, 2, 2);
+        employeeRepository.addExistingEmployeeToSubTask(1, 2, 2, 2);
         int actual = employeeRepository.getAllEmployees().size();
         int expected = 2;
         assertEquals(expected, actual);

@@ -156,7 +156,7 @@ public class EmployeeRepository {
             preparedStatement.setInt(2, projectID);
             preparedStatement.setInt(3, taskID);
             preparedStatement.setInt(4, subTaskID);
-            preparedStatement.executeUpdate();
+            //preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee added to subtask");

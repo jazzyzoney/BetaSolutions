@@ -29,7 +29,9 @@ public class SubTask implements ModelInterface {
         this.taskID = taskID;
     }
 
-    public SubTask (String name, int hours, int days, double price, Date startDate, Date deadLine){
+    //factory
+    public SubTask (int taskID, String name, int hours, int days, double price, Date deadLine , Date startDate){
+        this.taskID = taskID;
         subTaskName = name;
         subTaskTotalHours = hours;
         subTaskTotalDays = days;
@@ -38,27 +40,7 @@ public class SubTask implements ModelInterface {
         subTaskStartDate = deadLine;
 
     }
-    /*
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate, int taskID) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
-        this.taskID = taskID;
-    }
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
-    }
-*/
+
     public int getID() {
         return subTaskID;
     }

@@ -31,29 +31,14 @@ public class Task implements ModelInterface {
         this.taskStartDate = startDate;
     }
 
-    //set all values with subproject.
-    public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate, int projectID, int subProjectID){
+    //set all values
+    public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate){
         //this.id = id;
         this.taskName = taskName;
         this.taskTotalPrice = taskTotalPrice;
         this.taskStartDate = taskStartDate;
 
         setHours(taskTotalHours);
-
-        this.projectID = projectID;
-        this.subProjectID = subProjectID;
-    }
-
-    //set all values without subproject.
-    public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate, int projectID){
-        //this.id = id;
-        this.taskName = taskName;
-        this.taskTotalPrice = taskTotalPrice;
-        this.taskStartDate = taskStartDate;
-
-        setHours(taskTotalHours);
-
-        this.projectID = projectID;
     }
 
     public void setID(int id) {

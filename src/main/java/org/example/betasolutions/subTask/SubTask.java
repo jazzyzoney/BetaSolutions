@@ -30,8 +30,8 @@ public class SubTask implements ModelInterface {
     }
 
     //factory
-    public SubTask (int taskID, String name, int hours, int days, double price, Date deadLine , Date startDate){
-        this.taskID = taskID;
+    public SubTask (int subTaskID, String name, int hours, int days, double price, Date deadLine , Date startDate){
+        this.subTaskID = subTaskID;
         subTaskName = name;
         subTaskTotalHours = hours;
         subTaskTotalDays = days;

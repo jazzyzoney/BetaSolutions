@@ -1,95 +1,128 @@
 package org.example.betasolutions.subTask;
 
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
 
 public class SubTask implements ModelInterface {
-    private int id;
-    private String name;
-    private int hours;
-    private int days;
-    private double totalPrice;
-    private Date Deadline;
-    private Date startDate;
+    private int subTaskID;
+    private String subTaskName;
+    private int subTaskTotalHours;
+    private int subTaskTotalDays;
+    private double subTaskTotalPrice;
+    private Date subTaskDeadline;
+    private Date subTaskStartDate;
     private int taskID;
 
+    //empty
     public SubTask() {
     }
 
-    public SubTask(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate, int taskID) {
-        this.id = id;
-        this.name = name;
-        this.hours = hours;
-        this.days = days;
-        this.totalPrice = totalPrice;
-        this.Deadline = Deadline;
-        this.startDate = startDate;
+    public SubTask (String name, int hours, double price, Date startDate, int taskID){
+        subTaskName = name;
+        subTaskTotalPrice = price;
+        subTaskStartDate = startDate;
+
+        setHours(hours);
+
         this.taskID = taskID;
     }
-    public SubTask(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
-        this.id = id;
-        this.name = name;
-        this.hours = hours;
-        this.days = days;
-        this.totalPrice = totalPrice;
-        this.Deadline = Deadline;
-        this.startDate = startDate;
-    }
 
+    public SubTask (String name, int hours, int days, double price, Date startDate, Date deadLine){
+        subTaskName = name;
+        subTaskTotalHours = hours;
+        subTaskTotalDays = days;
+        subTaskTotalPrice = price;
+        subTaskStartDate = startDate;
+        subTaskStartDate = deadLine;
+
+    }
+    /*
+    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate, int taskID) {
+        this.subTaskID = subTaskID;
+        this.subTaskName = subTaskName;
+        this.subTaskTotalHours = subTaskTotalHours;
+        this.subTaskTotalDays = subTaskTotalDays;
+        this.subTaskTotalPrice = subTaskTotalPrice;
+        this.subTaskDeadline = subTaskDeadline;
+        this.subTaskStartDate = subTaskStartDate;
+        this.taskID = taskID;
+    }
+    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate) {
+        this.subTaskID = subTaskID;
+        this.subTaskName = subTaskName;
+        this.subTaskTotalHours = subTaskTotalHours;
+        this.subTaskTotalDays = subTaskTotalDays;
+        this.subTaskTotalPrice = subTaskTotalPrice;
+        this.subTaskDeadline = subTaskDeadline;
+        this.subTaskStartDate = subTaskStartDate;
+    }
+*/
     public int getID() {
-        return id;
+        return subTaskID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSubTaskID(int subTaskID) {
+        this.subTaskID = subTaskID;
     }
 
     public String getName() {
-        return name;
+        return subTaskName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSubTaskName(String subTaskName) {
+        this.subTaskName = subTaskName;
     }
 
     public int getHours() {
-        return hours;
+        return subTaskTotalHours;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    /*
+    public void setSubTaskTotalHours(int subTaskTotalHours) {
+        this.subTaskTotalHours = subTaskTotalHours;
+    }
+*/
+
+    public void setHours(int hours){
+        this.subTaskTotalHours = hours;
+
+        TimeManager timeManager = new TimeManager();
+
+        subTaskTotalDays = timeManager.calculateDays(hours);
+        subTaskDeadline = timeManager.calculateEndDate(subTaskStartDate, subTaskTotalDays);
     }
 
     public int getDays() {
-        return days;
+        return subTaskTotalDays;
     }
 
-    public void setDays(int days) {
-        this.days = days;
+    public void setSubTaskTotalDays(int subTaskTotalDays) {
+        this.subTaskTotalDays = subTaskTotalDays;
     }
 
     public double getTotalPrice() {
-        return totalPrice;
+        return subTaskTotalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setSubTaskTotalPrice(double subTaskTotalPrice) {
+        this.subTaskTotalPrice = subTaskTotalPrice;
     }
 
     public Date getDeadline() {
-        return Deadline;
+        return subTaskDeadline;
     }
 
-    public void setDeadline(Date deadline) {
-        this.Deadline = deadline;
+    public void setSubTaskDeadline(Date subTaskDeadline) {
+        this.subTaskDeadline = subTaskDeadline;
     }
 
     public Date getStartDate() {
-        return startDate;
+        return subTaskStartDate;
     }
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setSubTaskStartDate(Date subTaskStartDate) {
+        this.subTaskStartDate = subTaskStartDate;
     }
     public int getTaskID() {
         return taskID;

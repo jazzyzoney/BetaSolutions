@@ -8,6 +8,7 @@
 <body>
 <h1>Create New  TASK FOR SubProject</h1>
 
+<!-- new task for subproject -->
 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">
     <label class="large-text">Task Name:
         <input type="text" id="taskName" name="name" th:field="${task.name}" required>

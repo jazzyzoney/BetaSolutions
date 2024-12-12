@@ -19,6 +19,7 @@ public class SubTask implements ModelInterface {
     public SubTask() {
     }
 
+    //set all values.
     public SubTask (String name, int hours, double price, Date startDate, int taskID){
         this.name = name;
         totalPrice = price;

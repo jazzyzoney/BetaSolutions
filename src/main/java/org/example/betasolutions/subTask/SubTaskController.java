@@ -43,6 +43,7 @@ public class SubTaskController {
     @PostMapping("/project/{projectID}/task/{taskID}/subtasks/post")
     public String createNewSubTask(@PathVariable ("projectID") int projectID, @PathVariable ("taskID") int taskID, @ModelAttribute SubTask subTask){
         subTask.setTaskID(taskID);
+        subTask.setHours(subTask.getHours());
         subTaskService.createSubTask(subTask);
         return "redirect:/project/" + projectID + "/task/" + taskID + "/subtasks";
     }

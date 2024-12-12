@@ -11,8 +11,8 @@ public class SubTask implements ModelInterface {
     private int hours;
     private int totalDays;
     private double totalPrice;
-    private Date subTaskDeadline;
-    private Date subTaskStartDate;
+    private Date deadline;
+    private Date startDate;
     private int taskID;
 
     //empty
@@ -23,7 +23,7 @@ public class SubTask implements ModelInterface {
     public SubTask (String name, int hours, double price, Date startDate, int taskID){
         this.name = name;
         totalPrice = price;
-        subTaskStartDate = startDate;
+        this.startDate = startDate;
 
         setHours(hours);
 
@@ -37,8 +37,8 @@ public class SubTask implements ModelInterface {
         this.hours = hours;
         totalDays = days;
         totalPrice = price;
-        subTaskStartDate = startDate;
-        subTaskDeadline = deadLine;
+        this.startDate = startDate;
+        deadline = deadLine;
 
     }
     
@@ -96,7 +96,7 @@ public class SubTask implements ModelInterface {
         TimeManager timeManager = new TimeManager();
 
         totalDays = timeManager.calculateDays(hours);
-        subTaskDeadline = timeManager.calculateEndDate(subTaskStartDate, totalDays);
+        deadline = timeManager.calculateEndDate(startDate, totalDays);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,18 +120,18 @@ public class SubTask implements ModelInterface {
     }
 
     public Date getDeadline() {
-        return subTaskDeadline;
+        return deadline;
     }
 
-    public void setSubTaskDeadline(Date subTaskDeadline) {
-        this.subTaskDeadline = subTaskDeadline;
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     public Date getStartDate() {
-        return subTaskStartDate;
+        return startDate;
     }
-    public void setSubTaskStartDate(Date subTaskStartDate) {
-        this.subTaskStartDate = subTaskStartDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
     public int getTaskID() {
         return taskID;

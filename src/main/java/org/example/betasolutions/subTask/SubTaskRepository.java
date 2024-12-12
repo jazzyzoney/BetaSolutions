@@ -36,7 +36,6 @@ public class SubTaskRepository extends PSSTSuperclass {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 SubTask subTask = new SubTask();
-
                 subTask.setSubTaskID(resultSet.getInt("sub_task_id"));
                 subTask.setName(resultSet.getString("sub_task_name"));
                 subTask.setSubTaskStartDate(resultSet.getDate("sub_task_start_date"));

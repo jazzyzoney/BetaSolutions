@@ -28,11 +28,11 @@
     </label>
     <br>
     <label class="large-text">Deadline:
-        <input type="date" id="subTaskDeadline" name="subTaskDeadline" th:value="${subtask.deadline}" required>
+        <input type="date" id="subTaskDeadline" name="subTaskDeadline" th:field="${subtask.deadline}" required>
     </label>
     <br>
     <label class="large-text">Start Date:
-        <input type="date" id="subTaskStartDate" name="subTaskStartDate" th:value="${subtask.startDate}" required>
+        <input type="date" id="subTaskStartDate" name="subTaskStartDate" th:field="${subtask.startDate}" required>
     </label>
     <br>
     <button type="submit">Create SubTask</button>

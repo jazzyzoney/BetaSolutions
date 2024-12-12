@@ -24,9 +24,7 @@ public class SubTask implements ModelInterface {
         this.name = name;
         totalPrice = price;
         this.startDate = startDate;
-
-        setHours(hours);
-
+        this.hours = hours;
         this.taskID = taskID;
     }
 
@@ -41,28 +39,7 @@ public class SubTask implements ModelInterface {
         deadline = deadLine;
 
     }
-    
-    /*
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate, int taskID) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
-        this.taskID = taskID;
-    }
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
-    }
-*/
+
     public int getID() {
         return subTaskID;
     }
@@ -83,23 +60,15 @@ public class SubTask implements ModelInterface {
         return hours;
     }
 
-    /*
-    public void setSubTaskTotalHours(int subTaskTotalHours) {
-        this.subTaskTotalHours = subTaskTotalHours;
-    }
-*/
-
     public void setHours(int hours){
-        try {
         this.hours = hours;
-
+        //right here oficer this is where the error is
+        //theimleaf
         TimeManager timeManager = new TimeManager();
 
         totalDays = timeManager.calculateDays(hours);
         deadline = timeManager.calculateEndDate(startDate, totalDays);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
     }
 

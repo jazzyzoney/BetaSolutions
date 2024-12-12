@@ -12,7 +12,7 @@
 <form th:action="@{/employee/new/post}" method="post" th:object="${employee}"> <br>
 
     <label class="large-text">Name:
-        <input type="text" name="employeeName" th:value="${employee.employeeName}" required>
+        <input type="text" name="employeeName" th:field="${employee.employeeName}" required>
     </label>
 
     <br>

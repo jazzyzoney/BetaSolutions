@@ -33,7 +33,7 @@
 <main>
     <form class="logo" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
         <button type="submit">All employees for project</button>
-        <hidden name="projectID" value="projectID"> </hidden>
+        <hidden name="projectID" field="projectID"> </hidden>
     </form>
     <br>
 

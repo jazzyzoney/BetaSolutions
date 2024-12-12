@@ -49,11 +49,11 @@ public class ProjectController {
 
     //does this need pathvariable?
     @GetMapping("/project/{projectID}")
-    public String getProject(@PathVariable("projectID") int projectID,Model model) {
+    public String getProject(@PathVariable("projectID") int projectID, int taskID, Model model) {
         Project project = projectService.readAllProjects().get(projectID - 1);
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
         List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
-        List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID);
+        List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID, taskID);
 
         Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
         Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>();

@@ -52,7 +52,7 @@ public class ProjectController {
     public String getProject(@PathVariable("projectID") int projectID,Model model) {
         Project project = projectService.readAllProjects().get(projectID - 1);
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
-        List<Task> tasks = taskService.getAllTasks(projectID);
+        List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
 
 
 

@@ -34,7 +34,7 @@ public class TaskService {
     public List <Task> getAllTasksForSubProject(int projectID, int subProjectID){
         return taskRepository.readAllTasksForSubProject(projectID, subProjectID);
     }
-    public boolean deleteTask(int taskID){
+    public int deleteTask(int taskID){
         return taskRepository.deleteTask(taskID);
 
     }

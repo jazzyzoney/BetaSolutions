@@ -4,6 +4,7 @@ import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class SubTask implements ModelInterface {
     private int subTaskID;
@@ -26,6 +27,10 @@ public class SubTask implements ModelInterface {
         this.startDate = startDate;
         this.hours = hours;
         this.taskID = taskID;
+
+        TimeManager timeManager = new TimeManager();
+        totalDays = timeManager.calculateDays(hours);
+        deadline = timeManager.calculateEndDate(startDate, totalDays);
     }
 
     //factory

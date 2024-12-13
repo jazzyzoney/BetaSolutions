@@ -2,6 +2,7 @@ package org.example.betasolutions.task;
 
 import org.example.betasolutions.TimeManager;
 
+import org.example.betasolutions.subTask.SubTask;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -18,11 +19,13 @@ public class TaskService {
     }
 
     public void createTaskForProject(Task task){
+        calculateDeadline(task);
         taskRepository.addTaskToProject(task);
 
     }
 
     public void createTaskForSubProject(Task task){
+        calculateDeadline(task);
         taskRepository.addTaskToSubProject(task);
     }
 
@@ -34,7 +37,7 @@ public class TaskService {
     public List <Task> getAllTasksForSubProject(int projectID, int subProjectID){
         return taskRepository.readAllTasksForSubProject(projectID, subProjectID);
     }
-    public boolean deleteTask(int taskID){
+    public int deleteTask(int taskID){
         return taskRepository.deleteTask(taskID);
 
     }
@@ -54,12 +57,14 @@ public class TaskService {
         //System.out.println("taskservice. start date: " + task.getStartDate());
 
         Date deadline = timeManager.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
-
-
         taskRepository.updateTaskHours(taskID, hours);
         taskRepository.updateTaskDays(taskID, days);
         taskRepository.updateTaskDeadline(taskID, deadline);
 
+    }
+    public void calculateDeadline(Task task){
+        task.setDays(timeManager.calculateDays(task.getHours()));
+        task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays()));
     }
 
 }

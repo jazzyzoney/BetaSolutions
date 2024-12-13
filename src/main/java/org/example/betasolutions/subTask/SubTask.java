@@ -7,61 +7,39 @@ import java.sql.Date;
 
 public class SubTask implements ModelInterface {
     private int subTaskID;
-    private String subTaskName;
-    private int subTaskTotalHours;
-    private int subTaskTotalDays;
-    private double subTaskTotalPrice;
-    private Date subTaskDeadline;
-    private Date subTaskStartDate;
+    private String name;
+    private int hours;
+    private int totalDays;
+    private double totalPrice;
+    private Date deadline;
+    private Date startDate;
     private int taskID;
 
     //empty
     public SubTask() {
     }
 
+    //set all values.
     public SubTask (String name, int hours, double price, Date startDate, int taskID){
-        subTaskName = name;
-        subTaskTotalPrice = price;
-        subTaskStartDate = startDate;
-
-        setHours(hours);
-
+        this.name = name;
+        totalPrice = price;
+        this.startDate = startDate;
+        this.hours = hours;
         this.taskID = taskID;
     }
 
     //factory
     public SubTask (int subTaskID, String name, int hours, int days, double price, Date deadLine , Date startDate){
         this.subTaskID = subTaskID;
-        subTaskName = name;
-        subTaskTotalHours = hours;
-        subTaskTotalDays = days;
-        subTaskTotalPrice = price;
-        subTaskStartDate = startDate;
-        subTaskStartDate = deadLine;
+        this.name = name;
+        this.hours = hours;
+        totalDays = days;
+        totalPrice = price;
+        this.startDate = startDate;
+        deadline = deadLine;
 
     }
-    
-    /*
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate, int taskID) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
-        this.taskID = taskID;
-    }
-    public SubTask(int subTaskID, String subTaskName, int subTaskTotalHours, int subTaskTotalDays, double subTaskTotalPrice, Date subTaskDeadline, Date subTaskStartDate) {
-        this.subTaskID = subTaskID;
-        this.subTaskName = subTaskName;
-        this.subTaskTotalHours = subTaskTotalHours;
-        this.subTaskTotalDays = subTaskTotalDays;
-        this.subTaskTotalPrice = subTaskTotalPrice;
-        this.subTaskDeadline = subTaskDeadline;
-        this.subTaskStartDate = subTaskStartDate;
-    }
-*/
+
     public int getID() {
         return subTaskID;
     }
@@ -71,61 +49,62 @@ public class SubTask implements ModelInterface {
     }
 
     public String getName() {
-        return subTaskName;
+        return name;
     }
 
-    public void setSubTaskName(String subTaskName) {
-        this.subTaskName = subTaskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHours() {
-        return subTaskTotalHours;
+        return hours;
     }
-
-    /*
-    public void setSubTaskTotalHours(int subTaskTotalHours) {
-        this.subTaskTotalHours = subTaskTotalHours;
-    }
-*/
 
     public void setHours(int hours){
-        this.subTaskTotalHours = hours;
 
-        TimeManager timeManager = new TimeManager();
+        try {
+            this.hours = hours;
+            //right here oficer this is where the error is
+            // fucking theimleaf
+            //TimeManager timeManager = new TimeManager();
 
-        subTaskTotalDays = timeManager.calculateDays(hours);
-        subTaskDeadline = timeManager.calculateEndDate(subTaskStartDate, subTaskTotalDays);
+            //totalDays = timeManager.calculateDays(hours);
+           // deadline = timeManager.calculateEndDate(startDate, totalDays);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int getDays() {
-        return subTaskTotalDays;
+        return totalDays;
     }
 
-    public void setSubTaskTotalDays(int subTaskTotalDays) {
-        this.subTaskTotalDays = subTaskTotalDays;
+    public void setTotalDays(int totalDays) {
+        this.totalDays = totalDays;
     }
 
     public double getTotalPrice() {
-        return subTaskTotalPrice;
+        return totalPrice;
     }
 
-    public void setSubTaskTotalPrice(double subTaskTotalPrice) {
-        this.subTaskTotalPrice = subTaskTotalPrice;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Date getDeadline() {
-        return subTaskDeadline;
+        return deadline;
     }
 
-    public void setSubTaskDeadline(Date subTaskDeadline) {
-        this.subTaskDeadline = subTaskDeadline;
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     public Date getStartDate() {
-        return subTaskStartDate;
+        return startDate;
     }
-    public void setSubTaskStartDate(Date subTaskStartDate) {
-        this.subTaskStartDate = subTaskStartDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
     public int getTaskID() {
         return taskID;

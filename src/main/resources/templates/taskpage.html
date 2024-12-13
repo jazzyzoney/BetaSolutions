@@ -9,9 +9,10 @@
 <body>
 <h1>Create New  TASK FOR Project</h1>
 
+<!-- create task without subproject -->
 <form th:action="@{/project/{projectID}/task/new/post(projectID=${projectID})}" method="post" th:object="${task}">
 
-    <label class="large-text">SubProject Name:
+    <label class="large-text">task Name:
         <input type="text" id="projectName" name="projectName" th:field="${task.name}" required>
     </label>
     <br>
@@ -19,44 +20,15 @@
         <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${task.hours}" required>
     </label>
     <br>
-    <label class="large-text">Total Days:
-        <input type="number" id="projectTotalDays" name="projectTotalDays" th:field="${task.days}" required>
-    </label>
-    <br>
     <label class="large-text">Total Price:
         <input type="number" step="0.01" id="projectTotalPrice" name="projectTotalPrice" th:field="${task.totalPrice}" required>
     </label>
     <br>
-    <label class="large-text">Deadline:
-        <input type="date" id="projectDeadline" name="projectDeadline" th:field="${task.deadline}" required>
-    </label>
-    <br>
     <label class="large-text">Start Date:
-        <input type="date" id="projectStartDate" name="projectStartDate" th:field="${task.startDate}" required>
+        <input type="date" id="StartDate" name="StartDate" th:field="${task.startDate}" required>
     </label>
     <br>
     <button type="submit">Create SubProject</button>
 </form>
-
-    <p> task page</p>
-    <h2 th:text="${task.getName()}"></h2>
-
-    <!--@{/project/{projectID}/task/{taskID}/edit (projectID = ${projectID}, taskID = ${task.getID()})}"  th:object="${task}"-->
-    <form
-        th:method="post" th:action = "@{/project/task/edit}" th:object="${task}" style="display:inline;">
-        <label for="hours"> Hours: </label>
-        <input type="number" id="hours" name="hours" th:value = "${task.getHours()}"/>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-
-
-    <!--
-    <form th:action="@{/attractions/save}" th:method="post" th:object="${touristAttraction}">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" th:value="${touristAttraction.name}"> <br>
--->
-
-
 </body>
 </html>

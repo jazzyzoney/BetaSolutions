@@ -53,18 +53,26 @@ public class ProjectController {
         Project project = projectService.readAllProjects().get(projectID - 1);
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
         List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
-        List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID);
 
+
+
+        Map<Task,Integer> subTaskCount = new HashMap<>();
         Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
-        Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>();
         List<Task> tasksWithoutSubProject = new ArrayList<>();
 
-
+        //for each subproject we are adding a list of tasks to the map subProjectsAndTasks with the subproject as key and the list of tasks as value
         for (SubProject subProject : subProjects) {
             subProjectsAndTasks.put(subProject, new ArrayList<>());
         }
-
+        //here we are counting the amount of subtasks for each task and adding it to the map SubTaskCount with the task as key and the amount of subtasks as value
         for (Task task : tasks) {
+
+            //count them subtasks
+            int subTaskCounter = subTaskService.readAllSubTasks(projectID, task.getID()).size();
+
+            subTaskCount.put(task, subTaskCounter);
+
+
             if (task.getSubProjectID() != 0) {
                 for (SubProject subProject : subProjects) {
                     if (task.getSubProjectID() == subProject.getID()) {
@@ -77,21 +85,10 @@ public class ProjectController {
             }
         }
 
-        for (Task task : tasks) {
-            tasksAndSubTasks.put(task, new ArrayList<>());
-        }
-        for (Task task : tasks) {
-            for (SubTask subTask : subTasks) {
-                if (subTask.getTaskID() == task.getID()) {
-                    tasksAndSubTasks.get(task).add(subTask);
-                }
-            }
-        }
-
         model.addAttribute("project", project);
         model.addAttribute("subProjects", subProjectsAndTasks);
         model.addAttribute("tasksWithoutSubProject", tasksWithoutSubProject);
-        model.addAttribute("tasksAndSubTasks", tasksAndSubTasks);
+        model.addAttribute("subTaskCount", subTaskCount);
         return "projectpage";
     }
 

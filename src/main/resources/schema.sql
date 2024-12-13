@@ -108,13 +108,11 @@ CREATE TABLE IF NOT EXISTS project_employee_task_subTask (
                                                              FOREIGN KEY (employee_id, project_id, task_id) REFERENCES project_employee_task (employee_id, project_id, task_id) ON DELETE CASCADE,
                                                              FOREIGN KEY (sub_task_id) REFERENCES sub_task (sub_task_id) ON DELETE CASCADE
 );
-
 -- Insert sample data into project table
 INSERT INTO project (project_name, project_owner, project_total_hours, project_total_days, project_total_price, project_deadline, project_start_date, project_active)
 VALUES
     ('Project A', 'Owner 1', 500, 30, 10000.0, '2024-12-31', '2024-11-01', TRUE),
     ('Project B', 'Owner 2', 300, 20, 8000.0, '2025-01-15', '2024-12-01', TRUE);
-
 -- Insert sample data into sub_project table
 INSERT INTO sub_project (sub_project_name, sub_project_total_hours, sub_project_total_days, sub_project_total_price, sub_project_deadline, sub_project_start_date, project_id, sub_project_active)
 VALUES
@@ -122,10 +120,10 @@ VALUES
     ('SubProject 2', 100, 10, 3000.0, '2025-01-05', '2024-12-10', 2, TRUE);
 
 -- Insert sample data into task table
-INSERT INTO task (task_name, task_total_hours, task_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
+INSERT INTO task (task_name, task_total_hours, task_hours, task_total_days,task_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
 VALUES
-    ('Task 1', 100, 50, 5, 1500.0, '2024-12-05', '2024-11-10', 1, 1, TRUE),
-    ('Task 2', 50, 25, 4, 1200.0, '2024-12-20', '2024-11-15', 2, 2, TRUE);
+    ('Task 1', 100, 50, 10, 5, 2000.0, '2024-12-10', '2024-11-01', 1, 1, TRUE),
+    ('Task 2', 50, 40, 5, 4, 1000.0, '2024-12-25', '2024-11-10', 2, 2, TRUE);
 
 -- Insert sample data into sub_task table
 INSERT INTO sub_task (sub_task_name, hours, sub_task_total_days, sub_task_total_price, sub_task_deadline, sub_task_start_date, task_id, sub_task_active)

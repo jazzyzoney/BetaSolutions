@@ -60,7 +60,7 @@ public class TaskRepository extends PSSTSuperclass {
 
 
     public boolean addTaskToSubProject(Task task){
-        String sql = "insert into task (task_name, task_hours,task_total_hours,task_daystask_total_days,task_total_price,task_deadline,task_start_date,project_id,sub_project_id) values(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into task (task_name, task_hours,task_total_hours,task_days, task_total_days,task_total_price,task_deadline,task_start_date,project_id,sub_project_id) values(?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, task.getName());

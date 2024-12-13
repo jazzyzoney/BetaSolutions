@@ -24,7 +24,7 @@
 <h2>Tasks for just the project:</h2>
 <ul>
     <li th:each="task : ${tasksWithoutSubProject}">
-        Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span>
+        Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.totalHours}"></span>
 
         <!-- Display subtask count -->
         <span th:if="${subTaskCount[task] > 0}">

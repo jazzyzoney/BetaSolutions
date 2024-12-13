@@ -10,7 +10,6 @@ public class Task implements ModelInterface {
     private String name;
     private int hours;
     private int days;
-
     private double totalPrice;
     private Date taskDeadLine;
     private Date taskStartDate;
@@ -109,11 +108,15 @@ public class Task implements ModelInterface {
     }
 
     public void setHours(int hours){
+        try {
         TimeManager timeManager = new TimeManager();
         this.hours = hours;
 
         days = timeManager.calculateDays(hours);
         taskDeadLine = timeManager.calculateEndDate(taskStartDate, days);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

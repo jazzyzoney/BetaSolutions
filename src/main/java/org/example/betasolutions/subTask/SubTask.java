@@ -61,15 +61,19 @@ public class SubTask implements ModelInterface {
     }
 
     public void setHours(int hours){
-        this.hours = hours;
-        //right here oficer this is where the error is
-        //theimleaf
-        TimeManager timeManager = new TimeManager();
 
-        totalDays = timeManager.calculateDays(hours);
-        deadline = timeManager.calculateEndDate(startDate, totalDays);
+        try {
+            this.hours = hours;
+            //right here oficer this is where the error is
+            //theimleaf
+            TimeManager timeManager = new TimeManager();
 
-
+            totalDays = timeManager.calculateDays(hours);
+            deadline = timeManager.calculateEndDate(startDate, totalDays);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int getDays() {

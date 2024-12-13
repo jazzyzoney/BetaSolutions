@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public boolean addTaskToProject(Task task){
+/*
         String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, task_hours, task_days) values(?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
@@ -44,13 +46,32 @@ public class TaskRepository extends PSSTSuperclass {
             /*preparedStatement.setInt(2, getTotalHoursForTask(task));//set total hours for task.
             preparedStatement.setInt(3, task.getTotalDays()); //update total days.
             preparedStatement.setInt(5, task.getDeadline());//update*/
+        /*
             preparedStatement.setInt(8, task.getHours());//set task specific hours
             preparedStatement.setInt(9, task.getDays());//set task specific days.
 
             preparedStatement.executeUpdate(); //add task to database.
+*/
 
-            return true;
-        } catch (Exception e) {
+    String sql = "insert into task (task_name, task_hours,task_total_hours,task_days, task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?,?,?)";
+    try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+        preparedStatement.setString(1, task.getName()); //name
+        preparedStatement.setInt(2, task.getHours());   //hours
+        preparedStatement.setInt(3, task.getTotalHours());//totalhours
+        preparedStatement.setInt(4, task.getDays());//      //days
+        preparedStatement.setInt(5, task.getTotalDays());   //totaldays
+        preparedStatement.setDouble(6, task.getTotalPrice());  //price
+        preparedStatement.setDate(7, task.getDeadline());   //deadline
+        preparedStatement.setDate(8, task.getStartDate());  //startDate
+        preparedStatement.setInt(9, task.getProjectID());   //project ID
+        preparedStatement.executeUpdate();
+        ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -58,7 +79,7 @@ public class TaskRepository extends PSSTSuperclass {
 
 
     public boolean addTaskToSubProject(Task task){
-        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id, task_hours, task_days) values(?,?,?,?,?,?,?,?,?,?)";
+      /*  String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id, task_hours, task_days) values(?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
         try{
             preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
@@ -70,6 +91,26 @@ public class TaskRepository extends PSSTSuperclass {
             preparedStatement.executeUpdate(); //add task to database.
             return true;
         }catch (Exception e){
+*/
+        String sql = "insert into task (task_name, task_hours,task_total_hours,task_days, task_total_days,task_total_price,task_deadline,task_start_date,project_id,sub_project_id) values(?,?,?,?,?,?,?,?,?,?)";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            preparedStatement.setString(1, task.getName());
+            preparedStatement.setInt(2, task.getHours());
+            preparedStatement.setInt(3, task.getTotalHours());
+            preparedStatement.setInt(4, task.getDays()); //get days
+            preparedStatement.setInt(5, task.getTotalDays());
+            preparedStatement.setDouble(6, task.getTotalPrice());
+            preparedStatement.setDate(7, task.getDeadline());
+            preparedStatement.setDate(8, task.getStartDate());
+            preparedStatement.setInt(9, task.getProjectID());
+            preparedStatement.setInt(10, task.getSubProjectID());
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

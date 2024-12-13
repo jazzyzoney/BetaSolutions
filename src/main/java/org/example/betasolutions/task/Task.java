@@ -6,16 +6,16 @@ import java.sql.Date;
 
 public class Task implements ModelInterface {
 
-    private int taskID;
-    private String taskName;
-    private int taskTotalHours;
-    private int taskHours;
-    private int taskTotalDays;
-    private int taskDays;
-    private double taskTotalPrice;
+    private int id;
+    private String name;
+    private int hours;
+    private int days;
+    private double totalPrice;
+
     private Date taskDeadLine;
     private Date taskStartDate;
-
+    private int totalHours;
+    private int totalDays;
     private int subProjectID;
     private int projectID;
 
@@ -24,76 +24,56 @@ public class Task implements ModelInterface {
 
     //factory constructor.
     public Task(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
-        this.taskID = id;
-        this.taskName = name;
-        this.taskTotalHours = hours;
-        this.taskTotalDays = days;
-        this.taskTotalPrice = totalPrice;
+        this.id = id;
+        this.name = name;
+        this.totalHours = hours;
+        this.totalDays = days;
+        this.totalPrice = totalPrice;
         this.taskDeadLine = Deadline;
         this.taskStartDate = startDate;
     }
 
 
     //set all values with subproject.
-    public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate, int projectID, int subProjectID){
+    public Task(String name, int totalHours, double totalPrice, Date taskStartDate, int projectID, int subProjectID){
         //this.id = id;
-        this.taskName = taskName;
-        this.taskTotalPrice = taskTotalPrice;
+        this.name = name;
+        this.totalPrice = totalPrice;
         this.taskStartDate = taskStartDate;
 
-
-        setHours(taskTotalHours);
+        setHours(totalHours);
 
         this.projectID = projectID;
         this.subProjectID = subProjectID;
     }
 
     //set all values without subproject.
-    public Task(String taskName, int taskTotalHours, double taskTotalPrice, Date taskStartDate, int projectID){
+    public Task(String name, int totalHours, double totalPrice, Date taskStartDate, int projectID){
         //this.id = id;
-        this.taskName = taskName;
-        this.taskTotalPrice = taskTotalPrice;
+        this.name = name;
+        this.totalPrice = totalPrice;
         this.taskStartDate = taskStartDate;
 
-        setHours(taskTotalHours);
+        setHours(totalHours);
 
         this.projectID = projectID;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public void setID(int id) {
-        this.taskID = id;
+        this.id = id;
     }
     public int getID() {
-        return taskID;
+        return id;
     }
 
     public void setName(String name) {
-        this.taskName = name;
-    }
-    public String getName() {
-        return taskName;
-    }
-    public void setHours(int hours) {
-        this.taskHours = hours;
-        TimeManager timeManager = new TimeManager();
-
-        taskDays = timeManager.calculateDays(hours); //set days.
+        this.name = name;
     }
 
-    public void setTotalHours(int totalHours){
-        this.taskTotalHours = totalHours;
-        TimeManager timeManager = new TimeManager();
-
-        taskTotalDays = timeManager.calculateDays(totalHours); //set total days.
-        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays); //set new deadline
-    }
-
-    public int getHours() {
-        return taskHours;
-    }
-    public int getTotalHours() {
-        return taskTotalHours;
-    }
 /*
     public void setTotalHours(int hours){
         TimeManager timeManager = new TimeManager();
@@ -111,14 +91,18 @@ public class Task implements ModelInterface {
         return projectID;
     }
 
-    public int getDays() {
-        return taskTotalDays;
+    public int getTotalDays() {
+        return totalDays;
     }
+    public void setTotalDays(int totalDays) {
+        this.totalDays = totalDays;
+    }
+
     public void setTotalPrice(double totalPrice) {
-        this.taskTotalPrice = totalPrice;
+        this.totalPrice = totalPrice;
     }
     public double getTotalPrice() {
-        return taskTotalPrice;
+        return totalPrice;
     }
     public void setDeadline(Date endDate) {
         this.taskDeadLine = endDate;
@@ -133,6 +117,18 @@ public class Task implements ModelInterface {
         return taskStartDate;
     }
 
+    public void setHours(int hours){
+        try {
+        //TimeManager timeManager = new TimeManager();
+        this.hours = hours;
+
+        //days = timeManager.calculateDays(hours);
+        //taskDeadLine = timeManager.calculateEndDate(taskStartDate, days);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void setSubProjectID(int subProjectID){
         this.subProjectID = subProjectID;
@@ -140,5 +136,24 @@ public class Task implements ModelInterface {
 
     public void setProjectID(int projectID){
         this.projectID = projectID;
+    }
+
+    public int getHours(){
+        return hours;
+    }
+
+    public int getDays(){
+        return days;
+    }
+    public void setDays(int days){
+        this.days = days;
+    }
+
+    public void setTotalHours(int totalHours){
+        this.totalHours = totalHours;
+    }
+
+    public int getTotalHours(){
+        return totalHours;
     }
 }

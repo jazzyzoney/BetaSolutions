@@ -32,8 +32,6 @@ public class TimeManager {
                 days++;
                continue;
             }
-
-
         } //end of loop.
 
         Date deadline = Date.valueOf(localDate);//convert localdate object back into sql.Date object.

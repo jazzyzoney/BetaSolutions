@@ -11,7 +11,6 @@ public class SubProject implements ModelInterface {
 
     int subProjectID;
     String subProjectName;
-
     int subProjectTotalHours;
     int subProjectTotalDays;
     double subProjectTotalPrice;

@@ -5,6 +5,9 @@ import org.example.betasolutions.TimeManager;
 import org.example.betasolutions.project.ProjectService;
 import org.example.betasolutions.subProject.SubProjectRepository;
 import org.example.betasolutions.subProject.SubProjectService;
+
+import org.example.betasolutions.subTask.SubTask;
+
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -28,6 +31,7 @@ public class TaskService {
 
     public void createTaskForProject(Task task){
         task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+        calculateDeadline(task);
         taskRepository.addTaskToProject(task);
     }
 
@@ -35,6 +39,7 @@ public class TaskService {
     public void createTaskForSubProject(Task task){
         //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
         updateTaskTotalHours(task.getHours());
+        calculateDeadline(task);
         taskRepository.addTaskToSubProject(task);
     }
 
@@ -49,7 +54,7 @@ public class TaskService {
     public List <Task> getAllTasksForSubProject(int projectID, int subProjectID){
         return taskRepository.readAllTasksForSubProject(projectID, subProjectID);
     }
-    public boolean deleteTask(int taskID){
+    public int deleteTask(int taskID){
         return taskRepository.deleteTask(taskID);
 
     }
@@ -59,7 +64,7 @@ public class TaskService {
         return task;
     }
 
-    /*
+
     public void updateHours(Task task, int hours) {
         //task.setTotalHours(hours); //set task hours = new hours;
 
@@ -72,12 +77,17 @@ public class TaskService {
         Date deadline = timeManager.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
 
 
-        taskRepository.updateTaskTotalHours(taskID, hours);
-        taskRepository.updateTaskTotalDays(taskID, days);
+       // taskRepository.updateTaskHours(taskID, hours);
+        //taskRepository.updateTaskDays(taskID, days);
         taskRepository.updateTaskDeadline(taskID, deadline);
 
     }
-*/
+
+    public void calculateDeadline(Task task){
+        task.setDays(timeManager.calculateDays(task.getHours()));
+        task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays()));
+    }
+//>>>>>>> master
 
     public void updateTaskTotalHours(int taskID){
         Task task = taskRepository.readTask(taskID); //read task.

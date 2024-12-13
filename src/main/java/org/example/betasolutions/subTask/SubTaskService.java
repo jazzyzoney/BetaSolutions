@@ -17,6 +17,7 @@ public class SubTaskService {
 
     public SubTaskService(SubTaskRepository subTaskRepository, TimeManager timeManager, TaskService taskService){
         this.subTaskRepository = subTaskRepository;
+        this.taskService = taskService;
         this.timeManager = timeManager;
     }
 

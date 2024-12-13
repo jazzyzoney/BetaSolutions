@@ -47,9 +47,8 @@ public class SubProjectService {
         calculateDeadline(subProject);//martin
     }
 
-}
     public void calculateDeadline(SubProject subProject){
-        subProject.setDays(timeManager.calculateDays(subProject.getHours()));
+        subProject.setDayscalculateDays(timeManager(subProject.getHours()));
         subProject.setDeadline(timeManager.calculateEndDate(subProject.getStartDate(), subProject.getDays()));
     }
 }

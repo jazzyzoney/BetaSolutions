@@ -1,11 +1,18 @@
 package org.example.betasolutions.employee;
 
 import jakarta.transaction.Transactional;
+import org.example.betasolutions.ConnectionManager;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -19,7 +26,26 @@ class EmployeeRepositoryTest {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private ConnectionManager connectionManager;
 
+    private Connection conn;
+
+    @BeforeEach
+    void setUp(){
+        conn = connectionManager.getConnection();
+
+    }
+
+    @AfterEach
+    void tearDown(){
+        try{
+            conn.rollback();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
 
     @Test
     void createNewEmployee() {

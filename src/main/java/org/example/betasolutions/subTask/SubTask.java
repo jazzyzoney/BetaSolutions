@@ -1,48 +1,56 @@
 package org.example.betasolutions.subTask;
 
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.TimeManager;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class SubTask implements ModelInterface {
-    private int id;
+    private int subTaskID;
     private String name;
     private int hours;
-    private int days;
+    private int totalDays;
     private double totalPrice;
-    private Date Deadline;
+    private Date deadline;
     private Date startDate;
     private int taskID;
 
+    //empty
     public SubTask() {
     }
 
-    public SubTask(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate, int taskID) {
-        this.id = id;
+    //set all values.
+    public SubTask (String name, int hours, double price, Date startDate, int taskID){
         this.name = name;
-        this.hours = hours;
-        this.days = days;
-        this.totalPrice = totalPrice;
-        this.Deadline = Deadline;
+        totalPrice = price;
         this.startDate = startDate;
+        this.hours = hours;
         this.taskID = taskID;
+
+        TimeManager timeManager = new TimeManager();
+        totalDays = timeManager.calculateDays(hours);
+        deadline = timeManager.calculateEndDate(startDate, totalDays);
     }
-    public SubTask(int id, String name, int hours, int days, double totalPrice, Date Deadline, Date startDate) {
-        this.id = id;
+
+    //factory
+    public SubTask (int subTaskID, String name, int hours, int days, double price, Date deadLine , Date startDate){
+        this.subTaskID = subTaskID;
         this.name = name;
         this.hours = hours;
-        this.days = days;
-        this.totalPrice = totalPrice;
-        this.Deadline = Deadline;
+        totalDays = days;
+        totalPrice = price;
         this.startDate = startDate;
+        deadline = deadLine;
+
     }
 
     public int getID() {
-        return id;
+        return subTaskID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSubTaskID(int subTaskID) {
+        this.subTaskID = subTaskID;
     }
 
     public String getName() {
@@ -57,16 +65,28 @@ public class SubTask implements ModelInterface {
         return hours;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    public void setHours(int hours){
+
+        try {
+            this.hours = hours;
+            //right here oficer this is where the error is
+            // fucking theimleaf
+            //TimeManager timeManager = new TimeManager();
+
+            //totalDays = timeManager.calculateDays(hours);
+           // deadline = timeManager.calculateEndDate(startDate, totalDays);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int getDays() {
-        return days;
+        return totalDays;
     }
 
-    public void setDays(int days) {
-        this.days = days;
+    public void setTotalDays(int totalDays) {
+        this.totalDays = totalDays;
     }
 
     public double getTotalPrice() {
@@ -78,11 +98,11 @@ public class SubTask implements ModelInterface {
     }
 
     public Date getDeadline() {
-        return Deadline;
+        return deadline;
     }
 
     public void setDeadline(Date deadline) {
-        this.Deadline = deadline;
+        this.deadline = deadline;
     }
 
     public Date getStartDate() {

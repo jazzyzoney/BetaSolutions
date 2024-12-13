@@ -10,33 +10,21 @@
 
 <!-- new task for subproject -->
 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">
-    <label class="large-text">Task Name:
-        <input type="text" id="taskName" name="name" th:field="${task.name}" required>
+    <label class="large-text">task Name:
+        <input type="text" id="projectName" name="projectName" th:field="${task.name}" required>
     </label>
     <br>
     <label class="large-text">Total Hours:
-        <input type="number" id="taskTotalHours" name="hours" th:field="${task.hours}" required>
-    </label>
-    <br>
-    <label class="large-text">Total Days:
-        <input type="number" id="taskTotalDays" name="days" th:field="${task.days}" required>
+        <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${task.hours}" required>
     </label>
     <br>
     <label class="large-text">Total Price:
-        <input type="number" step="0.01" id="taskTotalPrice" name="totalPrice" th:field="${task.totalPrice}" required>
-    </label>
-    <br>
-    <label class="large-text">Deadline:
-        <input type="date" id="taskDeadline" name="deadline" th:field="${task.deadline}" required>
+        <input type="number" step="0.01" id="projectTotalPrice" name="projectTotalPrice" th:field="${task.totalPrice}" required>
     </label>
     <br>
     <label class="large-text">Start Date:
-        <input type="date" id="taskStartDate" name="startDate" th:field="${task.startDate}" required>
+        <input type="date" id="StartDate" name="StartDate" th:field="${task.startDate}" required>
     </label>
     <br>
-
-    <!-- SubProject ID as hidden field -->
-    <input type="hidden" th:field="${task.subProjectID}" th:value="${subProjectID}">
-
-    <button type="submit">Create Task</button>
+    <button type="submit">Create SubProject</button>
 </form>

@@ -13,10 +13,8 @@ public class Task implements ModelInterface {
     private double totalPrice;
     private Date taskDeadLine;
     private Date taskStartDate;
-
     private int totalHours;
     private int totalDays;
-
     private int subProjectID;
     private int projectID;
 
@@ -88,6 +86,10 @@ public class Task implements ModelInterface {
     public int getTotalDays() {
         return totalDays;
     }
+    public void setTotalDays(int totalDays) {
+        this.totalDays = totalDays;
+    }
+
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
@@ -109,11 +111,11 @@ public class Task implements ModelInterface {
 
     public void setHours(int hours){
         try {
-        TimeManager timeManager = new TimeManager();
+        //TimeManager timeManager = new TimeManager();
         this.hours = hours;
 
-        days = timeManager.calculateDays(hours);
-        taskDeadLine = timeManager.calculateEndDate(taskStartDate, days);
+        //days = timeManager.calculateDays(hours);
+        //taskDeadLine = timeManager.calculateEndDate(taskStartDate, days);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,6 +136,9 @@ public class Task implements ModelInterface {
 
     public int getDays(){
         return days;
+    }
+    public void setDays(int days){
+        this.days = days;
     }
 
     public void setTotalHours(int totalHours){

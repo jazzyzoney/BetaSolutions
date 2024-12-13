@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS task (
 CREATE TABLE IF NOT EXISTS sub_task (
                                         sub_task_id INT PRIMARY KEY AUTO_INCREMENT,
                                         sub_task_name VARCHAR(100) NOT NULL,
-                                        hours INT NOT NULL,
+                                        sub_task_total_hours INT NOT NULL,
                                         sub_task_total_days INT NOT NULL,
                                         sub_task_total_price DOUBLE NOT NULL,
                                         sub_task_deadline DATE NOT NULL,
@@ -126,7 +126,7 @@ VALUES
     ('Task 2', 50, 40, 5, 4, 1000.0, '2024-12-25', '2024-11-10', 2, 2, TRUE);
 
 -- Insert sample data into sub_task table
-INSERT INTO sub_task (sub_task_name, hours, sub_task_total_days, sub_task_total_price, sub_task_deadline, sub_task_start_date, task_id, sub_task_active)
+INSERT INTO sub_task (sub_task_name, sub_task_total_hours, sub_task_total_days, sub_task_total_price, sub_task_deadline, sub_task_start_date, task_id, sub_task_active)
 VALUES
     ('SubTask 1', 20, 3, 500.0, '2024-12-03', '2024-11-10', 1, TRUE),
     ('SubTask 2', 10, 2, 300.0, '2024-12-18', '2024-11-15', 2, TRUE);

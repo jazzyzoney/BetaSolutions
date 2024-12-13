@@ -201,12 +201,11 @@ public class EmployeeRepository {
 
     //add existing employee to project_employee_task table
     public void addExistingEmployeeToTask(int employeeID, int taskID, int projectID) { //idName is the name of the column
-        String sql = "INSERT INTO project_employee_task (employee_id, project_id, task_id) VALUES (?,?,?)" + "MERGE INTO project_employee (employee_id, project_id) KEY (employee_id, project_id) VALUES (?, ?)"; //because we get a "primary key violation" in the console when adding an employee to a project, we attempt to ignore it in H2
+        String sql = "INSERT INTO project_employee_task (employee_id, project_id, task_id) VALUES (?,?,?)"; //because we get a "primary key violation" in the console when adding an employee to a project, we attempt to ignore it in H2
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
             preparedStatement.setInt(2, projectID);
             preparedStatement.setInt(3, taskID);
-            preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee added to task");
@@ -226,7 +225,6 @@ public class EmployeeRepository {
             preparedStatement.setInt(2, projectID);
             preparedStatement.setInt(3, taskID);
             preparedStatement.setInt(4, subTaskID);
-            //preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee added to subtask");
@@ -247,7 +245,6 @@ public class EmployeeRepository {
             preparedStatement.setString(3, employee.getEmployeeProficiency());
             preparedStatement.setString(4, employee.getEmployeeSalary());
             preparedStatement.setInt(5, employee.getEmployeeID());
-            preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee updated");

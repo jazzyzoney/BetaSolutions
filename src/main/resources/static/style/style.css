@@ -83,3 +83,20 @@ header .logo .solutions{
     color: black;
 }
 
+/* for the buttons */
+button {
+    background-color: var(--orange);
+    color: white;
+    border: black;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1em;
+}
+
+/* for tasks to be below subprojects in the table */
+.task-cell {
+    display: block;
+    margin-top: 10px; /* Adjust the margin as needed */
+}

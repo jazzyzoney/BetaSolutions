@@ -187,7 +187,7 @@ public class EmployeeRepository {
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
             preparedStatement.setInt(2, projectID);
-            preparedStatement.executeUpdate();
+            //preparedStatement.executeUpdate();
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected == 1) {
                 System.out.println("Employee added to project");

@@ -59,6 +59,8 @@ public class TaskController {
     public String createNewTaskForSubProjectPost(@PathVariable("projectID") int projectID, @PathVariable("subProjectID") int subProjectID,@ModelAttribute Task task){
         task.setProjectID(projectID); //set project id.
         task.setSubProjectID(subProjectID); //set subproject id.
+       // System.out.println("subproject id: " + subProjectID);
+        //System.out.println("project id: " + projectID);
         taskService.createTaskForSubProject(task); //create task for subproject, update total hours for subproject and project.
         return "redirect:/project/" + projectID;
     }

@@ -21,6 +21,7 @@ public class ProjectRepository extends PSSTSuperclass {
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
+
     //Create method
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {

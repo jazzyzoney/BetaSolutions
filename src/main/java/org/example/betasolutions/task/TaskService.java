@@ -30,17 +30,17 @@ public class TaskService {
     }
 
     public void createTaskForProject(Task task){
-        task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
-        calculateDeadline(task);
+        //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+        //calculateDeadline(task);
         taskRepository.addTaskToProject(task);
+        updateTaskTotalHours(task);
     }
 
 
     public void createTaskForSubProject(Task task){
         //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
-        updateTaskTotalHours(task.getHours());
-        calculateDeadline(task);
         taskRepository.addTaskToSubProject(task);
+        updateTaskTotalHours(task);
     }
 
     public int getTotalHoursForTask(Task task){
@@ -87,19 +87,25 @@ public class TaskService {
         task.setDays(timeManager.calculateDays(task.getHours()));
         task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays()));
     }
-//>>>>>>> master
 
-    public void updateTaskTotalHours(int taskID){
-        Task task = taskRepository.readTask(taskID); //read task.
+    public void updateTaskTotalHours(Task task){
         int totalHours = taskRepository.getTotalHoursForTask(task); //getTotalHours for task.
 
         task.setTotalHours(totalHours);//set hours on task.
-        taskRepository.updateTaskTotalHours (taskID, totalHours); //update task total hours on database.
+        calculateDeadline(task);
 
+        taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
+
+        System.out.println("task id: " + task.getID() + "\nproject id: " + task.getProjectID() + "\nsubproject id: " + task.getSubProjectID());
         if (task.getSubProjectID() > 0) {
             subProjectService.updateSubProjectTotalHours(task.getSubProjectID());
         }else{
             projectService.updateProjectTotalHours(task.getProjectID());
         }
+    }
+
+    public void updateTaskTotalHours(int taskID){
+        Task task = taskRepository.readTask(taskID); //read task.
+        updateTaskTotalHours(task);
     }
 }

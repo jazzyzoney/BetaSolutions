@@ -16,7 +16,7 @@ public class Task implements ModelInterface {
     private Date taskStartDate;
     private int totalHours;
     private int totalDays;
-    private int subProjectID;
+    private int subProjectID = 0;
     private int projectID;
 
     //empty

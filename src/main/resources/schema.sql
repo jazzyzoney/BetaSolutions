@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS task (
                                     task_total_hours INT NOT NULL,
                                     task_hours INT NOT NULL,
                                     task_total_days INT NOT NULL,
+                                    task_days INT NOT NULL,
                                     task_total_price DOUBLE NOT NULL,
                                     task_deadline DATE NOT NULL,
                                     task_start_date DATE NOT NULL,

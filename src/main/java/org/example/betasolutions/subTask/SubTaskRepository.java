@@ -38,7 +38,7 @@ public class SubTaskRepository extends PSSTSuperclass {
                 subTask.setSubTaskID(resultSet.getInt("sub_task_id"));
                 subTask.setName(resultSet.getString("sub_task_name"));
                 subTask.setStartDate(resultSet.getDate("sub_task_start_date"));
-                subTask.setHours(resultSet.getInt("hours"));
+                subTask.setHours(resultSet.getInt("sub_task_hours"));
                 subTask.setTotalDays(resultSet.getInt("sub_task_total_days"));
                 subTask.setTotalPrice(resultSet.getDouble("sub_task_total_price"));
                 subTask.setDeadline(resultSet.getDate("sub_task_deadline"));

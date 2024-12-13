@@ -60,18 +60,19 @@ public class TaskRepository extends PSSTSuperclass {
 
 
     public boolean addTaskToSubProject(Task task){
-        String sql = "insert into task (task_name, task_hours,task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id,sub_project_id) values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into task (task_name, task_hours,task_total_hours,task_daystask_total_days,task_total_price,task_deadline,task_start_date,project_id,sub_project_id) values(?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, task.getName());
             preparedStatement.setInt(2, task.getHours());
             preparedStatement.setInt(3, task.getTotalHours());
-            preparedStatement.setInt(4, task.getTotalDays());
-            preparedStatement.setDouble(5, task.getTotalPrice());
-            preparedStatement.setDate(6, task.getDeadline());
-            preparedStatement.setDate(7, task.getStartDate());
-            preparedStatement.setInt(8, task.getProjectID());
-            preparedStatement.setInt(9, task.getSubProjectID());
+            preparedStatement.setInt(4, task.getDays()); //get days
+            preparedStatement.setInt(5, task.getTotalDays());
+            preparedStatement.setDouble(6, task.getTotalPrice());
+            preparedStatement.setDate(7, task.getDeadline());
+            preparedStatement.setDate(8, task.getStartDate());
+            preparedStatement.setInt(9, task.getProjectID());
+            preparedStatement.setInt(10, task.getSubProjectID());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {

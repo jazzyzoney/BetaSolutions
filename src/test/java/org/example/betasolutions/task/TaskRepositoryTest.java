@@ -127,8 +127,8 @@ class TaskRepositoryTest {
     }
     @Test
     void deleteTask() {
-        int taskDeleted = taskRepository.deleteTask(1);
-        assertTrue(true);
+        boolean taskDeleted = taskRepository.deleteTask(1);
+        assertTrue(taskDeleted);
     }
 
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,48 +34,26 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public boolean addTaskToProject(Task task){
-    String sql = "insert into task (task_name, task_hours,task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?,?)";
-    try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-
-        preparedStatement.setString(1, task.getName());
-        preparedStatement.setInt(2, task.getHours());
-        preparedStatement.setInt(3, task.getTotalHours());
-        preparedStatement.setInt(4, task.getTotalDays());
-        preparedStatement.setDouble(5, task.getTotalPrice());
-        preparedStatement.setDate(6, task.getDeadline());
-        preparedStatement.setDate(7, task.getStartDate());
-        preparedStatement.setInt(8, task.getProjectID());
-        preparedStatement.executeUpdate();
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        if (resultSet.next()) {
+        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id) values(?,?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
+        try{
+            preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
+            preparedStatement.executeUpdate(); //add task to database.
             return true;
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return false;
     }
-
-
     public boolean addTaskToSubProject(Task task){
-        String sql = "insert into task (task_name, task_hours,task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id,sub_project_id) values(?,?,?,?,?,?,?,?,?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-
-            preparedStatement.setString(1, task.getName());
-            preparedStatement.setInt(2, task.getHours());
-            preparedStatement.setInt(3, task.getTotalHours());
-            preparedStatement.setInt(4, task.getTotalDays());
-            preparedStatement.setDouble(5, task.getTotalPrice());
-            preparedStatement.setDate(6, task.getDeadline());
-            preparedStatement.setDate(7, task.getStartDate());
-            preparedStatement.setInt(8, task.getProjectID());
-            preparedStatement.setInt(9, task.getSubProjectID());
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) {
-                return true;
-            }
-        } catch (Exception e) {
+        String sql = "insert into task (task_name, task_total_hours,task_total_days,task_total_price,task_deadline,task_start_date,project_id, sub_project_id) values(?,?,?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = super.insertAssignmentIntoTable(task,sql); //get prepared statement from superclass.
+        try{
+            preparedStatement.setInt(7,task.getProjectID()); //set project id for task.
+            preparedStatement.setInt(8,task.getSubProjectID()); //set subproject id for task.
+            preparedStatement.executeUpdate(); //add task to database.
+            return true;
+        }catch (Exception e){
             e.printStackTrace();
         }
         return false;
@@ -90,11 +67,9 @@ public class TaskRepository extends PSSTSuperclass {
             if (assignmentObject instanceof Task) {
                 Task task = (Task) assignmentObject; //typecasting.
 
-                int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()); //get subprojectID
-                int hours = super.getTableIntByInt("task", "task_hours", "task_id", task.getID()); //get hours
-                int totalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", task.getID()); //get total hours
-                task.setHours(hours); //set hours
-                task.setTotalHours(totalHours); //set total hours
+                int subProjectID = super.getTableIntByInt("task", "sub_project_id", //get subprojectID
+                        "task_id", task.getID());
+
                 task.setSubProjectID(subProjectID); //set subprojectID
                 taskList.add(task); //add task to tasklist.
             }
@@ -128,22 +103,12 @@ public class TaskRepository extends PSSTSuperclass {
     public Task readTask(int taskID){
         return (Task) super.readAssignmentByID("task","task",Task::new,taskID); //read task using super class.
     }
-    public int deleteTask(int taskID){
-        try {
-        conn.setAutoCommit(false);
-            super.deleteObjectFromTable("task", "task", taskID);
-            super.deleteAllWhere("sub_task", "task_id = " + taskID);
-            super.deleteAllWhere("project_employee_task_subTask", "task_id = " + taskID);
-            super.deleteAllWhere("project_employee_task", "task_id = " + taskID);
-            conn.commit();
-            conn.setAutoCommit(true);
-            return 1;
-        } catch (Exception e) {
-            e.printStackTrace();
+
+    public boolean deleteTask(int taskID){
+        if (super.deleteObjectFromTable("task", "task", taskID)){
+            return true;
         }
-
-        return 0;
-
+        return false;
     }
 
 

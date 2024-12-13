@@ -25,7 +25,7 @@ class TaskTest {
         assertEquals(expectedDeadLine, actualDeadLine);
 
         //Test setter:
-        task.setHours(10);
+        task.setTotalHours(10);
         expectedHours = 10;
         actualHours =  task.getHours();
         assertEquals(expectedHours, actualHours);

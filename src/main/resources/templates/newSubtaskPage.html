@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New SubTask</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h1>Create New SubTask</h1>
+
+<!-- Corrected the th:action and field bindings -->
+<form th:action="@{/project/{projectID}/task/{taskID}/subtasks/post(projectID=${projectID}, taskID=${taskID})}" method="post" th:object="${subtask}">
+
+    <label class="large-text">SubTask Name:
+        <input type="text" id="Name" name="Name" th:field="${subtask.name}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Hours:
+        <input type="number" id="Hours" name="Hours" th:field="${subtask.hours}" required>
+    </label>
+    <br>
+    <label class="large-text">Total Price:
+        <input type="number" step="0.01" id="TotalPrice" name="TotalPrice" th:field="${subtask.totalPrice}" required>
+    </label>
+    <br>
+    <label class="large-text">Start Date:
+        <input type="date" id="StartDate" name="StartDate" th:field="${subtask.startDate}" required>
+    </label>
+    <br>
+    <button type="submit">Create SubTask</button>
+</form>
+<input type="hidden" name="taskId" th:value="${subtask.taskID}">
+</body>
+</html>

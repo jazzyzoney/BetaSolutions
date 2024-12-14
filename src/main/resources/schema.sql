@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS task (
 CREATE TABLE IF NOT EXISTS sub_task (
                                         sub_task_id INT PRIMARY KEY AUTO_INCREMENT,
                                         sub_task_name VARCHAR(100) NOT NULL,
-                                        hours INT NOT NULL,
+                                        sub_task_total_hours INT NOT NULL,
                                         sub_task_total_days INT NOT NULL,
                                         sub_task_total_price DOUBLE NOT NULL,
                                         sub_task_deadline DATE NOT NULL,
@@ -111,19 +111,8 @@ CREATE TABLE IF NOT EXISTS project_employee_task_subTask (
 -- Insert sample data into project table
 INSERT INTO project (project_name, project_owner, project_total_hours, project_total_days, project_total_price, project_deadline, project_start_date, project_active)
 VALUES
-<<<<<<< HEAD
-<<<<<<< HEAD
     ('Project A', 'Owner 1', 500, 30, 10000.0, '2024-12-31', '2024-11-01', TRUE),
     ('Project B', 'Owner 2', 300, 20, 8000.0, '2025-01-15', '2024-12-01', TRUE);
-=======
-    ('Project A', 'Owner 1', 500, 30, 10000.0, '2024-12-31', '2024-11-01', 1),
-    ('Project B', 'Owner 2', 300, 20, 8000.0, '2025-01-15', '2024-12-01', 1);
-=======
-    ('Project A', 'Owner 1', 500, 30, 10000.0, '2024-12-31', '2024-11-01', TRUE),
-    ('Project B', 'Owner 2', 300, 20, 8000.0, '2025-01-15', '2024-12-01', TRUE);
->>>>>>> parent of 558ff9c (Revert "Merge branch 'master' into feature84-addEmployeeToTask/SubTask")
-
->>>>>>> parent of 04dd732 (Merge branch 'master' into feature84-addEmployeeToTask/SubTask)
 -- Insert sample data into sub_project table
 INSERT INTO sub_project (sub_project_name, sub_project_total_hours, sub_project_total_days, sub_project_total_price, sub_project_deadline, sub_project_start_date, project_id, sub_project_active)
 VALUES
@@ -131,29 +120,13 @@ VALUES
     ('SubProject 2', 100, 10, 3000.0, '2025-01-05', '2024-12-10', 2, TRUE);
 
 -- Insert sample data into task table
-<<<<<<< HEAD
-<<<<<<< HEAD
 INSERT INTO task (task_name, task_total_hours, task_hours, task_total_days,task_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
 VALUES
     ('Task 1', 100, 50, 10, 5, 2000.0, '2024-12-10', '2024-11-01', 1, 1, TRUE),
     ('Task 2', 50, 40, 5, 4, 1000.0, '2024-12-25', '2024-11-10', 2, 2, TRUE);
-=======
-
-INSERT INTO task (task_name, task_total_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
-
-VALUES
-    ('Task 1', 100, 5, 1500.0, '2024-12-05', '2024-11-10', 1, 1, 1),
-    ('Task 2', 50, 4, 1200.0, '2024-12-20', '2024-11-15', 2, 2, 1);
->>>>>>> parent of 04dd732 (Merge branch 'master' into feature84-addEmployeeToTask/SubTask)
-=======
-INSERT INTO task (task_name, task_total_hours, task_hours, task_total_days, task_total_price, task_deadline, task_start_date, project_id, sub_project_id, task_active)
-VALUES
-    ('Task 1', 100, 50, 5, 1500.0, '2024-12-05', '2024-11-10', 1, 1, TRUE),
-    ('Task 2', 50, 25, 4, 1200.0, '2024-12-20', '2024-11-15', 2, 2, TRUE);
->>>>>>> parent of 558ff9c (Revert "Merge branch 'master' into feature84-addEmployeeToTask/SubTask")
 
 -- Insert sample data into sub_task table
-INSERT INTO sub_task (sub_task_name, hours, sub_task_total_days, sub_task_total_price, sub_task_deadline, sub_task_start_date, task_id, sub_task_active)
+INSERT INTO sub_task (sub_task_name, sub_task_total_hours, sub_task_total_days, sub_task_total_price, sub_task_deadline, sub_task_start_date, task_id, sub_task_active)
 VALUES
     ('SubTask 1', 20, 3, 500.0, '2024-12-03', '2024-11-10', 1, TRUE),
     ('SubTask 2', 10, 2, 300.0, '2024-12-18', '2024-11-15', 2, TRUE);

@@ -18,7 +18,6 @@ public class LoginRepository {
 
     // create login
     public void createLogin(Login login) {
-        String SQLInsertEmployee = "INSERT INTO employee (employee_id, employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?,?)";
         String SQLInsertLogin = "INSERT INTO profile (email, password, employee_id) VALUES(?,?,?)";
 
         try {
@@ -33,42 +32,18 @@ public class LoginRepository {
         }
 
     }
-
-    public Login findByEmail(String email) {
-        String SQLFindByEmail = "SELECT * FROM profile WHERE email = ?";
+    public boolean vaifyLogin(Login login) {
+        String SQLSelectLogin = "SELECT * FROM profile WHERE email = ? AND password = ?";
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(SQLFindByEmail);
-            preparedStatement.setString(1, email);
+            PreparedStatement preparedStatement = conn.prepareStatement(SQLSelectLogin);
+            preparedStatement.setString(1, login.getEmail());
+            preparedStatement.setString(2, login.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                Login login = new Login();
-                login.setEmail(resultSet.getString("email"));
-                login.setPassword(resultSet.getString("password"));
-                // Set other fields as needed
-                return login;
-            }
+            return resultSet.next();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
-
-    public int findEmployeeByEmail(String email) {
-        String SQLFindEmployeeByEmail= "SELECT employee_id FROM employee WHERE email = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(SQLFindEmployeeByEmail);
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                int employeeID = resultSet.getInt("employee_id");
-
-                // Set other fields as needed
-                return employeeID;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 }

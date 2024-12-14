@@ -57,6 +57,9 @@ public class Employee {
         this.employeeProficiency = employeeProficiency;
         this.employeeSalary = employeeSalary;
     }
+    public Employee() {
+
+    }
 
     //empty constructor?
 }

@@ -2,22 +2,40 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
-    <title>Title</title>
+    <title>Create New Profile</title>
     <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
-<p>login page </p>
+<p>Login page</p>
 <p>
-    log ind funktion. </br>
-    (ny bruger funktion)</br>
-
-
+    Log in function. </br>
+    (New user function)</br>
 </p>
 
-<p>(homepage)</p>
+<p>(Homepage)</p>
 <h1>Create new profile</h1>
-<form th:action="@{/login/new}" method="post" th:object="${login}"> <br>
+<form th:action="@{/login/new}" method="post" th:object="${login}">
+    <br>
+    <label class="large-text">Name:
+        <input type="text" name="employeeName" th:value="${employee.employeeName}" required>
+    </label>
+    <br>
+    <label class="large-text">Office:
+        <!-- Input field with datalist for both selectable and manual input -->
+        <input type="text" name="employeeOffice" id="officeSelect" list="officeOptions"
+               th:value="${employee.employeeOffice}" required>
+        <datalist id="officeOptions">
+            <option th:each="office : ${employeeOffices}" th:value="${office}" th:text="${office}"></option>
+        </datalist>
+    </label>
+    <br>
+    <label class="large-text">Proficiency:
+        <input type="text" name="employeeProficiency" th:value="${employee.employeeProficiency}" required>
+    </label>
+    <br>
+    <label class="large-text">Salary:
+        <input type="number" name="employeeSalary" th:value="${employee.employeeSalary}" required>
+    </label>
     <br>
     <label class="large-text">Email:
         <input type="email" name="email" th:value="${login.email}" required>
@@ -26,9 +44,8 @@
     <label class="large-text">Password:
         <input type="password" name="password" th:value="${login.password}" required>
     </label>
-
     <br>
-    <button type="submit">login</button>
-    </form>
+    <button type="submit">Create New User</button>
+</form>
 </body>
 </html>

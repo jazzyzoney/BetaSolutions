@@ -117,4 +117,20 @@ public class EmployeeRepository {
             e.printStackTrace();
         }
     }
+    public List<String> GetAllEmployeeOffices() {
+        String sql = "SELECT employee_office FROM employee";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<String> employeeOffices = new ArrayList<>();
+            while (resultSet.next()) {
+                String employeeOffice = resultSet.getString("employee_office");
+                employeeOffices.add(employeeOffice);
+            }
+            return employeeOffices;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

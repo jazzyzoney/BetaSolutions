@@ -7,26 +7,29 @@
 </head>
 <body>
 <header>
-
+    <!-- Optional header content -->
 </header>
 <h1>Welcome</h1>
-<form th:action="@{/login} "method="post" th:object="${login}">
+<form th:action="@{/login}" method="post" th:object="${login}">
     <div>
-
-    <div>
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" th:value="${login.email}" />
-    </div>
-    <div>
-        <label class="large-text">Password:
-            <input type="password" name="password" th:value="${login.password}" required>
-        </label>
-
-        <br>
-        </label>
-        <br>
-        <button type="submit">Save</button>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" th:value="${login.email}" />
+        </div>
+        <div>
+            <label class="large-text">Password:
+                <input type="password" name="password" th:value="${login.password}" required>
+            </label>
+            <br>
+            <button type="submit">login</button>
+        </div>
     </div>
 </form>
+
+<!-- Button for new login -->
+<div>
+    <p>Don't have an account?</p>
+    <a th:href="@{/login/new}" class="button">Create New Login</a>
+</div>
 </body>
 </html>

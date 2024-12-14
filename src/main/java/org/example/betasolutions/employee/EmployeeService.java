@@ -38,4 +38,7 @@ public class EmployeeService {
     public void deleteEmployee(int employeeID){
         employeeRepository.deleteEmployee(employeeID);
     }
+    public List<String> GetAllEmployeeOffices(){
+        return employeeRepository.GetAllEmployeeOffices();
+    }
 }

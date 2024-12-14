@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New Task</title>
+    <title>Create New SubProject</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Create New  TASK FOR Project</h1>
+<h1>Create New  TASK FOR SubProject</h1>
 
-<!-- create task without subproject -->
-<form th:action="@{/project/{projectID}/task/new/post(projectID=${projectID})}" method="post" th:object="${task}">
-
+<!-- new task for subproject -->
+<form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">
     <label class="large-text">task Name:
         <input type="text" id="projectName" name="projectName" th:field="${task.name}" required>
     </label>
@@ -30,5 +28,3 @@
     <br>
     <button type="submit">Create SubProject</button>
 </form>
-</body>
-</html>

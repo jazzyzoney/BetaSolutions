@@ -15,24 +15,51 @@ public class SubProjectRepository extends PSSTSuperclass {
         super(connectionManager);
     }
     //create a subproject
-    public int insertIntoSubProject(SubProject subProject){
-        String sql =( "insert into subproject (sub_project_id,sub_project_name,sub_project_total_hours,sub_project_total_days,sub_project_total_price,sub_project_start_date,sub_project_deadline,project_id) values(?,?,?,?,?,?,?,?)");
+    public boolean insertSubProject(SubProject subProject){
+        String sql =( "insert into sub_project (sub_project_name,sub_project_total_hours,sub_project_total_days,sub_project_total_price,sub_project_deadline,sub_project_start_date,project_id) values(?,?,?,?,?,?,?)");
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(subProject,sql);
         try{
-            preparedStatement.setInt(8,subProject.getID());
+            preparedStatement.setInt(7,subProject.getProjectID()); //set foreign key 'project_ID' for subproject.
             preparedStatement.executeUpdate();
-            return 1;
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 0;
+        return false;
     }
     //read all subprojects
-    public List<ModelInterface> readAllSubProjects(int projectID){
-        return super.readAllAssignmentsBelongingToProject("sub_project","sub_project",SubProject::new,projectID);
+    public List<SubProject> readAllSubProjects(int projectID){
+        List<SubProject> subProjects = new ArrayList<>();
+        for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("sub_project","sub_project",SubProject::new,projectID)){
+            if(assignmentObject instanceof SubProject){
+                SubProject subProject = (SubProject) assignmentObject;
+                subProjects.add(subProject);
+
+                int projectIDfromTable = super.getTableIntByInt("sub_project","project_id","sub_project_id",subProject.getID());
+                subProject.setProjectID(projectIDfromTable);
+
+                subProjects.add(subProject);
+            }
+        }
+        return subProjects;
     }
     //read a subproject
     public SubProject readSubProject(int subProjectID){
-        return (SubProject) super.readAssingmentByID("sub_project","sub_project",SubProject::new,subProjectID);
+        return (SubProject) super.readAssignmentByID("sub_project","sub_project",SubProject::new,subProjectID);
     }
+    //delete a subproject
+    public boolean deleteSubProject(int subProjectID){
+        try {
+        conn.setAutoCommit(false);
+         super.deleteObjectFromTable("sub_project","sub_project",subProjectID);
+         super.deleteAllWhere("task","sub_project_id =" + subProjectID);
+            conn.commit();
+
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

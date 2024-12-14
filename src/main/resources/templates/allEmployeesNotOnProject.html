@@ -28,28 +28,22 @@ it shows a list of all employees and also gives the user the option to create ne
     </thead>
     <tbody>
     <tr th:each="employee : ${allEmployees}">
-        <!--  -->
+        <td th:text="${employee.getEmployeeID()}"></td>
         <td th:text="${employee.getEmployeeName()}"></td>
         <td th:text="${employee.getEmployeeProficiency()}"></td>
         <td th:text="${employee.getEmployeeOffice()}"></td>
         <td>
-            <!-- Form to add employee to project -->
-            <form method="post" th:action="@{/project/employee/add}">
-                <input type="hidden" name="projectID" th:value="${project.projectID}" />
+            <form method="post" th:action="@{/project/{id}/employee/add/project(id=${id})}" th:object="${employee}">
+                <!-- Include employeeID as a hidden field -->
+                <input type="hidden" name="employeeID" id="employeeID" th:value="${employee.employeeID}"/>
+                <!-- Include projectID (replace with dynamic projectID if applicable) -->
 
-                <!-- Label and Dropdown for selecting an employee -->
-                <select name="projectID" id="projectSelect" required>
-                    <option value="" disabled selected>Select project</option>
-                    <option th:each="project : ${projects}"
-                            th:value="${project.projectID}"
-                            th:text="${project.projectName}"></option>
-                </select>
-
-                <button type="submit">Add</button>
+                <button type="submit">Add to Project</button>
             </form>
         </td>
     </tr>
     </tbody>
+
 </table>
 
 </body>

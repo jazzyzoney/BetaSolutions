@@ -15,7 +15,7 @@ public class EmployeeService {
     }
 
     //create
-    public int createNewEmployee(Employee employee){
+    public boolean createNewEmployee(Employee employee){
         return employeeRepository.createNewEmployee(employee);
     }
 
@@ -24,9 +24,27 @@ public class EmployeeService {
         return employeeRepository.getAllEmployees();
     }
 
-    //add employee to assignment
-    public void addExistingEmployeeToAssignment(Employee employee, String assignment, String idName){
-        employeeRepository.addExistingEmployeeToAssignment(employee, assignment, idName);
+    public List<Employee> getAllEmployeesForProject(int projectID){
+        return employeeRepository.getAllEmployeesForProject(projectID);
+    }
+
+    public List<Employee> getAllEmployeesNotOnProject(int projectID){
+        return employeeRepository.getAllEmployeesNotOnProject(projectID);
+    }
+
+    //add employee to project
+    public void addExistingEmployeeToProject(int employeeID, int projectID){
+        employeeRepository.addExistingEmployeeToProject(employeeID, projectID);
+    }
+
+    //add employee to task
+    public void addExistingEmployeeToTask(int employeeID, int taskID, int projectID){
+        employeeRepository.addExistingEmployeeToTask(employeeID, taskID, projectID);
+    }
+
+    //add employee to subtask
+    public void addExistingEmployeeToSubTask(int employeeID, int taskID, int subTaskID, int projectID){
+        employeeRepository.addExistingEmployeeToSubTask(employeeID, taskID, subTaskID, projectID);
     }
 
     //update

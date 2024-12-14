@@ -61,5 +61,7 @@ public class Employee {
 
     }
 
-    //empty constructor?
+    //empty constructor
+    public Employee() {
+    }
 }

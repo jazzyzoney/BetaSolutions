@@ -43,51 +43,58 @@ public class SubProject implements ModelInterface {
         setHours(hours);
     }
 
-
     public void setID(int subProjectID) {
         this.subProjectID = subProjectID;
     }
+
     public int getID() {
         return subProjectID;
     }
+
     public void setProjectID(int projectID) {
         this.projectID = projectID;
     }
+
     public int getProjectID() {
         return projectID;
     }
+
     public void setName(String subProjectName) {
         this.subProjectName = subProjectName;
     }
+
     public String getName() {
         return subProjectName;
     }
+
     public void setHours(int subProjectTotalHours) {
         this.subProjectTotalHours = subProjectTotalHours;
-
-        TimeManager timeManager = new TimeManager();
-        subProjectTotalDays = timeManager.calculateDays(subProjectTotalHours); //set days
-        subProjectDeadline = timeManager.calculateEndDate(subProjectStartDate, subProjectTotalDays); //set deadline
-
     }
+
     public int getHours() {
         return subProjectTotalHours;
     }
+
     public void setDays(int subProjectTotalDays) {
         this.subProjectTotalDays = subProjectTotalDays;
     }
+
     public int getDays() {
         return subProjectTotalDays;
     }
+
     public void setTotalPrice(double subProjectTotalPrice) {
         this.subProjectTotalPrice = subProjectTotalPrice;
     }
+
     public double getTotalPrice() {
         return subProjectTotalPrice;
     }
+
     public void setDeadline(Date subProjectDeadline) {
         this.subProjectDeadline = subProjectDeadline;
     }
+
     public Date getDeadline() {
         return subProjectDeadline;
     }
@@ -95,10 +102,8 @@ public class SubProject implements ModelInterface {
     public void setStartDate(Date subProjectStartDate) {
         this.subProjectStartDate = subProjectStartDate;
     }
+
     public Date getStartDate() {
         return subProjectStartDate;
     }
-
-
-
 }

@@ -46,13 +46,18 @@ public class Task implements ModelInterface {
     }
 
     //set all values without subproject.
-    public Task(String name, int totalHours, double totalPrice, Date taskStartDate, int projectID){
-        //this.id = id;
+    public Task(String name, int hours, double totalPrice, Date taskStartDate, int projectID){
         this.name = name;
         this.totalPrice = totalPrice;
         this.taskStartDate = taskStartDate;
+        this.hours = hours;
 
-        setHours(totalHours);
+        TimeManager timeManager = new TimeManager();
+        days = timeManager.calculateDays(hours);
+        taskDeadLine = timeManager.calculateEndDate(taskStartDate, days);
+
+        //totaldays
+        //totalhours
 
         this.projectID = projectID;
     }

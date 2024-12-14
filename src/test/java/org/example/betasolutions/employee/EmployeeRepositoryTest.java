@@ -49,7 +49,7 @@ class EmployeeRepositoryTest {
 
     @Test
     void createNewEmployee() {
-        boolean actual = employeeRepository.createNewEmployee(new Employee(1, "John Doe", "Office", "Proficient", "1000"));
+        int actual = employeeRepository.createNewEmployee(new Employee(1, "John Doe", "Office", "Proficient", "1000"));
         boolean expected = true;
         assertEquals(expected, actual);
     }

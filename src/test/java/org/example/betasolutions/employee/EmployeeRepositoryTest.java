@@ -105,4 +105,7 @@ class EmployeeRepositoryTest {
         int expected = 2;
         assertEquals(expected, actual);
     }
+    @Test
+    void getAllEmployeeOffices() {
+    }
 }

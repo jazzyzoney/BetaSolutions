@@ -1,4 +1,5 @@
 package org.example.betasolutions.login;
+import jakarta.servlet.http.HttpSession;
 import org.example.betasolutions.employee.Employee;
 import org.example.betasolutions.employee.EmployeeService;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
     private final LoginService loginService;
     private final EmployeeService employeeService;
+    private final HttpSession session;
 
-    public LoginController(LoginService loginService, EmployeeService employeeService) {
+    public LoginController(LoginService loginService, EmployeeService employeeService, HttpSession session) {
         this.loginService = loginService;
         this.employeeService = employeeService;
+        this.session = session;
     }
 
     @GetMapping("/login")
@@ -26,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String postLogin(@ModelAttribute Login login, Model Model) {
+    public String postLogin(@ModelAttribute Login login) {
         if (loginService.verifyLogin(login)) {
             return "redirect:/home";
         }
@@ -48,14 +51,13 @@ public class LoginController {
         int employeeID = employeeService.createNewEmployee(employee);
         login.setEmployeeID(employeeID);
         loginService.createLogin(login);
+        session.setAttribute("employeeID", employeeID);
         return "redirect:/login";
     }
 
     @PostMapping("/logout")
     public String logout() {
+        session.invalidate();
         return "redirect:/login";
     }
-
-
-
 }

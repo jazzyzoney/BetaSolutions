@@ -18,13 +18,12 @@ public class EmployeeRepository {
 
     //create
     public int createNewEmployee(Employee employee) {
-        String sql = "INSERT INTO employee (employee_id, employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO employee (employee_name, employee_office, employee_proficiency, employee_salary) VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setInt(1, employee.getEmployeeID());
-            preparedStatement.setString(2, employee.getEmployeeName());
-            preparedStatement.setString(3, employee.getEmployeeOffice());
-            preparedStatement.setString(4, employee.getEmployeeProficiency());
-            preparedStatement.setString(5, employee.getEmployeeSalary());
+            preparedStatement.setString(1, employee.getEmployeeName());
+            preparedStatement.setString(2, employee.getEmployeeOffice());
+            preparedStatement.setString(3, employee.getEmployeeProficiency());
+            preparedStatement.setString(4, employee.getEmployeeSalary());
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {

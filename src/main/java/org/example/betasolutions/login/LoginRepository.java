@@ -19,7 +19,6 @@ public class LoginRepository {
     // create login
     public void createLogin(Login login) {
         String SQLInsertLogin = "INSERT INTO profile (email, password, employee_id) VALUES(?,?,?)";
-
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLInsertLogin);
             preparedStatement.setString(1, login.getEmail());

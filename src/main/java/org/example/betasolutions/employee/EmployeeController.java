@@ -23,7 +23,7 @@ public class EmployeeController {
     @GetMapping("/employee/new")
     public String createNewEmployee(Model model) {
         Employee employee = new Employee();
-        employeeService.createNewEmployee(employee);
+        model.addAttribute("employeeOffices", employeeService.GetAllEmployeeOffices());
         model.addAttribute("employee", employee);
         return "newEmployee";
     }

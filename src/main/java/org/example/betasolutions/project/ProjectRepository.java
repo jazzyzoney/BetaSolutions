@@ -91,4 +91,7 @@ public class ProjectRepository extends PSSTSuperclass {
         }
         return false;
     }
+    public void deleteProject(int projectID) {
+        super.deleteObjectFromTable("project", "project", projectID);
+    }
 }

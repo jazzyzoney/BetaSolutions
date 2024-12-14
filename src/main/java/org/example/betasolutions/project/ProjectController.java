@@ -41,10 +41,16 @@ public class ProjectController {
         model.addAttribute("projectList", projectService.readAllProjects());
         return "homepage";
     }
+    @GetMapping("/project/new")
+    public String createNewProject(Model model){
+        model.addAttribute("project", new Project());
+        return "newproject";
+    }
+
     @PostMapping("/project/new")
     public String createNewProject(@ModelAttribute Project project){
         projectService.insertAssignmentIntoTable(project);
-        return "redirect: /home";
+        return "redirect:/home";
     }
 
     //does this need pathvariable?
@@ -53,8 +59,6 @@ public class ProjectController {
         Project project = projectService.readAllProjects().get(projectID - 1);
         List<SubProject> subProjects = subProjectRepository.readAllSubProjects(projectID);
         List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
-
-
 
         Map<Task,Integer> subTaskCount = new HashMap<>();
         Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
@@ -92,18 +96,9 @@ public class ProjectController {
         return "projectpage";
     }
 
-/*
-    @PostMapping("/project")
-    public String getProject(@ModelAttribute int projectID){//Project project){
-        //int projectID = project.getID();
-        session.setAttribute("projectID", projectID);
-        //System.out.println(project.getName());
-        System.out.println(session.getAttribute("projectID"));
-        return "redirect:/project";
-    }*/
-
     @PostMapping("project/delete")
-    public String deleteProject(){
+    public String deleteProject(@RequestParam int project_id){
+        projectService.deleteProject(project_id);
         return "redirect:/home";
     }
 

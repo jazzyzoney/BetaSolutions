@@ -106,7 +106,9 @@ class ProjectRepositoryTest{
     //projectRepository
     @Test
     void createProject() {
-
+    }
+    @Test
+    void deleteProject() {
     }
 
 }

@@ -55,6 +55,18 @@ class EmployeeRepositoryTest {
         String actualName = employeeRepository.getAllEmployeesNotOnProject(1).get(0).getEmployeeName();
         String expectedName = "Employee 2";
     }
+    @Test
+    void getAllEmployeesForTask() {
+    }
+    @Test
+    void getAllemployeesNotAssingedToTaskForProject() {
+    }
+    @Test
+    void getAllEmployeesForSubTask() {
+    }
+    @Test
+    void getAllEmployeesNotOnSubtaskForProject() {
+    }
 
     @Test
     void addExistingEmployeeToProject() {
@@ -79,4 +91,5 @@ class EmployeeRepositoryTest {
         int expected = 2;
         assertEquals(expected, actual);
     }
+
 }

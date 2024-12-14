@@ -132,11 +132,12 @@ public class EmployeeRepository {
         }
         return null;
     }
-    public List<Employee> getAllemployeesNotAssingedToTaskForProject(int projectID) {
-        String sql = "SELECT employee.employee_id, employee.employee_name,employee.employee_office,employee.employee_proficiency, employee.employee_salary FROM employee JOIN project_employee ON employee.employee_id = project_employee.employee_id LEFT JOIN project_employee_task ON project_employee.employee_id = project_employee_task.employee_id AND project_employee.project_id = project_employee_task.project_id WHERE project_employee.project_id = ? AND project_employee_task.task_id IS NULL;";
+    public List<Employee> getAllemployeesNotAssingedToTaskForProject(int projectID, int taskID) {
+        String sql = "SELECT employee.* FROM employee JOIN project_employee ON employee.employee_id = project_employee.employee_id LEFT JOIN project_employee_task ON project_employee.employee_id = project_employee_task.employee_id AND project_employee.project_id = project_employee_task.project_id AND project_employee_task.task_id = ? WHERE project_employee.project_id = ? AND project_employee_task.task_id IS NULL";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, projectID);
+            preparedStatement.setInt(2, taskID);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Employee> employees = new ArrayList<>();
             while (resultSet.next()) {
@@ -178,9 +179,27 @@ public class EmployeeRepository {
         }
         return null;
     }
-
-
-
+    public List<Employee> getAllEmployeesNotOnSubtaskForProject(int taskID) {
+        String sql ="SELECT employee.* FROM employee JOIN project_employee ON employee.employee_id = project_employee.employee_id JOIN project_employee_task ON project_employee.employee_id = project_employee_task.employee_id AND project_employee.project_id = project_employee_task.project_id AND project_employee_task.task_id = ? LEFT JOIN project_employee_task_subTask ON project_employee_task.employee_id = project_employee_task_subTask.employee_id AND project_employee_task.project_id = project_employee_task_subTask.project_id AND project_employee_task.task_id = project_employee_task_subTask.task_id WHERE project_employee_task_subTask.sub_task_id IS NULL";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, taskID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Employee> employees = new ArrayList<>();
+            while (resultSet.next()) {
+                int employeeID = resultSet.getInt("employee_id");
+                String employeeName = resultSet.getString("employee_name");
+                String employeeOffice = resultSet.getString("employee_office");
+                String employeeProficiency = resultSet.getString("employee_proficiency");
+                String employeeSalary = resultSet.getString("employee_salary");
+                employees.add(new Employee(employeeID, employeeName, employeeOffice, employeeProficiency, employeeSalary));
+            }
+            return employees;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     //add existing employee to project_employee table
     public void addExistingEmployeeToProject(int employeeID, int projectID) {
         String sql = "INSERT INTO project_employee (employee_id, project_id) VALUES (?,?)";

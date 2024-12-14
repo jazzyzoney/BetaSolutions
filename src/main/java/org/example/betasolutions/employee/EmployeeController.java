@@ -44,7 +44,7 @@ public class EmployeeController {
         return "employeepage";
     }
 
-    //read
+    //read all employees for project
     @GetMapping("/project/{id}/employees") //get employees for specific project
     public String getAllEmployeesForProject(@PathVariable int id, Model model) {
         List<Employee> employees = employeeService.getAllEmployeesForProject(id);
@@ -52,16 +52,23 @@ public class EmployeeController {
         model.addAttribute("allEmployees", employees);
         return "allEmployeesOnProject";
     }
-
-    @GetMapping("/project/{id}/task/{taskID}/employees") //get employees for specific project
+    //read all employees for task
+    @GetMapping("/project/{id}/task/{taskID}/employees")
     public String getAllEmployeesForTask(@PathVariable int id,@PathVariable int taskID , Model model) {
         List<Employee> employees = employeeService.getAllEmployeesForTask(id, taskID);
         model.addAttribute("allEmployees", employees);
         model.addAttribute("taskID", taskID);
         return "allEmployeesOnTask";
     }
+    //read all employees for subtask
+    @GetMapping("/project/{id}/task/{taskID}/subtask/{subTaskID}/employees")
+    public String getAllEmployeesForSubTask(@PathVariable int id,@PathVariable int taskID, @PathVariable int subTaskID, Model model) {
+        List<Employee> employees = employeeService.getAllEmployeesForSubTask(id, taskID, subTaskID);
+        model.addAttribute("allEmployees", employees);
+        return "allEmployeesOnSubTask";
+    }
 
-    //read
+    //read not assigned employees for project
     @GetMapping("/project/{id}/employeesNotAssigned") //get employees NOT on the specific project
     public String getAllEmployeesNotOnProject(@PathVariable int id, Model model) {
         List<Employee> employees = employeeService.getAllEmployeesNotOnProject(id);
@@ -69,12 +76,19 @@ public class EmployeeController {
         model.addAttribute("allEmployees", employees);
         return "allEmployeesNotOnProject";
     }
-    //read
+    //read all employees not assigned to task on a project
     @GetMapping("/project/{id}/task/{taskID}/employeesNotAssignedForTask") //get employees NOT on the specific task
     public String getAllemployeesNotAssingedToTaskForProject(@PathVariable int id, Model model,@PathVariable int taskID) {
-        List<Employee> employees = employeeService.getAllemployeesNotAssingedToTaskForProject(id);
+        List<Employee> employees = employeeService.getAllemployeesNotAssingedToTaskForProject(id,taskID);
         model.addAttribute("allEmployees", employees);
         return "allEmployeesNotOnTask";
+    }
+    //read all employees not assigned to subtask on a project
+    @GetMapping("/project/{id}/task/{taskID}/subtask/{subTaskID}/employeesNotAssignedForSubTask") //get employees NOT on the specific subtask
+    public String getAllEmployeesNotOnSubtaskForProject(@PathVariable int id, Model model,@PathVariable int taskID, @PathVariable int subTaskID) {
+        List<Employee> employees = employeeService.getAllEmployeesNotOnSubtaskForProject(taskID);
+        model.addAttribute("allEmployees", employees);
+        return "allEmployeesNotOnSubTask";
     }
 
     //add employee to project
@@ -93,13 +107,10 @@ public class EmployeeController {
     }
 
     //add employee to subtask
-    @PostMapping("/project/{id}/employee/add/subtask") //add employee to project/subproject/task/subtask aka assignment
-    public String addExistingEmployeeToSubTask(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID, @RequestParam("taskID") int taskID, @RequestParam("subTaskID") int subTaskID) {
+    @PostMapping("/project/{id}/task/{taskID}/subtask/{subTaskID}/employee/add/subtask") //add employee to project task subtask
+    public String addExistingEmployeeToSubTask(@PathVariable("id") int projectID, @RequestParam("employeeID") int employeeID, @PathVariable("taskID") int taskID, @PathVariable("subTaskID") int subTaskID) {
         employeeService.addExistingEmployeeToSubTask(employeeID, taskID, subTaskID, projectID);
-        session.getAttribute("taskID");
-        session.getAttribute("projectID");
-        session.getAttribute("subTaskID");
-        return "redirect:/project/employees";
+        return "redirect:/project/" + projectID + "/task/" + taskID + "/subtask/" + subTaskID + "/employees";
     }
 
         //update

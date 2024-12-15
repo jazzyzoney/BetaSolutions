@@ -100,9 +100,9 @@ public class TaskService {
 
         //System.out.println("task id: " + task.getID() + "\nproject id: " + task.getProjectID() + "\nsubproject id: " + task.getSubProjectID());
         if (task.getSubProjectID() > 0) {
-           // subProjectService.updateSubProjectTotalHours(task.getSubProjectID());
+           subProjectService.updateSubProjectTotalHours(task.getSubProjectID());
         }else{
-           // projectService.updateProjectTotalHours(task.getProjectID());
+           projectService.updateProjectTotalHours(task.getProjectID());
         }
     }
 

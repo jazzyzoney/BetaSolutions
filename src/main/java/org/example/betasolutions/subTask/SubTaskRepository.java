@@ -18,8 +18,12 @@ public class SubTaskRepository extends PSSTSuperclass {
     }
 
     public void addSubTaskToTask(SubTask subTask){
-        String sql = "insert into sub_task (sub_task_name, sub_task_total_hours,sub_task_total_days,sub_task_total_price,sub_task_deadline,sub_task_start_date,task_id) values(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO sub_task " +
+                "(sub_task_name, sub_task_total_hours,sub_task_total_days,sub_task_total_price,sub_task_deadline,sub_task_start_date,task_id) " +
+                "VALUES(?,?,?,?,?,?,?)";
+
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(subTask,sql);
+
         try{
             preparedStatement.setInt(7,subTask.getTaskID()); //set task id for subtask.
             preparedStatement.executeUpdate();
@@ -28,9 +32,13 @@ public class SubTaskRepository extends PSSTSuperclass {
         }
     }
 
+
+
     public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
         ArrayList<SubTask> subTaskList = new ArrayList<>();
-        String SQL ="SELECT *  FROM sub_task JOIN task ON sub_task.task_id = task.task_id WHERE task.project_id = ? and task.task_id = ?";
+        String SQL ="SELECT *  FROM sub_task " +
+                "JOIN task ON sub_task.task_id = task.task_id " +
+                "WHERE task.project_id = ? AND task.task_id = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setInt(1,ProjectID);

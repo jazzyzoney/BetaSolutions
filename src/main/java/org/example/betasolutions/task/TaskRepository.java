@@ -188,22 +188,25 @@ public class TaskRepository extends PSSTSuperclass {
 
         int totalHoursForTask  = super.getTableIntByInt("task", "task_hours", "task_id", task.getID()); //get task hours.
 
+        //if total hours havn't been set.
         if (totalHoursForTask == -1){
             totalHoursForTask = task.getHours(); //set task hours.
+        }else {
+
+            List<ModelInterface> allSubTasks = super.readAllAssignments("sub_task", "sub_task", SubTask::new);//get All subtasks.
+
+            for (ModelInterface modelInterface : allSubTasks) {
+                SubTask subTask = (SubTask) modelInterface; //typecasting.
+                subTask.setTaskID(getTableIntByInt("sub_task", "task_id", "sub_task_id", subTask.getID()));//set task id for subtask.
+
+                if (subTask.getTaskID() == task.getID()) {
+                    totalHoursForTask += subTask.getHours(); //add subtask-specific hours to total.
+                }
+            }//end of all subtasks.
         }
 
-        List<ModelInterface> allSubTasks = super.readAllAssignments("sub_task", "sub_task", SubTask::new);//get All subtasks.
-
-        for (ModelInterface modelInterface : allSubTasks){
-            SubTask subTask = (SubTask) modelInterface; //typecasting.
-            subTask.setTaskID(getTableIntByInt("sub_task", "task_id", "sub_task_id", subTask.getID()));//set task id for subtask.
-
-            if (subTask.getTaskID() == task.getID()){
-                totalHoursForTask += subTask.getHours(); //add subtask-specific hours to total.
-            }
-        }//end of all subtasks.
-
         task.setTotalHours(totalHoursForTask);
+       // updateTotalHoursForTask(task.getID(), totalHoursForTask);
         return totalHoursForTask;
     }
 

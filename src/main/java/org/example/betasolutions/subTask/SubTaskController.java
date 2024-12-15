@@ -44,7 +44,6 @@ public class SubTaskController {
     public String createNewSubTask(@PathVariable ("projectID") int projectID, @PathVariable ("taskID") int taskID, @ModelAttribute SubTask subTask){
         subTask.setTaskID(taskID);
         subTask.setHours(subTask.getHours());
-        System.out.print(subTask.getDeadline());
         subTaskService.createSubTask(subTask);
         return "redirect:/project/" + projectID + "/task/" + taskID + "/subtasks";
     }

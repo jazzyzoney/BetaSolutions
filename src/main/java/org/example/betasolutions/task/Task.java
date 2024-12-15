@@ -79,15 +79,6 @@ public class Task implements ModelInterface {
         this.name = name;
     }
 
-/*
-    public void setTotalHours(int hours){
-        TimeManager timeManager = new TimeManager();
-        this.taskTotalHours = hours;
-
-        taskTotalDays = timeManager.calculateDays(taskTotalHours);
-        taskDeadLine = timeManager.calculateEndDate(taskStartDate, taskTotalDays);
-    }*/
-    
     public int getSubProjectID() {
         return subProjectID;
     }
@@ -123,17 +114,8 @@ public class Task implements ModelInterface {
     }
 
     public void setHours(int hours){
-        try {
-        //TimeManager timeManager = new TimeManager();
         this.hours = hours;
-
-        //days = timeManager.calculateDays(hours);
-        //taskDeadLine = timeManager.calculateEndDate(taskStartDate, days);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
 
     public void setSubProjectID(int subProjectID){
         this.subProjectID = subProjectID;

@@ -31,7 +31,7 @@ public class TaskService {
 
     public void createTaskForProject(Task task){
         //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
-        //calculateDeadline(task);
+        calculateDeadline(task);
         updateTaskTotalHours(task); //update hours first.
         taskRepository.addTaskToProject(task);
 
@@ -40,6 +40,7 @@ public class TaskService {
 
     public void createTaskForSubProject(Task task){
         //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+        calculateDeadline(task);
         updateTaskTotalHours(task);
         taskRepository.addTaskToSubProject(task);
 
@@ -86,12 +87,15 @@ public class TaskService {
     }
 
     public void calculateDeadline(Task task){
-        task.setDays(timeManager.calculateDays(task.getHours()));
-        task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays()));
+        task.setTotalHours(taskRepository.getTotalHoursForTask(task));//set total hours
+        task.setTotalDays(timeManager.calculateDays(task.getTotalHours())); //set total days
+
+        task.setDays(timeManager.calculateDays(task.getHours())); //set days
+        task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays())); //set deadline
     }
 
     public void updateTaskTotalHours(Task task){
-        int totalHours = taskRepository.getTotalHoursForTask(task); //getTotalHours for task.
+        int totalHours = task.getTotalHours() ; //getTotalHours for task.
         task.setTotalHours(totalHours);//set total hours on task.
         calculateDeadline(task); //calculate days and deadline.
 

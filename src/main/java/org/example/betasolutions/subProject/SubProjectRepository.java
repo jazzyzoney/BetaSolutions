@@ -5,6 +5,7 @@ import org.example.betasolutions.PSSTSuperclass;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class SubProjectRepository extends PSSTSuperclass {
         for(ModelInterface assignmentObject : super.readAllAssignmentsBelongingToProject("sub_project","sub_project",SubProject::new,projectID)){
             if(assignmentObject instanceof SubProject){
                 SubProject subProject = (SubProject) assignmentObject;
+
+
+
                 subProjects.add(subProject);
 
                 int projectIDfromTable = super.getTableIntByInt("sub_project","project_id","sub_project_id",subProject.getID());
@@ -60,6 +64,25 @@ public class SubProjectRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
         return false;
+    }
+
+
+
+    //calculate total price for subproject
+    public double calculateTotalPriceForSubProject(int subProjectID){
+        double totalPrice = 0;
+        totalPrice += super.CalculatePrice(subProjectID,"task");
+
+        String sql = "UPDATE sub_project SET sub_project_total_price = ? WHERE sub_project_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setDouble(1, totalPrice);
+            preparedStatement.setInt(2, subProjectID);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalPrice;
     }
 
 }

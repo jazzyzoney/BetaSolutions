@@ -96,8 +96,6 @@ public class TaskRepository extends PSSTSuperclass {
                 int hours = super.getTableIntByInt("task", "task_hours", "task_id", task.getID()); //get hours
                 int totalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", task.getID());
 
-                task.setTotalPrice(calculateTotalPriceForTasks(task.getID())); //calculate price
-
 
                 //get total hours
                 task.setHours(hours); //set hours
@@ -138,9 +136,6 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
 
-
-
-
     public int deleteTask(int taskID){
         try {
         conn.setAutoCommit(false);
@@ -158,21 +153,7 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
 
-    public double calculateTotalPriceForTasks(int taskID) {
-        double totalPrice = 0;
-        totalPrice += super.CalculatePrice(taskID, "sub_task");
-        totalPrice += super.CalculatePrice(taskID, "task");
 
-        String SQL = "update task set task_total_price = ? where task_id = ?";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
-            preparedStatement.setDouble(1, totalPrice);
-            preparedStatement.setInt(2, taskID);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-    }
-        return totalPrice;
-    }
 
 
 }

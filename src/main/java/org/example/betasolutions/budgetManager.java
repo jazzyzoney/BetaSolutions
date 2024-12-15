@@ -8,5 +8,4 @@ public class budgetManager {
         int cost = hours * pricePerHour;
         return cost;
     }
-
 }

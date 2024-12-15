@@ -17,6 +17,7 @@ public class SubTaskService {
 
     public void createSubTask(SubTask subTask){
         calculateDeadline(subTask);
+        calculateTotalPriceForSubTask(subTask);
         subTaskRepository.addSubTaskToTask(subTask);
     }
 
@@ -31,5 +32,8 @@ public class SubTaskService {
     public void calculateDeadline(SubTask subTask){
         subTask.setTotalDays(timeManager.calculateDays(subTask.getHours()));
         subTask.setDeadline(timeManager.calculateEndDate(subTask.getStartDate(), subTask.getDays()));
+    }
+    public double  calculateTotalPriceForSubTask(SubTask subTask){
+        return subTaskRepository.calculateTotalPriceForTasks(subTask);
     }
 }

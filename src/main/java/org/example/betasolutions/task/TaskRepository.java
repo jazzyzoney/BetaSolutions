@@ -191,7 +191,7 @@ public class TaskRepository extends PSSTSuperclass {
 
         for (ModelInterface modelInterface : allSubTasks){
             SubTask subTask = (SubTask) modelInterface; //typecasting.
-            subTask.setTaskID(getTableIntByInt("sub_task", "task_id", "sub_task_id", task.getID()));//set task id for subtask.
+            subTask.setTaskID(getTableIntByInt("sub_task", "task_id", "sub_task_id", subTask.getID()));//set task id for subtask.
 
             if (subTask.getTaskID() == task.getID()){
                 totalHoursForTask += subTask.getHours(); //add subtask-specific hours to total.

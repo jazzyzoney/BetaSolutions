@@ -64,7 +64,7 @@ public class SubTaskRepository extends PSSTSuperclass {
     }
 
     public boolean updateSubTaskTotalHours(SubTask subTask) {
-        return updateObjectInt("sub_task_", "sub_task_total_hours", subTask.getID(), subTask.getHours());
+        return updateObjectInt("sub_task", "sub_task_total_hours", subTask.getID(), subTask.getHours());
     }
 
     public void deleteSubTask(int subTaskID) {
@@ -78,4 +78,5 @@ public class SubTaskRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
     }
+
 }

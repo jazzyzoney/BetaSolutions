@@ -25,7 +25,7 @@ public class SubTaskService {
         calculateDeadline(subTask);
         subTaskRepository.addSubTaskToTask(subTask);
         taskService.updateTaskTotalHours(subTask.getTaskID()); //update on task.
-        //updateSubTaskTotalHours(subTask, subTask.getHours());
+        updateSubTaskTotalHours(subTask, subTask.getHours());
     }
 
     public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
@@ -41,12 +41,11 @@ public class SubTaskService {
         subTask.setDeadline(timeManager.calculateEndDate(subTask.getStartDate(), subTask.getDays()));
     }
 
-    /*
     public void updateSubTaskTotalHours(SubTask subTask, int totalHours){
         subTask.setHours(totalHours); //update on object.
         subTaskRepository.updateSubTaskTotalHours(subTask); //update on database
 
         taskService.updateTaskTotalHours(subTask.getTaskID()); //update on task.
 
-    }*/
+    }
 }

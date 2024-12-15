@@ -98,17 +98,23 @@ public class ProjectRepository extends PSSTSuperclass {
     public int getTotalHoursForProject(Project project){
         int totalHours = project.getHours(); //get project hours.
 
-        List<ModelInterface> allSubProjects = super.readAllAssignments("sub_project", "sub_project", SubProject::new);//get All subtasks.
-        //allSubProjects.add(super.readAllAssignmentsBelongingToProject("task", "task", Task::new, 1));
+        List<ModelInterface> allSubProjectsAndTasks = super.readAllAssignmentsBelongingToProject("sub_project", "sub_project", SubProject::new, project.getID());//get All subtasks.
+        allSubProjectsAndTasks.addAll(super.readAllAssignmentsBelongingToProject("task", "task", Task::new, project.getID()));
 
-        for (ModelInterface modelInterface : allSubProjects){
-            SubProject subProject = (SubProject) modelInterface; //typecasting.
-            
-            subProject.setProjectID(super.getTableIntByInt("sub_project", "project_id", "sub_project_id", subProject.getID())); //set project id for subproject.
-            if (subProject.getProjectID() == subProject.getID()){
-                totalHours += subProject.getHours(); //add subProject hours to total.
-            }
-        }//end of all subprojects.
+        for (ModelInterface modelInterface : allSubProjectsAndTasks){
+
+            //if task in subproject, skip:
+            if (modelInterface instanceof Task){
+                Task task = (Task) modelInterface;
+                if(task.getSubProjectID() < 0){
+                    continue;
+                }
+            } //"if (modelinterface instanceof Task)"
+
+            //add task and subproject hours to total:
+            totalHours += modelInterface.getHours();
+
+        }//end of all modelInterfaces.
 
         return totalHours;
     }

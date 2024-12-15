@@ -185,7 +185,7 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public int getTotalHoursForTask(Task task){
-        int totalHoursForTask = task.getHours(); //get task-specific hours.
+        int totalHoursForTask  = super.getTableIntByInt("task", "task_hours", "task_id", task.getID()); //get task hours.
 
         List<ModelInterface> allSubTasks = super.readAllAssignments("sub_task", "sub_task", SubTask::new);//get All subtasks.
 
@@ -198,6 +198,7 @@ public class TaskRepository extends PSSTSuperclass {
             }
         }//end of all subtasks.
 
+        task.setTotalHours(totalHoursForTask);
         return totalHoursForTask;
     }
 

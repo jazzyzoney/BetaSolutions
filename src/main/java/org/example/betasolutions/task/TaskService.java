@@ -92,9 +92,8 @@ public class TaskService {
 
     public void updateTaskTotalHours(Task task){
         int totalHours = taskRepository.getTotalHoursForTask(task); //getTotalHours for task.
-
-        task.setTotalHours(totalHours);//set hours on task.
-        calculateDeadline(task);
+        task.setTotalHours(totalHours);//set total hours on task.
+        calculateDeadline(task); //calculate days and deadline.
 
         taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
 

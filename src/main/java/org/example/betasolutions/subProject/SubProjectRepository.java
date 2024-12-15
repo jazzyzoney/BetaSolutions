@@ -67,16 +67,19 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
 
     public boolean updateSubProjectTotalHours(SubProject subProject, int newTotalHours){
-        return updateObjectInt("sub_project", "sub_project_total_hours", subProject.getID(), newTotalHours);
+        return super.updateObjectInt("sub_project", "sub_project_total_hours", subProject.getID(), newTotalHours);
     }
 
     public int getTotalHoursForSubProject(SubProject subProject){
         int totalHours = subProject.getHours(); //get subProject-specific hours.
 
-        List<ModelInterface> allSubTasks = super.readAllAssignments("task", "task", Task::new);//get All subtasks.
+        List<ModelInterface> allTasks = super.readAllAssignments("task", "task", Task::new);//get All tasks.
 
-        for (ModelInterface modelInterface : allSubTasks){
+        for (ModelInterface modelInterface : allTasks){
             Task task = (Task) modelInterface; //typecasting.
+            task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
+            task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
+
             if (task.getSubProjectID() == subProject.getID()){
                 totalHours += task.getHours(); //add task-specific hours to total.
             }

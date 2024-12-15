@@ -29,7 +29,6 @@ class TaskRepositoryTest {
     TaskRepository taskRepository;
 
     @Autowired
-
     private ConnectionManager connectionManager;
 
     Connection conn;

@@ -94,7 +94,12 @@ public class TaskRepository extends PSSTSuperclass {
 
                 int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()); //get subprojectID
                 int hours = super.getTableIntByInt("task", "task_hours", "task_id", task.getID()); //get hours
-                int totalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", task.getID()); //get total hours
+                int totalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", task.getID());
+
+                task.setTotalPrice(calculateTotalPriceForTasks(task.getID())); //calculate price
+
+
+                //get total hours
                 task.setHours(hours); //set hours
                 task.setTotalHours(totalHours); //set total hours
                 task.setSubProjectID(subProjectID); //set subprojectID
@@ -118,6 +123,7 @@ public class TaskRepository extends PSSTSuperclass {
                 task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
                 task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
 
+
                 if (task.getSubProjectID() == subProjectID) {
                     allTasksForSubProject.add(task);//add task to return list.
                 }
@@ -130,6 +136,11 @@ public class TaskRepository extends PSSTSuperclass {
     public Task readTask(int taskID){
         return (Task) super.readAssignmentByID("task","task",Task::new,taskID); //read task using super class.
     }
+
+
+
+
+
     public int deleteTask(int taskID){
         try {
         conn.setAutoCommit(false);
@@ -143,9 +154,24 @@ public class TaskRepository extends PSSTSuperclass {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return 0;
+    }
 
+
+    public double calculateTotalPriceForTasks(int taskID) {
+        double totalPrice = 0;
+        totalPrice += super.CalculatePrice(taskID, "sub_task");
+        totalPrice += super.CalculatePrice(taskID, "task");
+
+        String SQL = "update task set task_total_price = ? where task_id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
+            preparedStatement.setDouble(1, totalPrice);
+            preparedStatement.setInt(2, taskID);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+        return totalPrice;
     }
 
 

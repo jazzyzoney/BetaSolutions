@@ -49,9 +49,11 @@ public class ProjectRepository extends PSSTSuperclass {
             //typecasting assignmentObject as Project:
             if (assignmentObject instanceof Project) {
                 Project project = (Project) assignmentObject;
-
                 //Getting projectowner from projectTAble using projectID.
                 String projectOwner = super.getTableStringByInt("project", "project_Owner", "project_ID", project.getID());
+
+                //setting total price for project.
+                project.setTotalPrice(calculateTotalPriceForProject(project.getID()));
 
                 //adding projectowner to projectObject.
                 project.setProjectOwner(projectOwner);
@@ -90,5 +92,39 @@ public class ProjectRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
         return false;
+    }
+
+    //Calculate total price for subtask. he is a bit special since he is not a direct child of project but so he gets his very own method.
+    public double calculateTotalPriceForSubtask(int projectID) {
+        double totalPrice = 0;
+        String sql = "SELECT sub_task.sub_task_total_price FROM sub_task INNER JOIN task ON sub_task.task_id = task.task_id WHERE task.project_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, projectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                totalPrice += resultSet.getDouble("sub_task_Total_Price");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalPrice;
+    }
+
+    public double calculateTotalPriceForProject(int projectID) {
+        double totalPrice = 0;
+        totalPrice += super.CalculatePrice(projectID, "sub_project");
+        totalPrice += super.CalculatePrice(projectID, "task");
+        totalPrice += calculateTotalPriceForSubtask(projectID);
+                String sql = "UPDATE project SET project_total_price = ? WHERE project_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setDouble(1, totalPrice);
+            preparedStatement.setInt(2, projectID);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalPrice;
     }
 }

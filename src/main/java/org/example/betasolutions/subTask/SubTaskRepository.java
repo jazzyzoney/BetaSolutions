@@ -64,4 +64,31 @@ public class SubTaskRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
     }
+    public double removeSubTaskPriceFromTask(int subTaskID, int taskID) {
+        double totalPrice = 0;
+        String sql = "SELECT sub_task_total_price FROM sub_task WHERE sub_task_id = ?";
+        String sql2 = "SELECT task_total_price FROM task WHERE task_id = ?";
+        String sql3 = "UPDATE task SET task_total_price = ? WHERE task_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, subTaskID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                totalPrice = resultSet.getDouble("sub_task_total_price");
+            }
+            PreparedStatement preparedStatement2 = conn.prepareStatement(sql2);
+            preparedStatement2.setInt(1, taskID);
+            ResultSet resultSet2 = preparedStatement2.executeQuery();
+            if (resultSet2.next()) {
+                totalPrice = resultSet2.getDouble("task_total_price") - totalPrice;
+            }
+            PreparedStatement preparedStatement3 = conn.prepareStatement(sql3);
+            preparedStatement3.setDouble(1, totalPrice);
+            preparedStatement3.setInt(2, taskID);
+            preparedStatement3.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalPrice;
+    }
 }

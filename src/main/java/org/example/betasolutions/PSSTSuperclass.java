@@ -323,13 +323,25 @@ public class PSSTSuperclass {
         return false;
     }
 
-
     //read for a specific object with a specific ID.
     public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
         List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
          return assignmentList.get(id- 1);
-
     }
-    
 
+    public double CalculatePrice(int ID, String tableName) {
+        double totalPrice = 0;
+        String sql = "SELECT " + tableName + "_Total_Price FROM " + tableName + " WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                totalPrice += resultSet.getDouble(tableName + "_Total_Price");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalPrice;
+    }
 }

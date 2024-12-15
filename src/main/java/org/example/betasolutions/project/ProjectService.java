@@ -18,6 +18,7 @@ public class ProjectService {
         projectRepository.insertAssignmentIntoTable(project);
     }
     public List<Project> readAllProjects(){
+
        return projectRepository.readAllProjects();
     }
     public Project readProjectByID(int project_id){
@@ -25,5 +26,8 @@ public class ProjectService {
     }
     public void updateProject(Project project,int project_id){
         projectRepository.updateProject(project,project_id);
+    }
+    public void calculateTotalPriceForProject(int project_id){
+        projectRepository.calculateTotalPriceForProject(project_id);
     }
 }

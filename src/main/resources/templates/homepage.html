@@ -30,6 +30,7 @@
             <th> PO</th>
             <th>Total Days</th>
             <th>Total Hours </th>
+            <th> Total Price</th>
             <th> Deadline</th>
             <th> Start date</th>
             <th></th>
@@ -40,6 +41,7 @@
             <td th:text="${project.getName()}"></td>
             <td th:text="${project.getProjectOwner()}"></td>
             <td th:text="${project.getDays()}"></td>
+            <td th:text="${project.totalPrice}"></td>
             <td th:text="${project.getHours()}"></td>
             <td th:text="${project.getDeadline()}"></td>
             <td th:text="${project.getStartDate()}"></td>

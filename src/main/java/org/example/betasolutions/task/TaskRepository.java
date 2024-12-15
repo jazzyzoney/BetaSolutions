@@ -160,7 +160,11 @@ public class TaskRepository extends PSSTSuperclass {
     }
 
     public Task readTask(int taskID){
-        return (Task) super.readAssignmentByID("task","task",Task::new,taskID); //read task using super class.
+
+         Task task = (Task) super.readAssignmentByID("task","task",Task::new,taskID); //read task using super class.
+        task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
+        task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
+        return task;
     }
     public int deleteTask(int taskID){
         try {

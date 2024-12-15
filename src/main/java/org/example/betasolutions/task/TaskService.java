@@ -106,6 +106,7 @@ public class TaskService {
         }
     }
 
+
     public void updateTaskTotalHours(int taskID){
         Task task = taskRepository.readTask(taskID); //read task.
         updateTaskTotalHours(task);

@@ -328,7 +328,6 @@ public class PSSTSuperclass {
     public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
         List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
          return assignmentList.get(id- 1);
-
     }
     
 

@@ -1,9 +1,10 @@
 :root {
-    --dark-blue: #568; /* Darker shade */
-    --medium-blue: #68BB; /* Lighter shade */
+    --dark-blue: #6688BB; /* Darker shade */
+    --medium-blue: #84a6ca; /* Lighter shade */
     --light-blue: #ACDF; /* Much lighter shade */
     --orange: #FF964F; /* Orange */
     --purple: #DEB3E0; /* lilla */
+    --turquoise: #B3ECEC; /* turkis */
 }
 
 /* coloring project and the assignments */
@@ -39,6 +40,7 @@ table {
     border: 2px solid black;
     border-collapse: collapse;
     margin: 0 auto;
+    background-color: white;
 }
 
 td, th {
@@ -57,6 +59,7 @@ html, body {
 body {
     justify-content: flex-start;
     padding-top: 150px; /* Adjust the padding as needed */
+    background-color: #B8C2CC; /* Adjust the background color as needed */
 }
 
 *{

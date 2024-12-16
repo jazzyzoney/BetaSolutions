@@ -11,6 +11,6 @@ class LoginRepositoryTest {
     }
 
     @Test
-    void vaifyLogin() {
+    void verifyLogin() {
     }
 }

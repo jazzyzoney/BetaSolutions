@@ -31,7 +31,7 @@ public class LoginRepository {
         }
 
     }
-    public boolean vaifyLogin(Login login) {
+    public boolean verifyLogin(Login login) {
         String SQLSelectLogin = "SELECT * FROM profile WHERE email = ? AND password = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLSelectLogin);

@@ -1,5 +1,4 @@
 package org.example.betasolutions.login;
-import org.example.betasolutions.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,7 @@ public class LoginService {
         loginRepository.createLogin(login);
     }
     public boolean verifyLogin(Login login) {
-        return loginRepository.vaifyLogin(login);
+        return loginRepository.verifyLogin(login);
     }
 
 }

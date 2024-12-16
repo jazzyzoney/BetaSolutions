@@ -51,7 +51,7 @@ public class LoginController {
         int employeeID = employeeService.createNewEmployee(employee);
         login.setEmployeeID(employeeID);
         loginService.createLogin(login);
-        session.setAttribute("employeeID", employeeID);
+       // session.setAttribute("employeeID", employeeID);
         return "redirect:/login";
     }
 

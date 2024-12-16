@@ -82,4 +82,14 @@ class SubProjectRepositoryTest {
     void deleteSubProject() {
         assertTrue (subProjectRepository.deleteSubProject(1));
     }
+
+    @Test
+    void updateSubProjectTotalHours(){
+        assertTrue (false);
+    }
+
+    @Test
+    void getTotalHoursForSubProject(){
+        assertTrue(false);
+    }
 }

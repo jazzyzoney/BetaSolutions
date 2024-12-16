@@ -62,5 +62,10 @@ class SubTaskRepositoryTest {
     void updateSubTaskTotalHours(){
         SubTask subTask = new SubTask("test", 4, 10.03, Date.valueOf("2024-12-17"), 1);
         assertTrue(subTaskRepository.updateSubTaskTotalHours(subTask));
+        //???
+
+        assertTrue(false);
     }
+
+
 }

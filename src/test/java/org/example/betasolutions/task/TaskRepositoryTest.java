@@ -139,10 +139,6 @@ class TaskRepositoryTest {
     void updateTotalHoursForTask(){
         assertTrue (false);
     }
-
-    @Test
-    void updateHoursForTask(){
-        assertTrue (false);
-    }
+    
 
 }

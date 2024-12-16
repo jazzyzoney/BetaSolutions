@@ -109,4 +109,14 @@ class ProjectRepositoryTest{
 
     }
 
+    @Test
+    void getTotalHoursForProject(){
+        assertTrue(false);
+    }
+
+    @Test
+    void updateTotalHoursForProject(){
+        assertTrue(false);
+    }
+
 }

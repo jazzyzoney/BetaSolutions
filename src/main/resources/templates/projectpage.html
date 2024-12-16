@@ -19,7 +19,9 @@
 
 <h2>
     <span style="font-size: 2em;" class="project" th:text="${project.name}"></span>
-    </span>Project owner: <span th:text="${project.owner}"></span>
+
+    <p>Project owner: <span th:text="${project.owner}"></span></p>
+    <br>
 </h2>
 
 <aside>
@@ -31,27 +33,27 @@
 
 <main>
     <form class="logo" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
-        <button type="submit">All employees for project</button>
+        <button type="submit" class="employees">Employees</button>
         <hidden name="projectID" field="projectID"> </hidden>
     </form>
     <br>
 
     <h2>Project with tasks:</h2>
     <form th:action="@{/project/{projectID}/New/task(projectID=${project.getID()})}" method="get">
-        <button type="submit">Create a new task</button>
+        <button type="submit" class="task">Create task</button>
     </form>
 
     <table>
         <tr>
-            <th>ID</th>
-            <th>Task name</th>
-            <th>Days</th>
-            <th>Deadline</th>
-            <th>Start date</th>
+            <th class="task">ID</th>
+            <th class="task">Task name</th>
+            <th class="task">Days</th>
+            <th class="task">Deadline</th>
+            <th class="task">Start date</th>
         </tr>
 
         <!-- Loop through subprojects -->
-        <tr th:each="task : ${tasksWithoutSubProject}" class="task">
+        <tr th:each="task : ${tasksWithoutSubProject}">
             <td th:text="${task.ID}"></td>
             <td th:text="${task.name}"></td>
             <td th:text="${task.days}"></td>
@@ -60,13 +62,13 @@
             <td>
                 <!-- Button to navigate to subtasks page -->
                 <form th:action="@{/project/{projectID}/task/{taskID}/subtasks(projectID=${project.getID()}, taskID=${task.getID()})}" method="get">
-                    <button type="submit">View subtasks</button>
+                    <button type="submit" class="subtask">View subtasks</button>
                 </form>
             </td>
             <td> <!-- Delete button for each task -->
                 <form th:action="@{/project/task/delete(taskID=${task.getID()}, projectID=${project.getID()})}" method="post"
                       onsubmit="return confirm('Are you sure you want to delete this task?');">
-                    <button type="submit" class="delete-button">Delete Task</button>
+                    <button type="submit" class="task">Delete Task</button>
                 </form> </td>
         </tr>
     </table>
@@ -77,52 +79,52 @@
     <h2>Subprojects with tasks:</h2>
     <!-- Button to create a new subproject -->
     <form th:action="@{/project/{projectID}/subproject/newSubProject(projectID=${project.getID()})}" method="get">
-        <button type="submit">Create a new subproject</button>
+        <button type="submit" class="subproject">Create a new subproject</button>
     </form>
 
     <table>
     <thead>
         <tr>
-            <th>SubProject Name</th>
-            <th>Hours</th>
-            <th>Deadline</th>
-            <th>Start Date</th>
-            <th>Total Price</th>
-            <th>Days</th>
-            <th>Tasks</th>
-            <th>Subtasks</th>
+            <th class="subproject">SubProject Name</th>
+            <th class="subproject">Hours</th>
+            <th class="subproject">Deadline</th>
+            <th class="subproject">Start Date</th>
+            <th class="subproject">Total Price</th>
+            <th class="subproject">Days</th>
+            <th class="task">Tasks</th>
+            <th class="subtask">Subtasks</th>
         </tr>
     </thead>
     <tbody>
         <tr th:each="entry : ${subProjects}">
-            <td th:text="${entry.key.name}" class="subproject"></td>
-            <td th:text="${entry.key.getHours()}" class="subproject"></td>
-            <td th:text="${entry.key.getDeadline()}" class="subproject"></td>
-            <td th:text="${entry.key.getStartDate()}" class="subproject"></td>
-            <td th:text="${entry.key.getTotalPrice()}" class="subproject"></td>
-            <td th:text="${entry.key.getDays()}" class="subproject"></td>
+            <td th:text="${entry.key.name}"></td>
+            <td th:text="${entry.key.getHours()}"></td>
+            <td th:text="${entry.key.getDeadline()}"></td>
+            <td th:text="${entry.key.getStartDate()}"></td>
+            <td th:text="${entry.key.getTotalPrice()}"></td>
+            <td th:text="${entry.key.getDays()}"></td>
             <td>
                 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task(projectID=${project.getID()}, subProjectID=${entry.key.getID()})}" method="get">
-                    <button type="submit">Create task for subproject</button>
+                    <button type="submit" class="task">Create task</button>
                 </form>
                 <table>
                     <thead>
                         <tr>
-                            <th>Task Name</th>
-                            <th>Hours</th>
-                            <th>Delete Task</th>
+                            <th class="task">Task Name</th>
+                            <th class="task">Hours</th>
+                            <th class="task">Delete Task</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:if="${#lists.isEmpty(entry.value)}">
                             <td colspan="3">No tasks for this subproject</td>
                         </tr>
-                        <tr th:each="task : ${entry.value}" class="task">
+                        <tr th:each="task : ${entry.value}">
                             <td th:text="${task.getName()}" ></td>
                             <td th:text="${task.getHours()}"></td>
                             <td>
                                 <form th:action="@{/project/task/delete(taskID=${task.getID()}, projectID=${project.getID()})}" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
-                                    <button type="submit" class="delete-button">Delete Task</button>
+                                    <button type="submit" class="task" >Delete Task</button>
                                 </form>
                             </td>
                         </tr>
@@ -132,7 +134,7 @@
             <td>
                 <!-- Button to navigate to subtasks page -->
 <form th:action="@{/project/{projectID}/task/{taskID}/subtasks(projectID=${project.getID()}, taskID=${entry.key.getID()})}" method="get">
-    <button type="submit">View subtasks</button>
+    <button type="submit" class="subtask">View subtasks</button>
 </form>
             </td>
         </tr>

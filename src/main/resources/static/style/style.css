@@ -3,7 +3,7 @@
     --medium-blue: #68BB; /* Lighter shade */
     --light-blue: #ACDF; /* Much lighter shade */
     --orange: #FF964F; /* Orange */
-    --bownish: #A08679; /* Brun */
+    --purple: #DEB3E0; /* lilla */
 }
 
 /* coloring project and the assignments */
@@ -15,17 +15,23 @@
 
 .subproject {
     background-color: var(--dark-blue);
-    color: white; /* Adjust text color for better readability */
+    color: black; /* Adjust text color for better readability */
 }
 
 .task {
     background-color: var(--medium-blue);
-    color: white; /* Adjust text color for better readability */
+    color: black; /* Adjust text color for better readability */
 }
 
 .subtask {
     background-color: var(--light-blue);
     color: black; /* Adjust text color for better readability */
+}
+
+.employees {
+    background-color: var(--purple);
+    color: black; /* Adjust text color for better readability */
+    /* sort kant rundt om knapperne, underline tasks med farven, tabel headers breddere, projekt info i boks, lidt mørkere baggrund */
 }
 
 /* table */

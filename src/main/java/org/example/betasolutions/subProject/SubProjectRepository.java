@@ -81,7 +81,7 @@ public class SubProjectRepository extends PSSTSuperclass {
             //task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
 
             if (task.getSubProjectID() == subProject.getID()){
-                totalHours += task.getHours(); //add task-specific hours to total.
+                totalHours += task.getTotalHours(); //add task-specific hours to total.
             }
         }//end of all subtasks.
 

@@ -65,7 +65,6 @@ public class TaskService {
         return task;
     }
 
-
     public void updateHours(Task task, int hours) {
         //task.setTotalHours(hours); //set task hours = new hours;
 
@@ -101,7 +100,6 @@ public class TaskService {
 
         taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
 
-        //System.out.println("task id: " + task.getID() + "\nproject id: " + task.getProjectID() + "\nsubproject id: " + task.getSubProjectID());
         if (task.getSubProjectID() > 0) {
            subProjectService.updateSubProjectTotalHours(task.getSubProjectID());
         }else{

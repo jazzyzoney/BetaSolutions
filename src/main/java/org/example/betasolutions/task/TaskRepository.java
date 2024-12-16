@@ -168,7 +168,7 @@ public class TaskRepository extends PSSTSuperclass {
     }
     public int deleteTask(int taskID){
         try {
-        conn.setAutoCommit(false);
+            conn.setAutoCommit(false);
             super.deleteObjectFromTable("task", "task", taskID);
             super.deleteAllWhere("sub_task", "task_id = " + taskID);
             super.deleteAllWhere("project_employee_task_subTask", "task_id = " + taskID);
@@ -206,7 +206,7 @@ public class TaskRepository extends PSSTSuperclass {
         }
 
         task.setTotalHours(totalHoursForTask);
-       // updateTotalHoursForTask(task.getID(), totalHoursForTask);
+        // updateTotalHoursForTask(task.getID(), totalHoursForTask);
         return totalHoursForTask;
     }
 

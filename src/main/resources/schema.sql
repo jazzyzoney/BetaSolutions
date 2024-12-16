@@ -150,13 +150,17 @@ VALUES
 INSERT INTO project_employee (employee_id, project_id)
 VALUES
     (1, 1),
-    (2, 2);
+    (2, 2),
+    (3, 2),
+    (4, 2);
+
 
 -- Insert sample data into project_employee_task table
 INSERT INTO project_employee_task (employee_id, project_id, task_id)
 VALUES
     (1, 1, 1),
-    (2, 2, 2);
+    (2, 2, 2),
+    (4, 2, 2);
 
 -- Insert sample data into project_employee_task_subTask table
 INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub_task_id)

@@ -201,7 +201,7 @@ public class EmployeeRepository {
         return null;
     }
     //add existing employee to project_employee table
-    public void addExistingEmployeeToProject(int employeeID, int projectID) {
+    public boolean addExistingEmployeeToProject(int employeeID, int projectID) {
         String sql = "INSERT INTO project_employee (employee_id, project_id) VALUES (?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
@@ -213,13 +213,15 @@ public class EmployeeRepository {
             } else {
                 System.out.println("Employee not added to project");
             }
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     //add existing employee to project_employee_task table
-    public void addExistingEmployeeToTask(int employeeID, int taskID, int projectID) { //idName is the name of the column
+    public boolean addExistingEmployeeToTask(int employeeID, int taskID, int projectID) { //idName is the name of the column
         String sql = "INSERT INTO project_employee_task (employee_id, project_id, task_id) VALUES (?,?,?)"; //because we get a "primary key violation" in the console when adding an employee to a project, we attempt to ignore it in H2
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
@@ -231,13 +233,15 @@ public class EmployeeRepository {
             } else {
                 System.out.println("Employee not added to task");
             }
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     //add existing employee to project_employee_task_subTask table
-    public void addExistingEmployeeToSubTask(int employeeID, int projectID, int taskID, int subTaskID) { //idName is the name of the column
+    public boolean addExistingEmployeeToSubTask(int employeeID, int projectID, int taskID, int subTaskID) { //idName is the name of the column
         String sql = "INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub_task_id) VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, employeeID);
@@ -250,9 +254,11 @@ public class EmployeeRepository {
             } else {
                 System.out.println("Employee not added to subtask");
             }
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     //update

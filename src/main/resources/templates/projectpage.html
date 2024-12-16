@@ -24,7 +24,7 @@
     <br>
 </h2>
 
-<aside>
+<aside class="left-corner">
     <h2>Start date: <span th:text="${project.getStartDate()}"></span></h2>
     <h2>Deadline: <span th:text="${project.getDeadline()}"></span></h2>
     <h2>Total price: <span th:text="${project.getTotalPrice()}"></span></h2>
@@ -32,13 +32,13 @@
 </aside>
 
 <main>
-    <form class="logo" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
+    <form class="logo right-corner" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
         <button type="submit" class="employees">Employees</button>
         <hidden name="projectID" field="projectID"> </hidden>
     </form>
     <br>
 
-    <h2>Project with tasks:</h2>
+    <h2><span class="project">Project</span> with <span class="taskunder">tasks</span></h2>
     <form th:action="@{/project/{projectID}/New/task(projectID=${project.getID()})}" method="get">
         <button type="submit" class="task">Create task</button>
     </form>
@@ -76,7 +76,7 @@
     <br>
     <br>
 
-    <h2>Subprojects with tasks:</h2>
+    <h2><span class="subprojectunder">Subprojects</span> with <span class="taskunder">tasks</span></h2>
     <!-- Button to create a new subproject -->
     <form th:action="@{/project/{projectID}/subproject/newSubProject(projectID=${project.getID()})}" method="get">
         <button type="submit" class="subproject">Create a new subproject</button>

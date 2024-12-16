@@ -1,10 +1,10 @@
 :root {
-    --dark-blue: #6688BB; /* Darker shade */
-    --medium-blue: #84a6ca; /* Lighter shade */
-    --light-blue: #ACDF; /* Much lighter shade */
+    --dark-blue: #6688BB; /* dark shade */
+    --medium-blue: #84a6ca; /* lighter shade */
+    --light-blue: #ACDF; /* lightest shade */
     --orange: #FF964F; /* Orange */
-    --purple: #DEB3E0; /* lilla */
-    --turquoise: #B3ECEC; /* turkis */
+    --purple: #DEB3E0; /* purple */
+    --turquoise: #B3ECEC; /*  */
 }
 
 /* coloring project and the assignments */
@@ -16,7 +16,7 @@
 
 .subproject {
     background-color: var(--dark-blue);
-    color: black; /* Adjust text color for better readability */
+    color: black; /* text color for better readability */
 }
 
 .task {
@@ -27,6 +27,24 @@
 .subtask {
     background-color: var(--light-blue);
     color: black; /* Adjust text color for better readability */
+}
+
+.subprojectunder {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: var(--dark-blue);
+}
+
+.taskunder {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: var(--medium-blue);
+}
+
+.subtaskunder {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: var(--light-blue);
 }
 
 .employees {
@@ -41,10 +59,13 @@ table {
     border-collapse: collapse;
     margin: 0 auto;
     background-color: white;
+    font-size: 1em;
+    padding: 10px;
 }
 
 td, th {
     border: 1px solid black;
+    width: 150px;
 }
 
 html, body {
@@ -95,8 +116,8 @@ header .logo .solutions{
 /* for the buttons */
 button {
     background-color: var(--orange);
-    color: white;
-    border: black;
+    color: black;
+    border: 1px solid black;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
@@ -104,8 +125,20 @@ button {
     font-size: 1em;
 }
 
-/* for tasks to be below subprojects in the table */
-.task-cell {
-    display: block;
-    margin-top: 10px; /* Adjust the margin as needed */
+.right-corner {
+    position: absolute;
+    top: 170px; /* Adjust the top position as needed */
+    right: 600px; /* Adjust the right position as needed */
 }
+
+.left-corner {
+    position: absolute;
+    top: 200px; /* Adjust the top position as needed */
+    left: 400px; /* Adjust the left position as needed */
+    padding: 15px; /* Add padding inside the box */
+    border: 2px solid black; /* Add a border around the box */
+    border-radius: 10px; /* Rounded corners */
+    background-color: white; /* Background color of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+

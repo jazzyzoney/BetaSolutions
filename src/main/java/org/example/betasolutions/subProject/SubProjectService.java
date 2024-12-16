@@ -20,7 +20,7 @@ public class SubProjectService {
     }
 
     public void insertIntoSubProject(SubProject subProject){
-        updateSubProjectTotalHours(subProject.getID(), 0);
+        //updateSubProjectTotalHours(subProject.getID(), 0);
         subProjectRepository.insertSubProject(subProject);
     }
 

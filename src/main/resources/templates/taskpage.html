@@ -7,7 +7,7 @@
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Create New  TASK FOR Project</h1>
+<h1>Create new task for project</h1>
 
 <!-- create task without subproject -->
 <form th:action="@{/project/{projectID}/task/new/post(projectID=${projectID})}" method="post" th:object="${task}">

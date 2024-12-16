@@ -132,12 +132,15 @@ class TaskRepositoryTest {
 
     @Test
     void getTotalHoursForTask(){
-        assertTrue(false);
+        Task task = taskRepository.readTask(1);
+        int totalHours = taskRepository.getTotalHoursForTask(task);
+        int expectedHours = 70;
+        assertEquals(expectedHours, totalHours);
     }
 
     @Test
     void updateTotalHoursForTask(){
-        assertTrue (false);
+        assertTrue(taskRepository.updateTotalHoursForTask(1, 100));
     }
     
 

@@ -64,7 +64,6 @@ class SubTaskRepositoryTest {
         assertTrue(subTaskRepository.updateSubTaskTotalHours(subTask));
         //???
 
-        assertTrue(false);
     }
 
 

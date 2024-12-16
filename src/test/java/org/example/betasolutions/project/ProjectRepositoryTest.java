@@ -1,6 +1,7 @@
 package org.example.betasolutions.project;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
+import org.example.betasolutions.task.Task;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -111,12 +112,15 @@ class ProjectRepositoryTest{
 
     @Test
     void getTotalHoursForProject(){
-        assertTrue(false);
+        Project project = projectRepository.readProjectByID(1); // in this case project 1 has 200 hours.
+        int actualHours = projectRepository.getTotalHoursForProject(project); //get total hours for project.
+        int expectedHours = 200; //expected hours.
+        assertEquals(actualHours, expectedHours);
     }
 
     @Test
     void updateTotalHoursForProject(){
-        assertTrue(false);
+        assertTrue(projectRepository.updateTotalHoursForProject(1,500));
     }
 
 }

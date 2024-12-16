@@ -85,11 +85,15 @@ class SubProjectRepositoryTest {
 
     @Test
     void updateSubProjectTotalHours(){
-        assertTrue (false);
+       SubProject subProject = subProjectRepository.readSubProject(1);
+        assertTrue(subProjectRepository.updateSubProjectTotalHours(subProject, 100));
     }
 
     @Test
     void getTotalHoursForSubProject(){
-        assertTrue(false);
+        SubProject subProject = subProjectRepository.readSubProject(1);
+        int totalHours = subProjectRepository.getTotalHoursForSubProject(subProject,10);
+        int expectedHours = 110;
+        assertEquals(expectedHours, totalHours);
     }
 }

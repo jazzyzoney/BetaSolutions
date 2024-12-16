@@ -70,8 +70,8 @@ public class SubProjectRepository extends PSSTSuperclass {
         return super.updateObjectInt("sub_project", "sub_project_total_hours", subProject.getID(), newTotalHours);
     }
 
-    public int getTotalHoursForSubProject(SubProject subProject){
-        int totalHours = subProject.getHours(); //get subProject-specific hours.
+    public int getTotalHoursForSubProject(SubProject subProject, int totalTaskHours){
+        int totalHours = totalTaskHours;//subProject.getHours(); //get subProject-specific hours.
 
         List<ModelInterface> allTasks = super.readAllAssignments("task", "task", Task::new);//get All tasks.
 

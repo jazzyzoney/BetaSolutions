@@ -31,17 +31,20 @@ public class TaskService {
 
     public void createTaskForProject(Task task){
         //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
-        updateTaskTotalHours(task); //update hours first.
+
+        calculateDeadline(task); //set variables temporarily.
         taskRepository.addTaskToProject(task);
+
+        updateTaskTotalHours(task); //update hours first.
 
     }
 
-
     public void createTaskForSubProject(Task task){
         //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+
+        calculateDeadline(task); //set variables temporarily.
         updateTaskTotalHours(task);
         taskRepository.addTaskToSubProject(task);
-
     }
 
     public int getTotalHoursForTask(Task task){
@@ -101,7 +104,7 @@ public class TaskService {
         taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
 
         if (task.getSubProjectID() > 0) {
-           subProjectService.updateSubProjectTotalHours(task.getSubProjectID());
+           subProjectService.updateSubProjectTotalHours(task.getSubProjectID(), task.getTotalHours());
         }else{
            projectService.updateProjectTotalHours(task.getProjectID());
         }

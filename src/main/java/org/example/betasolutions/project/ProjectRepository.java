@@ -96,7 +96,7 @@ public class ProjectRepository extends PSSTSuperclass {
     }
 
     public int getTotalHoursForProject(Project project){
-        int totalHours = project.getHours(); //get project hours.
+        int totalHours = 0;//project.getHours(); //get project hours.
 
         List<ModelInterface> allSubProjectsAndTasks = super.readAllAssignmentsBelongingToProject("sub_project", "sub_project", SubProject::new, project.getID());//get All subtasks.
         allSubProjectsAndTasks.addAll(super.readAllAssignmentsBelongingToProject("task", "task", Task::new, project.getID()));

@@ -47,6 +47,7 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
     //read a subproject
     public SubProject readSubProject(int subProjectID){
+        //int projectID = super.getTableIntByInt("sub_project", "project_id", "sub_project_id", subProjectID); //get project id.
         SubProject subProject = (SubProject) super.readAssignmentByID("sub_project","sub_project",SubProject::new,subProjectID);
         subProject.setProjectID(super.getTableIntByInt("sub_project", "project_id", "sub_project_id", subProject.getID()));
         return subProject;

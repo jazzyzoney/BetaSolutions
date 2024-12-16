@@ -15,7 +15,7 @@ public class ProjectService {
     }
 
     public void insertAssignmentIntoTable(Project project){
-        updateProjectTotalHours(project.getID());
+        //updateProjectTotalHours(project.getID());
         projectRepository.insertAssignmentIntoTable(project);
     }
     public List<Project> readAllProjects(){

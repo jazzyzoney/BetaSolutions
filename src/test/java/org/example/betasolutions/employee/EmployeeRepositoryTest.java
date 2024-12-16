@@ -13,6 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -57,7 +58,7 @@ class EmployeeRepositoryTest {
     @Test
     void getAllEmployees() {
         int actual = employeeRepository.getAllEmployees().size();
-        int expected = 2;
+        int expected = 5;
         assertEquals(expected, actual);
         String actualName = employeeRepository.getAllEmployees().get(0).getEmployeeName();
         String expectedName = "Employee 1";
@@ -76,23 +77,79 @@ class EmployeeRepositoryTest {
     @Test
     void getAllEmployeesNotOnProject() {
         int actual = employeeRepository.getAllEmployeesNotOnProject(1).size();
-        int expected = 1;
+        int expected = 4; //4 employees not assigned project 1.
         assertEquals(expected, actual);
         String actualName = employeeRepository.getAllEmployeesNotOnProject(1).get(0).getEmployeeName();
         String expectedName = "Employee 2";
     }
     @Test
     void getAllEmployeesForTask() {
+        List<Employee> employeeList = employeeRepository.getAllEmployeesForTask(1, 1);
+        //Test list size:
+        int expectedSize = 1;
+        int actualSize = employeeList.size();
+
+        assertEquals(expectedSize, actualSize);
+
+        //Test name for employee 1.
+        String expectedName = "Employee 1";
+        String actualName = employeeList.get(0).getEmployeeName();
+
+        assertEquals(expectedName, actualName);
+
     }
+
     @Test
-    void getAllemployeesNotAssingedToTaskForProject() {
+    void getAllEmployeesNotAssingedToTaskForProject() {
+        List<Employee> employeeList = employeeRepository.getAllemployeesNotAssingedToTaskForProject(1, 1);
+        //Test list size:
+        int expectedSize = 0; //no employees assigned project, without a task.
+        int actualSize = employeeList.size();
+
+        assertEquals(expectedSize, actualSize);
+/*
+        //Test name for employee 1.
+        String expectedName = "Employee 3";
+        String actualName = employeeList.get(0).getEmployeeName();
+
+        assertEquals(expectedName, actualName);
+*/
     }
+
     @Test
     void getAllEmployeesForSubTask() {
+        List<Employee> employeeList = employeeRepository.getAllEmployeesForSubTask(1,1,1);
+        //Test list size:
+        int expectedSize = 1;
+        int actualSize = employeeList.size();
+
+        assertEquals(expectedSize, actualSize);
+
+        //Test name for employee 1.
+        String expectedName = "Employee 1";
+        String actualName = employeeList.get(0).getEmployeeName();
+
+        assertEquals(expectedName, actualName);
+
     }
+
     @Test
     void getAllEmployeesNotOnSubtaskForProject() {
+        List<Employee> employeeList = employeeRepository.getAllEmployeesNotOnSubtaskForProject(1);
+        //Test list size:
+        int expectedSize = 0;
+        int actualSize = employeeList.size();
+
+        assertEquals(expectedSize, actualSize);
+/*
+        //Test name for employee 1.
+        String expectedName = "Employee 1";
+        String actualName = employeeList.get(0).getEmployeeName();
+
+        assertEquals(expectedName, actualName);
+*/
     }
+
 
     @Test
     void addExistingEmployeeToProject() {

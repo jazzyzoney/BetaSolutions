@@ -95,7 +95,7 @@ public class SubTask implements ModelInterface {
         return totalPrice;
     }
 
-    public void setotalPrice(double subTaskTotalPrice) {
+    public void setTotalPrice(double subTaskTotalPrice) {
         this.totalPrice = subTaskTotalPrice;
     }
 

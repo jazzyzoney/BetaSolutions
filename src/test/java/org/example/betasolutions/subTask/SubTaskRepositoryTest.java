@@ -28,8 +28,8 @@ class SubTaskRepositoryTest {
 
     @Test
     void addSubTaskToTask() {
-        SubTask subTask = new SubTask (3, "new subTask", 2, 1, 500, Date.valueOf("2024-12-11"), Date.valueOf("2024-12-11"), 1);
-        subTask.setTaskID(1);
+        SubTask subTask = new SubTask ( "new subTask", 2, 500,  Date.valueOf("2024-12-11"), 1);
+       // subTask.setTaskID(1);
         boolean subTaskAddedToTask = subTaskRepository.addSubTaskToTask(subTask);
 
         assertTrue(subTaskAddedToTask);

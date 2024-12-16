@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New SubProject</title>
+    <title>Create New task for SubProject</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Create New  TASK FOR SubProject</h1>
+<h1>Create new task for subproject</h1>
 
 <!-- new task for subproject -->
 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">

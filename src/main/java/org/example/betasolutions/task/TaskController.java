@@ -38,6 +38,7 @@ public class TaskController {
     @PostMapping("project/{projectID}/task/new/post")
     public String createNewTaskForProjectPost(@PathVariable("projectID") int projectID, @ModelAttribute Task task){
         task.setProjectID(projectID);
+        task.setHours(task.getHours());
         taskService.createTaskForProject(task);
         return "redirect:/project/" + projectID;
     }

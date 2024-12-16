@@ -55,6 +55,7 @@ public class ProjectController {
         List<Task> tasks = taskService.getAllTasksBelongingToProject(projectID);
         List<SubTask> subTasks = subTaskService.readAllSubTasks(projectID, taskID);
 
+
         Map<SubProject, List<Task>> subProjectsAndTasks = new HashMap<>();
         Map<Task, List<SubTask>> tasksAndSubTasks = new HashMap<>();
         List<Task> tasksWithoutSubProject = new ArrayList<>();

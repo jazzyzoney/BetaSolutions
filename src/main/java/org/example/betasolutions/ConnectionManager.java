@@ -17,7 +17,7 @@ public class ConnectionManager {
     @Value("${spring.datasource.password}")
     private String password;
 
-    private Connection conn;
+    static private Connection conn;
 
     private ConnectionManager(){}
 

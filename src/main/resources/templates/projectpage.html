@@ -103,7 +103,7 @@
             <td th:text="${entry.key.getDays()}"></td>
             <td>
                 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task(projectID=${project.getID()}, subProjectID=${entry.key.getID()})}" method="get">
-                    <button type="submit">Create Task for subproject</button>
+                    <button type="submit">Create task for subproject</button>
                 </form>
             </td>
             <td>

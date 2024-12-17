@@ -15,7 +15,7 @@ public class EmployeeService {
     }
 
     //create
-    public boolean createNewEmployee(Employee employee){
+    public int createNewEmployee(Employee employee){
         return employeeRepository.createNewEmployee(employee);
     }
 
@@ -68,5 +68,8 @@ public class EmployeeService {
     //delete
     public void deleteEmployee(int employeeID){
         employeeRepository.deleteEmployee(employeeID);
+    }
+    public List<String> GetAllEmployeeOffices(){
+        return employeeRepository.GetAllEmployeeOffices();
     }
 }

@@ -24,7 +24,7 @@ public class SubTaskService {
     public void createSubTask(SubTask subTask){
         calculateDeadline(subTask);
         subTaskRepository.addSubTaskToTask(subTask);
-        taskService.updateTaskTotalHours(subTask.getTaskID()); //update on task.
+        //taskService.updateTaskTotalHours(subTask.getTaskID()); //update on task.
         updateSubTaskTotalHours(subTask, subTask.getHours());
     }
 

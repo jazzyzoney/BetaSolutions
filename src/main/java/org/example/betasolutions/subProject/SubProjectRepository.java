@@ -2,6 +2,8 @@ package org.example.betasolutions.subProject;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.subTask.SubTask;
+import org.example.betasolutions.task.Task;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -45,7 +47,10 @@ public class SubProjectRepository extends PSSTSuperclass {
     }
     //read a subproject
     public SubProject readSubProject(int subProjectID){
-        return (SubProject) super.readAssignmentByID("sub_project","sub_project",SubProject::new,subProjectID);
+        //int projectID = super.getTableIntByInt("sub_project", "project_id", "sub_project_id", subProjectID); //get project id.
+        SubProject subProject = (SubProject) super.readAssignmentByID("sub_project","sub_project",SubProject::new,subProjectID);
+        subProject.setProjectID(super.getTableIntByInt("sub_project", "project_id", "sub_project_id", subProject.getID()));
+        return subProject;
     }
     //delete a subproject
     public boolean deleteSubProject(int subProjectID){
@@ -60,6 +65,29 @@ public class SubProjectRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean updateSubProjectTotalHours(SubProject subProject, int newTotalHours){
+        return super.updateObjectInt("sub_project", "sub_project_total_hours", subProject.getID(), newTotalHours);
+    }
+
+    public int getTotalHoursForSubProject(SubProject subProject){
+        int totalHours = 0;//subProject.getHours(); //get subProject-specific hours.
+
+        List<ModelInterface> allTasks = super.readAllAssignments("task", "task", Task::new);//get All tasks.
+
+        for (ModelInterface modelInterface : allTasks){
+            Task task = (Task) modelInterface; //typecasting.
+            task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
+            task.setHours(super.getTableIntByInt("task", "task_hours", "task_id", task.getID()));//set task total hours.
+            //task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
+
+            if (task.getSubProjectID() == subProject.getID()){
+                totalHours += task.getHours(); //add task-specific hours to total.
+            }
+        }//end of all subtasks.
+
+        return totalHours;
     }
 
 }

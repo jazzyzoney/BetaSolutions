@@ -15,6 +15,7 @@ public class ProjectService {
     }
 
     public void insertAssignmentIntoTable(Project project){
+        //updateProjectTotalHours(project.getID());
         projectRepository.insertAssignmentIntoTable(project);
     }
     public List<Project> readAllProjects(){
@@ -25,5 +26,16 @@ public class ProjectService {
     }
     public void updateProject(Project project,int project_id){
         projectRepository.updateProject(project,project_id);
+    }
+
+    public void updateProjectTotalHours(int projectID){
+        Project project = projectRepository.readProjectByID(projectID); //read project.
+        int totalHours = projectRepository.getTotalHoursForProject(project);//get total hours
+        project.setTotalHours(totalHours); //update object.
+        projectRepository.updateTotalHoursForProject(projectID, totalHours); //update database.
+    }
+    
+    public void deleteProject(int project_id){
+        projectRepository.deleteProject(project_id);
     }
 }

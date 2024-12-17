@@ -31,6 +31,19 @@ public class EmployeeService {
     public List<Employee> getAllEmployeesNotOnProject(int projectID){
         return employeeRepository.getAllEmployeesNotOnProject(projectID);
     }
+    public List<Employee> getAllEmployeesForTask(int projectID, int taskID){
+        return employeeRepository.getAllEmployeesForTask(projectID, taskID);
+    }
+    public List<Employee> getAllemployeesNotAssingedToTaskForProject(int projectID, int taskID){
+        return employeeRepository.getAllemployeesNotAssingedToTaskForProject(projectID, taskID);
+    }
+
+    public List<Employee> getAllEmployeesForSubTask(int projectID, int taskID, int subTaskID){
+        return employeeRepository.getAllEmployeesForSubTask(projectID, taskID, subTaskID);
+    }
+    public List<Employee> getAllEmployeesNotOnSubtaskForProject(int TaskID){
+        return employeeRepository.getAllEmployeesNotOnSubtaskForProject(TaskID);
+    }
 
     //add employee to project
     public void addExistingEmployeeToProject(int employeeID, int projectID){

@@ -10,8 +10,8 @@ public class LoginService {
 
     }
 
-    public void createLogin(Login login) {
-        loginRepository.createLogin(login);
+    public boolean createLogin(Login login) {
+         return loginRepository.createLogin(login);
     }
     public boolean verifyLogin(Login login) {
         return loginRepository.verifyLogin(login);

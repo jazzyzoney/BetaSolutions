@@ -17,7 +17,7 @@ public class LoginRepository {
     }
 
     // create login
-    public void createLogin(Login login) {
+    public boolean createLogin(Login login) {
         String SQLInsertLogin = "INSERT INTO profile (email, password, employee_id) VALUES(?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQLInsertLogin);
@@ -29,7 +29,7 @@ public class LoginRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return false;
     }
     public boolean verifyLogin(Login login) {
         String SQLSelectLogin = "SELECT * FROM profile WHERE email = ? AND password = ?";

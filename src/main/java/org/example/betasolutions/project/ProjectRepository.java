@@ -106,7 +106,7 @@ public class ProjectRepository extends PSSTSuperclass {
 
         for (ModelInterface modelInterface : allTasks){
             int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", modelInterface.getID());
-            int taskTotalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", modelInterface.getID());
+            int taskTotalHours = super.getTableIntByInt("task", "task_hours", "task_id", modelInterface.getID());
             ((Task) modelInterface).setHours(taskTotalHours);
             if (subProjectID <= 0){
                 allSubProjectsAndTasks.add(modelInterface);

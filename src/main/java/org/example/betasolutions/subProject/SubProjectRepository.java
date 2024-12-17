@@ -79,6 +79,7 @@ public class SubProjectRepository extends PSSTSuperclass {
         for (ModelInterface modelInterface : allTasks){
             Task task = (Task) modelInterface; //typecasting.
             task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
+            task.setHours(super.getTableIntByInt("task", "task_hours", "task_id", task.getID()));//set task total hours.
             //task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
 
             if (task.getSubProjectID() == subProject.getID()){

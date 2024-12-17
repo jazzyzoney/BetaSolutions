@@ -14,17 +14,15 @@
     <label class="large-text">Name:
         <input type="text" name="employeeName" th:value="${employee.employeeName}" required>
     </label>
-
     <br>
     <label class="large-text">Office:
-        <select name="employeeOffice" id="officeSelect" required>
-            <option value="" disabled selected>Select office</option>
-            <option th:each="employeeOffice : ${employee}"
-                    th:value="${employee.employeeOffice}"
-                    th:text="${employee.employeeOffice}"></option>
-        </select>
+        <!-- Input field with datalist for both selectable and manual input -->
+        <input type="text" name="employeeOffice" id="officeSelect" list="officeOptions"
+               th:value="${employee.employeeOffice}" required>
+        <datalist id="officeOptions">
+            <option th:each="office : ${employeeOffices}" th:value="${office}" th:text="${office}"></option>
+        </datalist>
     </label>
-
     <br>
     <label class="large-text">Proficiency:
         <input type="text" name="employeeProficiency" th:value="${employee.employeeProficiency}" required>

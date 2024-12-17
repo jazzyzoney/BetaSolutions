@@ -50,7 +50,7 @@ class EmployeeRepositoryTest {
 
     @Test
     void createNewEmployee() {
-        boolean actual = employeeRepository.createNewEmployee(new Employee(1, "John Doe", "Office", "Proficient", "1000"));
+        int actual = employeeRepository.createNewEmployee(new Employee(1, "John Doe", "Office", "Proficient", "1000"));
         boolean expected = true;
         assertEquals(expected, actual);
     }
@@ -175,6 +175,9 @@ class EmployeeRepositoryTest {
         int actual = employeeRepository.getAllEmployees().size();
         int expected = 3;
         assertEquals(expected, actual);*/
+    }
+    @Test
+    void getAllEmployeeOffices() {
     }
 
 }

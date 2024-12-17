@@ -106,7 +106,15 @@ class ProjectRepositoryTest{
     //projectRepository
     @Test
     void createProject() {
+        Project project = new Project ("name", "po", 1, 500.0, Date.valueOf("2024-12-16"));
+        int expectedID = 3; //2 projects already exist.
+        int actualID = projectRepository.insertAssignmentIntoTable(project); //method returns id of new project.
 
+        assertEquals(expectedID, actualID);
+    }
+    @Test
+    void deleteProject() {
+        assertTrue(projectRepository.deleteProject(1));
     }
 
 }

@@ -3,6 +3,8 @@ package org.example.betasolutions.project;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.subProject.SubProject;
+import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,7 @@ public class ProjectRepository extends PSSTSuperclass {
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
+
     //Create method
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {
@@ -90,5 +93,51 @@ public class ProjectRepository extends PSSTSuperclass {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public int getTotalHoursForProject(Project project){
+        int totalHours = 0;//project.getHours(); //get project hours.
+
+        //get all subprojects for project.
+        List<ModelInterface> allSubProjectsAndTasks = super.readAllAssignmentsBelongingToProject("sub_project", "sub_project", SubProject::new, project.getID());
+
+        //get all tasks for project.
+        List <ModelInterface> allTasks = super.readAllAssignmentsBelongingToProject("task", "task", Task::new, project.getID());
+
+        for (ModelInterface modelInterface : allTasks){
+            int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", modelInterface.getID());
+            int taskTotalHours = super.getTableIntByInt("task", "task_hours", "task_id", modelInterface.getID());
+            ((Task) modelInterface).setHours(taskTotalHours);
+            if (subProjectID <= 0){
+                allSubProjectsAndTasks.add(modelInterface);
+            }
+        }
+
+        //add task and subproject hours to total:
+        for (ModelInterface modelInterface : allSubProjectsAndTasks){
+
+            /*
+            //if task in subproject, skip:
+            if (modelInterface instanceof Task){
+                Task task = (Task) modelInterface;
+                if(task.getSubProjectID() < 0){
+                    continue;
+                }
+            } //'if (modelinterface instanceof Task)'*/
+
+
+            totalHours += modelInterface.getHours();
+
+        }//end of all modelInterfaces.
+
+        return totalHours;
+    }
+
+    public boolean updateTotalHoursForProject(int projectID, int newTotalHours) {
+        return super.updateObjectInt("project", "project_total_hours", projectID, newTotalHours);
+    }
+
+    public boolean deleteProject(int projectID) {
+        return super.deleteObjectFromTable("project", "project", projectID);
     }
 }

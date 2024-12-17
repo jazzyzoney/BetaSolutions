@@ -135,7 +135,10 @@ VALUES
 INSERT INTO employee (employee_name, employee_office, employee_proficiency, employee_salary)
 VALUES
     ('Employee 1', 'Office 1', 'Developer', 5000.0),
-    ('Employee 2', 'Office 2', 'Designer', 4000.0);
+    ('Employee 2', 'Office 2', 'Designer', 4000.0),
+    ('Employee 3', 'Office 3', 'Tester', 3000.0),
+    ('Employee 4', 'Office 4', 'Manager', 6000.0),
+    ('Employee 5', 'Office 5', 'Developer', 5500.0);
 
 -- Insert sample data into profile table
 INSERT INTO profile (password, email, employee_id)
@@ -147,18 +150,23 @@ VALUES
 INSERT INTO project_employee (employee_id, project_id)
 VALUES
     (1, 1),
-    (2, 2);
+    (2, 2),
+    (3, 2),
+    (4, 2);
+
 
 -- Insert sample data into project_employee_task table
 INSERT INTO project_employee_task (employee_id, project_id, task_id)
 VALUES
     (1, 1, 1),
-    (2, 2, 2);
+    (2, 2, 2),
+    (4, 2, 2);
 
 -- Insert sample data into project_employee_task_subTask table
 INSERT INTO project_employee_task_subTask (employee_id, project_id, task_id, sub_task_id)
 VALUES
     (1, 1, 1, 1),
     (2, 2, 2, 2);
+
 
 

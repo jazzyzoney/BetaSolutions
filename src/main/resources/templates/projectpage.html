@@ -24,7 +24,7 @@
     <br>
 </h2>
 
-<aside class="left-corner">
+<aside class="right-corner">
     <h2>Start date: <span th:text="${project.getStartDate()}"></span></h2>
     <h2>Deadline: <span th:text="${project.getDeadline()}"></span></h2>
     <h2>Total price: <span th:text="${project.getTotalPrice()}"></span></h2>
@@ -32,7 +32,7 @@
 </aside>
 
 <main>
-    <form class="logo right-corner" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
+    <form class="logo left-corner" method="get" th:action="@{/project/{id}/employees (id=${projectID})}" style="display:inline;">
         <button type="submit" class="employees">Employees</button>
         <hidden name="projectID" field="projectID"> </hidden>
     </form>
@@ -72,7 +72,7 @@
                 </form>
                 <!-- employees for task on project -->
                 <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${task.getID()}, id=${project.getID()})}" style="display:inline;">
-                    <button type="submit">All employees for task</button>
+                    <button type="submit" class="employees">All employees for task</button>
                 </form>
             </td>
         </tr>
@@ -139,11 +139,11 @@
             <td>
                 <!-- Button to navigate to subtasks page -->
                 <form th:action="@{/project/{projectID}/task/{taskID}/subtasks(projectID=${project.getID()}, taskID=${entry.key.getID()})}" method="get">
-    <button type="submit" class="subtask">View subtasks</button>
+                    <button type="submit" class="subtask">View subtasks</button>
                 </form>
                 <!-- employees for task in subprojects -->
-                <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${task.getID()}, id=${project.getID()})}" style="display:inline;">
-                    <button type="submit">All employees for task</button>
+                <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${entry.key.getID()}, id=${entry.key.getID()})}" style="display:inline;">
+                    <button type="submit" class="employees">All employees for task</button>
                 </form>
             </td>
         </tr>

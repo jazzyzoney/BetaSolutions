@@ -125,16 +125,16 @@ button {
     font-size: 1em;
 }
 
-.right-corner {
-    position: absolute;
-    top: 170px; /* Adjust the top position as needed */
-    right: 600px; /* Adjust the right position as needed */
-}
-
 .left-corner {
     position: absolute;
     top: 200px; /* Adjust the top position as needed */
-    left: 400px; /* Adjust the left position as needed */
+    left: 650px;
+}
+
+.right-corner {
+    position: absolute;
+    top: 170px; /* Adjust the top position as needed */
+    right: 500px; /* Adjust the left position as needed */
     padding: 15px; /* Add padding inside the box */
     border: 2px solid black; /* Add a border around the box */
     border-radius: 10px; /* Rounded corners */

@@ -36,9 +36,9 @@ public class SubProjectService {
         return subProjectRepository.deleteSubProject(subProjectID);
     }
 
-    public void updateSubProjectTotalHours(int subProjectID, int taskTotalHours){
+    public void updateSubProjectTotalHours(int subProjectID){
         SubProject subProject = subProjectRepository.readSubProject(subProjectID); //read subproject.
-        int totalHours = subProjectRepository.getTotalHoursForSubProject(subProject, taskTotalHours); //get totalHours.
+        int totalHours = subProjectRepository.getTotalHoursForSubProject(subProject); //get totalHours.
 
         subProject.setHours(totalHours);//total hours.
         calculateDeadline(subProject);//update on object.

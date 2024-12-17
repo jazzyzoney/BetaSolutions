@@ -104,7 +104,7 @@ public class TaskService {
         taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
 
         if (task.getSubProjectID() > 0) {
-           subProjectService.updateSubProjectTotalHours(task.getSubProjectID(), 0);//task.getTotalHours());
+           subProjectService.updateSubProjectTotalHours(task.getSubProjectID());//task.getTotalHours());
         }else{
            projectService.updateProjectTotalHours(task.getProjectID());
         }

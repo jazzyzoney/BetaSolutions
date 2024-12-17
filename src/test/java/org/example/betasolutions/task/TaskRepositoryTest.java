@@ -29,7 +29,6 @@ class TaskRepositoryTest {
     TaskRepository taskRepository;
 
     @Autowired
-
     private ConnectionManager connectionManager;
 
     Connection conn;
@@ -48,17 +47,17 @@ class TaskRepositoryTest {
             e.printStackTrace();
         }
     }
-
+/*
     @Test
-    void updateTaskHours() {
+    void updateTaskTotalHours() {
         //taskRepository.updateTaskHours(1, 4);
 
     }
 
     @Test
-    void updateTaskDays() {
+    void updateTaskTotalDays() {
     }
-
+*/
     @Test
     void addTaskForProject() {
     }
@@ -130,5 +129,19 @@ class TaskRepositoryTest {
         int taskDeleted = taskRepository.deleteTask(1);
         assertTrue(true);
     }
+
+    @Test
+    void getTotalHoursForTask(){
+        Task task = taskRepository.readTask(1);
+        int totalHours = taskRepository.getTotalHoursForTask(task);
+        int expectedHours = 70;
+        assertEquals(expectedHours, totalHours);
+    }
+
+    @Test
+    void updateTotalHoursForTask(){
+        assertTrue(taskRepository.updateTotalHoursForTask(1, 100));
+    }
+    
 
 }

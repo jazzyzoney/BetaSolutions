@@ -82,4 +82,18 @@ class SubProjectRepositoryTest {
     void deleteSubProject() {
         assertTrue (subProjectRepository.deleteSubProject(1));
     }
+
+    @Test
+    void updateSubProjectTotalHours(){
+       SubProject subProject = subProjectRepository.readSubProject(1);
+        assertTrue(subProjectRepository.updateSubProjectTotalHours(subProject, 100));
+    }
+
+    @Test
+    void getTotalHoursForSubProject(){
+        SubProject subProject = subProjectRepository.readSubProject(1);
+        int totalHours = subProjectRepository.getTotalHoursForSubProject(subProject);
+        int expectedHours = 100;
+        assertEquals(expectedHours, totalHours);
+    }
 }

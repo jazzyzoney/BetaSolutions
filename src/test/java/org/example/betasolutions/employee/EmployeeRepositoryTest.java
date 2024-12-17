@@ -51,7 +51,7 @@ class EmployeeRepositoryTest {
     @Test
     void createNewEmployee() {
         int actual = employeeRepository.createNewEmployee(new Employee(1, "John Doe", "Office", "Proficient", "1000"));
-        boolean expected = true;
+        int expected = 6;
         assertEquals(expected, actual);
     }
 

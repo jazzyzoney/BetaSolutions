@@ -28,7 +28,7 @@ public class EmployeeController {
         return "newEmployee";
     }
 
-    @PostMapping("/employee/new/post")
+    @PostMapping("/employee/new")
     public String createNewEmployeePost(Model model, @ModelAttribute Employee employee) { //henter model fra getmapping overfor
         employeeService.createNewEmployee(employee);
         model.addAttribute("employee", employee);
@@ -50,7 +50,7 @@ public class EmployeeController {
         List<Employee> employees = employeeService.getAllEmployeesForProject(id);
         System.out.println(employees.size());
         model.addAttribute("allEmployees", employees);
-        return "allEmployeesOnProject";
+        return "allEmployees";
     }
     //read all employees for task
     @GetMapping("/project/{id}/task/{taskID}/employees")
@@ -58,14 +58,14 @@ public class EmployeeController {
         List<Employee> employees = employeeService.getAllEmployeesForTask(id, taskID);
         model.addAttribute("allEmployees", employees);
         model.addAttribute("taskID", taskID);
-        return "allEmployeesOnTask";
+        return "allEmployees";
     }
     //read all employees for subtask
     @GetMapping("/project/{id}/task/{taskID}/subtask/{subTaskID}/employees")
     public String getAllEmployeesForSubTask(@PathVariable int id,@PathVariable int taskID, @PathVariable int subTaskID, Model model) {
         List<Employee> employees = employeeService.getAllEmployeesForSubTask(id, taskID, subTaskID);
         model.addAttribute("allEmployees", employees);
-        return "allEmployeesOnSubTask";
+        return "allEmployees";
     }
 
     //read not assigned employees for project
@@ -74,21 +74,21 @@ public class EmployeeController {
         List<Employee> employees = employeeService.getAllEmployeesNotOnProject(id);
         System.out.println(employees.size());
         model.addAttribute("allEmployees", employees);
-        return "allEmployeesNotOnProject";
+        return "allEmployees";
     }
     //read all employees not assigned to task on a project
     @GetMapping("/project/{id}/task/{taskID}/employeesNotAssignedForTask") //get employees NOT on the specific task
     public String getAllemployeesNotAssingedToTaskForProject(@PathVariable int id, Model model,@PathVariable int taskID) {
         List<Employee> employees = employeeService.getAllemployeesNotAssingedToTaskForProject(id,taskID);
         model.addAttribute("allEmployees", employees);
-        return "allEmployeesNotOnTask";
+        return "allEmployees";
     }
     //read all employees not assigned to subtask on a project
     @GetMapping("/project/{id}/task/{taskID}/subtask/{subTaskID}/employeesNotAssignedForSubTask") //get employees NOT on the specific subtask
     public String getAllEmployeesNotOnSubtaskForProject(@PathVariable int id, Model model,@PathVariable int taskID, @PathVariable int subTaskID) {
         List<Employee> employees = employeeService.getAllEmployeesNotOnSubtaskForProject(taskID);
         model.addAttribute("allEmployees", employees);
-        return "allEmployeesNotOnSubTask";
+        return "allEmployees";
     }
 
     //add employee to project

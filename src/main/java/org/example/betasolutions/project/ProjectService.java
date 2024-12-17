@@ -34,6 +34,8 @@ public class ProjectService {
         project.setTotalHours(totalHours); //update object.
         projectRepository.updateTotalHoursForProject(projectID, totalHours); //update database.
     }
-
-
+    
+    public void deleteProject(int project_id){
+        projectRepository.deleteProject(project_id);
+    }
 }

@@ -92,6 +92,9 @@ public class Project implements ModelInterface {
     public double getTotalPrice() {
         return projectTotalPrice;
     }
+    public void setDeadline(Date projectDeadline) {
+        this.projectDeadline = projectDeadline;
+    }
 
     public Date getDeadline() {
         return projectDeadline;

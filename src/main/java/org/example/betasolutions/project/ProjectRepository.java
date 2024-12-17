@@ -133,7 +133,11 @@ public class ProjectRepository extends PSSTSuperclass {
         return totalHours;
     }
 
-    public boolean updateTotalHoursForProject(int projectID, int newTotalHours){
+    public boolean updateTotalHoursForProject(int projectID, int newTotalHours) {
         return super.updateObjectInt("project", "project_total_hours", projectID, newTotalHours);
+    }
+
+    public boolean deleteProject(int projectID) {
+        return super.deleteObjectFromTable("project", "project", projectID);
     }
 }

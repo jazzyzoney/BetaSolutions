@@ -1,7 +1,7 @@
 package org.example.betasolutions.subProject;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.Assignment;
+import org.example.betasolutions.AssignmentRepository;
 import org.example.betasolutions.task.Task;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SubProjectRepository extends Assignment {
+public class SubProjectRepository extends AssignmentRepository {
 
     public SubProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);

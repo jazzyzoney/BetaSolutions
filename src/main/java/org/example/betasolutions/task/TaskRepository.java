@@ -2,7 +2,7 @@ package org.example.betasolutions.task;
 import org.example.betasolutions.ConnectionManager;
 
 import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.Assignment;
+import org.example.betasolutions.AssignmentRepository;
 import org.example.betasolutions.subTask.SubTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TaskRepository extends Assignment {
+public class TaskRepository extends AssignmentRepository {
 
     @Autowired
     public TaskRepository(ConnectionManager connectionManager) {

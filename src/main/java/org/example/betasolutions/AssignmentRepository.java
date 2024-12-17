@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Assignment {
+public class AssignmentRepository {
     protected ConnectionManager connectionManager;
     public Connection conn;
 
-    public Assignment(ConnectionManager connectionManager) {
+    public AssignmentRepository(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
         this.conn = connectionManager.getConnection();
     }

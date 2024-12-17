@@ -1,7 +1,7 @@
 package org.example.betasolutions.subTask;
 
 import org.example.betasolutions.ConnectionManager;
-import org.example.betasolutions.Assignment;
+import org.example.betasolutions.AssignmentRepository;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SubTaskRepository extends Assignment {
+public class SubTaskRepository extends AssignmentRepository {
 
     public SubTaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);

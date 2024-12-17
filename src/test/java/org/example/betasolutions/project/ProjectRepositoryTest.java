@@ -53,10 +53,6 @@ class ProjectRepositoryTest{
     }
 
     @Test
-    void contextLoads() {
-    }
-
-    @Test
     void testInsertObjectIntoTable() {
 
         //new project
@@ -80,28 +76,13 @@ class ProjectRepositoryTest{
     }
 
     @Test
-    void testReadAllTasks() {
+    void testReadAllProjects() {
         List<Project> projectList = projectRepository.readAllProjects();
         assertNotNull(projectList);
         assertEquals(2, projectList.size());
         assertNotNull(projectList.get(0).getProjectOwner());
         assertNotNull(projectList.get(1).getProjectOwner());
 
-
-
-    }
-
-    @Test
-    void testReadAllTasksForEmployee() {
-
-    }
-
-    @Test
-    void testDeleteObjectFromTable() {
-    }
-
-    @Test
-    void testUpdateObjectAtrribute() {
     }
 
     //projectRepository

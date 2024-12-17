@@ -72,6 +72,7 @@ class EmployeeRepositoryTest {
         assertEquals(expected, actual);
         String actualName = employeeRepository.getAllEmployeesForProject(1).get(0).getEmployeeName();
         String expectedName = "Employee 1";
+        assertEquals(expectedName, actualName);
     }
 
     @Test
@@ -81,6 +82,8 @@ class EmployeeRepositoryTest {
         assertEquals(expected, actual);
         String actualName = employeeRepository.getAllEmployeesNotOnProject(1).get(0).getEmployeeName();
         String expectedName = "Employee 2";
+        assertEquals(expectedName, actualName);
+
     }
     @Test
     void getAllEmployeesForTask() {

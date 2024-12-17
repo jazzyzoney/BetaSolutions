@@ -35,7 +35,7 @@ public class TaskService {
         calculateDeadline(task); //set variables temporarily.
         taskRepository.addTaskToProject(task);
 
-        updateTaskTotalHours(task); //update hours first.
+        updateTaskTotalHours(task); //update hours.
 
     }
 

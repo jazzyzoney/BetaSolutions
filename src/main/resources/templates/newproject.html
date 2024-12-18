@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New SubTask</title>
+    <link th:href="@{/style.css}" rel="stylesheet">
+</head>
+<body>
+<h1>RETURN OF THE PROJECT</h1>
+
+<!-- Corrected the th:action and field bindings -->
+<form th:action="@{/project/new}" method="post" th:object="${project}">
+    <label class="large-text">SubTask Name:
+        <input type="text" id="Name" name="Name" th:field="${project.name}" required>
+    </label>
+    <br>
+    <label class="large-text">Project Owner:
+        <input type="text" id="projectOwner" name="projectOwner" th:field="${project.projectOwner}" required>
+    </label>
+
+    <!-- Hidden field for Hours, automatically set to 0 -->
+    <input type="hidden" id="Hours" name="Hours" th:value="0">
+
+    <!-- Hidden field for TotalPrice, automatically set to 0 -->
+    <input type="hidden" id="TotalPrice" name="TotalPrice" th:value="0">
+
+    <br>
+    <label class="large-text">Start Date:
+        <input type="date" id="StartDate" name="StartDate" th:field="${project.startDate}" required>
+    </label>
+    <br>
+    <label class="large-text">End Date:
+        <input type="date" id="deadline" name="deadline" th:field="${project.deadline}" required>
+    </label>
+    <br>
+
+    <button type="submit">Create Project</button>
+</form>
+</body>
+</html>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +18,27 @@ public class SubTaskRepository extends PSSTSuperclass {
     }
 
     public void addSubTaskToTask(SubTask subTask){
-        String sql = "insert into sub_task (sub_task_name, sub_task_total_hours,sub_task_total_days,sub_task_total_price,sub_task_deadline,sub_task_start_date,task_id) values(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO sub_task " +
+                "(sub_task_name, sub_task_total_hours,sub_task_total_days,sub_task_total_price,sub_task_deadline,sub_task_start_date,task_id) " +
+                "VALUES(?,?,?,?,?,?,?)";
+
         PreparedStatement preparedStatement = super.insertAssignmentIntoTable(subTask,sql);
+
         try{
-            preparedStatement.setInt(7,subTask.getTaskID());
+            preparedStatement.setInt(7,subTask.getTaskID()); //set task id for subtask.
             preparedStatement.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+
+
     public List<SubTask> readAllSubTasks(int ProjectID, int TaskID){
         ArrayList<SubTask> subTaskList = new ArrayList<>();
-        String SQL ="SELECT *  FROM sub_task JOIN task ON sub_task.task_id = task.task_id WHERE task.project_id = ? and task.task_id = ?";
+        String SQL ="SELECT *  FROM sub_task " +
+                "JOIN task ON sub_task.task_id = task.task_id " +
+                "WHERE task.project_id = ? AND task.task_id = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(SQL);
             preparedStatement.setInt(1,ProjectID);
@@ -46,38 +55,32 @@ public class SubTaskRepository extends PSSTSuperclass {
                 subTask.setDeadline(resultSet.getDate("sub_task_deadline"));
                 subTask.setTaskID(resultSet.getInt("task_id"));
                 subTaskList.add(subTask);
-            }
-        }catch (Exception e){
+            }//end of while.
+        }catch (SQLException e){
             e.printStackTrace();
         }
+
         return subTaskList;
+    }
+
+    public boolean updateSubTaskTotalHours(SubTask subTask) {
+        return updateObjectInt("sub_task", "sub_task_total_hours", subTask.getID(), subTask.getHours());
+    }
+
+    public boolean updateSubTaskPrice(SubTask subTask, double price){
+        return super.updateDouble("sub_task", "sub_task_total_price", subTask.getID(), price);
     }
 
     public void deleteSubTask(int subTaskID) {
         try {
-        conn.setAutoCommit(false);
-        super.deleteAllWhere("sub_task", "sub_task_id = " + subTaskID);
-        super.deleteAllWhere("project_employee_task_subTask", "sub_task_id = " + subTaskID);
-        conn.commit();
-        conn.setAutoCommit(true);
+            conn.setAutoCommit(false);
+            super.deleteAllWhere("sub_task", "sub_task_id = " + subTaskID);
+            super.deleteAllWhere("project_employee_task_subTask", "sub_task_id = " + subTaskID);
+            conn.commit();
+            conn.setAutoCommit(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public double calculateTotalPriceForTasks(SubTask subTask) {
-        double totalPrice = 0;
-        totalPrice += subTask.getTotalPrice();
-        totalPrice += super.CalculatePrice(subTask.getTaskID(), "task");
-
-        String SQL = "update task set task_total_price = ? where task_id = ?";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(SQL)) {
-            preparedStatement.setDouble(1, totalPrice);
-            preparedStatement.setInt(2, subTask.getTaskID());
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalPrice;
-    }
 }

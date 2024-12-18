@@ -15,7 +15,7 @@ public class EmployeeService {
     }
 
     //create
-    public boolean createNewEmployee(Employee employee){
+    public int createNewEmployee(Employee employee){
         return employeeRepository.createNewEmployee(employee);
     }
 
@@ -30,6 +30,19 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployeesNotOnProject(int projectID){
         return employeeRepository.getAllEmployeesNotOnProject(projectID);
+    }
+    public List<Employee> getAllEmployeesForTask(int projectID, int taskID){
+        return employeeRepository.getAllEmployeesForTask(projectID, taskID);
+    }
+    public List<Employee> getAllemployeesNotAssingedToTaskForProject(int projectID, int taskID){
+        return employeeRepository.getAllemployeesNotAssingedToTaskForProject(projectID, taskID);
+    }
+
+    public List<Employee> getAllEmployeesForSubTask(int projectID, int taskID, int subTaskID){
+        return employeeRepository.getAllEmployeesForSubTask(projectID, taskID, subTaskID);
+    }
+    public List<Employee> getAllEmployeesNotOnSubtaskForProject(int TaskID){
+        return employeeRepository.getAllEmployeesNotOnSubtaskForProject(TaskID);
     }
 
     //add employee to project
@@ -55,5 +68,8 @@ public class EmployeeService {
     //delete
     public void deleteEmployee(int employeeID){
         employeeRepository.deleteEmployee(employeeID);
+    }
+    public List<String> GetAllEmployeeOffices(){
+        return employeeRepository.GetAllEmployeeOffices();
     }
 }

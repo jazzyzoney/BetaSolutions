@@ -1,25 +1,35 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
     <link th:href="@{/style.css}" rel="stylesheet">
 </head>
 <body>
-    <p>login page </p>
-    <p>
-        log ind funktion. </br>
-        (ny bruger funktion)</br>
+<header>
+    <!-- Optional header content -->
+</header>
+<h1>Welcome</h1>
+<form th:action="@{/login}" method="post" th:object="${login}">
+    <div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" th:value="${login.email}" />
+        </div>
+        <div>
+            <label class="large-text">Password:
+                <input type="password" name="password" th:value="${login.password}" required>
+            </label>
+            <br>
+            <button type="submit">login</button>
+        </div>
+    </div>
+</form>
 
-
-    </p>
-
-    <p>(homepage)</p>
-    <form class="logo" method="get" th:action="@{/home}" style="display:inline;">
-        <button type="submit">login</button>
-    </form>
-
-
+<!-- Button for new login -->
+<div>
+    <p>Don't have an account?</p>
+    <a th:href="@{/login/new}" class="button">Create New Login</a>
+</div>
 </body>
 </html>

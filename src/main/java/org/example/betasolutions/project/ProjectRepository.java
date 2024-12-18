@@ -3,6 +3,8 @@ package org.example.betasolutions.project;
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
 import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.subProject.SubProject;
+import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,7 @@ public class ProjectRepository extends PSSTSuperclass {
     public ProjectRepository(ConnectionManager connectionManager) {
         super(connectionManager);
     }
+
     //Create method
     // Insert project into project table with the projectOwner.which is still completely nuts to me.
     public int insertAssignmentIntoTable(Project project) {
@@ -49,11 +52,9 @@ public class ProjectRepository extends PSSTSuperclass {
             //typecasting assignmentObject as Project:
             if (assignmentObject instanceof Project) {
                 Project project = (Project) assignmentObject;
+
                 //Getting projectowner from projectTAble using projectID.
                 String projectOwner = super.getTableStringByInt("project", "project_Owner", "project_ID", project.getID());
-
-                //setting total price for project.
-                project.setTotalPrice(calculateTotalPriceForProject(project.getID()));
 
                 //adding projectowner to projectObject.
                 project.setProjectOwner(projectOwner);
@@ -94,37 +95,49 @@ public class ProjectRepository extends PSSTSuperclass {
         return false;
     }
 
-    //Calculate total price for subtask. he is a bit special since he is not a direct child of project but so he gets his very own method.
-    public double calculateTotalPriceForSubtask(int projectID) {
-        double totalPrice = 0;
-        String sql = "SELECT sub_task.sub_task_total_price FROM sub_task INNER JOIN task ON sub_task.task_id = task.task_id WHERE task.project_id = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, projectID);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                totalPrice += resultSet.getDouble("sub_task_Total_Price");
+    public int getTotalHoursForProject(Project project){
+        int totalHours = 0;//project.getHours(); //get project hours.
+
+        //get all subprojects for project.
+        List<ModelInterface> allSubProjectsAndTasks = super.readAllAssignmentsBelongingToProject("sub_project", "sub_project", SubProject::new, project.getID());
+
+        //get all tasks for project.
+        List <ModelInterface> allTasks = super.readAllAssignmentsBelongingToProject("task", "task", Task::new, project.getID());
+
+        for (ModelInterface modelInterface : allTasks){
+            int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", modelInterface.getID());
+            int taskTotalHours = super.getTableIntByInt("task", "task_hours", "task_id", modelInterface.getID());
+            ((Task) modelInterface).setHours(taskTotalHours);
+            if (subProjectID <= 0){
+                allSubProjectsAndTasks.add(modelInterface);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return totalPrice;
+
+        //add task and subproject hours to total:
+        for (ModelInterface modelInterface : allSubProjectsAndTasks){
+
+            /*
+            //if task in subproject, skip:
+            if (modelInterface instanceof Task){
+                Task task = (Task) modelInterface;
+                if(task.getSubProjectID() < 0){
+                    continue;
+                }
+            } //'if (modelinterface instanceof Task)'*/
+
+
+            totalHours += modelInterface.getHours();
+
+        }//end of all modelInterfaces.
+
+        return totalHours;
     }
 
-    public double calculateTotalPriceForProject(int projectID) {
-        double totalPrice = 0;
-        totalPrice += super.CalculatePrice(projectID, "sub_project");
-        totalPrice += super.CalculatePrice(projectID, "task");
-        totalPrice += calculateTotalPriceForSubtask(projectID);
-                String sql = "UPDATE project SET project_total_price = ? WHERE project_id = ?";
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setDouble(1, totalPrice);
-            preparedStatement.setInt(2, projectID);
-            preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalPrice;
+    public boolean updateTotalHoursForProject(int projectID, int newTotalHours) {
+        return super.updateObjectInt("project", "project_total_hours", projectID, newTotalHours);
+    }
+
+    public boolean deleteProject(int projectID) {
+        return super.deleteObjectFromTable("project", "project", projectID);
     }
 }

@@ -1,10 +1,10 @@
 package org.example.betasolutions;
 
-public class budgetManager {
+public class BudgetManager {
 
 
-    int calculateCost(int hours){
-        int pricePerHour = 150;
+    public int calculateCost(int hours){
+        int pricePerHour = 200;
         int cost = hours * pricePerHour;
         return cost;
     }

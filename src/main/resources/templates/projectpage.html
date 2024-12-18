@@ -24,9 +24,11 @@
 <h2>Tasks for just the project:</h2>
 <ul>
     <li th:each="task : ${tasksWithoutSubProject}">
+
         Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span>
         - Deadline: <span th:text="${task.getDeadline()}"></span> - StartDate: <span th:text="${task.getStartDate()}"></span>
         - TotalPrice: <span th:text="${task.getTotalPrice()}"></span> - Days: <span th:text="${task.getDays()}"></span>
+
 
         <!-- Display subtask count -->
         <span th:if="${subTaskCount[task] > 0}">
@@ -45,6 +47,9 @@
         <form th:action="@{/project/task/delete(taskID=${task.getID()}, projectID=${project.getID()})}" method="post"
               onsubmit="return confirm('Are you sure you want to delete this task?');">
             <button type="submit" class="delete-button">Delete Task</button>
+        </form>
+        <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${task.getID()}, id=${project.getID()})}" style="display:inline;">
+            <button type="submit">All employees for task</button>
         </form>
     </li>
 </ul>
@@ -96,6 +101,12 @@
                       onsubmit="return confirm('Are you sure you want to delete this task?');">
                     <button type="submit" class="delete-button">Delete Task</button>
                 </form>
+
+                <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${task.getID()}, id=${project.getID()})}" style="display:inline;">
+                    <button type="submit">All employees for task</button>
+                </form>
+
+
             </li>
         </ul>
 

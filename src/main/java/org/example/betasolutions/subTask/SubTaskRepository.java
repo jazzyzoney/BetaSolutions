@@ -67,6 +67,10 @@ public class SubTaskRepository extends PSSTSuperclass {
         return updateObjectInt("sub_task", "sub_task_total_hours", subTask.getID(), subTask.getHours());
     }
 
+    public boolean updateSubTaskPrice(SubTask subTask, double price){
+        return super.updateDouble("sub_task", "sub_task_total_price", subTask.getID(), price);
+    }
+
     public void deleteSubTask(int subTaskID) {
         try {
             conn.setAutoCommit(false);

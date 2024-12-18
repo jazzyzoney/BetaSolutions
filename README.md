@@ -53,3 +53,20 @@ Sit back and watch the magic unfold. (Or chaos… we’re not making any promise
 ## :mailbox_with_mail: Contact
 
 We’re currently preoccupied with planning world domination, so please refrain from reaching out. If it’s an absolute emergency (like, the sky is falling), just send good vibes our way. We’ll feel it. Probably.
+
+## 🍿 Credits
+
+- **Chief Chaos Architect & Overlord of All Bugs:** [jazzyzoney](https://github.com/jazzyzoney)  
+  *Inventor of problems, solver of none.*
+
+- **Pixel Wizardry Apprentice & Sorcerer of Scaling:** [signelystrup](https://github.com/signelystrup)  
+  *Master of pixel dust and design spells. Needs more coffee.*
+
+- **Vice President of "Undead Diagrams" & Conqueror of the Mysterious Flowcharts:** [carobraaa](https://github.com/carobraaa)  
+  *Can resurrect diagrams from the dead, but still can't make them less confusing.*
+
+- **Supreme Fixing Goblin & Code Whisperer:** [MH020](https://github.com/MH020)  
+  *Fixes bugs with the precision of a goblin armed with a magnifying glass.*
+
+ - **Robot Overlord of Bot Repair & Digital Mechanic:** [qodana-bot](https://github.com/qodana-bot)
+  *When bots break, this mechanical marvel swoops in to weld their wires and debug their souls.*

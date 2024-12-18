@@ -48,7 +48,7 @@ public class PSSTSuperclass {
     //we need to use this because we are reading from a table and we need to create new objects of the type we are reading from the table.
     public List<ModelInterface> readAllAssignments(String tableName, String tablePrefix, FactoryInterface factory){//}, String sqlWhereClause){//}, int projectID) {
         List<ModelInterface> allObjects = new ArrayList<>();
-        String sql = "SELECT * FROM " + tableName ;//+ " WHERE " + sqlWhereClause;
+        String sql = "SELECT * FROM " + tableName ;
 
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -309,12 +309,12 @@ public class PSSTSuperclass {
     //update method
     //put og patch
     //this one is for updating an int value in a table with a specific ID.
-    public boolean updateObjectInt(String tableName, String attributeName, int functionID, int newValue) {
+    public boolean updateObjectInt(String tableName, String attributeName, int assignmentID, int newValue) {
         String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, newValue);
-            preparedStatement.setInt(2, functionID);
+            preparedStatement.setInt(2, assignmentID);
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {

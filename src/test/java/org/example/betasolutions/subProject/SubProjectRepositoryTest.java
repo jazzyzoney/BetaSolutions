@@ -1,6 +1,7 @@
 package org.example.betasolutions.subProject;
 
 import org.example.betasolutions.ConnectionManager;
+import org.example.betasolutions.TimeManager;
 import org.example.betasolutions.project.Project;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,9 @@ class SubProjectRepositoryTest {
     @Test
     void insertSubProject() {
         SubProject subproject = new SubProject("sub 1",200,500,Date.valueOf("1996-06-06"),1);
+        TimeManager timeManager = new TimeManager();
+        //calculate deadline for subproject. Deadline = startdate + days.
+        subproject.setDeadline(timeManager.calculateEndDate(subproject.getStartDate(), subproject.getDays()));
         System.out.println(subproject.getDeadline());
         boolean subprojectInserted = subProjectRepository.insertSubProject(subproject);
 
@@ -77,5 +81,19 @@ class SubProjectRepositoryTest {
     @Test
     void deleteSubProject() {
         assertTrue (subProjectRepository.deleteSubProject(1));
+    }
+
+    @Test
+    void updateSubProjectTotalHours(){
+       SubProject subProject = subProjectRepository.readSubProject(1);
+        assertTrue(subProjectRepository.updateSubProjectTotalHours(subProject, 100));
+    }
+
+    @Test
+    void getTotalHoursForSubProject(){
+        SubProject subProject = subProjectRepository.readSubProject(1);
+        int totalHours = subProjectRepository.getTotalHoursForSubProject(subProject);
+        int expectedHours = 50;
+        assertEquals(expectedHours, totalHours);
     }
 }

@@ -2,7 +2,12 @@ package org.example.betasolutions.task;
 
 import org.example.betasolutions.TimeManager;
 
+import org.example.betasolutions.project.ProjectService;
+import org.example.betasolutions.subProject.SubProjectRepository;
+import org.example.betasolutions.subProject.SubProjectService;
+
 import org.example.betasolutions.subTask.SubTask;
+
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -11,24 +16,38 @@ import java.util.List;
 @Service
 public class TaskService {
     private TaskRepository taskRepository;
+
+    private SubProjectService subProjectService;
+    private final ProjectService projectService;
     private TimeManager timeManager;
 
-    public TaskService(TaskRepository taskRepository){
+    public TaskService(TaskRepository taskRepository, SubProjectService subProjectService, ProjectService projectService){
         this.taskRepository = taskRepository;
+        this.subProjectService = subProjectService;
+
         timeManager = new TimeManager();
+        this.projectService = projectService;
     }
 
     public void createTaskForProject(Task task){
-        calculateDeadline(task);
-        taskRepository.addTaskToProject(task);
+        //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
 
+        calculateDeadline(task); //set variables temporarily.
+        taskRepository.addTaskToProject(task);
+        updateTaskTotalHours(task); //update hours.
     }
 
     public void createTaskForSubProject(Task task){
-        calculateDeadline(task);
+        //task.setTotalHours(getTotalHoursForTask(task));//set totalHours, totalDays, and deadline.
+
+        calculateDeadline(task); //set variables temporarily.
         taskRepository.addTaskToSubProject(task);
+        updateTaskTotalHours(task);
     }
 
+    public int getTotalHoursForTask(Task task){
+        return taskRepository.getTotalHoursForTask(task);
+    }
 
     public List<Task> getAllTasksBelongingToProject(int projectID){
         return taskRepository.readAllTasksBelongingToProject(projectID);
@@ -57,14 +76,41 @@ public class TaskService {
         //System.out.println("taskservice. start date: " + task.getStartDate());
 
         Date deadline = timeManager.calculateEndDate(task.getStartDate(), days); //calculate new expected end date for task, using startdate and days.
-        taskRepository.updateTaskHours(taskID, hours);
-        taskRepository.updateTaskDays(taskID, days);
+
+
+       // taskRepository.updateTaskHours(taskID, hours);
+        //taskRepository.updateTaskDays(taskID, days);
         taskRepository.updateTaskDeadline(taskID, deadline);
 
     }
+
     public void calculateDeadline(Task task){
-        task.setDays(timeManager.calculateDays(task.getHours()));
-        task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays()));
+       // task.setTotalHours(taskRepository.getTotalHoursForTask(task));//set total hours
+        task.setTotalDays(timeManager.calculateDays(task.getTotalHours())); //set total days
+
+        task.setDays(timeManager.calculateDays(task.getHours())); //set days
+        task.setDeadline(timeManager.calculateEndDate(task.getStartDate(), task.getDays())); //set deadline
     }
 
+    public void updateTaskTotalHours(Task task){
+        //int totalHours = task.getTotalHours() ; //getTotalHours for task.
+        int totalHours = taskRepository.getTotalHoursForTask(task);//set total hours
+        task.setTotalHours(totalHours);//set total hours on task.
+
+        calculateDeadline(task); //calculate days and deadline.
+
+        taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
+
+        if (task.getSubProjectID() > 0) {
+           subProjectService.updateSubProjectTotalHours(task.getSubProjectID());//task.getTotalHours());
+        }else{
+           projectService.updateProjectTotalHours(task.getProjectID());
+        }
+    }
+
+
+    public void updateTaskTotalHours(int taskID){
+        Task task = taskRepository.readTask(taskID); //read task.
+        updateTaskTotalHours(task);
+    }
 }

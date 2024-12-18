@@ -1,7 +1,6 @@
-package org.example.betasolutions.subTask;
+package org.example.betasolutions.login;
 
 import org.example.betasolutions.ConnectionManager;
-import org.example.betasolutions.task.TaskRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,11 +19,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
+class LoginRepositoryTest {
 
-class SubTaskRepositoryTest {
 
     @Autowired
-    SubTaskRepository subTaskRepository;
+    LoginRepository loginRepository;
 
     @Autowired
     private ConnectionManager connectionManager;
@@ -37,6 +35,7 @@ class SubTaskRepositoryTest {
         conn = connectionManager.getConnection();
     }
 
+
     @AfterEach
     void tearDown(){
         try {
@@ -47,24 +46,15 @@ class SubTaskRepositoryTest {
     }
 
     @Test
-    void addSubTaskToTask() {
+    void createLogin() {
+        assertTrue(true);
+
     }
 
     @Test
-    void readAllSubTasks() {
+    void verifyLogin() {
+        Login Login = new Login("password1", "employee1@example.com", 1);
+        boolean expected = loginRepository.verifyLogin(Login);
+        assertTrue(expected);
     }
-
-    @Test
-    void deleteSubTask() {
-    }
-
-    @Test
-    void updateSubTaskTotalHours(){
-        SubTask subTask = new SubTask("test", 4, 10.03, Date.valueOf("2024-12-17"), 1);
-        assertTrue(subTaskRepository.updateSubTaskTotalHours(subTask));
-        //???
-
-    }
-
-
 }

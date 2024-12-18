@@ -61,14 +61,14 @@ table {
     margin: 0 auto;
     background-color: white;
     font-size: 1em;
-    padding: 10em;
+    padding: 10px;
     width: 100%;
 }
 
 td, th {
-    border: 1em solid black;
-    width: 150em;
-    padding: 10em;
+    border: 1px solid black;
+    width: 150px;
+    padding: 10px;
 }
 
 html, body {
@@ -82,7 +82,7 @@ html, body {
 
 body {
     justify-content: flex-start;
-    padding-top: 150em; /* Adjust the padding as needed */
+    padding-top: 150px; /* Adjust the padding as needed */
     background-color: #e2e5e8; /* Adjust the background color as needed */
 }
 
@@ -120,54 +120,44 @@ header .logo .solutions{
 button {
     background-color: var(--pinkish);
     color: black;
-    border: 1em solid black;
-    padding: 5em 10em;
-    border-radius: 4em;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
-    margin: 10em;
+    margin: 10px;
     font-size: 1em;
 }
 
 .delete-button {
     background-color: var(--gray);
     color: black;
-    border: 1em solid black;
-    padding: 5em 10em;
-    border-radius: 4em;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 4px;
     cursor: pointer;
-    margin: 10em;
+    margin: 10px;
     font-size: 1em;
 }
 
 .left-corner {
     position: absolute;
-    top: 200em; /* Adjust the top position as needed */
-    left: 650em;
+    top: 200px; /* Adjust the top position as needed */
+    left: 650px;
 }
 
 .right-corner {
     position: absolute;
-    top: 170em; /* top position */
-    right: 500em; /* left position */
-    padding: 15em; /* padding inside the box */
-    border: 2em solid black; /* border around the box */
-    border-radius: 10em; /* rounded corners */
+    top: 170px; /* top position */
+    right: 500px; /* left position */
+    padding: 15px; /* padding inside the box */
+    border: 2px solid black; /* border around the box */
+    border-radius: 10px; /* rounded corners */
     background-color: white; /* background color of the box */
-    box-shadow: 0 4em 8em rgba(0, 0, 0, 0.1); /* subtle shadow ?? */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow ?? */
 }
 
 .left-corner-button {
     position: absolute;
-    top: 200em; /* Adjust the top position as needed */
-    left: 550em;
-}
-
-/* Vendor-specific fixes */
-button,
-input,
-select,
-textarea {
-    -webkit-appearance: none; /* Removes default styling for buttons/inputs on Safari */
-    -moz-appearance: none;
-    appearance: none;
+    top: 200px; /* Adjust the top position as needed */
+    left: 550px;
 }

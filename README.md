@@ -15,7 +15,8 @@ _Beta Solutions_ is a program designed to bring enlightenment, efficiency, or pe
 Before you embark on this journey, ensure you have the following:
 
 - **Code Editor:**
-  - IntelliJ IDEA (Version: 2024.3.1) or
+  - IntelliJ IDEA (Version: 2024.3.1)
+  OR
   - JGrasp (Version: 2.0.6_16).
 - **Programming Language:** Java 22 (because anything less wouldn't do justice to our brilliance).
 - **Database:**

@@ -1,6 +1,6 @@
 package org.example.betasolutions;
 
-public class budgetManager {
+public class BudgetManager {
 
 
     int calculateCost(int hours){

@@ -161,3 +161,42 @@ button {
     top: 200px; /* Adjust the top position as needed */
     left: 550px;
 }
+
+/* Vendor-specific fixes */
+button,
+input,
+select,
+textarea {
+    -webkit-appearance: none; /* Removes default styling for buttons/inputs on Safari */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .left-corner,
+    .right-corner {
+        width: 90%; /* Ensure corners are responsive */
+        left: auto;
+        right: auto;
+    }
+
+    table {
+        width: 100%; /* Keep tables within view */
+    }
+
+    button {
+        font-size: 0.9em; /* Adjust button size */
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stack header content */
+    }
+
+    button {
+        font-size: 0.8em;
+        padding: 5px;
+    }
+}

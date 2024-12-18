@@ -24,7 +24,11 @@
 <h2>Tasks for just the project:</h2>
 <ul>
     <li th:each="task : ${tasksWithoutSubProject}">
-        <span th:text="'Task: ' + ${task.name} + 'Total hours: '+ ${task.totalHours}"></span>
+
+        Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span>
+        - Deadline: <span th:text="${task.getDeadline()}"></span> - StartDate: <span th:text="${task.getStartDate()}"></span>
+        - TotalPrice: <span th:text="${task.getTotalPrice()}"></span> - Days: <span th:text="${task.getDays()}"></span>
+
 
         <!-- Display subtask count -->
         <span th:if="${subTaskCount[task] > 0}">
@@ -76,6 +80,8 @@
             <li th:if="${#lists.isEmpty(entry.value)}">No tasks for this subproject</li>
             <li th:each="task : ${entry.value}">
                 Task: <span th:text="${task.name}"></span> - Hours: <span th:text="${task.hours}"></span> - total price: <span th:text="${task.hours}"></span>
+                - Deadline: <span th:text="${task.getDeadline()}"></span> - StartDate: <span th:text="${task.getStartDate()}"></span>
+                - TotalPrice: <span th:text="${task.getTotalPrice()}"></span> - Days: <span th:text="${task.getDays()}"></span>
 
                 <!-- Display subtask count for tasks within subprojects -->
                 <span th:if="${subTaskCount[task] > 0}">

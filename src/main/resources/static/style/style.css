@@ -1,0 +1,163 @@
+:root {
+    --dark-blue: #6688BB; /* dark shade */
+    --medium-blue: #84a6ca; /* lighter shade */
+    --light-blue: #ACDF; /* lightest shade */
+
+    --pinkish: #ffc4da; /* pinkish */
+    --purple: #c19acb; /* purple-ish */
+    --gray: #d3d3d3; /* gray */
+}
+
+/* coloring project and the assignments */
+.project {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: #ff8fab; /* pink for underline */
+}
+
+.subproject {
+    background-color: var(--dark-blue);
+    color: black; /* text color for better readability */
+}
+
+.task {
+    background-color: var(--medium-blue);
+    color: black; /* Adjust text color for better readability */
+}
+
+.subtask {
+    background-color: var(--light-blue);
+    color: black; /* Adjust text color for better readability */
+}
+
+.subprojectunder {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: var(--dark-blue);
+}
+
+.taskunder {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: var(--medium-blue);
+}
+
+.subtaskunder {
+    color: black; /* Adjust text color for better readability */
+    text-decoration: underline;
+    text-decoration-color: var(--light-blue);
+}
+
+.employees {
+    background-color: var(--purple);
+    color: black; /* Adjust text color for better readability */
+    /* sort kant rundt om knapperne, underline tasks med farven, tabel headers breddere, projekt info i boks, lidt mørkere baggrund */
+}
+
+/* table */
+table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: white;
+    font-size: 1em;
+    padding: 10px;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid black;
+    width: 150px;
+    padding: 10px;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+body {
+    justify-content: flex-start;
+    padding-top: 150px; /* Adjust the padding as needed */
+    background-color: #e2e5e8; /* Adjust the background color as needed */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Sans-Serif;
+    text-decoration: none;
+    transition: 2s linear;
+}
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #fff;
+    padding: 2rem 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+/* color of the logo */
+header .logo .beta{
+    color:var(--dark-blue);
+}
+
+header .logo .solutions{
+    color: black;
+}
+
+/* for the buttons */
+button {
+    background-color: var(--pinkish);
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1em;
+}
+
+.delete-button {
+    background-color: var(--gray);
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1em;
+}
+
+.left-corner {
+    position: absolute;
+    top: 200px; /* Adjust the top position as needed */
+    left: 650px;
+}
+
+.right-corner {
+    position: absolute;
+    top: 170px; /* top position */
+    right: 500px; /* left position */
+    padding: 15px; /* padding inside the box */
+    border: 2px solid black; /* border around the box */
+    border-radius: 10px; /* rounded corners */
+    background-color: white; /* background color of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow ?? */
+}
+
+.left-corner-button {
+    position: absolute;
+    top: 200px; /* Adjust the top position as needed */
+    left: 550px;
+}

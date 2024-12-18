@@ -2,29 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New SubProject</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <title>Create New task for SubProject</title>
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Create New  TASK FOR SubProject</h1>
+<header>
+    <a th:href="@{/home}" class="logo">
+        <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+    </a>
+
+    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+        <button type="submit">Log out</button>
+    </form>
+</header>
+<h1>Create new task for subproject</h1>
+<button onclick="history.back()" class="left-corner-button">Back</button> <!-- go back to previous page -->
 
 <!-- new task for subproject -->
 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">
-    <label class="large-text">task Name:
+    <label class="large-text">Task name:
         <input type="text" id="projectName" name="projectName" th:field="${task.name}" required>
     </label>
     <br>
-    <label class="large-text">Total Hours:
+    <label class="large-text">Total hours:
         <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${task.hours}" required>
     </label>
     <br>
-    <label class="large-text">Total Price:
-        <input type="number" step="0.01" id="projectTotalPrice" name="projectTotalPrice" th:field="${task.totalPrice}" required>
-    </label>
-    <br>
-    <label class="large-text">Start Date:
+    <label class="large-text">Start date:
         <input type="date" id="StartDate" name="StartDate" th:field="${task.startDate}" required>
     </label>
     <br>
-    <button type="submit">Create SubProject</button>
+    <button type="submit">Create task</button>
 </form>

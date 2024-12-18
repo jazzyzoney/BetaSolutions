@@ -5,6 +5,7 @@
 
     --pinkish: #ffc4da; /* pinkish */
     --purple: #c19acb; /* purple-ish */
+    --gray: #d3d3d3; /* gray */
 }
 
 /* coloring project and the assignments */
@@ -61,7 +62,6 @@ table {
     background-color: white;
     font-size: 1em;
     padding: 10px;
-    border-radius: 10px; /* rounded corners but not working rn */
 }
 
 td, th {

@@ -2,35 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create New SubTask</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <title>Create New project</title>
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>RETURN OF THE PROJECT</h1>
+<header>
+    <a th:href="@{/home}" class="logo">
+        <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+    </a>
+
+    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+        <button type="submit">Log out</button>
+    </form>
+</header>
+<h1>Create a new project</h1>
+<button onclick="history.back()" class="left-corner-button">Back</button> <!-- go back to previous page -->
 
 <!-- Corrected the th:action and field bindings -->
 <form th:action="@{/project/new}" method="post" th:object="${project}">
-    <label class="large-text">SubTask Name:
+    <label class="large-text">Project name:
         <input type="text" id="Name" name="Name" th:field="${project.name}" required>
     </label>
     <br>
-    <label class="large-text">Project Owner:
+    <label class="large-text">Project owner:
         <input type="text" id="projectOwner" name="projectOwner" th:field="${project.projectOwner}" required>
-    </label>
-
-    <!-- Hidden field for Hours, automatically set to 0 -->
-    <input type="hidden" id="Hours" name="Hours" th:value="0">
-
-    <!-- Hidden field for TotalPrice, automatically set to 0 -->
-    <input type="hidden" id="TotalPrice" name="TotalPrice" th:value="0">
-
-    <br>
-    <label class="large-text">Start Date:
-        <input type="date" id="StartDate" name="StartDate" th:field="${project.startDate}" required>
-    </label>
-    <br>
-    <label class="large-text">End Date:
-        <input type="date" id="deadline" name="deadline" th:field="${project.deadline}" required>
     </label>
     <br>
 

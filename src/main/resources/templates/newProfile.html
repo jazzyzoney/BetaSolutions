@@ -6,6 +6,11 @@
     <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
+<header>
+    <a th:href="@{/home}" class="logo">
+        <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+    </a>
+</header>
 <p>Login page</p>
 <p>
     Log in function. </br>
@@ -45,7 +50,7 @@
         <input type="password" name="password" th:value="${login.password}" required>
     </label>
     <br>
-    <button type="submit">Create New User</button>
+    <button type="submit">Create new user</button>
 </form>
 </body>
 </html>

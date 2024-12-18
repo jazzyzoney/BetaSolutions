@@ -61,6 +61,7 @@ table {
     background-color: white;
     font-size: 1em;
     padding: 10px;
+    border-radius: 10px; /* rounded corners but not working rn */
 }
 
 td, th {
@@ -133,12 +134,18 @@ button {
 
 .right-corner {
     position: absolute;
-    top: 170px; /* Adjust the top position as needed */
-    right: 500px; /* Adjust the left position as needed */
-    padding: 15px; /* Add padding inside the box */
-    border: 2px solid black; /* Add a border around the box */
-    border-radius: 10px; /* Rounded corners */
-    background-color: white; /* Background color of the box */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    top: 170px; /* top position */
+    right: 500px; /* left position */
+    padding: 15px; /* padding inside the box */
+    border: 2px solid black; /* border around the box */
+    border-radius: 10px; /* rounded corners */
+    background-color: white; /* background color of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow ?? */
 }
 
+/* maybe not useful anyway */
+.left-corner-button {
+        position: absolute;
+        top: 200px; /* Adjust the top position as needed */
+        left: 650px;
+}

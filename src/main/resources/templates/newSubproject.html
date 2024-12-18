@@ -3,38 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New SubProject</title>
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Create New SubProject</h1>
+<header>
+    <a th:href="@{/home}" class="logo">
+        <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+    </a>
+
+    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+        <button type="submit">Log out</button>
+    </form>
+</header>
+<h1>Create new subproject</h1>
+<button onclick="history.back()" class="left-corner-button">Back</button> <!-- go back to previous page -->
 
 <form th:action="@{/project/{id}/subproject/newSubProject/post(id=${projectID})}" method="post" th:object="${subproject}">
 
-    <label class="large-text">SubProject Name:
+    <label class="large-text">Subproject name:
         <input type="text" id="projectName" name="projectName" th:field="${subproject.name}" required>
     </label>
     <br>
-    <label class="large-text">Total Hours:
-        <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${subproject.hours}" required>
-    </label>
-    <br>
-    <label class="large-text">Total Days:
-        <input type="number" id="projectTotalDays" name="projectTotalDays" th:field="${subproject.days}" required>
-    </label>
-    <br>
-    <label class="large-text">Total Price:
-        <input type="number" step="0.01" id="projectTotalPrice" name="projectTotalPrice" th:field="${subproject.totalPrice}" required>
-    </label>
-    <br>
-    <label class="large-text">Deadline:
-        <input type="date" id="projectDeadline" name="projectDeadline" th:field="${subproject.deadline}" required>
-    </label>
-    <br>
-    <label class="large-text">Start Date:
-        <input type="date" id="projectStartDate" name="projectStartDate" th:field="${subproject.startDate}" required>
-    </label>
-    <br>
-    <button type="submit">Create SubProject</button>
+    <button type="submit" class="subproject">Create subproject</button>
 </form>
 
 </body>

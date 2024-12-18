@@ -6,7 +6,7 @@ import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TimeManagerTest {
+class   TimeManagerTest {
     private final TimeManager timeManager = new TimeManager();
 
     @Test

@@ -20,12 +20,12 @@ public class SubTaskController {
         model.addAttribute("subtasks", subTaskService.readAllSubTasks(projectID, taskID));
         return "subtaskpage";
     }
-
+/*
     @PostMapping("project/subtask/edit")
     public String editSubTask(){
         return "subtaskpage";
     }
-
+*/
     @PostMapping("/project/subtask/delete")
     public String deleteSubTask(@RequestParam int subTaskID, @RequestParam int projectID, @RequestParam int taskID){
         subTaskService.deleteSubTask(subTaskID);

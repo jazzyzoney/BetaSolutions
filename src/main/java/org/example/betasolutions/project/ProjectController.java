@@ -102,6 +102,7 @@ public class ProjectController {
         return "redirect:/home";
     }
 
+    /*
     @PostMapping("project/edit")
     public String editProject(Model model,@RequestParam int project_id){
          project_id = (int) session.getAttribute("project_id");
@@ -113,7 +114,7 @@ public class ProjectController {
     @GetMapping("/project/budget")
     public String getProjectBudget(){
         return "budgetpage";
-    }
+    }*/
 
 
 

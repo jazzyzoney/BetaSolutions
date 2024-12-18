@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PSSTSuperclass {
+public class AssignmentRepository {
     protected ConnectionManager connectionManager;
     public Connection conn;
 
-    public PSSTSuperclass(ConnectionManager connectionManager) {
+    public AssignmentRepository(ConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
         this.conn = connectionManager.getConnection();
     }

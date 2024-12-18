@@ -21,14 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 // @SQL ensures that h2 is reset for usage
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:schema.sql")
-class PSSTSuperclassTest {
+class AssignmentRepositoryTest {
 
     //private Task task;
 
 
     @Autowired
     @Qualifier("projectRepository") // Specify the exact bean name
-    private PSSTSuperclass superRepository;
+    private AssignmentRepository superRepository;
 
     @Autowired
     private ConnectionManager connectionManager;

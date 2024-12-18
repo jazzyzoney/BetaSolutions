@@ -4,7 +4,7 @@ public class BudgetManager {
 
 
     public int calculateCost(int hours){
-        int pricePerHour = 150;
+        int pricePerHour = 200;
         int cost = hours * pricePerHour;
         return cost;
     }

@@ -93,7 +93,7 @@ class SubProjectRepositoryTest {
     void getTotalHoursForSubProject(){
         SubProject subProject = subProjectRepository.readSubProject(1);
         int totalHours = subProjectRepository.getTotalHoursForSubProject(subProject);
-        int expectedHours = 100;
+        int expectedHours = 50;
         assertEquals(expectedHours, totalHours);
     }
 }

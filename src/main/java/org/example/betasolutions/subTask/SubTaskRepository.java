@@ -1,7 +1,7 @@
 package org.example.betasolutions.subTask;
 
 import org.example.betasolutions.ConnectionManager;
-import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.AssignmentRepository;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SubTaskRepository extends PSSTSuperclass {
+public class SubTaskRepository extends AssignmentRepository {
 
     public SubTaskRepository(ConnectionManager connectionManager) {
         super(connectionManager);
@@ -65,6 +65,10 @@ public class SubTaskRepository extends PSSTSuperclass {
 
     public boolean updateSubTaskTotalHours(SubTask subTask) {
         return updateObjectInt("sub_task", "sub_task_total_hours", subTask.getID(), subTask.getHours());
+    }
+
+    public boolean updateSubTaskPrice(SubTask subTask, double price){
+        return super.updateDouble("sub_task", "sub_task_total_price", subTask.getID(), price);
     }
 
     public void deleteSubTask(int subTaskID) {

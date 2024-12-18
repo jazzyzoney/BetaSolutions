@@ -41,21 +41,22 @@ public class SubProjectController {
         return "redirect:/project/" + projectID;
     }
 
+    /*
     @PostMapping("/project/subproject/edit")
     public String editSubProject() {
         return "subprojectpage";
     }
-
+*/
     @PostMapping("/project/subproject/delete")
     public String deleteSubProject(@RequestParam int subprojectID,  @RequestParam int projectID){
         subProjectService.deleteSubProject(subprojectID);
         return "redirect:/project/" + projectID;
     }
-
+/*
     @PostMapping("/project/subproject/new")
     public String createNewSubProject(){
         return "redirect:/project";
     }
-
+*/
 
 }

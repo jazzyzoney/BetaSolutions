@@ -2,7 +2,7 @@ package org.example.betasolutions.project;
 
 import org.example.betasolutions.ConnectionManager;
 import org.example.betasolutions.ModelInterface;
-import org.example.betasolutions.PSSTSuperclass;
+import org.example.betasolutions.AssignmentRepository;
 import org.example.betasolutions.subProject.SubProject;
 import org.example.betasolutions.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 
-public class ProjectRepository extends PSSTSuperclass {
+public class ProjectRepository extends AssignmentRepository {
 
     @Autowired
     public ProjectRepository(ConnectionManager connectionManager) {
@@ -135,6 +135,10 @@ public class ProjectRepository extends PSSTSuperclass {
 
     public boolean updateTotalHoursForProject(int projectID, int newTotalHours) {
         return super.updateObjectInt("project", "project_total_hours", projectID, newTotalHours);
+    }
+
+    public boolean updateProjectPrice(Project project, double price){
+        return super.updateDouble("project", "project_total_price", project.getID(), price);
     }
 
     public boolean deleteProject(int projectID) {

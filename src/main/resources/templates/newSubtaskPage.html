@@ -6,7 +6,7 @@
     <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Create New SubTask</h1>
+<h1>Create new subtask</h1>
 
 <!-- Corrected the th:action and field bindings -->
 <form th:action="@{/project/{projectID}/task/{taskID}/subtasks/post(projectID=${projectID}, taskID=${taskID})}" method="post" th:object="${subtask}">

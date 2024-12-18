@@ -21,20 +21,22 @@
     <form class="logo" method="get" th:action="@{/employees}" style="display:inline;">
         <button type="submit" class="employees">All employees</button>
     </form>
-
+    <br>
+    <br>
     <form class="logo" method="get" th:action="@{/project/new}" style="display:inline;">
         <button type="submit">Create Project</button>
     </form>
 
     <table>
         <tr>
-            <th>Project Name</th>
-            <th> PO</th>
-            <th>Total Days</th>
-            <th>Total Hours </th>
-            <th> Deadline</th>
-            <th> Start date</th>
-            <th></th>
+            <th class="project">Project name</th>
+            <th class="project"> PO</th>
+            <th class="project">Total days</th>
+            <th class="project">Total hours </th>
+            <th class="project"> Deadline</th>
+            <th class="project"> Start date</th>
+            <th class="project"> </th>
+            <th class="project"> </th>
 
                 <!-- Added a new column for buttons -->
         </tr>
@@ -49,14 +51,15 @@
 
                 <form method="get" th:action="@{/project/{id}(id=${project.getID()})}" style="display:inline;">
 
-                    <button type="submit">View Details</button>
+                    <button type="submit">View details</button>
                 </form>
-
-                <!-- Delete Project Button -->
-                <form method="post" th:action="@{project/delete(project_id=${project.ID})}" style="display:inline;"
-                      onsubmit="return confirm('Are you sure you want to delete this project? this will course all SubProjects, task and subtasks under this project to also be deleted and this action is final');">
-                    <button type="submit">Delete</button>
-                </form>
+            </td>
+            <td>
+            <!-- Delete Project Button -->
+            <form method="post" th:action="@{project/delete(project_id=${project.ID})}" style="display:inline;"
+                  onsubmit="return confirm('Are you sure you want to delete this project? this will course all SubProjects, task and subtasks under this project to also be deleted and this action is final');">
+                <button type="submit">Delete</button>
+            </form>
             </td>
         </tr>
     </table>

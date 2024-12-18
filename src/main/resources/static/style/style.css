@@ -2,16 +2,16 @@
     --dark-blue: #6688BB; /* dark shade */
     --medium-blue: #84a6ca; /* lighter shade */
     --light-blue: #ACDF; /* lightest shade */
-    --orange: #FF964F; /* Orange */
-    --purple: #DEB3E0; /* purple */
-    --turquoise: #B3ECEC; /*  */
+
+    --pinkish: #ffc4da; /* pinkish */
+    --purple: #c19acb; /* purple-ish */
 }
 
 /* coloring project and the assignments */
 .project {
     color: black; /* Adjust text color for better readability */
     text-decoration: underline;
-    text-decoration-color: var(--orange);
+    text-decoration-color: #ff8fab; /* pink for underline */
 }
 
 .subproject {
@@ -116,7 +116,18 @@ header .logo .solutions{
 
 /* for the buttons */
 button {
-    background-color: var(--orange);
+    background-color: var(--pinkish);
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1em;
+}
+
+.delete-button {
+    background-color: var(--gray);
     color: black;
     border: 1px solid black;
     padding: 5px 10px;
@@ -143,9 +154,8 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow ?? */
 }
 
-/* maybe not useful anyway */
 .left-corner-button {
-        position: absolute;
-        top: 200px; /* Adjust the top position as needed */
-        left: 650px;
+    position: absolute;
+    top: 200px; /* Adjust the top position as needed */
+    left: 550px;
 }

@@ -20,17 +20,17 @@
 
 <!-- new task for subproject -->
 <form th:action="@{/project/{projectID}/subproject/{subProjectID}/New/task/post(projectID=${projectID}, subProjectID=${subProjectID})}" method="post" th:object="${task}">
-    <label class="large-text">task Name:
+    <label class="large-text">Task name:
         <input type="text" id="projectName" name="projectName" th:field="${task.name}" required>
     </label>
     <br>
-    <label class="large-text">Total Hours:
+    <label class="large-text">Total hours:
         <input type="number" id="projectTotalHours" name="projectTotalHours" th:field="${task.hours}" required>
     </label>
     <br>
-    <label class="large-text">Start Date:
+    <label class="large-text">Start date:
         <input type="date" id="StartDate" name="StartDate" th:field="${task.startDate}" required>
     </label>
     <br>
-    <button type="submit">Create SubProject</button>
+    <button type="submit">Create task</button>
 </form>

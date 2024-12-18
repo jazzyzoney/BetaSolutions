@@ -45,16 +45,17 @@
 
     <table>
         <tr>
-            <th class="task">ID</th>
             <th class="task">Task name</th>
             <th class="task">Days</th>
             <th class="task">Deadline</th>
             <th class="task">Start date</th>
+            <th class="task"></th>
+            <th class="task"></th>
+            <th class="task"></th>
         </tr>
 
         <!-- Loop through subprojects -->
         <tr th:each="task : ${tasksWithoutSubProject}">
-            <td th:text="${task.ID}"></td>
             <td th:text="${task.name}"></td>
             <td th:text="${task.days}"></td>
             <td th:text="${task.deadline}"></td>
@@ -65,14 +66,16 @@
                     <button type="submit" class="subtask">View subtasks</button>
                 </form>
             </td>
+            <td>
+                <!-- employees for task on project -->
+                <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${task.getID()}, id=${project.getID()})}" style="display:inline;">
+                    <button type="submit" class="employees">Employees</button>
+                </form>
+            </td>
             <td> <!-- Delete button for each task -->
                 <form th:action="@{/project/task/delete(taskID=${task.getID()}, projectID=${project.getID()})}" method="post"
                       onsubmit="return confirm('Are you sure you want to delete this task?');">
                     <button type="submit" class="task">Delete Task</button>
-                </form>
-                <!-- employees for task on project -->
-                <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/employees (taskID=${task.getID()}, id=${project.getID()})}" style="display:inline;">
-                    <button type="submit" class="employees">All employees for task</button>
                 </form>
             </td>
         </tr>
@@ -90,14 +93,14 @@
     <table>
     <thead>
         <tr>
-            <th class="subproject">SubProject Name</th>
+            <th class="subproject">Subproject Name</th>
             <th class="subproject">Hours</th>
             <th class="subproject">Deadline</th>
             <th class="subproject">Start Date</th>
             <th class="subproject">Total Price</th>
             <th class="subproject">Days</th>
-            <th class="task">Tasks</th>
-            <th class="subproject">Delete subproject</th>
+            <th class="task"></th>
+            <th class="subproject"></th>
         </tr>
     </thead>
     <tbody>
@@ -117,9 +120,9 @@
                         <tr>
                             <th class="task">Task Name</th>
                             <th class="task">Hours</th>
-                            <th class="task">Subtasks</th>
-                            <th class="task">Employees</th>
-                            <th class="task">Delete Task</th>
+                            <th class="task"></th>
+                            <th class="task"></th>
+                            <th class="task"></th>
                         </tr>
                     </thead>
                     <tbody>

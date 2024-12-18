@@ -36,7 +36,7 @@
         <td><span th:text="${subtask.hours}"></span></td>
         <td>
             <form class="logo" method="get" th:action="@{/project/{id}/task/{taskID}/subtask/{subTaskID}/employees(taskID=${taskID}, id=${projectID},subTaskID=${subtask.getID()})}" style="display:inline;">
-                <button type="submit" class="employees">All employees for subtask</button>
+                <button type="submit" class="employees">Employees</button>
             </form>
         </td>
         <td>
@@ -45,7 +45,7 @@
                 <input type="hidden" th:name="subTaskID" th:value="${subtask.ID}"/>
                 <input type="hidden" th:name="projectID" th:value="${projectID}"/>
                 <input type="hidden" th:name="taskID" th:value="${taskID}"/>
-                <button type="submit" class="delete-button, subtask">Delete subtask</button>
+                <button type="submit" class="delete-button">Delete</button>
             </form>
         </td>
     </tr>

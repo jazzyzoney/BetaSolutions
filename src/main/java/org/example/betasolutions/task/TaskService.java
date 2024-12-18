@@ -1,5 +1,6 @@
 package org.example.betasolutions.task;
 
+import org.example.betasolutions.BudgetManager;
 import org.example.betasolutions.TimeManager;
 
 import org.example.betasolutions.project.ProjectService;
@@ -112,5 +113,10 @@ public class TaskService {
     public void updateTaskTotalHours(int taskID){
         Task task = taskRepository.readTask(taskID); //read task.
         updateTaskTotalHours(task);
+    }
+    public void setTaskPrice(int hours, Task task){
+        BudgetManager budgetManager = new BudgetManager();
+        double price = budgetManager.calculateCost(hours);
+        task.setTotalPrice(price);
     }
 }

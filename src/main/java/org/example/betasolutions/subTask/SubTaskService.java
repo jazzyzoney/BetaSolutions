@@ -46,16 +46,15 @@ public class SubTaskService {
     public void updateSubTaskTotalHours(SubTask subTask, int totalHours){
         subTask.setHours(totalHours); //update on object.
         subTaskRepository.updateSubTaskTotalHours(subTask); //update on database
-        updateTaskPrice(totalHours, subTask); //update price on database
+        updateSubTaskPrice(totalHours, subTask); //update price on database
 
         taskService.updateTaskTotalHours(subTask.getTaskID()); //update on task.
     }
 
-    public void updateTaskPrice(int hours, SubTask subTask){
+    public void updateSubTaskPrice(int hours, SubTask subTask){
         BudgetManager budgetManager = new BudgetManager();
         double price = budgetManager.calculateCost(hours);
 
-        subTaskRepository.updateSubTaskPrice(subTask, price);
-
+        subTaskRepository.updateSubTaskPrice(subTask, price); //update on database.
     }
 }

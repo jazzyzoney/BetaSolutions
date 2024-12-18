@@ -90,4 +90,8 @@ public class SubProjectRepository extends PSSTSuperclass {
         return totalHours;
     }
 
+    public boolean updateSubProjectPrice(SubProject subProject, double price){
+        return super.updateDouble("sub_project", "sub_project_total_price", subProject.getID(), price);
+    }
+
 }

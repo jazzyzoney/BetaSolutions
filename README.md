@@ -60,7 +60,7 @@ We’re currently preoccupied with planning world domination, so please refrain 
   *Inventor of problems, solver of none.*
 
 - **Pixel Wizardry Apprentice & Sorcerer of Scaling:** [signelystrup](https://github.com/signelystrup)  
-  *Master of pixel dust and design spells. Needs more coffee.*
+  *Master of pixel dust and design spells. Needs more water and sleep.*
 
 - **Vice President of "Undead Diagrams" & Conqueror of the Mysterious Flowcharts:** [carobraaa](https://github.com/carobraaa)  
   *Can resurrect diagrams from the dead, but still can't make them less confusing.*

@@ -1,5 +1,6 @@
 package org.example.betasolutions.task;
 
+import org.example.betasolutions.BudgetManager;
 import org.example.betasolutions.TimeManager;
 
 import org.example.betasolutions.project.ProjectService;
@@ -93,14 +94,15 @@ public class TaskService {
     }
 
     public void updateTaskTotalHours(Task task){
-        //int totalHours = task.getTotalHours() ; //getTotalHours for task.
         int totalHours = taskRepository.getTotalHoursForTask(task);//set total hours
         task.setTotalHours(totalHours);//set total hours on task.
 
         calculateDeadline(task); //calculate days and deadline.
 
         taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
+        updateTaskPrice(totalHours, task); //update price on database.
 
+        //update hours on project or subproject:
         if (task.getSubProjectID() > 0) {
            subProjectService.updateSubProjectTotalHours(task.getSubProjectID());//task.getTotalHours());
         }else{
@@ -113,4 +115,14 @@ public class TaskService {
         Task task = taskRepository.readTask(taskID); //read task.
         updateTaskTotalHours(task);
     }
+
+    public void updateTaskPrice(int hours, Task task){
+        BudgetManager budgetManager = new BudgetManager();
+        double price = budgetManager.calculateCost(hours);
+        //task.setTotalPrice(price);
+
+        taskRepository.updateTaskPrice(task.getID(), price);
+
+    }
+
 }

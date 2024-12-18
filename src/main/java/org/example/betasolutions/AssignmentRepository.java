@@ -208,6 +208,20 @@ public class AssignmentRepository {
         return false;
     }
 
+    public boolean updateDouble(String tableName, String attributeName, int assignmentID, double newValue){
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setDouble(1, newValue);
+            preparedStatement.setInt(2, assignmentID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     //read method
     //this one is for getting a string value from a table with a specific ID or int value.
     //so it would look like this: getTableStringByInt("project", "projectName", "projectID", 1); for example.
@@ -323,12 +337,25 @@ public class AssignmentRepository {
         return false;
     }
 
-
     //read for a specific object with a specific ID.
     public ModelInterface readAssignmentByID(String tableName, String tablePrefix, FactoryInterface factory, int id){
         List <ModelInterface> assignmentList = readAllAssignments(tableName, tablePrefix, factory);
          return assignmentList.get(id- 1);
     }
-    
 
+    public double CalculatePrice(int ID, String tableName) {
+        double totalPrice = 0;
+        String sql = "SELECT " + tableName + "_Total_Price FROM " + tableName + " WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                totalPrice += resultSet.getDouble(tableName + "_Total_Price");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalPrice;
+    }
 }

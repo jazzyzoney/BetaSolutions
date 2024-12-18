@@ -89,4 +89,8 @@ public class SubProjectRepository extends AssignmentRepository {
         return totalHours;
     }
 
+    public boolean updateSubProjectPrice(SubProject subProject, double price){
+        return super.updateDouble("sub_project", "sub_project_total_price", subProject.getID(), price);
+    }
+
 }

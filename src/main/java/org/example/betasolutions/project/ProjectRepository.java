@@ -137,6 +137,10 @@ public class ProjectRepository extends AssignmentRepository {
         return super.updateObjectInt("project", "project_total_hours", projectID, newTotalHours);
     }
 
+    public boolean updateProjectPrice(Project project, double price){
+        return super.updateDouble("project", "project_total_price", project.getID(), price);
+    }
+
     public boolean deleteProject(int projectID) {
         return super.deleteObjectFromTable("project", "project", projectID);
     }

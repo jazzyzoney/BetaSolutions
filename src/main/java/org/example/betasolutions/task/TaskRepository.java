@@ -126,7 +126,10 @@ public class TaskRepository extends AssignmentRepository {
 
                 int subProjectID = super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()); //get subprojectID
                 int hours = super.getTableIntByInt("task", "task_hours", "task_id", task.getID()); //get hours
-                int totalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", task.getID()); //get total hours
+                int totalHours = super.getTableIntByInt("task", "task_total_hours", "task_id", task.getID());
+
+
+                //get total hours
                 task.setHours(hours); //set hours
                 task.setTotalHours(totalHours); //set total hours
                 task.setSubProjectID(subProjectID); //set subprojectID
@@ -150,6 +153,7 @@ public class TaskRepository extends AssignmentRepository {
                 task.setProjectID(super.getTableIntByInt("task", "project_id", "task_id", task.getID()));
                 task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
 
+
                 if (task.getSubProjectID() == subProjectID) {
                     allTasksForSubProject.add(task);//add task to return list.
                 }
@@ -166,6 +170,8 @@ public class TaskRepository extends AssignmentRepository {
         task.setSubProjectID(super.getTableIntByInt("task", "sub_project_id", "task_id", task.getID()));
         return task;
     }
+
+
     public int deleteTask(int taskID){
         try {
             conn.setAutoCommit(false);
@@ -179,9 +185,7 @@ public class TaskRepository extends AssignmentRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return 0;
-
     }
 
     public int getTotalHoursForTask(Task task){
@@ -220,6 +224,12 @@ public class TaskRepository extends AssignmentRepository {
         
         return updateTotalHoursForTask(task.getID(), totalHours); //update total hours for task.
     }
+
+    public boolean updateTaskPrice(int taskID, double newPrice){
+        return super.updateDouble("task", "task_total_price", taskID, newPrice);
+    }
+
+
 
 }
 

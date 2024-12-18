@@ -101,12 +101,15 @@ public class TaskService {
         calculateDeadline(task); //calculate days and deadline.
 
         taskRepository.updateTaskTotalHours (task.getID(), totalHours); //update task total hours on database.
+        updateTaskPrice(totalHours, task); //update price on database.
 
         if (task.getSubProjectID() > 0) {
            subProjectService.updateSubProjectTotalHours(task.getSubProjectID());//task.getTotalHours());
         }else{
            projectService.updateProjectTotalHours(task.getProjectID());
         }
+
+
     }
 
 
@@ -114,9 +117,14 @@ public class TaskService {
         Task task = taskRepository.readTask(taskID); //read task.
         updateTaskTotalHours(task);
     }
-    public void setTaskPrice(int hours, Task task){
+
+    public void updateTaskPrice(int hours, Task task){
         BudgetManager budgetManager = new BudgetManager();
         double price = budgetManager.calculateCost(hours);
-        task.setTotalPrice(price);
+        //task.setTotalPrice(price);
+
+        taskRepository.updateTaskPrice(task.getID(), price);
+
     }
+
 }

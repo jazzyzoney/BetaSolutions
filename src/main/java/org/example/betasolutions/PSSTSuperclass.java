@@ -208,6 +208,20 @@ public class PSSTSuperclass {
         return false;
     }
 
+    public boolean updateDouble(String tableName, String attributeName, int assignmentID, double newValue){
+        String sql = "UPDATE " + tableName + " SET " + attributeName + " = ? WHERE " + tableName + "_ID = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setDouble(1, newValue);
+            preparedStatement.setInt(2, assignmentID);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     //read method
     //this one is for getting a string value from a table with a specific ID or int value.
     //so it would look like this: getTableStringByInt("project", "projectName", "projectID", 1); for example.

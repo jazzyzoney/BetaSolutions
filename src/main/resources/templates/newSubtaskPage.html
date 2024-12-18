@@ -6,7 +6,17 @@
     <link th:href="@{/style/style.css}" rel="stylesheet">
 </head>
 <body>
+<header>
+    <a th:href="@{/home}" class="logo">
+        <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
+    </a>
+
+    <form class="logo" method="get" th:action="@{/login}" style="display:inline;">
+        <button type="submit">Log out</button>
+    </form>
+</header>
 <h1>Create new subtask</h1>
+<button onclick="history.back()" class="left-corner-button">Back</button> <!-- go back to previous page -->
 
 <!-- Corrected the th:action and field bindings -->
 <form th:action="@{/project/{projectID}/task/{taskID}/subtasks/post(projectID=${projectID}, taskID=${taskID})}" method="post" th:object="${subtask}">

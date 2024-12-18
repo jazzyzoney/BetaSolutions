@@ -47,6 +47,7 @@
         <tr>
             <th class="task">Task name</th>
             <th class="task">Days</th>
+            <th class="task">Hours</th>
             <th class="task">Deadline</th>
             <th class="task">Start date</th>
             <th class="task"></th>
@@ -58,6 +59,7 @@
         <tr th:each="task : ${tasksWithoutSubProject}">
             <td th:text="${task.name}"></td>
             <td th:text="${task.days}"></td>
+            <td th:text="${task.hours}"></td>
             <td th:text="${task.deadline}"></td>
             <td th:text="${task.startDate}"></td>
             <td>

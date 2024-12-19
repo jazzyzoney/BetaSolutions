@@ -11,14 +11,10 @@
         <h1><span class="beta">Beta</span><span class="solutions">Solutions</span></h1>
     </a>
 </header>
-<p>Login page</p>
-<p>
-    Log in function. </br>
-    (New user function)</br>
-</p>
 
-<p>(Homepage)</p>
 <h1>Create new profile</h1>
+<button onclick="history.back()" class="left-corner-button">Back</button> <!-- go back to previous page -->
+
 <form th:action="@{/login/new}" method="post" th:object="${login}">
     <br>
     <label class="large-text">Name:
